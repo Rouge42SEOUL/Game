@@ -15,10 +15,16 @@ namespace StateMachine
             this._context = context;
         }
         
+        public virtual void OnInitialized()
+        {}
+        
         public virtual void OnEnter()
         {}
 
         public abstract void Update();
+        
+        public virtual void FixedUpdate()
+        {}
 
         public virtual void OnExit()
         {}
