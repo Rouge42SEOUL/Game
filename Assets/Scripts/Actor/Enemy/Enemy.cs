@@ -1,3 +1,5 @@
+using System;
+using StateMachine;
 using UnityEngine;
 
 namespace Actor.Enemy
@@ -5,51 +7,53 @@ namespace Actor.Enemy
     // Values or methods that other can use
     public partial class Enemy
     {
+        protected StateMachine<Enemy> stateMachine;
         public override void GetHit() => _GetHit();
+        internal GameObject Target => _target;
+        internal ActorStatSo Stat => stat;
+
+        internal bool IsAttackable
+        {
+            get
+            {
+                float dis = Vector2.Distance(_target.transform.position, transform.position);
+                return attackableDistance >= dis;
+            }
+        }
     }
     
     // Values or methods that other cannot use
     public partial class Enemy
     {
-        private Rigidbody2D _rigidbody2D;
-        private Transform _playerPos;
-
-        [SerializeField] private float distanceWithPlayer = 0.5f;
+        private GameObject _target;
+        [SerializeField] private float attackableDistance = 0.5f;
     }
     
     // body of MonoBehaviour
     public partial class Enemy : Actor
     {
-        private void Awake()
-        {
-            _rigidbody2D = GetComponent<Rigidbody2D>();
-            
-        }
-
         private void Start()
         {
-            _playerPos = GameObject.Find("Player").GetComponent<Transform>();
+            _target = GameObject.Find("Player");
+            stateMachine = new StateMachine<Enemy>(this, new IdleState());
+            stateMachine.AddState(new MoveState());
+            stateMachine.AddState(new AttackState());
         }
-        
+
+        private void Update()
+        {
+            stateMachine.Update();
+        }
+
         private void FixedUpdate()
         {
-            MovePos();
+            stateMachine.FixedUpdate();
         }
     }
     
     // body of others
     public partial class Enemy
     {
-        protected override void MovePos()
-        {
-            float dis = Vector2.Distance(_playerPos.position, transform.position);
-            if (dis > distanceWithPlayer)
-            {
-                Vector2 pos = Vector3.Normalize(_playerPos.position - transform.position);
-                _rigidbody2D.MovePosition(_rigidbody2D.position + stat.speed * Time.fixedDeltaTime * pos);
-            }
-        }
-
         private void _GetHit()
         {
             throw new System.NotImplementedException();

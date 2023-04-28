@@ -34,7 +34,7 @@ namespace Actor.Player
     // body of others
     public partial class Player
     {
-        protected override void MovePos()
+        protected void MovePos()
         {
             _rigidbody2D.MovePosition(_rigidbody2D.position + stat.speed * Time.fixedDeltaTime * _movement);
         }
