@@ -1,4 +1,5 @@
 
+using StateMachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,38 +8,50 @@ namespace Actor.Player
     // Values or methods that other can use
     public partial class Player
     {
+        protected StateMachine<Player> StateMachine;
         public override void GetHit() => _GetHit();
+        internal Vector2 Movement => _movement;
+        internal ActorStatSo Stat => stat;
+
+        internal bool IsMoving
+        {
+            get
+            {
+                return _movement != Vector2.zero;
+            }
+        }
     }
     
     // Values or methods that other cannot use
     public partial class Player
     {
-        private Rigidbody2D _rigidbody2D;
         private Vector2 _movement;
     }
     
     // body of MonoBehaviour
     public partial class Player : Actor
     {
-        private void Awake()
+        private void Start()
         {
-            _rigidbody2D = GetComponent<Rigidbody2D>();
+            StateMachine = new StateMachine<Player>(this, new PlayerIdleState());
+            StateMachine.AddState(new PlayerMoveState());
+            StateMachine.AddState(new PlayerAttackState());
+        }
+
+        private void Update()
+        {
+            StateMachine.Update();
         }
         
         private void FixedUpdate()
         {
-            MovePos();
+            StateMachine.FixedUpdate();
         }
     }
     
     // body of others
     public partial class Player
     {
-        protected void MovePos()
-        {
-            _rigidbody2D.MovePosition(_rigidbody2D.position + stat.speed * Time.fixedDeltaTime * _movement);
-        }
-
         private void _GetHit()
         {
             throw new System.NotImplementedException();
