@@ -10,9 +10,6 @@ namespace Actor
         [SerializeField]
         protected ActorStatSo stat;
 
-        // protected StateMachine<Actor> status;
-
-        protected abstract void MovePos();
         public abstract void GetHit();
         protected abstract void Died();
     }

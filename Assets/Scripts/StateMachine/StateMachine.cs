@@ -24,7 +24,7 @@ namespace StateMachine
             _currentState.OnEnter();
         }
 
-        private void AddState(State<T> state)
+        public void AddState(State<T> state)
         {
             state.SetContext(this, _context);
             _states[state.GetType()] = state;
@@ -33,6 +33,11 @@ namespace StateMachine
         public void Update()
         {
             _currentState.Update();
+        }
+
+        public void FixedUpdate()
+        {
+            _currentState.FixedUpdate();
         }
 
         public void ChangeState<T2>() where T2 : State<T>

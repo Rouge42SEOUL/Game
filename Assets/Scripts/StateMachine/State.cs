@@ -13,12 +13,20 @@ namespace StateMachine
         {
             this._stateMachine = stateMachine;
             this._context = context;
+            
+            OnInitialized();
         }
+        
+        public virtual void OnInitialized()
+        {}
         
         public virtual void OnEnter()
         {}
 
         public abstract void Update();
+        
+        public virtual void FixedUpdate()
+        {}
 
         public virtual void OnExit()
         {}
