@@ -13,6 +13,8 @@ namespace StateMachine
         {
             this._stateMachine = stateMachine;
             this._context = context;
+            
+            OnInitialized();
         }
         
         public virtual void OnInitialized()

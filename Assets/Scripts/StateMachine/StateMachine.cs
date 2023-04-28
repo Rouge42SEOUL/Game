@@ -35,6 +35,11 @@ namespace StateMachine
             _currentState.Update();
         }
 
+        public void FixedUpdate()
+        {
+            _currentState.FixedUpdate();
+        }
+
         public void ChangeState<T2>() where T2 : State<T>
         {
             if (typeof(T2) == _currentState.GetType())
