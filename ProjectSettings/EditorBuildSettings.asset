@@ -8,4 +8,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/SceneManagement/Scene/gyyu_game.unity
+    guid: 9e2d003c96df8c948997de68cadc494d
+  - enabled: 1
+    path: Assets/SceneManagement/Scene/gyyu_end.unity
+    guid: a907b3d805457c544b3091b3a78d60bc
+  - enabled: 1
+    path: Assets/SceneManagement/Scene/gyyu_battle.unity
+    guid: c851a802371608744ae65c0ac59fc855
   m_configObjects: {}

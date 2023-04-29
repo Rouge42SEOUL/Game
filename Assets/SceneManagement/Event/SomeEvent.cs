@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public abstract class SomeEvent : MonoBehaviour
@@ -6,8 +5,15 @@ public abstract class SomeEvent : MonoBehaviour
     private bool _isDisplay = false;
     public string Name { get; protected set; }
 
+    private void Start()
+    {
+        Debug.Log("Start");
+        CloseUI();
+    }
+
     private void Awake()
     {
+        Debug.Log("Awake");
         CloseUI();
     }
 
@@ -19,8 +25,7 @@ public abstract class SomeEvent : MonoBehaviour
             CloseUI();
         
     }
-    // UI를 상속받는 이벤트들이 각자 구성하기 위해 순수 가상 함수 사용
-    public void DisplayEvent()
+    private void DisplayEvent()
     {
         DisplayUI();
         BuildUI();
@@ -36,5 +41,6 @@ public abstract class SomeEvent : MonoBehaviour
         gameObject.SetActive(false);
         _isDisplay = false;
     }
+    // UI를 상속받는 이벤트들이 각자 구성하기 위해 순수 가상 함수 사용
     protected abstract void BuildUI();
 }
