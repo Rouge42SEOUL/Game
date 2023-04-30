@@ -6,9 +6,12 @@ public class EventBlackSmith : SomeEvent
     {
         Name = "BlackSmith";
     }
+
     protected override void BuildUI()
     {
     }
+    
+    // 카드(버튼) 선택시 호출될 함수들 
     public void Upgrade()
     {
         Debug.Log("강화");
