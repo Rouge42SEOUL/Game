@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using StateMachine;
 using UnityEngine;
 
@@ -8,9 +9,12 @@ namespace Actor.Enemy
     public partial class Enemy
     {
         protected StateMachine<Enemy> stateMachine;
-        public override void GetHit() => _GetHit();
+        
         internal GameObject Target => _target;
         internal ActorStatObject Stat => stat;
+        // public Dictionary<ActorStatType, int> CurrentStat { get; protected set; }
+        
+        public override void GetHit() => _GetHit();
 
         internal bool IsAttackable
         {
@@ -32,6 +36,13 @@ namespace Actor.Enemy
     // body of MonoBehaviour
     public partial class Enemy : Actor
     {
+        // private void OnEnable()
+        // {
+        //    CurrentStat[ActorStatType.Health] = stat.health;
+        //    CurrentStat[ActorStatType.Attack] = stat.atkPower;
+        //    CurrentStat[ActorStatType.Speed] = stat.speed;
+        // }
+
         private void Start()
         {
             _target = GameObject.Find("Player");
