@@ -8,7 +8,7 @@ namespace Actor
     public abstract partial class Actor
     {
         [SerializeField]
-        protected ActorStatSo stat;
+        protected ActorStatObject stat;
 
         public abstract void GetHit();
         protected abstract void Died();

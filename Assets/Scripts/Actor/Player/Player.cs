@@ -11,7 +11,7 @@ namespace Actor.Player
         protected StateMachine<Player> StateMachine;
         public override void GetHit() => _GetHit();
         internal Vector2 Movement => _movement;
-        internal ActorStatSo Stat => stat;
+        internal ActorStatObject Stat => stat;
 
         internal bool IsMoving
         {

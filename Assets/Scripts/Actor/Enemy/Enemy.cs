@@ -10,7 +10,7 @@ namespace Actor.Enemy
         protected StateMachine<Enemy> stateMachine;
         public override void GetHit() => _GetHit();
         internal GameObject Target => _target;
-        internal ActorStatSo Stat => stat;
+        internal ActorStatObject Stat => stat;
 
         internal bool IsAttackable
         {
