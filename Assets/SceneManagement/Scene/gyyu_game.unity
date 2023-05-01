@@ -547,7 +547,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 394609027}
-        m_TargetAssemblyTypeName: SceneManagement, Assembly-CSharp
+        m_TargetAssemblyTypeName: SceneManagement.SceneManager, Assembly-CSharp
         m_MethodName: StartBattle
         m_Mode: 1
         m_Arguments:

@@ -1,6 +1,5 @@
 using UnityEngine;
-
-public class EventBlackSmith : SomeEvent
+public class EventBlackSmith :  RougeEvent.Event
 {
     private void Awake()
     {
@@ -9,6 +8,7 @@ public class EventBlackSmith : SomeEvent
 
     protected override void BuildUI()
     {
+        
     }
     
     // 카드(버튼) 선택시 호출될 함수들 
