@@ -51,7 +51,12 @@ namespace Actor.Skill
         
         private void Attack(ref List<GameObject> targets)
         {
-            
+            if (targets.Count == 0)
+                return;
+            foreach (var target in targets)
+            {
+                target.GetComponent<Actor>().GetHit();
+            }
         }
     }
 }
