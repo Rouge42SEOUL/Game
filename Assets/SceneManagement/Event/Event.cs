@@ -1,4 +1,18 @@
+using System;
 using UnityEngine;
+
+public enum EventType
+{
+    BlackSmith,
+    Battle,
+}
+
+[Serializable]
+public struct EventStruct
+{
+    public EventType Type;
+    public float Probability;
+};
 
 
 namespace RougeEvent
@@ -6,7 +20,8 @@ namespace RougeEvent
     public abstract class Event : MonoBehaviour // namespace 
     {
         private bool _isDisplay = false;
-        public string Name { get; protected set; } // Enum으로 교체
+
+        public EventType Type { get; protected set; }
 
         public void UIControl()
         {

@@ -3,7 +3,7 @@ public class EventBlackSmith :  RougeEvent.Event
 {
     private void Awake()
     {
-        Name = "BlackSmith";
+        Type = EventType.BlackSmith;
     }
 
     protected override void BuildUI()

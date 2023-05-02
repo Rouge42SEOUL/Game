@@ -1,22 +1,22 @@
 using System.Collections.Generic;
 using UnityEngine;
+
 public class EventManager : MonoBehaviour
 {
-    public RougeEvent.Event[] someEvents;
-    private Dictionary<string, RougeEvent.Event> _events = new Dictionary<string, RougeEvent.Event>();
+    public RougeEvent.Event[] events;
+    private Dictionary<EventType, RougeEvent.Event> _events = new Dictionary<EventType, RougeEvent.Event>();
 
     private void Start()
     {
-        foreach (RougeEvent.Event someEvent in someEvents)
+        foreach (RougeEvent.Event tmpEvent in events)
         {
-            _events.Add(someEvent.Name, someEvent);
+            _events.Add(tmpEvent.Type, tmpEvent);
         }
     }
 
-    public void EventAction(string eventName)
+    public void EventAction(EventType eventType)
     {
-        RougeEvent.Event value;
-        if (_events.TryGetValue(eventName, out value) == false)
+        if (_events.TryGetValue(eventType, out RougeEvent.Event value) == false)
             Debug.Log("찾고자 하는 이벤트가 없습니다");
         else
             value.UIControl();
