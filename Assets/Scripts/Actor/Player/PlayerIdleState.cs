@@ -12,10 +12,6 @@ namespace Actor.Player
             {
                 _stateMachine.ChangeState<PlayerMoveState>();
             }
-            else
-            {
-                _stateMachine.ChangeState<PlayerIdleState>();
-            }
         }
     }
 }
