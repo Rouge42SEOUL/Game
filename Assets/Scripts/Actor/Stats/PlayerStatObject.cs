@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
-using Core;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 namespace Actor.Stats
 {
@@ -10,7 +10,7 @@ namespace Actor.Stats
     {
         #region Variables
 
-        public SerializableDictionary<AttributeType, Attribute> attributes;
+        public SerializedDictionary<AttributeType, Attribute> attributes;
         public List<Effect> effects;
 
         private int _level = 1;
@@ -36,7 +36,7 @@ namespace Actor.Stats
 
         #region PrivateMethods
 
-        private void OnEnable()
+        private void OnValidate()
         {
             if (_isInitialized)
                 return;
@@ -44,7 +44,9 @@ namespace Actor.Stats
             
             attributes.Clear();
             foreach (AttributeType type in Enum.GetValues(typeof(AttributeType)))
+            {
                 attributes[type] = new Attribute(type, 10);
+            }
             effects.Clear();
             // base health point initialize
         }

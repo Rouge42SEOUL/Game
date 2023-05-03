@@ -29,7 +29,7 @@ namespace Actor.Player
     public partial class Player
     {
         private Vector2 _movement;
-        private PlayerStatObject _stat;
+        [SerializeField] private PlayerStatObject _stat;
     }
     
     // body of MonoBehaviour

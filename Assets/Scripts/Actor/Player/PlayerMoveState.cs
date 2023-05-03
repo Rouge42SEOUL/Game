@@ -20,7 +20,10 @@ namespace Actor.Player
         // Update is called once per frame
         public override void Update()
         {
-        
+            if (!_context.IsMoving)
+            {
+                _stateMachine.ChangeState<PlayerIdleState>();
+            }
         }
 
         public override void FixedUpdate()

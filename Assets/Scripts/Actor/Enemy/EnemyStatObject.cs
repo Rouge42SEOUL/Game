@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Actor.Stats;
 using Core;
@@ -12,7 +13,15 @@ namespace Actor.Enemy
         public List<Effect> effects;
         
         private int _baseHealthPoint;
-        
+
+        private void OnValidate()
+        {
+            foreach (AttributeType type in Enum.GetValues(typeof(AttributeType)))
+            {
+                baseAttributes[type] = 10;
+            }
+        }
+
         public void AddEffect(EffectType type)
         {
             effects.Add(new Effect(type));
