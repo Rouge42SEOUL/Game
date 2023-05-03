@@ -1,7 +1,7 @@
-using System;
-using System.Collections.Generic;
+using Actor.Stats;
 using StateMachine;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 namespace Actor.Enemy
 {
@@ -11,8 +11,11 @@ namespace Actor.Enemy
         protected StateMachine<Enemy> stateMachine;
         
         internal GameObject Target => _target;
-        internal ActorStatObject Stat => stat;
-        // public Dictionary<ActorStatType, int> CurrentStat { get; protected set; }
+        internal EnemyStatObject Stat => _stat;
+        public SerializedDictionary<AttributeType, int> CurrentAttributes { get; protected set; }
+        
+        protected int baseHealthPoint;
+        protected int currentHealthPoint;
         
         public override void GetHit() => _GetHit();
 
@@ -31,17 +34,18 @@ namespace Actor.Enemy
     {
         private GameObject _target;
         [SerializeField] private float attackableDistance = 0.5f;
+        private EnemyStatObject _stat;
     }
     
     // body of MonoBehaviour
     public partial class Enemy : Actor
     {
-        // private void OnEnable()
-        // {
-        //    CurrentStat[ActorStatType.Health] = stat.health;
-        //    CurrentStat[ActorStatType.Attack] = stat.atkPower;
-        //    CurrentStat[ActorStatType.Speed] = stat.speed;
-        // }
+        private void OnEnable()
+        {
+            CurrentAttributes[AttributeType.Health] = _stat.baseAttributes[AttributeType.Health];
+            CurrentAttributes[AttributeType.Attack] = _stat.baseAttributes[AttributeType.Attack];
+            CurrentAttributes[AttributeType.Speed] = _stat.baseAttributes[AttributeType.Speed];
+        }
 
         private void Start()
         {

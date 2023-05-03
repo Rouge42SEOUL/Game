@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Core;
 using UnityEngine;
 
 namespace Actor.Stats
@@ -7,22 +8,33 @@ namespace Actor.Stats
     [CreateAssetMenu(fileName = "New Player Data", menuName = "Stat/PlayerStat")]
     public class PlayerStatObject : ScriptableObject
     {
-        public List<Attribute> attributes;
+        #region Variables
+
+        public SerializableDictionary<AttributeType, Attribute> attributes;
         public List<Effect> effects;
 
-        public int level = 1;
+        private int _level = 1;
         private int _exp = 0;
 
         private bool _isInitialized = false;
 
+        private int _baseHealthPoint;
+        private int _currentHealthPoint;
+        
         public Action<PlayerStatObject> OnChangedStats;
         public Action<PlayerStatObject> OnChangedAttributes;
         public Action<PlayerStatObject> OnChangedEffects;
+        
+        #endregion
 
-        private int _baseHealthPoint;
-        private int _currentHealthPoint;
+        #region Properties
 
+        public int Level => _level;
         public float PercentHealPoint => (_baseHealthPoint > 0) ? (_currentHealthPoint / _baseHealthPoint) : 0;
+
+        #endregion
+
+        #region PrivateMethods
 
         private void OnEnable()
         {
@@ -32,20 +44,19 @@ namespace Actor.Stats
             
             attributes.Clear();
             foreach (AttributeType type in Enum.GetValues(typeof(AttributeType)))
-                attributes.Add(new Attribute(type, 10));
+                attributes[type] = new Attribute(type, 10);
             effects.Clear();
+            // base health point initialize
         }
 
+        #endregion
+        
+        #region PublicMethods
+        
         public void AddAttributeValue(AttributeType type, int value)
         {
-            foreach (var att in attributes)
-            {
-                if (att.type == type)
-                {
-                    att.currentValue += value;
-                    OnChangedAttributes?.Invoke(this);
-                }
-            }
+            attributes[type].currentValue += value;
+            OnChangedAttributes?.Invoke(this);
         }
 
         public void AddEffect(EffectType type)
@@ -66,5 +77,7 @@ namespace Actor.Stats
             // if exp > max, level++ 
             OnChangedStats?.Invoke(this);
         }
+
+        #endregion
     }
 }

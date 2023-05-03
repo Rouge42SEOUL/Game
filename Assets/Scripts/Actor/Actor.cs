@@ -9,9 +9,6 @@ namespace Actor
     // Values or methods that other can use
     public abstract partial class Actor
     {
-        [SerializeField]
-        protected ActorStatObject stat;
-
         public abstract void GetHit();
         protected abstract void Died();
     }
