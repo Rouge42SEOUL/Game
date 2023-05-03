@@ -1,4 +1,5 @@
 
+using Actor.Stats;
 using UnityEngine;
 using StateMachine;
 
@@ -8,6 +9,8 @@ namespace Actor.Player
     {
         private Rigidbody2D _rigidbody2D;
         private Transform _playerPos;
+        
+        private float Speed => _context.Stat.attributes[AttributeType.Speed].currentValue;
 
         public override void OnInitialized()
         {
@@ -17,14 +20,17 @@ namespace Actor.Player
         // Update is called once per frame
         public override void Update()
         {
-        
+            if (!_context.IsMoving)
+            {
+                _stateMachine.ChangeState<PlayerIdleState>();
+            }
         }
 
         public override void FixedUpdate()
         {
             if (_context.IsMoving)
             {
-                _rigidbody2D.MovePosition(_rigidbody2D.position + _context.Stat.speed * Time.fixedDeltaTime * _context.Movement);
+                _rigidbody2D.MovePosition(_rigidbody2D.position + Speed * Time.fixedDeltaTime * _context.Movement);
             }
         }
     }
