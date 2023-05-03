@@ -69,3 +69,5 @@ public class StageManager : MonoBehaviour
         }
     }
 }
+
+// 맵이랑 플레이어 말이랑 따로 구성, 맵 노드의 종속되지 않게
