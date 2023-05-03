@@ -7,5 +7,5 @@ public class Node : MonoBehaviour
     public int _positionX;
     public int _positionY;
     private LinkedListNode<int>[] _nextNode;
-    public EventType _eventType ;
+    public EventType _eventType;
 }
