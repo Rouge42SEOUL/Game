@@ -1,10 +1,10 @@
 using System;
 using System.Collections;
+using Actor.Stats;
 using StateMachine;
-using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.Pool;
-using UnityEngine.Rendering.UI;
+using UnityEngine.Rendering;
 
 namespace Actor.Enemy
 {
@@ -12,13 +12,16 @@ namespace Actor.Enemy
     public partial class Enemy
     {
         protected StateMachine<Enemy> stateMachine;
+        internal GameObject Target => _target;
+        internal EnemyStatObject Stat => _stat;
+        public SerializedDictionary<AttributeType, int> currentAttributes;
+        
+        protected int baseHealthPoint;
+        protected int currentHealthPoint;
+        
         public override void GetHit() => _GetHit();
         public void SetManagedPool(IObjectPool<Enemy> pool) => _SetManagedPool(pool);
-
         public void Init() => _Init();
-        
-        internal GameObject Target => _target;
-        internal ActorStatObject Stat => stat;
 
         internal bool IsAttackable
         {
@@ -35,7 +38,7 @@ namespace Actor.Enemy
     {
         private GameObject _target;
         [SerializeField] private float attackableDistance = 0.5f;
-
+        [SerializeField] private EnemyStatObject _stat;
         private IObjectPool<Enemy> _managedPool;
     }
     
@@ -45,7 +48,6 @@ namespace Actor.Enemy
         private void Start()
         {
             _target = GameObject.Find("Player");
-            
             stateMachine = new StateMachine<Enemy>(this, new IdleState());
             stateMachine.AddState(new MoveState());
             stateMachine.AddState(new AttackState());
@@ -74,10 +76,15 @@ namespace Actor.Enemy
         {
             throw new System.NotImplementedException();
         }
-
+        
         private void _Init()
         {
             StartCoroutine(_KillEnemy());
+            currentAttributes.Clear();
+            foreach (AttributeType type in Enum.GetValues(typeof(AttributeType)))
+            {
+                currentAttributes.Add(type, _stat.baseAttributes[type]);
+            }
         }
 
         private IEnumerator _KillEnemy()

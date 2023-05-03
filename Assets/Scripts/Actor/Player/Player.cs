@@ -1,4 +1,5 @@
 
+using Actor.Stats;
 using StateMachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -11,21 +12,24 @@ namespace Actor.Player
         protected StateMachine<Player> StateMachine;
         public override void GetHit() => _GetHit();
         internal Vector2 Movement => _movement;
-        internal ActorStatObject Stat => stat;
 
-        internal bool IsMoving
+        public PlayerStatObject Stat
         {
-            get
+            get => _stat;
+            private set
             {
-                return _movement != Vector2.zero;
+                _stat = value;
             }
         }
+
+        internal bool IsMoving => _movement != Vector2.zero;
     }
     
     // Values or methods that other cannot use
     public partial class Player
     {
         private Vector2 _movement;
+        [SerializeField] private PlayerStatObject _stat;
     }
     
     // body of MonoBehaviour
