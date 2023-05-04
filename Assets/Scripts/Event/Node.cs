@@ -11,9 +11,16 @@ public class Node : MonoBehaviour
     private readonly Color[] _colors = new Color[7]
         {Color.white, Color.yellow, Color.cyan, Color.blue, Color.green, Color.gray, Color.black};
 
+
     public void ChangeColor()
     {
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.color = _colors[(int)eventType];
+    }
+
+    public void MoveToNextNode()
+    {
+        Node node = this;
+        node = nextNode[0];
     }
 }

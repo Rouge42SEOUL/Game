@@ -16,8 +16,6 @@ public class EventManager : MonoBehaviour
 
     public void EventAction(EventType eventType)
     {
-        Debug.Log("Action");
-        Debug.Log(eventType);
         if (_events.TryGetValue(eventType, out RougeEvent.Event value) == false)
             Debug.Log("찾고자 하는 이벤트가 없습니다");
         else
@@ -28,5 +26,10 @@ public class EventManager : MonoBehaviour
     {
         playerTransform.position = eNode.transform.position;
         EventAction(eNode.eventType);
+    }
+    
+    public void MoveToNextNode()
+    {
+        
     }
 }

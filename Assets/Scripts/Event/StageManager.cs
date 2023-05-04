@@ -32,11 +32,9 @@ public class StageManager : MonoBehaviour
     {
         int nodeCount = _selectMap.transform.childCount;
         _nodes = new Node[nodeCount];
-        Debug.Log(nodeCount);
         for (int i = 0; i < nodeCount; i++)
         {
             _nodes[i] = _selectMap.transform.GetChild(i).gameObject.GetComponent<Node>();
-            Debug.Log(_nodes[i].positionY);
             if (_nodes[i].positionY == 0)
                 _nodes[i].eventType = EventType.None;
             else if (_nodes[i].positionY == (int)StandardRound.Start) // 시작은 배틀로 고정

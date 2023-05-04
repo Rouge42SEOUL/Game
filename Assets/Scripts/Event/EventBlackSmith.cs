@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 public class EventBlackSmith :  RougeEvent.Event
 {
@@ -8,7 +9,6 @@ public class EventBlackSmith :  RougeEvent.Event
 
     protected override void BuildUI()
     {
-        
     }
     
     // 카드(버튼) 선택시 호출될 함수들 
