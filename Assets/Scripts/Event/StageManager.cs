@@ -10,15 +10,16 @@ public enum StandardRound
 
 public class StageManager : MonoBehaviour
 {
+    private EventManager _eventManager;
     public GameObject[] map;
     public EventList[] eventLists;
     private GameObject _selectMap;
     private Node[] _nodes;
     private EventType _eventType;
-    
 
     private void Start()
     {
+        _eventManager = FindObjectOfType<EventManager>();
         RandomStage();
         Instantiate(_selectMap);
         RandomSetting();
@@ -36,24 +37,29 @@ public class StageManager : MonoBehaviour
         for (int i = 0; i < nodeCount; i++)
         {
             _nodes[i] = _selectMap.transform.GetChild(i).gameObject.GetComponent<Node>();
-            if (_nodes[i]._positionY == (int)StandardRound.Start)
+            if (_nodes[i]._positionY == 0)
+            {
+                _eventManager.MovePlayerPawn(_nodes[i].gameObject.GetComponent<Transform>().position);
+                continue;
+            }
+            if (_nodes[i]._positionY == (int)StandardRound.Start) // 시작은 배틀로 고정
                 _nodes[i]._eventType = EventType.Battle;
-            else if (_nodes[i]._positionY == (int)StandardRound.End)
-                _nodes[i]._eventType = EventType.Battle;
-            else if (_nodes[i]._positionY <= (int)StandardRound.Middle)
+            else if (_nodes[i]._positionY == (int)StandardRound.End) // 마지막은 보스로 고정
+                _nodes[i]._eventType = EventType.Boss;
+            else if (_nodes[i]._positionY <= (int)StandardRound.Middle) // 처음부터 5라운드까지
             {
                 EventList eventList = eventLists[0];
                 float num = Random.Range(0.0f, 1.0f);
-                foreach (EventStruct e in eventList.EventStructs)
+                foreach (EventStruct e in eventList.EventStructs) // 이벤트 갯수만큼 반복문
                 {
-                    if (num <= e.Probability)
+                    if (num <= e.Probability) // 랜덤값이 어떤 이벤트 구간인지 확인
                     {
                         _nodes[i]._eventType = e.Type;
                         break;
                     }
                 }
             }
-            else
+            else    // 5라운드부터 마지막까지
             {
                 EventList eventList = eventLists[1];
                 float num = Random.Range(0.0f, 1.0f);
@@ -66,6 +72,7 @@ public class StageManager : MonoBehaviour
                     }
                 }
             }
+            _nodes[i].ChangeColor();
         }
     }
 }

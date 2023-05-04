@@ -3,8 +3,12 @@ using UnityEngine;
 
 public enum EventType
 {
-    BlackSmith,
     Battle,
+    Skill,
+    BlackSmith,
+    Merchent,
+    Box,
+    Boss,
 }
 
 [Serializable]
