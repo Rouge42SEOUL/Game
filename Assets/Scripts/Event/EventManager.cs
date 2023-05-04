@@ -1,7 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
-using UnityEngine.UIElements;
 
 public class EventManager : MonoBehaviour
 {
@@ -18,15 +16,17 @@ public class EventManager : MonoBehaviour
 
     public void EventAction(EventType eventType)
     {
+        Debug.Log("Action");
+        Debug.Log(eventType);
         if (_events.TryGetValue(eventType, out RougeEvent.Event value) == false)
             Debug.Log("찾고자 하는 이벤트가 없습니다");
         else
             value.UIControl();
     }
 
-    public void MovePlayerPawn(Vector3 position)
+    public void MovePlayerPawn(Node eNode)
     {
-        Debug.Log(playerTransform.position);
-        playerTransform.position = position;
+        playerTransform.position = eNode.transform.position;
+        EventAction(eNode.eventType);
     }
 }

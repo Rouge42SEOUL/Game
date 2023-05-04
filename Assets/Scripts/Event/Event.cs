@@ -3,6 +3,7 @@ using UnityEngine;
 
 public enum EventType
 {
+    None,
     Battle,
     Skill,
     BlackSmith,
@@ -17,7 +18,6 @@ public struct EventStruct
     public EventType Type;
     public float Probability;
 };
-
 
 namespace RougeEvent
 {

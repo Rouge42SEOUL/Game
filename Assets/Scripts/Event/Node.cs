@@ -3,17 +3,17 @@ using UnityEngine;
 
 public class Node : MonoBehaviour
 {
-    private LinkedListNode<int>[] _nextNode;
-    public LinkedListNode<int> _eventNode;
-    public int _positionX;
-    public int _positionY; // Round 계층
-    public EventType _eventType;
-    private Color[] _colors = new Color[6]
-        {Color.yellow, Color.cyan, Color.blue, Color.green, Color.gray, Color.black};
+    public Node[] nextNode;
+    private LinkedListNode<Node> _eventNode;
+    public int positionX;
+    public int positionY; // Round 계층
+    public EventType eventType;
+    private readonly Color[] _colors = new Color[7]
+        {Color.white, Color.yellow, Color.cyan, Color.blue, Color.green, Color.gray, Color.black};
 
     public void ChangeColor()
     {
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
-        spriteRenderer.color = _colors[(int)_eventType];
+        spriteRenderer.color = _colors[(int)eventType];
     }
 }

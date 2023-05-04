@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: SecondRound
   m_EditorClassIdentifier: 
   EventStructs:
-  - Type: 0
-    Probability: 0.5
   - Type: 1
-    Probability: 0.6
+    Probability: 0.5
   - Type: 2
-    Probability: 0.7
+    Probability: 0.6
   - Type: 3
-    Probability: 0.8
+    Probability: 0.7
   - Type: 4
+    Probability: 0.8
+  - Type: 5
     Probability: 1

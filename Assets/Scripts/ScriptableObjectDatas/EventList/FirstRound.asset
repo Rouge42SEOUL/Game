@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: FirstRound
   m_EditorClassIdentifier: 
   EventStructs:
-  - Type: 0
-    Probability: 0.5
   - Type: 1
+    Probability: 0.5
+  - Type: 2
     Probability: 0.7
   - Type: 4
     Probability: 0.9
-  - Type: 3
+  - Type: 5
     Probability: 1

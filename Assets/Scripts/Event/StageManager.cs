@@ -10,43 +10,40 @@ public enum StandardRound
 
 public class StageManager : MonoBehaviour
 {
-    private EventManager _eventManager;
     public GameObject[] map;
     public EventList[] eventLists;
     private GameObject _selectMap;
-    private Node[] _nodes;
+    public Node[] _nodes { get; protected set; }
     private EventType _eventType;
 
     private void Start()
     {
-        _eventManager = FindObjectOfType<EventManager>();
         RandomStage();
-        Instantiate(_selectMap);
         RandomSetting();
     }
     
     public void RandomStage()
     {
         _selectMap= map[Random.Range(0, 2)];
+        Instantiate(_selectMap);
     }
 
     public void RandomSetting()
     {
         int nodeCount = _selectMap.transform.childCount;
         _nodes = new Node[nodeCount];
+        Debug.Log(nodeCount);
         for (int i = 0; i < nodeCount; i++)
         {
             _nodes[i] = _selectMap.transform.GetChild(i).gameObject.GetComponent<Node>();
-            if (_nodes[i]._positionY == 0)
-            {
-                _eventManager.MovePlayerPawn(_nodes[i].gameObject.GetComponent<Transform>().position);
-                continue;
-            }
-            if (_nodes[i]._positionY == (int)StandardRound.Start) // 시작은 배틀로 고정
-                _nodes[i]._eventType = EventType.Battle;
-            else if (_nodes[i]._positionY == (int)StandardRound.End) // 마지막은 보스로 고정
-                _nodes[i]._eventType = EventType.Boss;
-            else if (_nodes[i]._positionY <= (int)StandardRound.Middle) // 처음부터 5라운드까지
+            Debug.Log(_nodes[i].positionY);
+            if (_nodes[i].positionY == 0)
+                _nodes[i].eventType = EventType.None;
+            else if (_nodes[i].positionY == (int)StandardRound.Start) // 시작은 배틀로 고정
+                _nodes[i].eventType = EventType.Battle;
+            else if (_nodes[i].positionY == (int)StandardRound.End) // 마지막은 보스로 고정
+                _nodes[i].eventType = EventType.Boss;
+            else if (_nodes[i].positionY <= (int)StandardRound.Middle) // 처음부터 5라운드까지
             {
                 EventList eventList = eventLists[0];
                 float num = Random.Range(0.0f, 1.0f);
@@ -54,7 +51,7 @@ public class StageManager : MonoBehaviour
                 {
                     if (num <= e.Probability) // 랜덤값이 어떤 이벤트 구간인지 확인
                     {
-                        _nodes[i]._eventType = e.Type;
+                        _nodes[i].eventType = e.Type;
                         break;
                     }
                 }
@@ -67,7 +64,7 @@ public class StageManager : MonoBehaviour
                 {
                     if (num <= e.Probability)
                     {
-                        _nodes[i]._eventType = e.Type;
+                        _nodes[i].eventType = e.Type;
                         break;
                     }
                 }
