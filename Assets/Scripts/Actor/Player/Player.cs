@@ -3,6 +3,7 @@ using Actor.Stats;
 using StateMachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 
 namespace Actor.Player
 {
@@ -11,7 +12,11 @@ namespace Actor.Player
     {
         protected StateMachine<Player> StateMachine;
         public override void GetHit() => _GetHit();
-        internal Vector2 Movement => _movement;
+
+        internal Vector2 Movement;
+
+        internal Animator PlayerAnim;
+        internal Rigidbody2D PlayerRigid;
 
         public PlayerStatObject Stat
         {
@@ -21,20 +26,24 @@ namespace Actor.Player
                 _stat = value;
             }
         }
-
-        internal bool IsMoving => _movement != Vector2.zero;
     }
     
     // Values or methods that other cannot use
     public partial class Player
     {
-        private Vector2 _movement;
         [SerializeField] private PlayerStatObject _stat;
+        private PlayerInput _playerInput;
     }
     
     // body of MonoBehaviour
     public partial class Player : Actor
     {
+        private void Awake()
+        {
+            PlayerAnim = GetComponent<Animator>();
+            PlayerRigid = GetComponent<Rigidbody2D>();
+        }
+        
         private void Start()
         {
             StateMachine = new StateMachine<Player>(this, new PlayerIdleState());
@@ -68,7 +77,12 @@ namespace Actor.Player
 
         private void OnMovement(InputValue value)
         {
-            _movement = value.Get<Vector2>();
+            Movement = value.Get<Vector2>();
+        }
+
+        private void OnAutoAttack(InputValue value)
+        {
+            StateMachine.ChangeState<PlayerAttackState>();
         }
     }
 }

@@ -44,7 +44,7 @@ namespace StateMachine
         {
             if (typeof(T2) == _currentState.GetType())
                 return;
-            
+
             if (_currentState != null)
                 _currentState.OnExit();
             _previousState = _currentState;
