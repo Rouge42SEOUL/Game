@@ -11,7 +11,7 @@ namespace Actor.Skill
             skill.coolTime = 60.0f;
             skill.name = "HeresyDesignation";
             skill.type = TargetType.Single;
-            skill.elementalType = ElementalType.Debuf;
+            skill.elementalType = ElementalType.DeBuff;
             skill.range = 0;
             skill.ultimate = true;
             skill.effectiveSpeed = 1.0f;

@@ -10,7 +10,7 @@ namespace Actor.Skill
             skill.coolTime = 10.0f;
             skill.name = "Confuse";
             skill.type = TargetType.Single;
-            skill.elementalType = ElementalType.Debuf;
+            skill.elementalType = ElementalType.DeBuff;
             skill.range = 5.0f;
             skill.ultimate = false;
             skill.effectiveSpeed = 1.0f;

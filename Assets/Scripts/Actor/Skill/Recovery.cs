@@ -10,7 +10,7 @@ namespace Actor.Skill
             skill.coolTime = 30.0f;
             skill.name = "Recovery";
             skill.type = TargetType.Self;
-            skill.elementalType = ElementalType.Buf;
+            skill.elementalType = ElementalType.Buff;
             skill.range = 0;
             skill.ultimate = false;
             skill.effectiveSpeed = 0.1f;

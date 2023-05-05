@@ -12,10 +12,11 @@ namespace Actor
         Wind,
         Ground,
         Light,
-        Dark, 
-        Buf,
-        Debuf
+        Dark,
+        Buff,
+        DeBuff
     }
+
     [CreateAssetMenu(fileName = "Actor Data", menuName = "Scriptable Object/Actor Data")]
     public class ActorStatObject : ScriptableObject
     {

@@ -10,7 +10,7 @@ namespace Actor.Skill
             skill.coolTime = 60.0f;
             skill.name = "DescentOfGod";
             skill.type = TargetType.Self;
-            skill.elementalType = ElementalType.Buf;
+            skill.elementalType = ElementalType.Buff;
             skill.range = 0;
             skill.ultimate = true;
             skill.effectiveSpeed = 0.1f;

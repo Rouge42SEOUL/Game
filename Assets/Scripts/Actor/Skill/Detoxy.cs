@@ -10,7 +10,7 @@ namespace Actor.Skill
             skill.coolTime = 10.0f;
             skill.name = "Detoxy";
             skill.type = TargetType.Self;
-            skill.elementalType = ElementalType.Buf;
+            skill.elementalType = ElementalType.Buff;
             skill.range = 0;
             skill.ultimate = false;
             skill.effectiveSpeed = 0.1f;
