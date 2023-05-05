@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.Serialization;
 
 namespace Actor.Stats
 {
@@ -11,7 +12,7 @@ namespace Actor.Stats
         #region Variables
 
         public SerializedDictionary<AttributeType, Attribute> attributes;
-        public List<Effect> effects;
+        public EffectMachine effectMachine;
 
         private int _level = 1;
         private int _exp = 0;
@@ -23,7 +24,7 @@ namespace Actor.Stats
         
         public Action<PlayerStatObject> OnChangedStats;
         public Action<PlayerStatObject> OnChangedAttributes;
-        public Action<PlayerStatObject> OnChangedEffects;
+        public Action<PlayerStatObject> OnChangedeffects;
         
         #endregion
 
@@ -38,7 +39,7 @@ namespace Actor.Stats
 
         private void OnValidate()
         {
-            if (_isInitialized)
+            if (_isInitialized) 
                 return;
             _isInitialized = true;
             
@@ -47,7 +48,7 @@ namespace Actor.Stats
             {
                 attributes[type] = new Attribute(type, 10);
             }
-            effects.Clear();
+            effectMachine.effects.Clear();
             // base health point initialize
         }
 
@@ -63,14 +64,14 @@ namespace Actor.Stats
 
         public void AddEffect(EffectType type)
         {
-            effects.Add(new Effect(type));
-            OnChangedEffects?.Invoke(this);
+            effectMachine.effects.Add(new Effect(type));
+            OnChangedeffects?.Invoke(this);
         }
 
         public void AddEffect(EffectType type, float duration)
         {
-            effects.Add(new Effect(type, duration));
-            OnChangedEffects?.Invoke(this);
+            effectMachine.effects.Add(new Effect(type, duration));
+            OnChangedeffects?.Invoke(this);
         }
 
         public void AddExp(int value)

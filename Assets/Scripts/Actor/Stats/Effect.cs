@@ -1,6 +1,7 @@
 using System;
 using Core;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Actor.Stats
 {
@@ -11,8 +12,9 @@ namespace Actor.Stats
         public bool isStackable;
         public bool isPermanent;
         public float duration;
+        public float effectivePoint;
         public SerializableDictionary<AttributeType, float> effectiveValues;
-
+        public int overlappingCount;
         public int DisplayTime
         {
             get

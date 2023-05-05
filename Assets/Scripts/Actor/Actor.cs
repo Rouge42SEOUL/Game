@@ -21,6 +21,7 @@ namespace Actor
     // body of MonoBehaviour
     public abstract partial class Actor : MonoBehaviour, IDamageable
     {
+        public ActorStatObject stat;
     }
     
     // body of others

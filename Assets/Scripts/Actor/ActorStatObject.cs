@@ -20,10 +20,10 @@ namespace Actor
     [CreateAssetMenu(fileName = "Actor Data", menuName = "Scriptable Object/Actor Data")]
     public class ActorStatObject : ScriptableObject
     {
-        public int health;
-        public int atkPower;
-        public int speed;
-        public int defence;
+        public float health;
+        public float atkPower;
+        public float speed;
+        public float defence;
         public ElementalType element;
     }
 }

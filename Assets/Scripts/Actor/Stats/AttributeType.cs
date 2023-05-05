@@ -5,5 +5,6 @@ namespace Actor.Stats
         Health,
         Attack,
         Speed,
+        Defence
     }
 }
