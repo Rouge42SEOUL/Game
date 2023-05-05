@@ -49,6 +49,7 @@ namespace Actor.Player
             StateMachine = new StateMachine<Player>(this, new PlayerIdleState());
             StateMachine.AddState(new PlayerMoveState());
             StateMachine.AddState(new PlayerAttackState());
+            StateMachine.AddState(new PlayerDiedState());
         }
 
         private void Update()
@@ -83,6 +84,11 @@ namespace Actor.Player
         private void OnAutoAttack(InputValue value)
         {
             StateMachine.ChangeState<PlayerAttackState>();
+        }
+
+        private void OnSkill1(InputValue value)
+        {
+            StateMachine.ChangeState<PlayerDiedState>();
         }
     }
 }
