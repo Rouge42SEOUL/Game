@@ -24,8 +24,8 @@ public class StageManager : MonoBehaviour
     
     public void RandomStage()
     {
-        _selectMap= map[Random.Range(0, 2)];
-        Instantiate(_selectMap);
+        _selectMap = map[Random.Range(0, 2)];
+        _selectMap = Instantiate(_selectMap);
     }
 
     public void RandomSetting()
@@ -79,4 +79,3 @@ public class StageManager : MonoBehaviour
     }
 }
 
-// 맵이랑 플레이어 말이랑 따로 구성, 맵 노드의 종속되지 않게

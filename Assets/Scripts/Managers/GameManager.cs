@@ -4,7 +4,7 @@ public class GameManager : MonoBehaviour
 {
     private EventManager _eventManager;
     private StageManager _stageManager;
-    private GameObject _playerPawn;
+    [SerializeField] private PlayerPawn playerPawn;
     private Node _currentNode;
     private bool _isDisplayToeventUI = false;
     [SerializeField] private GameObject eventUI;
@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
         _eventManager = FindObjectOfType<EventManager>();
         _stageManager = FindObjectOfType<StageManager>();
          _currentNode = _stageManager._nodes[0];
-        // _eventManager.MovePlayerPawn(_currentNode);
+         playerPawn.MoveToNode(_currentNode);
         CloseEvent();
     }
     
@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour
 
     private void CloseEvent()
     {
+        Debug.Log("Close");
         eventUI.gameObject.SetActive(false);
         _isDisplayToeventUI = false;
     }

@@ -1,10 +1,18 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PlayerPawn : MonoBehaviour
 {
-    public void MovePlayerPawn(Node eNode)
+    private EventManager _eventManager;
+
+    private void Start()
     {
-        transform.position = eNode.transform.position;
+        _eventManager = FindObjectOfType<EventManager>();
+    }
+    
+
+    public void MoveToNode(Node node)
+    {
+        transform.position = node.transform.position;
+        _eventManager.EventUISetting(node);
     }
 }

@@ -14,7 +14,6 @@ public class Node : MonoBehaviour
 
     public void EventSetting()
     {
-        Debug.Log("in");
         if (eventType == EventType.Battle)
             _event = gameObject.AddComponent<EventBattle>();
         else if (eventType == EventType.BlackSmith)
@@ -28,25 +27,6 @@ public class Node : MonoBehaviour
         else if (eventType == EventType.Box)
             _event = gameObject.AddComponent<EventBox>();
     }
-    // {
-    //     get => eventType;
-    //     set
-    //     {
-    //         eventType = value;
-    //         if (eventType == EventType.Battle)
-    //             _event = gameObject.AddComponent<EventBattle>();
-    //         else if (eventType == EventType.BlackSmith)
-    //             _event = gameObject.AddComponent<EventBlackSmith>();
-    //         else if (eventType == EventType.Skill)
-    //             _event = gameObject.AddComponent<EventSkill>();
-    //         else if (eventType == EventType.Boss)
-    //             _event = gameObject.AddComponent<EventBoss>();
-    //         else if (eventType == EventType.Merchant)
-    //             _event = gameObject.AddComponent<EventMerchant>();
-    //         else if (eventType == EventType.Box)
-    //             _event = gameObject.AddComponent<EventBox>();
-    //     }
-    // }
 
     public void ChangeColor()
     {

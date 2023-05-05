@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 588663444197815568}
   - component: {fileID: 9154221936900809537}
   - component: {fileID: 1525150456673764475}
-  - component: {fileID: -9050890874503310518}
   m_Layer: 0
   m_Name: Circle 2
   m_TagString: Untagged
@@ -76,7 +75,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -101,22 +100,10 @@ MonoBehaviour:
   nextNode:
   - {fileID: 1525150456165810532}
   - {fileID: 1525150454733210451}
-  _event: {fileID: -9050890874503310518}
+  _event: {fileID: 0}
   positionX: 2
   positionY: 3
-  eventType: 1
---- !u!114 &-9050890874503310518
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1525150454733210400}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d72300458f5a4a4d97d62ff50f2d6e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  eventType: 0
 --- !u!1 &1525150454733210401
 GameObject:
   m_ObjectHideFlags: 0
@@ -128,7 +115,6 @@ GameObject:
   - component: {fileID: 7684362599699709155}
   - component: {fileID: 423563948469547900}
   - component: {fileID: 1525150456165810532}
-  - component: {fileID: -2025640014101837149}
   m_Layer: 0
   m_Name: Circle 3
   m_TagString: Untagged
@@ -193,7 +179,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -217,22 +203,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextNode:
   - {fileID: 1525150454733210460}
-  _event: {fileID: -2025640014101837149}
+  _event: {fileID: 0}
   positionX: 2
   positionY: 4
-  eventType: 1
---- !u!114 &-2025640014101837149
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1525150454733210401}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d72300458f5a4a4d97d62ff50f2d6e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  eventType: 0
 --- !u!1 &1525150454733210402
 GameObject:
   m_ObjectHideFlags: 0
@@ -244,7 +218,6 @@ GameObject:
   - component: {fileID: 640831312917288884}
   - component: {fileID: 931052081060772765}
   - component: {fileID: 1525150456588764836}
-  - component: {fileID: -4405623844064476368}
   m_Layer: 0
   m_Name: Circle 7
   m_TagString: Untagged
@@ -309,7 +282,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -333,22 +306,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextNode:
   - {fileID: 1525150456115740638}
-  _event: {fileID: -4405623844064476368}
+  _event: {fileID: 0}
   positionX: 2
   positionY: 6
-  eventType: 5
---- !u!114 &-4405623844064476368
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1525150454733210402}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c255d759aae7d345aafec8a12cbc58e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  eventType: 0
 --- !u!1 &1525150454733210403
 GameObject:
   m_ObjectHideFlags: 0
@@ -360,7 +321,6 @@ GameObject:
   - component: {fileID: 7083980907774934160}
   - component: {fileID: 3547911505195531294}
   - component: {fileID: 1525150456506067058}
-  - component: {fileID: 4133851246252379986}
   m_Layer: 0
   m_Name: Circle 10
   m_TagString: Untagged
@@ -425,7 +385,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -450,22 +410,10 @@ MonoBehaviour:
   nextNode:
   - {fileID: 1525150456451623605}
   - {fileID: 1525150456356392625}
-  _event: {fileID: 4133851246252379986}
+  _event: {fileID: 0}
   positionX: 2
   positionY: 8
-  eventType: 2
---- !u!114 &4133851246252379986
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1525150454733210403}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d949b35bbc33e04f98d7aaa7eafb9e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  eventType: 0
 --- !u!1 &1525150454733210404
 GameObject:
   m_ObjectHideFlags: 0
@@ -477,7 +425,6 @@ GameObject:
   - component: {fileID: 8794370920002854077}
   - component: {fileID: 3208387905318692908}
   - component: {fileID: 1525150456015344729}
-  - component: {fileID: 7755999900234529128}
   m_Layer: 0
   m_Name: Circle 9
   m_TagString: Untagged
@@ -542,7 +489,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -567,22 +514,10 @@ MonoBehaviour:
   nextNode:
   - {fileID: 1525150456451623605}
   - {fileID: 1525150456356392625}
-  _event: {fileID: 7755999900234529128}
+  _event: {fileID: 0}
   positionX: 1
   positionY: 8
-  eventType: 5
---- !u!114 &7755999900234529128
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1525150454733210404}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c255d759aae7d345aafec8a12cbc58e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  eventType: 0
 --- !u!1 &1525150454733210405
 GameObject:
   m_ObjectHideFlags: 0
@@ -594,7 +529,6 @@ GameObject:
   - component: {fileID: 3715125275834026617}
   - component: {fileID: 2733340701095294267}
   - component: {fileID: 1525150456451623605}
-  - component: {fileID: 8010040179145507660}
   m_Layer: 0
   m_Name: Circle 11
   m_TagString: Untagged
@@ -659,7 +593,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -684,22 +618,10 @@ MonoBehaviour:
   nextNode:
   - {fileID: 1525150454591624863}
   - {fileID: 1525150455109037728}
-  _event: {fileID: 8010040179145507660}
+  _event: {fileID: 0}
   positionX: 1
   positionY: 9
-  eventType: 5
---- !u!114 &8010040179145507660
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1525150454733210405}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c255d759aae7d345aafec8a12cbc58e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  eventType: 0
 --- !u!1 &1525150454733210406
 GameObject:
   m_ObjectHideFlags: 0
@@ -711,7 +633,6 @@ GameObject:
   - component: {fileID: 548202652540314528}
   - component: {fileID: 2494328603943621859}
   - component: {fileID: 1525150454591624863}
-  - component: {fileID: 4543240346629866836}
   m_Layer: 0
   m_Name: Circle 13
   m_TagString: Untagged
@@ -776,7 +697,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0, g: 0, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -801,22 +722,10 @@ MonoBehaviour:
   nextNode:
   - {fileID: 1525150456059379234}
   - {fileID: 1525150454855007118}
-  _event: {fileID: 4543240346629866836}
+  _event: {fileID: 0}
   positionX: 1
   positionY: 10
-  eventType: 3
---- !u!114 &4543240346629866836
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1525150454733210406}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a6d3838fb98d8c48b0d1b03d2d724e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  eventType: 0
 --- !u!1 &1525150454733210407
 GameObject:
   m_ObjectHideFlags: 0
@@ -828,7 +737,6 @@ GameObject:
   - component: {fileID: 917685064563326240}
   - component: {fileID: 1098155978908771011}
   - component: {fileID: 1525150456059379234}
-  - component: {fileID: 8931316412571861035}
   m_Layer: 0
   m_Name: Circle 15
   m_TagString: Untagged
@@ -893,7 +801,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -917,22 +825,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextNode:
   - {fileID: 1525150455993354041}
-  _event: {fileID: 8931316412571861035}
+  _event: {fileID: 0}
   positionX: 1
   positionY: 11
-  eventType: 1
---- !u!114 &8931316412571861035
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1525150454733210407}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d72300458f5a4a4d97d62ff50f2d6e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  eventType: 0
 --- !u!1 &1525150454733210408
 GameObject:
   m_ObjectHideFlags: 0
@@ -944,7 +840,6 @@ GameObject:
   - component: {fileID: 2041860452613813539}
   - component: {fileID: 7175426738076352871}
   - component: {fileID: 1525150456496294352}
-  - component: {fileID: -4496379205329569832}
   m_Layer: 0
   m_Name: Circle 18
   m_TagString: Untagged
@@ -1009,7 +904,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1032,22 +927,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextNode: []
-  _event: {fileID: -4496379205329569832}
+  _event: {fileID: 0}
   positionX: 1
   positionY: 13
-  eventType: 6
---- !u!114 &-4496379205329569832
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1525150454733210408}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61ddb628eb6511f49ab1e6771256f032, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  eventType: 0
 --- !u!1 &1525150454733210412
 GameObject:
   m_ObjectHideFlags: 0
@@ -1059,7 +942,6 @@ GameObject:
   - component: {fileID: 8735976921394735474}
   - component: {fileID: 6477301599869479890}
   - component: {fileID: 1525150456356392625}
-  - component: {fileID: 2571458505814164124}
   m_Layer: 0
   m_Name: Circle 12
   m_TagString: Untagged
@@ -1124,7 +1006,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0, g: 0, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1149,22 +1031,10 @@ MonoBehaviour:
   nextNode:
   - {fileID: 1525150454591624863}
   - {fileID: 1525150455109037728}
-  _event: {fileID: 2571458505814164124}
+  _event: {fileID: 0}
   positionX: 2
   positionY: 9
-  eventType: 3
---- !u!114 &2571458505814164124
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1525150454733210412}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a6d3838fb98d8c48b0d1b03d2d724e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  eventType: 0
 --- !u!1 &1525150454733210413
 GameObject:
   m_ObjectHideFlags: 0
@@ -1176,7 +1046,6 @@ GameObject:
   - component: {fileID: 4146058951382976796}
   - component: {fileID: 98171682186488285}
   - component: {fileID: 1525150455109037728}
-  - component: {fileID: -1148673981036573617}
   m_Layer: 0
   m_Name: Circle 14
   m_TagString: Untagged
@@ -1241,7 +1110,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1266,22 +1135,10 @@ MonoBehaviour:
   nextNode:
   - {fileID: 1525150456059379234}
   - {fileID: 1525150454855007118}
-  _event: {fileID: -1148673981036573617}
+  _event: {fileID: 0}
   positionX: 2
   positionY: 10
-  eventType: 1
---- !u!114 &-1148673981036573617
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1525150454733210413}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d72300458f5a4a4d97d62ff50f2d6e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  eventType: 0
 --- !u!1 &1525150454733210414
 GameObject:
   m_ObjectHideFlags: 0
@@ -1293,7 +1150,6 @@ GameObject:
   - component: {fileID: 311058431556086337}
   - component: {fileID: 3658372367585989965}
   - component: {fileID: 1525150454855007118}
-  - component: {fileID: 3946264614473770210}
   m_Layer: 0
   m_Name: Circle 16
   m_TagString: Untagged
@@ -1358,7 +1214,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1382,22 +1238,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextNode:
   - {fileID: 1525150455993354041}
-  _event: {fileID: 3946264614473770210}
+  _event: {fileID: 0}
   positionX: 2
   positionY: 11
-  eventType: 5
---- !u!114 &3946264614473770210
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1525150454733210414}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c255d759aae7d345aafec8a12cbc58e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  eventType: 0
 --- !u!1 &1525150454733210415
 GameObject:
   m_ObjectHideFlags: 0
@@ -1409,7 +1253,6 @@ GameObject:
   - component: {fileID: 2198636333090298347}
   - component: {fileID: 284241137979508161}
   - component: {fileID: 1525150455993354041}
-  - component: {fileID: -7209789189143064910}
   m_Layer: 0
   m_Name: Circle 17
   m_TagString: Untagged
@@ -1474,7 +1317,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1498,22 +1341,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextNode:
   - {fileID: 1525150456496294352}
-  _event: {fileID: -7209789189143064910}
+  _event: {fileID: 0}
   positionX: 2
   positionY: 12
-  eventType: 5
---- !u!114 &-7209789189143064910
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1525150454733210415}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c255d759aae7d345aafec8a12cbc58e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  eventType: 0
 --- !u!1 &1525150454733210456
 GameObject:
   m_ObjectHideFlags: 0
@@ -1525,7 +1356,6 @@ GameObject:
   - component: {fileID: 8030921721960740973}
   - component: {fileID: 1506658324769940812}
   - component: {fileID: 1525150454733210451}
-  - component: {fileID: 1749243922728275422}
   m_Layer: 0
   m_Name: Circle 4
   m_TagString: Untagged
@@ -1590,7 +1420,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1614,22 +1444,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextNode:
   - {fileID: 1525150454733210460}
-  _event: {fileID: 1749243922728275422}
+  _event: {fileID: 0}
   positionX: 1
   positionY: 4
-  eventType: 1
---- !u!114 &1749243922728275422
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1525150454733210456}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d72300458f5a4a4d97d62ff50f2d6e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  eventType: 0
 --- !u!1 &1525150454733210457
 GameObject:
   m_ObjectHideFlags: 0
@@ -1641,7 +1459,6 @@ GameObject:
   - component: {fileID: 8559751539127792968}
   - component: {fileID: 1019847341347543821}
   - component: {fileID: 1525150454733210460}
-  - component: {fileID: -3244228955549426813}
   m_Layer: 0
   m_Name: Circle 5
   m_TagString: Untagged
@@ -1706,7 +1523,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1731,22 +1548,10 @@ MonoBehaviour:
   nextNode:
   - {fileID: 1525150455329051751}
   - {fileID: 1525150456588764836}
-  _event: {fileID: -3244228955549426813}
+  _event: {fileID: 0}
   positionX: 1
   positionY: 5
-  eventType: 1
---- !u!114 &-3244228955549426813
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1525150454733210457}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d72300458f5a4a4d97d62ff50f2d6e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  eventType: 0
 --- !u!1 &1525150454733210458
 GameObject:
   m_ObjectHideFlags: 0
@@ -1758,7 +1563,6 @@ GameObject:
   - component: {fileID: 5624628547716818849}
   - component: {fileID: 2589699381641576285}
   - component: {fileID: 1525150455329051751}
-  - component: {fileID: 5288118418385308426}
   m_Layer: 0
   m_Name: Circle 6
   m_TagString: Untagged
@@ -1823,7 +1627,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1847,22 +1651,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextNode:
   - {fileID: 1525150456115740638}
-  _event: {fileID: 5288118418385308426}
+  _event: {fileID: 0}
   positionX: 1
   positionY: 6
-  eventType: 1
---- !u!114 &5288118418385308426
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1525150454733210458}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d72300458f5a4a4d97d62ff50f2d6e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  eventType: 0
 --- !u!1 &1525150454733210459
 GameObject:
   m_ObjectHideFlags: 0
@@ -1874,7 +1666,6 @@ GameObject:
   - component: {fileID: 6841172756520897968}
   - component: {fileID: 2268909314694675493}
   - component: {fileID: 1525150456115740638}
-  - component: {fileID: -6677448886017468796}
   m_Layer: 0
   m_Name: Circle 8
   m_TagString: Untagged
@@ -1939,7 +1730,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1964,22 +1755,10 @@ MonoBehaviour:
   nextNode:
   - {fileID: 1525150456015344729}
   - {fileID: 1525150456506067058}
-  _event: {fileID: -6677448886017468796}
+  _event: {fileID: 0}
   positionX: 1
   positionY: 7
-  eventType: 5
---- !u!114 &-6677448886017468796
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1525150454733210459}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c255d759aae7d345aafec8a12cbc58e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  eventType: 0
 --- !u!1 &1525150454733210461
 GameObject:
   m_ObjectHideFlags: 0
@@ -2094,7 +1873,6 @@ GameObject:
   - component: {fileID: 930991594773889327}
   - component: {fileID: 7654840044921443134}
   - component: {fileID: 1525150454733210449}
-  - component: {fileID: 8129121076713308941}
   m_Layer: 0
   m_Name: Circle
   m_TagString: Untagged
@@ -2159,7 +1937,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -2183,22 +1961,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextNode:
   - {fileID: 1525150454733210450}
-  _event: {fileID: 8129121076713308941}
+  _event: {fileID: 0}
   positionX: 1
   positionY: 1
-  eventType: 1
---- !u!114 &8129121076713308941
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1525150454733210462}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d72300458f5a4a4d97d62ff50f2d6e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  eventType: 0
 --- !u!1 &1525150454733210463
 GameObject:
   m_ObjectHideFlags: 0
@@ -2210,7 +1976,6 @@ GameObject:
   - component: {fileID: 7610550135773034787}
   - component: {fileID: 2135884972696593209}
   - component: {fileID: 1525150454733210450}
-  - component: {fileID: 980885724059318063}
   m_Layer: 0
   m_Name: Circle 1
   m_TagString: Untagged
@@ -2275,7 +2040,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -2299,22 +2064,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextNode:
   - {fileID: 1525150456673764475}
-  _event: {fileID: 980885724059318063}
+  _event: {fileID: 0}
   positionX: 1
   positionY: 2
-  eventType: 2
---- !u!114 &980885724059318063
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1525150454733210463}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d949b35bbc33e04f98d7aaa7eafb9e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  eventType: 0
 --- !u!1 &8285922035824383398
 GameObject:
   m_ObjectHideFlags: 0
