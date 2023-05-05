@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
         _eventManager = FindObjectOfType<EventManager>();
         _stageManager = FindObjectOfType<StageManager>();
          _currentNode = _stageManager._nodes[0];
-        _eventManager.MovePlayerPawn(_currentNode);
+        // _eventManager.MovePlayerPawn(_currentNode);
         CloseEvent();
     }
     

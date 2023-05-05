@@ -7,7 +7,7 @@ public enum EventType
     Battle,
     Skill,
     BlackSmith,
-    Merchent,
+    Merchant,
     Box,
     Boss,
 }

@@ -4,8 +4,8 @@ using UnityEngine;
 public class EventManager : MonoBehaviour
 {
     public RougeEvent.Event[] events;
-    private Dictionary<EventType, RougeEvent.Event> _events = new Dictionary<EventType, RougeEvent.Event>();
-    [SerializeField] private Transform playerTransform;
+    private Dictionary<EventType, RougeEvent.Event> _events 
+        = new Dictionary<EventType, RougeEvent.Event>();
     private void Start()
     {
         foreach (RougeEvent.Event tmpEvent in events)
@@ -17,19 +17,13 @@ public class EventManager : MonoBehaviour
     public void EventAction(EventType eventType)
     {
         if (_events.TryGetValue(eventType, out RougeEvent.Event value) == false)
+        {
             Debug.Log("찾고자 하는 이벤트가 없습니다");
+        }
         else
+        {
             value.UIControl();
+        }
     }
 
-    public void MovePlayerPawn(Node eNode)
-    {
-        playerTransform.position = eNode.transform.position;
-        EventAction(eNode.eventType);
-    }
-    
-    public void MoveToNextNode()
-    {
-        
-    }
 }

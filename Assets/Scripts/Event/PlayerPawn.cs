@@ -1,18 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerPawn : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public void MovePlayerPawn(Node eNode)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        transform.position = eNode.transform.position;
     }
 }

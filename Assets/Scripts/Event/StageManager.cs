@@ -36,11 +36,17 @@ public class StageManager : MonoBehaviour
         {
             _nodes[i] = _selectMap.transform.GetChild(i).gameObject.GetComponent<Node>();
             if (_nodes[i].positionY == 0)
+            {
                 _nodes[i].eventType = EventType.None;
+            }
             else if (_nodes[i].positionY == (int)StandardRound.Start) // 시작은 배틀로 고정
+            {
                 _nodes[i].eventType = EventType.Battle;
+            }
             else if (_nodes[i].positionY == (int)StandardRound.End) // 마지막은 보스로 고정
+            {
                 _nodes[i].eventType = EventType.Boss;
+            }
             else if (_nodes[i].positionY <= (int)StandardRound.Middle) // 처음부터 5라운드까지
             {
                 EventList eventList = eventLists[0];
@@ -67,6 +73,7 @@ public class StageManager : MonoBehaviour
                     }
                 }
             }
+            _nodes[i].EventSetting();
             _nodes[i].ChangeColor();
         }
     }
