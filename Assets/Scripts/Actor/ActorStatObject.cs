@@ -1,5 +1,6 @@
 
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Actor
 {
@@ -21,6 +22,7 @@ namespace Actor
         public int health;
         public int atkPower;
         public int speed;
+        public int defence;
         public ElementalType element;
     }
 }

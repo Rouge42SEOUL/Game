@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Actor.Skill
@@ -17,7 +18,9 @@ namespace Actor.Skill
             skill.effectivePoint = 30.0f; // 퍼센트
             skill.effectiveDuration = 5.0f;
         }
-
+        /*
+         * 혼란, 마비, 부패 중 1개 추가 부여
+         */
         public override void LevelUp()
         {
             this.data.level++;

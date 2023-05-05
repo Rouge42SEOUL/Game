@@ -14,7 +14,7 @@ namespace Actor.Skill
             skill.range = 0;
             skill.ultimate = true;
             skill.effectiveSpeed = 0.1f;
-            skill.effectivePoint = 0.0f;
+            skill.effectivePoint = 30.0f; // 퍼센트
             skill.effectiveDuration = 3.0f;
         }
         
@@ -23,6 +23,7 @@ namespace Actor.Skill
         {
             this.data.level++;
             this.data.coolTime -= 5.0f;
+            this.data.effectivePoint += 10.0f;
             this.data.effectiveDuration++;
         }
     }
