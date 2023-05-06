@@ -7,9 +7,22 @@ namespace Actor.Player
 {
     public class PlayerAttackState : State<Player>
     {
+        private Transform _atkPos;
+        private Collider2D _atkCol;
+        
+        public override void OnInitialized()
+        {
+            _atkPos = _context.PlayerAttackCol.transform;
+            _atkCol = _context.PlayerAttackCol.GetComponent<BoxCollider2D>();
+        }
+        
         public override void OnEnter()
         {
             _context.PlayerAnim.SetBool(Animator.StringToHash("isAttacking"), true);
+            
+            _context.PlayerAttackCol.SetActive(true);
+            _SetAttackCol();
+            
             _context.StartCoroutine(_AttackSpeed());
         }
         
@@ -31,8 +44,22 @@ namespace Actor.Player
         
         private IEnumerator _AttackSpeed()
         {
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.1f);
+            _context.PlayerAttackCol.SetActive(false);
+            yield return new WaitForSeconds(0.4f);
             _Finish();
+        }
+
+        private void _SetAttackCol()
+        {
+            Vector2 t = new Vector2(Mathf.Abs(_context.Stareing.y), Mathf.Abs(_context.Stareing.x));
+            _atkPos.localScale = t * 0.75f + new Vector2(0.75f, 0.75f);;
+            _atkPos.localPosition = _context.Stareing * 0.75f;
+        }
+
+        private void _GiveDamage()
+        {
+            
         }
     }
 }

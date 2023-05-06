@@ -1,9 +1,9 @@
 
+using System;
 using Actor.Stats;
 using StateMachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Rendering;
 
 namespace Actor.Player
 {
@@ -11,12 +11,14 @@ namespace Actor.Player
     public partial class Player
     {
         protected StateMachine<Player> StateMachine;
-        public override void GetHit() => _GetHit();
+        public override void GetHit(int damage) => _GetHit(damage);
 
         internal Vector2 Movement;
+        internal Vector2 Stareing;
 
         internal Animator PlayerAnim;
         internal Rigidbody2D PlayerRigid;
+        internal GameObject PlayerAttackCol;
 
         public PlayerStatObject Stat
         {
@@ -42,6 +44,8 @@ namespace Actor.Player
         {
             PlayerAnim = GetComponent<Animator>();
             PlayerRigid = GetComponent<Rigidbody2D>();
+            PlayerAttackCol = transform.GetChild(0).gameObject;
+            PlayerAttackCol.gameObject.SetActive(false);
         }
         
         private void Start()
@@ -61,12 +65,17 @@ namespace Actor.Player
         {
             StateMachine.FixedUpdate();
         }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            throw new NotImplementedException();
+        }
     }
     
     // body of others
     public partial class Player
     {
-        private void _GetHit()
+        private void _GetHit(int damage)
         {
             throw new System.NotImplementedException();
         }
@@ -79,6 +88,10 @@ namespace Actor.Player
         private void OnMovement(InputValue value)
         {
             Movement = value.Get<Vector2>();
+            if (!Movement.Equals(Vector2.zero))
+            {
+                Stareing = Movement;
+            }
         }
 
         private void OnAutoAttack(InputValue value)

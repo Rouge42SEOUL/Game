@@ -19,7 +19,7 @@ namespace Actor.Enemy
         protected int baseHealthPoint;
         protected int currentHealthPoint;
         
-        public override void GetHit() => _GetHit();
+        public override void GetHit(int damage) => _GetHit(damage);
         public void SetManagedPool(IObjectPool<Enemy> pool) => _SetManagedPool(pool);
         public void Init() => _Init();
 
@@ -62,12 +62,17 @@ namespace Actor.Enemy
         {
             stateMachine.FixedUpdate();
         }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            throw new System.NotImplementedException();
+        }
     }
     
     // body of others
     public partial class Enemy
     {
-        private void _GetHit()
+        private void _GetHit(int damage)
         {
             throw new System.NotImplementedException();
         }

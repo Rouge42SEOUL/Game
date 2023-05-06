@@ -31,8 +31,8 @@ namespace Actor.Player
             }
             else
             {
-                _context.PlayerAnim.SetFloat(_moveXid, _context.Movement.x);
-                _context.PlayerAnim.SetFloat(_moveYid, _context.Movement.y);
+                _context.PlayerAnim.SetFloat(_moveXid, _context.Stareing.x);
+                _context.PlayerAnim.SetFloat(_moveYid, _context.Stareing.y);
             }
         }
         

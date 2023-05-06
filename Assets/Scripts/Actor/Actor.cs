@@ -1,6 +1,4 @@
 
-using System;
-using System.Collections.Generic;
 using Interface;
 using UnityEngine;
 
@@ -9,7 +7,7 @@ namespace Actor
     // Values or methods that other can use
     public abstract partial class Actor
     {
-        public abstract void GetHit();
+        public abstract void GetHit(int damage);
         protected abstract void Died();
     }
     
