@@ -1,20 +1,42 @@
+using System.Collections.Generic;
+using Newtonsoft.Json;
 using UnityEngine;
+
+
+[JsonObject(MemberSerialization.OptIn)]
+public class InfoToJson
+{
+    [JsonProperty]
+    public int Map;
+    [JsonProperty]
+    public Dictionary<int, EventType>[] Events;
+    [JsonProperty]
+    public int PlayerCurrentPosition;
+}
 
 public class GameManager : MonoBehaviour
 {
     private EventManager _eventManager;
     private StageManager _stageManager;
-    [SerializeField] private PlayerPawn playerPawn;
-    private Node _currentNode;
     private bool _isDisplayToeventUI = false;
+    private bool _isFirstStart;
+    private InfoToJson _infoToJson;
+    
+    [SerializeField] private PlayerPawn playerPawn;
     [SerializeField] private GameObject eventUI;
+    
+    public Node currentNode;
 
     private void Start()
     {
+        JsonSaveLoder jsonSaveLoder = gameObject.AddComponent<JsonSaveLoder>();
+
+        _isFirstStart = jsonSaveLoder.Load(out _infoToJson);
         _eventManager = FindObjectOfType<EventManager>();
         _stageManager = FindObjectOfType<StageManager>();
-         _currentNode = _stageManager._nodes[0];
-         playerPawn.MoveToNode(_currentNode);
+        if (_isFirstStart)
+            currentNode = _stageManager._nodes[0];
+        playerPawn.MoveToNode(currentNode);
         CloseEvent();
     }
     
@@ -34,7 +56,6 @@ public class GameManager : MonoBehaviour
 
     private void CloseEvent()
     {
-        Debug.Log("Close");
         eventUI.gameObject.SetActive(false);
         _isDisplayToeventUI = false;
     }

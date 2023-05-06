@@ -12,7 +12,7 @@ public class StageManager : MonoBehaviour
 {
     public GameObject[] map;
     public EventList[] eventLists;
-    private GameObject _selectMap;
+    public GameObject _selectMap;
     public Node[] _nodes { get; protected set; }
     private EventType _eventType;
 

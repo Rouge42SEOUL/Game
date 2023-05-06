@@ -1,6 +1,8 @@
+using System;
 using UnityEngine;
 using Event = RougeEvent.Event;
 
+[Serializable]
 public class Node : MonoBehaviour
 {
     public Node[] nextNode;

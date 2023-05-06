@@ -6,7 +6,7 @@ public class EventBlackSmith :  RougeEvent.Event
         Type = EventType.BlackSmith;
     }
 
-    protected override void BuildUI()
+    public override void BuildUI()
     {
     }
     

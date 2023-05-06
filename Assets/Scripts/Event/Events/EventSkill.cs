@@ -7,7 +7,7 @@ public class EventSkill :  RougeEvent.Event
         Type = EventType.Skill;
     }
 
-    protected override void BuildUI()
+    public override void BuildUI()
     {
     }
     

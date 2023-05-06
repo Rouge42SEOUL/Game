@@ -29,18 +29,11 @@ namespace RougeEvent
 
         public void UIControl()
         {
-            Debug.Log("UI");
             if (_isDisplay == false)
                 DisplayEvent();
-            // else
-            //     CloseEvent();
         }
 
-        protected abstract void BuildUI();
-
-        // private void Start()
-        // {
-        // }
+        public abstract void BuildUI();
 
         private void DisplayEvent()
         {

@@ -7,7 +7,7 @@ public class EventBoss :  RougeEvent.Event
         Type = EventType.Boss;
     }
 
-    protected override void BuildUI()
+    public override void BuildUI()
     {
     }
     

@@ -7,7 +7,7 @@ public class EventMerchant :  RougeEvent.Event
         Type = EventType.Merchant;
     }
 
-    protected override void BuildUI()
+    public override void BuildUI()
     {
     }
     

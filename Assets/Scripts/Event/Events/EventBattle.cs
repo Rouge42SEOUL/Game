@@ -7,8 +7,9 @@ public class EventBattle :  RougeEvent.Event
         Type = EventType.Battle;
     }
 
-    protected override void BuildUI()
+    public override void BuildUI()
     {
+        Battle();        
     }
     
     public void Battle()
