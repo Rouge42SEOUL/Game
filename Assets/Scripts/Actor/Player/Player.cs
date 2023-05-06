@@ -1,9 +1,11 @@
 
 using System;
-using Actor.Stats;
-using StateMachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
+
+using Actor.Stats;
+using Interface;
+using StateMachine;
 
 namespace Actor.Player
 {
@@ -11,7 +13,7 @@ namespace Actor.Player
     public partial class Player
     {
         protected StateMachine<Player> StateMachine;
-        public override void GetHit(int damage) => _GetHit(damage);
+        public override void GetHit(DamageData data) => _GetHit(data);
 
         internal Vector2 Movement;
         internal Vector2 Stareing;
@@ -65,17 +67,12 @@ namespace Actor.Player
         {
             StateMachine.FixedUpdate();
         }
-
-        private void OnTriggerEnter(Collider other)
-        {
-            throw new NotImplementedException();
-        }
     }
     
     // body of others
     public partial class Player
     {
-        private void _GetHit(int damage)
+        private void _GetHit(DamageData data)
         {
             throw new System.NotImplementedException();
         }

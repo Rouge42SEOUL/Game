@@ -53,8 +53,8 @@ namespace Actor.Player
         private void _SetAttackCol()
         {
             Vector2 t = new Vector2(Mathf.Abs(_context.Stareing.y), Mathf.Abs(_context.Stareing.x));
-            _atkPos.localScale = t * 0.75f + new Vector2(0.75f, 0.75f);;
-            _atkPos.localPosition = _context.Stareing * 0.75f;
+            _atkPos.localScale = t * 0.5f + new Vector2(1, 1);;
+            _atkPos.localPosition = _context.Stareing * 0.5f;
         }
 
         private void _GiveDamage()

@@ -7,7 +7,7 @@ namespace Actor
     // Values or methods that other can use
     public abstract partial class Actor
     {
-        public abstract void GetHit(int damage);
+        public abstract void GetHit(DamageData data);
         protected abstract void Died();
     }
     
