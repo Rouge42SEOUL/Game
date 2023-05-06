@@ -118,7 +118,18 @@
                 },
                 {
                     "name": "",
-                    "id": "3f3e6174-2fb6-4064-890e-f0c0c7e4ef5f",
+                    "id": "be102d85-415c-479f-ba32-5652fbabfa3f",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AutoAttack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f00bab81-13b8-4c4c-80c1-dfb804d7bf20",
                     "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
@@ -129,7 +140,7 @@
                 },
                 {
                     "name": "",
-                    "id": "a0e13338-aa15-4976-90d9-2ee2db74026e",
+                    "id": "20c817d0-03d6-4ea6-a4cf-42647bd79786",
                     "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
@@ -140,7 +151,7 @@
                 },
                 {
                     "name": "",
-                    "id": "cea29484-ed2d-4311-8453-2b1de88a2d41",
+                    "id": "01d5a38e-5575-4351-9f1c-109152e2655d",
                     "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
@@ -151,23 +162,12 @@
                 },
                 {
                     "name": "",
-                    "id": "5154a8ce-c14c-4a44-bbcb-96362cf6935c",
+                    "id": "b63c72d3-6491-4288-930c-11fcfd4c057c",
                     "path": "<Keyboard>/r",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "SkillUlt",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "be102d85-415c-479f-ba32-5652fbabfa3f",
-                    "path": "<Keyboard>/space",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "AutoAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
