@@ -6,7 +6,8 @@ namespace Actor.Skill
     {
         private GameObject _context;
         [SerializeField] private Skill _data;
-        [SerializeField] private ElementalType elementalType;
+        public SkillType type;
+        public ElementalType elementalType;
         public bool isUnlocked = false;
 
         public SkillObject(GameObject context)

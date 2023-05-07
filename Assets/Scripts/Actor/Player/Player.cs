@@ -1,8 +1,10 @@
 
+using System;
 using Actor.Stats;
 using StateMachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 
 namespace Actor.Player
 {
@@ -30,11 +32,18 @@ namespace Actor.Player
     {
         private Vector2 _movement;
         [SerializeField] private PlayerStatObject _stat;
+        [SerializeField] private SerializedDictionary<AttributeType, int> _skillEffectValues;
+        [SerializeField] private SerializedDictionary<AttributeType, int> _itemEffectValues;
     }
     
     // body of MonoBehaviour
     public partial class Player : Actor
     {
+        private void Awake()
+        {
+            // inventory on equip item += OnEquipItem;
+        }
+
         private void Start()
         {
             StateMachine = new StateMachine<Player>(this, new PlayerIdleState());
@@ -56,6 +65,32 @@ namespace Actor.Player
     // body of others
     public partial class Player
     {
+        private void OnEquipItem()
+        {
+            foreach (AttributeType type in Enum.GetValues(typeof(AttributeType)))
+            {
+                _stat.AddAttributeValue(type, -(_itemEffectValues[type]));
+            }
+            // calculate stats effect
+            foreach (AttributeType type in Enum.GetValues(typeof(AttributeType)))
+            {
+                _stat.AddAttributeValue(type, _itemEffectValues[type]);
+            }
+        }
+
+        private void OnActivateSkill()
+        {
+            foreach (AttributeType type in Enum.GetValues(typeof(AttributeType)))
+            {
+                _stat.AddAttributeValue(type, -(_skillEffectValues[type]));
+            }
+            // calculate stats effect
+            foreach (AttributeType type in Enum.GetValues(typeof(AttributeType)))
+            {
+                _stat.AddAttributeValue(type, _skillEffectValues[type]);
+            }
+        }
+        
         private void _GetHit()
         {
             throw new System.NotImplementedException();

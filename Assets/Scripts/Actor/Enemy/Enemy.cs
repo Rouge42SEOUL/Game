@@ -1,10 +1,10 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using Actor.Stats;
 using StateMachine;
 using UnityEngine;
 using UnityEngine.Pool;
-using UnityEngine.Rendering;
 
 namespace Actor.Enemy
 {
@@ -14,7 +14,7 @@ namespace Actor.Enemy
         protected StateMachine<Enemy> stateMachine;
         internal GameObject Target => _target;
         internal EnemyStatObject Stat => _stat;
-        public SerializedDictionary<AttributeType, int> currentAttributes;
+        public List<int> currentAttributes;
         
         protected int baseHealthPoint;
         protected int currentHealthPoint;
@@ -81,9 +81,9 @@ namespace Actor.Enemy
         {
             StartCoroutine(_KillEnemy());
             currentAttributes.Clear();
-            foreach (AttributeType type in Enum.GetValues(typeof(AttributeType)))
+            foreach (int type in Enum.GetValues(typeof(AttributeType)))
             {
-                currentAttributes.Add(type, _stat.baseAttributes[type]);
+                currentAttributes.Add(_stat.baseAttributes[type]);
             }
         }
 

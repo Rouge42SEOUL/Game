@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
+using Actor.Skill;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 namespace Actor.Stats
 {
@@ -10,8 +10,9 @@ namespace Actor.Stats
     {
         #region Variables
 
-        public SerializedDictionary<AttributeType, Attribute> attributes;
+        public List<Attribute> attributes;
         public List<Effect> effects;
+        public List<SkillSlot> skills;
 
         private int _level = 1;
         private int _exp = 0;
@@ -20,11 +21,7 @@ namespace Actor.Stats
 
         private int _baseHealthPoint;
         private int _currentHealthPoint;
-        
-        public Action<PlayerStatObject> OnChangedStats;
-        public Action<PlayerStatObject> OnChangedAttributes;
-        public Action<PlayerStatObject> OnChangedEffects;
-        
+
         #endregion
 
         #region Properties
@@ -36,48 +33,68 @@ namespace Actor.Stats
 
         #region PrivateMethods
 
-        private void OnValidate()
+        private void OnEnable()
         {
             if (_isInitialized)
                 return;
             _isInitialized = true;
             
+            Debug.Log("init stat");
             attributes.Clear();
             foreach (AttributeType type in Enum.GetValues(typeof(AttributeType)))
             {
-                attributes[type] = new Attribute(type, 10);
+                attributes.Add(new Attribute(type, 10));
             }
             effects.Clear();
             // base health point initialize
+            skills.Clear();
+            for (int i = 0; i < 5; i++)
+            {
+                skills.Add(new SkillSlot());
+            }
         }
 
         #endregion
         
         #region PublicMethods
+
+        public int GetAttributeValue(AttributeType type)
+        {
+            foreach (var att in attributes)
+            {
+                if (att.type == type)
+                    return att.currentValue;
+            }
+
+            return -1;
+        }
         
         public void AddAttributeValue(AttributeType type, int value)
         {
-            attributes[type].currentValue += value;
-            OnChangedAttributes?.Invoke(this);
+            foreach (var att in attributes)
+            {
+                if (att.type != type)
+                    continue;
+                att.currentValue += value;
+                return;
+            }
         }
 
         public void AddEffect(EffectType type)
         {
             effects.Add(new Effect(type));
-            OnChangedEffects?.Invoke(this);
         }
 
         public void AddEffect(EffectType type, float duration)
         {
             effects.Add(new Effect(type, duration));
-            OnChangedEffects?.Invoke(this);
         }
 
         public void AddExp(int value)
         {
             this._exp += value;
             // if exp > max, level++ 
-            OnChangedStats?.Invoke(this);
+            // add attribute base value by level
         }
 
         #endregion
