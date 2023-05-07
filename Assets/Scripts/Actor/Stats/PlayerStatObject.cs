@@ -10,9 +10,9 @@ namespace Actor.Stats
     {
         #region Variables
 
-        public List<Attribute> attributes;
-        public List<Effect> effects;
-        public List<SkillSlot> skills;
+        public List<Attribute> attributes = new();
+        public List<Effect> effects = new();
+        public SkillSlot[] skills = new SkillSlot[6];
 
         private int _level = 1;
         private int _exp = 0;
@@ -47,11 +47,9 @@ namespace Actor.Stats
             }
             effects.Clear();
             // base health point initialize
-            skills.Clear();
-            for (int i = 0; i < 5; i++)
-            {
-                skills.Add(new SkillSlot());
-            }
+            skills[0].slotType = SkillType.Normal;
+            skills[4].slotType = SkillType.Ultimate;
+            skills[5].slotType = SkillType.Passive;
         }
 
         #endregion

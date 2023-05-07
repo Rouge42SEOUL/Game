@@ -14,7 +14,7 @@ namespace Actor.Enemy
         protected StateMachine<Enemy> stateMachine;
         internal GameObject Target => _target;
         internal EnemyStatObject Stat => _stat;
-        public List<int> currentAttributes;
+        public Dictionary<AttributeType, int> currentAttributes = new();
         
         protected int baseHealthPoint;
         protected int currentHealthPoint;
@@ -81,9 +81,9 @@ namespace Actor.Enemy
         {
             StartCoroutine(_KillEnemy());
             currentAttributes.Clear();
-            foreach (int type in Enum.GetValues(typeof(AttributeType)))
+            foreach (AttributeType type in Enum.GetValues(typeof(AttributeType)))
             {
-                currentAttributes.Add(_stat.baseAttributes[type]);
+                currentAttributes[type] = _stat.baseAttributes[(int)type];
             }
         }
 
@@ -101,6 +101,11 @@ namespace Actor.Enemy
         private void _SetManagedPool(IObjectPool<Enemy> pool)
         {
             _managedPool = pool;
+        }
+        
+        public int GetAttributeValue(AttributeType type)
+        {
+            return currentAttributes[type];
         }
     }
 }

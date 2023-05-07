@@ -3,6 +3,7 @@ using System;
 using Actor.Stats;
 using StateMachine;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
 
@@ -104,6 +105,27 @@ namespace Actor.Player
         private void OnMovement(InputValue value)
         {
             _movement = value.Get<Vector2>();
+        }
+
+        private void OnAutoAttack()
+        {
+            _stat.skills[0].UseSkill();
+        }
+        private void OnSkill1()
+        {
+            _stat.skills[1].UseSkill();
+        }
+        private void OnSkill2()
+        {
+            _stat.skills[2].UseSkill();
+        }
+        private void OnSkill3()
+        {
+            _stat.skills[3].UseSkill();
+        }
+        private void OnSkillUlt()
+        {
+            _stat.skills[4].UseSkill();
         }
     }
 }

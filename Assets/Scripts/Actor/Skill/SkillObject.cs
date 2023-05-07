@@ -8,12 +8,17 @@ namespace Actor.Skill
         [SerializeField] private Skill _data;
         public SkillType type;
         public ElementalType elementalType;
-        public bool isUnlocked = false;
+        private bool isUnlocked = false;
 
         public SkillObject(GameObject context)
         {
             this._context = context;
         }
         public abstract void Use();
+
+        public void UnlockSkill()
+        {
+            isUnlocked = true;
+        }
     }
 }

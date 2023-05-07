@@ -1,34 +1,40 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Actor.Skill
 {
     [Serializable]
     public class SkillSlot
     {
-        [SerializeField] public List<SkillType> possibleTypes = new List<SkillType>();
+        public SkillType slotType;
         [SerializeField] private SkillObject _skillObject;
 
         public Action<SkillObject> OnChangeSkill;
 
         public SkillSlot()
         {
+            slotType = SkillType.Active;
             _skillObject = null;
-            possibleTypes.Add(SkillType.Active);
         }
 
         public void UpdateSlot(SkillObject skillObject)
         {
-            foreach (var type in possibleTypes)
+            if (skillObject.type == slotType)
             {
-                if (skillObject.type == type)
-                {
-                    _skillObject = skillObject;
-                    OnChangeSkill?.Invoke(_skillObject);
-                    return;
-                }
+                _skillObject = skillObject;
+                OnChangeSkill?.Invoke(_skillObject);
+                return;
             }
+        }
+
+        public void UseSkill()
+        {
+            Debug.Log("call SkillObject.Use");
+            if (_skillObject == null)
+                return;
+            _skillObject.Use();
         }
     }
 }

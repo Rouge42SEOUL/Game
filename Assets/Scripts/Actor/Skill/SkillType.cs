@@ -5,6 +5,6 @@ namespace Actor.Skill
         Normal,
         Passive,
         Active,
-        Final,
+        Ultimate,
     }
 }

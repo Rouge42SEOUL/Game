@@ -6,7 +6,9 @@ namespace Actor.Skill
     public class PassiveSkillObject : SkillObject
     {
         public PassiveSkillObject(GameObject context) : base(context)
-        {}
+        {
+            UnlockSkill();
+        }
         
         public override void Use()
         {

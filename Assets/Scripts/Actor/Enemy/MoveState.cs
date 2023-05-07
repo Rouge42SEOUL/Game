@@ -11,7 +11,7 @@ namespace Actor.Enemy
     {
         private Rigidbody2D _rigidbody2D;
         private Transform _playerPos;
-        private int _speed => _context.currentAttributes[(int)AttributeType.Speed];
+        private int _speed => _context.currentAttributes[AttributeType.Speed];
 
         public override void OnInitialized()
         {
