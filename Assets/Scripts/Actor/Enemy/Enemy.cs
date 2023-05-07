@@ -85,13 +85,14 @@ namespace Actor.Enemy
         private void _GetHit(DamageData data)
         {
             Debug.Log(data.Damage + "health Lost");
-            // TODO : make GetHitState of Enemy
+            // TODO : make GetHitState of Enemy and put Addforce func in it
             Rigidbody2D.AddForce(data.KbForce, ForceMode2D.Impulse);
         }
 
         protected override void Died()
         {
             throw new System.NotImplementedException();
+            // TODO : make 
         }
         
         private void _Init()
