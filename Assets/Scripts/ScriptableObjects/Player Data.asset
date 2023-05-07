@@ -12,22 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b702b10af9fb4e58ad395c7cc28030d1, type: 3}
   m_Name: Player Data
   m_EditorClassIdentifier: 
-  attributes:
-    m_Keys: 000000000100000002000000
-    m_Values:
-    - type: 0
-      baseValue: 10
-      currentValue: 10
-    - type: 1
-      baseValue: 10
-      currentValue: 10
-    - type: 2
-      baseValue: 10
-      currentValue: 10
-  effects: []
+  attributes: []
+  effects:
+  - type: 0
+    isStackable: 0
+    isPermanent: 0
+    duration: 0
+    effectiveValues:
+      m_Keys: 
+      m_Values: []
   skills:
-  - possibleTypes: 0000000000000000
-  - possibleTypes: 0000000000000000
+  - possibleTypes: 0000000002000000
+    _skillObject: {fileID: 0}
+  - possibleTypes: 0000000002000000
+    _skillObject: {fileID: 0}
+  - possibleTypes: 00000000
+    _skillObject: {fileID: 0}
   - possibleTypes: 
+    _skillObject: {fileID: 0}
   - possibleTypes: 
-  - possibleTypes: 
+    _skillObject: {fileID: 0}
