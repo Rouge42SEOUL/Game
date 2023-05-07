@@ -1,6 +1,6 @@
 using System;
-using Core;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 namespace Actor.Stats
 {
@@ -11,7 +11,7 @@ namespace Actor.Stats
         public bool isStackable;
         public bool isPermanent;
         public float duration;
-        public SerializableDictionary<AttributeType, float> effectiveValues;
+        public SerializedDictionary<AttributeType, float> effectiveValues;
 
         public int DisplayTime
         {

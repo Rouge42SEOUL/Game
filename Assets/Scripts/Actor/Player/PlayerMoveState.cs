@@ -1,4 +1,5 @@
 
+using System.Linq;
 using Actor.Stats;
 using UnityEngine;
 using StateMachine;
@@ -9,8 +10,8 @@ namespace Actor.Player
     {
         private Rigidbody2D _rigidbody2D;
         private Transform _playerPos;
-        
-        private float Speed => _context.Stat.attributes[AttributeType.Speed].currentValue;
+
+        private float Speed => _context.Stat.GetAttributeValue(AttributeType.Speed);
 
         public override void OnInitialized()
         {
