@@ -3,15 +3,30 @@ using Newtonsoft.Json;
 using UnityEngine;
 
 
-[JsonObject(MemberSerialization.OptIn)]
+[JsonObject(MemberSerialization.OptIn)] //지정한 데이터만 변환하게 하는 설정
 public class InfoToJson
 {
     [JsonProperty]
     public int Map;
+    [JsonProperty] 
+    public Dictionary<int, EventType> Events;
     [JsonProperty]
-    public Dictionary<int, EventType>[] Events;
-    [JsonProperty]
-    public int PlayerCurrentPosition;
+    public int PlayerCurrentNode;
+
+    public void SaveInfo(int mapNum, Node[] nodes, Node currentNode)
+    {
+        Map = mapNum;
+        Events = new Dictionary<int, EventType>();
+        for (int i = 0; i < nodes.Length; i++)
+        {
+            Events.Add(i, nodes[i].eventType);
+            if (nodes[i] == currentNode)
+            {
+                PlayerCurrentNode = i;
+                Debug.Log("saveInfor = " + nodes[i].name);
+            }
+        }
+    }
 }
 
 public class GameManager : MonoBehaviour
@@ -20,24 +35,42 @@ public class GameManager : MonoBehaviour
     private StageManager _stageManager;
     private bool _isDisplayToeventUI = false;
     private bool _isFirstStart;
-    private InfoToJson _infoToJson;
+    private JsonSaveLoder _jsonSaveLoder;
     
-    [SerializeField] private PlayerPawn playerPawn;
+    public InfoToJson InfoToJson;
+    [SerializeField] public PlayerPawn playerPawn;
     [SerializeField] private GameObject eventUI;
     
     public Node currentNode;
 
     private void Start()
     {
-        JsonSaveLoder jsonSaveLoder = gameObject.AddComponent<JsonSaveLoder>();
-
-        _isFirstStart = jsonSaveLoder.Load(out _infoToJson);
+        _jsonSaveLoder = gameObject.AddComponent<JsonSaveLoder>();
         _eventManager = FindObjectOfType<EventManager>();
         _stageManager = FindObjectOfType<StageManager>();
+        
+        _isFirstStart = _jsonSaveLoder.Load(out InfoToJson);
         if (_isFirstStart)
-            currentNode = _stageManager._nodes[0];
+        {
+            // 첫시작시 랜덤으로 초기화    
+            _stageManager.RandomInit();
+        }
+        else
+        {
+            // infoToJson 데이터를 StageManager에 동기화 맵, 노드들
+            _stageManager.PrevInit(InfoToJson);
+        }
+        currentNode = _stageManager.Nodes[InfoToJson.PlayerCurrentNode];
         playerPawn.MoveToNode(currentNode);
         CloseEvent();
+        InfoToJson.SaveInfo(_stageManager.MapNum, _stageManager.Nodes, currentNode);
+        _jsonSaveLoder.Save(InfoToJson);
+    }
+
+    public void SaveCurrentInfo()
+    {
+        InfoToJson.SaveInfo(_stageManager.MapNum, _stageManager.Nodes, currentNode);
+        _jsonSaveLoder.Save(InfoToJson);
     }
     
     public void UIControl()

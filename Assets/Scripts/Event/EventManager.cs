@@ -9,12 +9,15 @@ public class EventManager : MonoBehaviour
     [SerializeField] private GameObject[] eventSelectionWindow; 
     private Dictionary<EventType, RougeEvent.Event> _events 
         = new Dictionary<EventType, RougeEvent.Event>();
+
+    private GameManager _gameManager;
     private void Start()
     {
         foreach (RougeEvent.Event tmpEvent in events)
         {
             _events.Add(tmpEvent.Type, tmpEvent);
         }
+        _gameManager = FindObjectOfType<GameManager>();
     }
 
     public void EventUISetting(Node node) // next Node를 가져와서 이벤트UI에 띄운다
@@ -28,18 +31,23 @@ public class EventManager : MonoBehaviour
             tmp.text = node.nextNode[i].eventType.ToString();
             int i1 = i; // 람다식에서  "()"closure를 사용하면 값을 복사 하는게 아닌 참조를 하기때문에 i가 바뀌면 함수의 위치도 바뀌게 된다.
                         // 그래서 각각의 이벤트에 대한 위치 i를 지역변수로 복사한다음 사용해야 한다.
-            eventSelectionWindow[i].GetComponent<Button>().onClick.AddListener(() => EventAction(node.nextNode[i1].eventType));
+            eventSelectionWindow[i].GetComponent<Button>().onClick.AddListener(() => EventAction(node.nextNode[i1]));
         }
     }
 
-    public void EventAction(EventType eventType)
+    public void EventAction(Node node)
     {
-        if (_events.TryGetValue(eventType, out RougeEvent.Event value) == false)
+        // Debug.Log("EventAction ");
+        if (_events.TryGetValue(node.eventType, out RougeEvent.Event value) == false)
         {
             Debug.Log("찾고자 하는 이벤트가 없습니다");
         }
         else
         {
+            _gameManager.playerPawn.MoveToNode(node);
+            _gameManager.currentNode = node;
+            Debug.Log("Action" + node.name);
+            _gameManager.SaveCurrentInfo();
             value.BuildUI();
         }
     }

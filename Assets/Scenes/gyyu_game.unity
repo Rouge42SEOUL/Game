@@ -707,7 +707,7 @@ MonoBehaviour:
   eventLists:
   - {fileID: 11400000, guid: 3ec16d5000c80a74ba5185d2f1ab2e90, type: 2}
   - {fileID: 11400000, guid: 8d4851db386b0dd47987a9dd2e2ceb08, type: 2}
-  _selectMap: {fileID: 0}
+  selectMap: {fileID: 0}
 --- !u!4 &416167770
 Transform:
   m_ObjectHideFlags: 0
@@ -807,7 +807,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1942567962}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: JsonSaveLoder, Assembly-CSharp
         m_MethodName: Save
         m_Mode: 1
@@ -2349,7 +2349,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1942567961}
   - component: {fileID: 1942567960}
-  - component: {fileID: 1942567962}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -2370,8 +2369,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPawn: {fileID: 1365835024}
-  currentNode: {fileID: 0}
   eventUI: {fileID: 1633479925}
+  currentNode: {fileID: 0}
 --- !u!4 &1942567961
 Transform:
   m_ObjectHideFlags: 0
@@ -2387,19 +2386,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1942567962
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1942567959}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d115cb0d024e1d41a33d8ac07fcd60d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameManager: {fileID: 1942567960}
 --- !u!1 &2034751779
 GameObject:
   m_ObjectHideFlags: 0

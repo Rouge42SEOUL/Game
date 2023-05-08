@@ -20,20 +20,21 @@ public class JsonSaveLoder : MonoBehaviour
 
         if (File.Exists(filePath))
         {
-            Debug.LogError("이전 데이터를 불러오는중..");
+            Debug.Log("이전 데이터를 불러오는중..");
             FileStream stream = new FileStream(filePath, FileMode.Open);
             byte[] data = new byte[stream.Length];
             stream.Read(data, 0, (int)stream.Length);
             string jsonData = Encoding.UTF8.GetString(data);
+            infoToJson = new InfoToJson();
             infoToJson = JsonConvert.DeserializeObject<InfoToJson>(jsonData);
+            stream.Close();
             return false;
         }
         else
         {
-            Debug.LogError("새로운 게임 생성중..");
-            FileStream stream = new FileStream(filePath, FileMode.CreateNew);
-            // 파일 작업 수행...
-            stream.Close();
+            Debug.Log("새로운 게임 생성중..");
+            // FileStream stream = new FileStream(filePath, FileMode.CreateNew);
+            // stream.Close();
             infoToJson = new InfoToJson();
             return true;
         }

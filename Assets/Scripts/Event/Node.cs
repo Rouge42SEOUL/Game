@@ -7,9 +7,9 @@ public class Node : MonoBehaviour
 {
     public Node[] nextNode;
     public Event _event;
+    public EventType eventType;
     public int positionX;
     public int positionY; // Round 계층
-    public EventType eventType;
     
     private readonly Color[] _colors = new Color[7]
         {Color.white, Color.yellow, Color.cyan, Color.blue, Color.green, Color.gray, Color.black};
