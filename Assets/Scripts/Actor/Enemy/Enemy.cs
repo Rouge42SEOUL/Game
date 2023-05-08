@@ -25,15 +25,7 @@ namespace Actor.Enemy
         public override void GetHit(DamageData data) => _GetHit(data);
         public void SetManagedPool(IObjectPool<Enemy> pool) => _SetManagedPool(pool);
         public void Init() => _Init();
-
-        internal bool IsAttackable
-        {
-            get
-            {
-                float dis = Vector2.Distance(_target.transform.position, transform.position);
-                return attackableDistance >= dis;
-            }
-        }
+        
     }
     
     // Values or methods that other cannot use
@@ -59,6 +51,8 @@ namespace Actor.Enemy
             stateMachine = new StateMachine<Enemy>(this, new IdleState());
             stateMachine.AddState(new MoveState());
             stateMachine.AddState(new AttackState());
+            stateMachine.AddState(new GetHitState());
+            stateMachine.AddState(new DiedState());
         }
 
         private void Update()
