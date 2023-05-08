@@ -39,6 +39,7 @@ namespace ObjectPool
 
         void Start()
         {
+            // TODO : Change method of spawn by stored data
             StartCoroutine(_SpawnEnemy());
         }
     }
@@ -55,7 +56,7 @@ namespace ObjectPool
                 enemy.transform.position = pos;
                 enemy.Init();
 
-                yield return new WaitForSeconds(1f);
+                yield return new WaitForSeconds(5f);
             }
         }
 

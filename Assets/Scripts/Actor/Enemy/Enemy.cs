@@ -15,6 +15,7 @@ namespace Actor.Enemy
         protected StateMachine<Enemy> stateMachine;
         
         internal Rigidbody2D Rigidbody2D;
+        internal Animator EnemyAnim;
         internal GameObject Target => _target;
         internal EnemyStatObject Stat => _stat;
         public SerializedDictionary<AttributeType, int> currentAttributes;
@@ -43,6 +44,7 @@ namespace Actor.Enemy
         private void Awake()
         {
             Rigidbody2D = GetComponent<Rigidbody2D>();
+            EnemyAnim = GetComponent<Animator>();
             _target = GameObject.Find("Player");
         }
         
@@ -57,6 +59,7 @@ namespace Actor.Enemy
 
         private void Update()
         {
+            // TODO : if enemy health below zero, call Died()
             stateMachine.Update();
         }
 
@@ -64,13 +67,6 @@ namespace Actor.Enemy
         {
             stateMachine.FixedUpdate();
         }
-
-        // private void OnTriggerEnter2D(Collider2D other)
-        // {
-        //     // TODO : Call _GetHit function of Player
-        //     
-        //     throw new System.NotImplementedException();
-        // }
     }
     
     // body of others
@@ -78,15 +74,14 @@ namespace Actor.Enemy
     {
         private void _GetHit(DamageData data)
         {
-            Debug.Log(data.Damage + "health Lost");
-            // TODO : make GetHitState of Enemy and put Addforce func in it
+            Debug.Log( "Enemy health Lost -> " + data.Damage);
+            stateMachine.ChangeState<GetHitState>();
             Rigidbody2D.AddForce(data.KbForce, ForceMode2D.Impulse);
         }
 
         protected override void Died()
         {
-            throw new System.NotImplementedException();
-            // TODO : make 
+            stateMachine.ChangeState<DiedState>();
         }
         
         private void _Init()
@@ -102,7 +97,7 @@ namespace Actor.Enemy
         private IEnumerator _KillEnemy()
         {
             yield return new WaitForSeconds(5f);
-            _DestroyEnemy();
+            Died();
         }
         
         private void _DestroyEnemy()

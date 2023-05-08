@@ -60,6 +60,7 @@ namespace Actor.Player
 
         private void Update()
         {
+            // TODO : if player health below zero, call Died()
             StateMachine.Update();
         }
         
@@ -74,12 +75,13 @@ namespace Actor.Player
     {
         private void _GetHit(DamageData data)
         {
-            throw new System.NotImplementedException();
+            // TODO : get damaged, remove Debug.Log
+            Debug.Log("Player health lost ->" + data.Damage);
         }
 
         protected override void Died()
         {
-            throw new System.NotImplementedException();
+            StateMachine.ChangeState<PlayerDiedState>();
         }
 
         private void OnMovement(InputValue value)
@@ -98,6 +100,7 @@ namespace Actor.Player
 
         private void OnSkill1(InputValue value)
         {
+            // TODO : Remove hardcoded death
             StateMachine.ChangeState<PlayerDiedState>();
         }
     }

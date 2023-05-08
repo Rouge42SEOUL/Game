@@ -21,7 +21,7 @@ namespace Actor.Player
         private IEnumerator _PlayerDead()
         {
             yield return new WaitForSeconds(3f);
-            Object.Destroy(_context.gameObject);
+            _context.gameObject.SetActive(false);
         }
     }
 }
