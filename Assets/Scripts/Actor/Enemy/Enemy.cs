@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using Actor.Stats;
+using Interface;
 using StateMachine;
 using UnityEngine;
 using UnityEngine.Pool;
@@ -12,6 +13,8 @@ namespace Actor.Enemy
     public partial class Enemy
     {
         protected StateMachine<Enemy> stateMachine;
+        
+        internal Rigidbody2D Rigidbody2D;
         internal GameObject Target => _target;
         internal EnemyStatObject Stat => _stat;
         public SerializedDictionary<AttributeType, int> currentAttributes;
@@ -19,7 +22,7 @@ namespace Actor.Enemy
         protected int baseHealthPoint;
         protected int currentHealthPoint;
         
-        public override void GetHit() => _GetHit();
+        public override void GetHit(DamageData data) => _GetHit(data);
         public void SetManagedPool(IObjectPool<Enemy> pool) => _SetManagedPool(pool);
         public void Init() => _Init();
 
@@ -45,9 +48,14 @@ namespace Actor.Enemy
     // body of MonoBehaviour
     public partial class Enemy : Actor
     {
+        private void Awake()
+        {
+            Rigidbody2D = GetComponent<Rigidbody2D>();
+            _target = GameObject.Find("Player");
+        }
+        
         private void Start()
         {
-            _target = GameObject.Find("Player");
             stateMachine = new StateMachine<Enemy>(this, new IdleState());
             stateMachine.AddState(new MoveState());
             stateMachine.AddState(new AttackState());
@@ -62,19 +70,29 @@ namespace Actor.Enemy
         {
             stateMachine.FixedUpdate();
         }
+
+        // private void OnTriggerEnter2D(Collider2D other)
+        // {
+        //     // TODO : Call _GetHit function of Player
+        //     
+        //     throw new System.NotImplementedException();
+        // }
     }
     
     // body of others
     public partial class Enemy
     {
-        private void _GetHit()
+        private void _GetHit(DamageData data)
         {
-            throw new System.NotImplementedException();
+            Debug.Log(data.Damage + "health Lost");
+            // TODO : make GetHitState of Enemy and put Addforce func in it
+            Rigidbody2D.AddForce(data.KbForce, ForceMode2D.Impulse);
         }
 
         protected override void Died()
         {
             throw new System.NotImplementedException();
+            // TODO : make 
         }
         
         private void _Init()
