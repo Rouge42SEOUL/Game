@@ -14,6 +14,8 @@ namespace Actor.Enemy
     {
         protected StateMachine<Enemy> stateMachine;
         
+        internal IObjectPool<Enemy> ManagedPool;
+        internal Collider2D Collider2D;
         internal Rigidbody2D Rigidbody2D;
         internal Animator EnemyAnim;
         internal GameObject Target => _target;
@@ -35,7 +37,7 @@ namespace Actor.Enemy
         private GameObject _target;
         [SerializeField] private float attackableDistance = 0.5f;
         [SerializeField] private EnemyStatObject _stat;
-        private IObjectPool<Enemy> _managedPool;
+        
     }
     
     // body of MonoBehaviour
@@ -45,11 +47,10 @@ namespace Actor.Enemy
         {
             Rigidbody2D = GetComponent<Rigidbody2D>();
             EnemyAnim = GetComponent<Animator>();
+            Collider2D = GetComponent<Collider2D>();
+            
             _target = GameObject.Find("Player");
-        }
-        
-        private void Start()
-        {
+            
             stateMachine = new StateMachine<Enemy>(this, new IdleState());
             stateMachine.AddState(new MoveState());
             stateMachine.AddState(new AttackState());
@@ -76,17 +77,24 @@ namespace Actor.Enemy
         {
             Debug.Log( "Enemy health Lost -> " + data.Damage);
             stateMachine.ChangeState<GetHitState>();
+            
+            Rigidbody2D.velocity = Vector2.zero;
             Rigidbody2D.AddForce(data.KbForce, ForceMode2D.Impulse);
         }
 
         protected override void Died()
         {
+            StopAllCoroutines();
             stateMachine.ChangeState<DiedState>();
         }
         
         private void _Init()
         {
+            Collider2D.enabled = true;
+            stateMachine.ChangeState<IdleState>();
+            
             StartCoroutine(_KillEnemy());
+            
             currentAttributes.Clear();
             foreach (AttributeType type in Enum.GetValues(typeof(AttributeType)))
             {
@@ -99,15 +107,10 @@ namespace Actor.Enemy
             yield return new WaitForSeconds(5f);
             Died();
         }
-        
-        private void _DestroyEnemy()
-        {
-            _managedPool.Release(this);
-        }
 
         private void _SetManagedPool(IObjectPool<Enemy> pool)
         {
-            _managedPool = pool;
+            ManagedPool = pool;
         }
     }
 }

@@ -25,6 +25,7 @@ namespace Actor.Enemy
 
         public override void OnExit()
         {
+            _context.StopCoroutine(_Hit());
             _context.EnemyAnim.SetBool(Animator.StringToHash("getHit"), false);
         }
         

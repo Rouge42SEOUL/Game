@@ -26,6 +26,7 @@ namespace Actor.Enemy
 
         public override void OnEnter()
         {
+            Debug.Log("Enemy move");   
             _context.EnemyAnim.SetBool(Animator.StringToHash("isMoving"), true);
         }
         

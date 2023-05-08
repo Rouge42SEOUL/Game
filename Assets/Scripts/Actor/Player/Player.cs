@@ -48,10 +48,7 @@ namespace Actor.Player
             PlayerRigid = GetComponent<Rigidbody2D>();
             PlayerAttackCol = transform.GetChild(0).gameObject;
             PlayerAttackCol.gameObject.SetActive(false);
-        }
-        
-        private void Start()
-        {
+            
             StateMachine = new StateMachine<Player>(this, new PlayerIdleState());
             StateMachine.AddState(new PlayerMoveState());
             StateMachine.AddState(new PlayerAttackState());
@@ -81,6 +78,8 @@ namespace Actor.Player
 
         protected override void Died()
         {
+            Debug.Log("Player Died");
+            StopAllCoroutines();
             StateMachine.ChangeState<PlayerDiedState>();
         }
 
