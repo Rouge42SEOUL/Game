@@ -38,12 +38,17 @@ namespace Actor.Skill
             }
             
         }
-
         private void Attack()
         {
             
         }
         
+
+        public override void Cancel()
+        {
+            
+        }
+
         private void Attack(GameObject target)
         {
             

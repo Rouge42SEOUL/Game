@@ -11,5 +11,11 @@ namespace Actor.Skill
         {
             
         }
+        
+        public override void Cancel()
+        {
+            
+        }
+
     }
 }
