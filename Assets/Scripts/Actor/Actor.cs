@@ -1,6 +1,7 @@
 
 using System;
 using System.Collections.Generic;
+using Actor.Stats;
 using Interface;
 using UnityEngine;
 
@@ -10,6 +11,7 @@ namespace Actor
     public abstract partial class Actor
     {
         public abstract void GetHit();
+        public abstract void GetEffect(AttributeType type, float value);
         protected abstract void Died();
     }
     

@@ -20,6 +20,11 @@ namespace Actor.Enemy
         protected int currentHealthPoint;
         
         public override void GetHit() => _GetHit();
+        public override void GetEffect(AttributeType type, float value)
+        {
+            throw new NotImplementedException();
+        }
+
         public void SetManagedPool(IObjectPool<Enemy> pool) => _SetManagedPool(pool);
         public void Init() => _Init();
 
