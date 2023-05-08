@@ -29,14 +29,14 @@ namespace Actor.Stats
                         {
                             case EffectType.Burns:
                                 changeValue = effect.effectivePoint;
-                                actor.stat.defence -= changeValue;
+                                actor.stat.totalDfc -= changeValue;
                                 break;
                             case EffectType.Frostbite:
                                 actor.stat.moveSpeed = 0;
                                 break;
                             case EffectType.Poison:
-                                changeValue = actor.stat.health * effect.effectivePoint;
-                                actor.stat.health -= changeValue;
+                                changeValue = actor.stat.entireHp * effect.effectivePoint;
+                                actor.stat.entireHp -= changeValue;
                                 break;
                         }
                     }
@@ -58,7 +58,7 @@ namespace Actor.Stats
             {
                 case EffectType.Bleeding:
                 {
-                    var changeValue = actor.stat.entireHP * effect.effectivePoint;
+                    var changeValue = actor.stat.entireHp * effect.effectivePoint;
                     actor.stat.currentHp -= changeValue;
                     break;
                 }
@@ -103,7 +103,7 @@ namespace Actor.Stats
                 }
                 case EffectType.Poison:
                 {
-                    var changeValue = actor.stat.entireHP * effect.effectivePoint;
+                    var changeValue = actor.stat.entireHp * effect.effectivePoint;
                     actor.stat.currentHp -= changeValue;
                     break;
                 }
