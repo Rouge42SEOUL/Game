@@ -23,7 +23,6 @@ public class InfoToJson
             if (nodes[i] == currentNode)
             {
                 PlayerCurrentNode = i;
-                Debug.Log("saveInfor = " + nodes[i].name);
             }
         }
     }
@@ -33,7 +32,7 @@ public class GameManager : MonoBehaviour
 {
     private EventManager _eventManager;
     private StageManager _stageManager;
-    private bool _isDisplayToeventUI = false;
+    private bool _isDisplayToEventUI = false;
     private bool _isFirstStart;
     private JsonSaveLoder _jsonSaveLoder;
     
@@ -75,7 +74,8 @@ public class GameManager : MonoBehaviour
     
     public void UIControl()
     {
-        if (_isDisplayToeventUI == false)
+        Debug.Log("gameManager's UIControl");
+        if (_isDisplayToEventUI == false)
             DisplayEvent();
         else
             CloseEvent();
@@ -84,13 +84,13 @@ public class GameManager : MonoBehaviour
     private void DisplayEvent()
     {
         eventUI.gameObject.SetActive(true);
-        _isDisplayToeventUI = true;
+        _isDisplayToEventUI = true;
     }
 
     private void CloseEvent()
     {
         eventUI.gameObject.SetActive(false);
-        _isDisplayToeventUI = false;
+        _isDisplayToEventUI = false;
     }
     
 }

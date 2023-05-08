@@ -8,6 +8,7 @@ public class EventBlackSmith :  RougeEvent.Event
 
     public override void BuildUI()
     {
+        Debug.Log("대장장이");
     }
     
     // 카드(버튼) 선택시 호출될 함수들 

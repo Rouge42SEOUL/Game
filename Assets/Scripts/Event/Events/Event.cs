@@ -29,6 +29,7 @@ namespace RougeEvent
 
         public void UIControl()
         {
+            Debug.Log("Event's UIControl");
             if (_isDisplay == false)
                 DisplayEvent();
         }

@@ -9,6 +9,7 @@ public class EventMerchant :  RougeEvent.Event
 
     public override void BuildUI()
     {
+        Merchant();
     }
     
     public void Merchant()

@@ -2,12 +2,14 @@ using System.IO;
 using System.Text;
 using UnityEngine;
 using Newtonsoft.Json;
+
 public class JsonSaveLoder : MonoBehaviour
 {
+    private string FileName = "/test.json";
 
     public void Save(InfoToJson infoToJson)
     {
-        FileStream stream = new FileStream(Application.dataPath + "/test.json", FileMode.OpenOrCreate);
+        FileStream stream = new FileStream(Application.dataPath + FileName, FileMode.OpenOrCreate);
         string jsonData = JsonConvert.SerializeObject(infoToJson);
         byte[] data = Encoding.UTF8.GetBytes(jsonData);
         stream.Write(data, 0, data.Length);
@@ -16,7 +18,7 @@ public class JsonSaveLoder : MonoBehaviour
 
     public bool Load(out InfoToJson infoToJson)
     {
-        string filePath = Application.dataPath + "/test.json";
+        string filePath = Application.dataPath + FileName;
 
         if (File.Exists(filePath))
         {
@@ -33,10 +35,14 @@ public class JsonSaveLoder : MonoBehaviour
         else
         {
             Debug.Log("새로운 게임 생성중..");
-            // FileStream stream = new FileStream(filePath, FileMode.CreateNew);
-            // stream.Close();
             infoToJson = new InfoToJson();
             return true;
         }
+    }
+
+    public void DeleteJson()
+    {
+        if (File.Exists(Application.dataPath + FileName))
+            File.Delete(Application.dataPath + FileName);
     }
 }

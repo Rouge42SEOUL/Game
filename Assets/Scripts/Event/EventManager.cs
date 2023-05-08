@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class EventManager : MonoBehaviour
 {
@@ -27,6 +28,7 @@ public class EventManager : MonoBehaviour
             eventSelectionWindow[i].SetActive(false);
         for (int i = 0; i < nodeCount; i++)
         {
+            eventSelectionWindow[i].SetActive(true);
             TextMeshProUGUI tmp = eventSelectionWindow[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>();
             tmp.text = node.nextNode[i].eventType.ToString();
             int i1 = i; // 람다식에서  "()"closure를 사용하면 값을 복사 하는게 아닌 참조를 하기때문에 i가 바뀌면 함수의 위치도 바뀌게 된다.
@@ -44,11 +46,13 @@ public class EventManager : MonoBehaviour
         }
         else
         {
+            for (int i = 0; i < eventSelectionWindow.Length; i++)
+                eventSelectionWindow[i].GetComponent<Button>().onClick.RemoveAllListeners();
             _gameManager.playerPawn.MoveToNode(node);
             _gameManager.currentNode = node;
-            Debug.Log("Action" + node.name);
             _gameManager.SaveCurrentInfo();
             value.BuildUI();
+            _gameManager.UIControl();
         }
     }
 

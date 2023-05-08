@@ -9,6 +9,7 @@ public class EventBox :  RougeEvent.Event
 
     public override void BuildUI()
     {
+        Box();
     }
     
     public void Box()
