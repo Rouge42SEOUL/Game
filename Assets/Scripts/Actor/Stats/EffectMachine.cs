@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,7 +10,7 @@ namespace Actor.Stats
     {
         public List<Effect> effects = new List<Effect>();
 
-        public void SufferEffect(Effect effect, Actor actor)
+        public void SufferEffect(Effect effect, Actor actor, float deltaTime)
         {
             // 이미 해당 상태이상이 적용되어 있는 경우
             if (effects.Exists(e => e.type == effect.type))
@@ -17,7 +19,7 @@ namespace Actor.Stats
                     return;
                 else if (effect.isStackable)
                 {
-                    if (effect.overlappingCount < 2)
+                    if (effect.overlappingCount == 1)
                     {
                         effects.Add(effect);
                         effect.overlappingCount++;
@@ -52,6 +54,8 @@ namespace Actor.Stats
             else
             {
                 effects.Add(effect);
+                if (effect.isStackable)
+                    effect.overlappingCount++;
             }
 
             switch (effect.type)
@@ -59,7 +63,11 @@ namespace Actor.Stats
                 case EffectType.Bleeding:
                 {
                     var changeValue = actor.stat.entireHp * effect.effectivePoint;
-                    actor.stat.currentHp -= changeValue;
+                    for (var i = effect.duration; (i -= deltaTime) > 0;)
+                    {
+                        HandleDotStatusEffect(actor, effect, changeValue, deltaTime);
+                        i -= deltaTime;
+                    }
                     break;
                 }
                 case EffectType.Blind:
@@ -70,7 +78,11 @@ namespace Actor.Stats
                 case EffectType.Burns:
                 {
                     var changeValue = effect.effectivePoint;
-                    actor.stat.currentHp -= changeValue;
+                    for (var i = effect.duration; (i -= deltaTime) > 0;)
+                    {
+                        HandleDotStatusEffect(actor, effect, changeValue, deltaTime);
+                        i -= deltaTime;
+                    }
                     break;
                 }
                 case EffectType.Confuse:
@@ -104,13 +116,71 @@ namespace Actor.Stats
                 case EffectType.Poison:
                 {
                     var changeValue = actor.stat.entireHp * effect.effectivePoint;
-                    actor.stat.currentHp -= changeValue;
+                    for (var i = effect.duration; (i -= deltaTime) > 0;)
+                    {
+                        HandleDotStatusEffect(actor, effect, changeValue, deltaTime);
+                        i -= deltaTime;
+                    }
                     break;
                 }
 
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
+            
         }
 
+        private static void HandleDotStatusEffect(Actor actor, Effect effect, float damagePerSecond, float deltaTime)
+        {
+            var damage = damagePerSecond * deltaTime;
+
+            actor.stat.currentHp -= damage;
+            effect.duration -= deltaTime;
+        }
+        private IEnumerator EndStatusEffect(Effect effect, Actor actor)
+        {
+            yield return new WaitForSeconds(effect.duration);
+
+            if (!effects.Exists(e => e.type == effect.type)) yield break;
+            // 스탯 변경량 원상복구
+            switch (effect.type)
+            {
+                case EffectType.Blind:
+                {
+                    actor.stat.accuracyRate = actor.stat.baseStat.speed * 0.01f + 0.5f;
+                    break;
+                }
+                case EffectType.Confuse:
+                {
+                    /*
+                     * if(player)
+                     *  조작 정상화
+                     * if(enemy)
+                     *  공격 타겟 정상화
+                     */
+                    break;
+                }
+                case EffectType.Frostbite:
+                {
+                    var changeValue = effect.effectivePoint;
+                    actor.stat.moveSpeed += changeValue;
+                    break;
+                }
+                case EffectType.Paralysis:
+                {
+                    var changeValue = effect.effectivePoint;
+                    actor.stat.atkSpeed += changeValue;
+                    break;
+                }
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+            
+            if (effect.isStackable)
+                effect.overlappingCount--;
+            if (!effect.isPermanent)
+                effects.Remove(effect);
+        }
     }
 }
     
