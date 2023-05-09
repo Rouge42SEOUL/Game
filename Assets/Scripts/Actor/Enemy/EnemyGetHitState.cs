@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Actor.Enemy
 {
-    public class GetHitState : State<Enemy>
+    public class EnemyGetHitState : State<Enemy>
     {
         private float _stunTime = 1.5f;
         
@@ -31,7 +31,7 @@ namespace Actor.Enemy
         
         private void _Finish()
         {
-            _stateMachine.ChangeState<IdleState>();
+            _stateMachine.ChangeState<EnemyIdleState>();
         }
         
         private IEnumerator _Hit()

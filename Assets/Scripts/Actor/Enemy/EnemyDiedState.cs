@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Actor.Enemy
 {
-    public class DiedState : State<Enemy>
+    public class EnemyDiedState : State<Enemy>
     {
         public override void OnEnter()
         {
