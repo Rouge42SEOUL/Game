@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.Security.Cryptography;
 using Newtonsoft.Json;
 using UnityEngine;
 
@@ -30,7 +28,7 @@ public class InfoToJson
     }
 }
 
-public class GameManager : MonoBehaviour
+public partial class GameManager // singleton
 {
     private static GameManager _instance;
 
@@ -54,19 +52,6 @@ public class GameManager : MonoBehaviour
             return _instance;
         }
     }
-    private EventManager _eventManager;
-    private StageManager _stageManager;
-    private bool _isDisplayToEventUI = false;
-    private bool _isFirstStart;
-    private JsonSaveLoder _jsonSaveLoder;
-    
-    public InfoToJson InfoToJson;
-    [SerializeField] public PlayerPawn playerPawn;
-    [SerializeField] private GameObject eventUI;
-    
-    public Node currentNode;
-
-
     private void Awake()
     {
         GameManager[] obj = FindObjectsOfType<GameManager>();
@@ -77,55 +62,65 @@ public class GameManager : MonoBehaviour
         }
     }
 
+}
+
+public partial class GameManager : MonoBehaviour
+{
+    [SerializeField] private string fileName = "/test.json";
+    private EventManager _eventManager;
+    private StageManager _stageManager;
+    private bool _isDisplayUI;
+    private bool _isFirstStart;
+    
+    public InfoToJson InfoToJson;
+    [SerializeField] public PlayerPawn playerPawn;
+    [SerializeField] private GameObject eventUI;
+    
+    public Node currentNode;
     private void Start()
     {
-        _jsonSaveLoder = gameObject.AddComponent<JsonSaveLoder>();
-        _eventManager = FindObjectOfType<EventManager>();
-        _stageManager = FindObjectOfType<StageManager>(); // 싱글톤
+        _eventManager = EventManager.Instance;
+        _stageManager = StageManager.Instance;
         
-        _isFirstStart = _jsonSaveLoder.Load(out InfoToJson);
+        _isFirstStart = !JsonSaveLoder.Load(out InfoToJson, Application.dataPath + fileName);
         if (_isFirstStart)
         {
-            // 첫시작시 랜덤으로 초기화    
             _stageManager.RandomInit();
         }
         else
         {
-            // infoToJson 데이터를 StageManager에 동기화 맵, 노드들
             _stageManager.PrevInit(InfoToJson);
         }
         currentNode = _stageManager.Nodes[InfoToJson.PlayerCurrentNode];
         playerPawn.MoveToNode(currentNode);
-        CloseEvent();
-        InfoToJson.SaveInfo(_stageManager.MapNum, _stageManager.Nodes, currentNode);
-        _jsonSaveLoder.Save(InfoToJson);
+        SaveCurrentInfo();
     }
 
-    public void SaveCurrentInfo()
+    public void MovePlayer(Node node)
     {
-        InfoToJson.SaveInfo(_stageManager.MapNum, _stageManager.Nodes, currentNode);
-        _jsonSaveLoder.Save(InfoToJson);
+        OptionUIControl();
+        playerPawn.MoveToNode(node);
+        currentNode = node;
+        SaveCurrentInfo();
     }
     
-    public void UIControl()
+    private void SaveCurrentInfo()
     {
-        Debug.Log("gameManager's UIControl");
-        if (_isDisplayToEventUI == false)
-            DisplayEvent();
+        InfoToJson.SaveInfo(_stageManager.MapNum, _stageManager.Nodes, currentNode);
+        JsonSaveLoder.Save(InfoToJson, Application.dataPath + fileName);
+    }
+    
+    public void OptionUIControl()
+    {
+        if (_isDisplayUI == false)
+        {
+            eventUI.gameObject.SetActive(true);
+            _isDisplayUI = true;
+        }
         else
-            CloseEvent();
+        {
+            eventUI.gameObject.SetActive(false);
+            _isDisplayUI = false;
+        }
     }
-    
-    private void DisplayEvent()
-    {
-        eventUI.gameObject.SetActive(true);
-        _isDisplayToEventUI = true;
-    }
-
-    private void CloseEvent()
-    {
-        eventUI.gameObject.SetActive(false);
-        _isDisplayToEventUI = false;
-    }
-    
 }

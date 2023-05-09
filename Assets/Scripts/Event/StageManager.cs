@@ -8,7 +8,7 @@ public enum RoundTable
     End = 13,
 }
 
-public class StageManager : MonoBehaviour
+public partial class StageManager // singleton
 {
     private static StageManager _instance;
     public static StageManager Instance
@@ -40,6 +40,11 @@ public class StageManager : MonoBehaviour
             return;
         }
     }
+}
+
+public partial class StageManager : MonoBehaviour
+{
+
     public GameObject[] map;
     public int MapNum { get; private set; }
     public EventList[] eventLists;
@@ -73,7 +78,6 @@ public class StageManager : MonoBehaviour
             Nodes[key] = selectMap.transform.GetChild(i).gameObject.GetComponent<Node>();
             Nodes[key].eventType = prevData.Events[key];
             Nodes[key].EventSetting();
-            Nodes[key].ChangeColor();
         }
     }
     
@@ -130,7 +134,6 @@ public class StageManager : MonoBehaviour
                 }
             }
             Nodes[i].EventSetting();
-            Nodes[i].ChangeColor();
         }
     }
 }

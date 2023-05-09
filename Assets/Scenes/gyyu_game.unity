@@ -578,7 +578,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1942567960}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: UIControl
+        m_MethodName: OptionUIControl
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -899,13 +899,13 @@ MonoBehaviour:
       - m_Target: {fileID: 426997362}
         m_TargetAssemblyTypeName: JsonSaveLoder, Assembly-CSharp
         m_MethodName: DeleteJson
-        m_Mode: 1
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: /test.json
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &426997360
@@ -2103,7 +2103,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1633479926
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2599,6 +2599,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86e649d645a426640ae2f7cf965bdb0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fileName: /test.json
   playerPawn: {fileID: 1365835024}
   eventUI: {fileID: 1633479925}
   currentNode: {fileID: 0}

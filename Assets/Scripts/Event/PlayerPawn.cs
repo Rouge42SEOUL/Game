@@ -6,7 +6,7 @@ public class PlayerPawn : MonoBehaviour
 
     private void Start()
     {
-        _eventManager = FindObjectOfType<EventManager>();
+        _eventManager = EventManager.Instance;
     }
     
 

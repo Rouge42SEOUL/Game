@@ -5,44 +5,38 @@ using Newtonsoft.Json;
 
 public class JsonSaveLoder : MonoBehaviour
 {
-    private string FileName = "/test.json";
 
-    public void Save(InfoToJson infoToJson)
+    public static void Save<T>(T objectToSave, string fileName)
     {
-        FileStream stream = new FileStream(Application.dataPath + FileName, FileMode.OpenOrCreate);
-        string jsonData = JsonConvert.SerializeObject(infoToJson);
+        FileStream stream = new FileStream(fileName, FileMode.OpenOrCreate);
+        string jsonData = JsonConvert.SerializeObject(objectToSave);
         byte[] data = Encoding.UTF8.GetBytes(jsonData);
         stream.Write(data, 0, data.Length);
         stream.Close();
     }
 
-    public bool Load(out InfoToJson infoToJson)
+    public static bool Load<T>(out T objectToLoad, string fileName) where T : new() // 인스턴스가 없을떄만 사용가능
     {
-        string filePath = Application.dataPath + FileName;
-
-        if (File.Exists(filePath))
+        objectToLoad = new T();
+        if (File.Exists(fileName)) // 파일이 있으면 읽고 objectToLoad 객체에 담는다.
         {
-            Debug.Log("이전 데이터를 불러오는중..");
-            FileStream stream = new FileStream(filePath, FileMode.Open);
+            FileStream stream = new FileStream(fileName, FileMode.Open);
             byte[] data = new byte[stream.Length];
             stream.Read(data, 0, (int)stream.Length);
             string jsonData = Encoding.UTF8.GetString(data);
-            infoToJson = new InfoToJson();
-            infoToJson = JsonConvert.DeserializeObject<InfoToJson>(jsonData);
+            objectToLoad = JsonConvert.DeserializeObject<T>(jsonData);
             stream.Close();
-            return false;
+            return true;
         }
         else
         {
-            Debug.Log("새로운 게임 생성중..");
-            infoToJson = new InfoToJson();
-            return true;
+            return false;
         }
     }
 
-    public void DeleteJson()
-    {
-        if (File.Exists(Application.dataPath + FileName))
-            File.Delete(Application.dataPath + FileName);
+    public void DeleteJson(string fileName)
+    { 
+        if (File.Exists(Application.dataPath + fileName))
+            File.Delete(Application.dataPath + fileName);
     }
 }
