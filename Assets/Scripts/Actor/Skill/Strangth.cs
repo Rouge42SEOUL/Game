@@ -14,7 +14,7 @@ namespace Actor.Skill
             skill.range = 0;
             skill.ultimate = false;
             skill.effectiveSpeed = 1.0f;
-            skill.effectivePoint = 50.0f; //퍼센트
+            skill.effectivePoint = 1.5f; //퍼센트
             skill.effectiveDuration = 5.0f;
         }
 
