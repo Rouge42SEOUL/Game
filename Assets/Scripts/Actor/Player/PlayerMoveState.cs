@@ -7,31 +7,43 @@ namespace Actor.Player
 {
     public class PlayerMoveState : State<Player>
     {
-        private Rigidbody2D _rigidbody2D;
-        private Transform _playerPos;
-        
         private float Speed => _context.Stat.attributes[AttributeType.Speed].currentValue;
+        private int _moveXid;
+        private int _moveYid;
 
         public override void OnInitialized()
         {
-            _rigidbody2D = _context.GetComponent<Rigidbody2D>();
+            _moveXid = Animator.StringToHash("moveX");
+            _moveYid = Animator.StringToHash("moveY");
+        }
+
+        public override void OnEnter()
+        {
+            _context.PlayerAnim.SetBool(Animator.StringToHash("isMoving"), true);
         }
         
         // Update is called once per frame
         public override void Update()
         {
-            if (!_context.IsMoving)
+            if (_context.Movement == Vector2.zero)
             {
                 _stateMachine.ChangeState<PlayerIdleState>();
             }
+            else
+            {
+                _context.PlayerAnim.SetFloat(_moveXid, _context.Stareing.x);
+                _context.PlayerAnim.SetFloat(_moveYid, _context.Stareing.y);
+            }
         }
-
+        
         public override void FixedUpdate()
         {
-            if (_context.IsMoving)
-            {
-                _rigidbody2D.MovePosition(_rigidbody2D.position + Speed * Time.fixedDeltaTime * _context.Movement);
-            }
+            _context.PlayerRigid.MovePosition(_context.PlayerRigid.position + Speed * Time.fixedDeltaTime * _context.Movement);
+        }
+        
+        public override void OnExit()
+        {
+            _context.PlayerAnim.SetBool(Animator.StringToHash("isMoving"), false);
         }
     }
 }
