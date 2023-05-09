@@ -29,8 +29,8 @@ namespace Actor.Player
         {
             if (other.CompareTag("Enemy"))
             {
-                // TOD0 : Set KnockBackForce power
-                DmgData.KbForce = Vector3.Normalize(_player.transform.position - other.transform.position);
+                // TOD0 : optimize and reimplement KnockBackForce power
+                DmgData.KbForce = Vector3.Normalize(other.transform.position - _player.transform.position);
                 other.GetComponent<Enemy.Enemy>().GetHit(DmgData);
             }
         }

@@ -39,6 +39,7 @@ namespace ObjectPool
 
         void Start()
         {
+            // TODO : Change method of spawn by stored data
             StartCoroutine(_SpawnEnemy());
         }
     }
@@ -53,9 +54,8 @@ namespace ObjectPool
                 Vector3 pos = _spawnPos[Random.Range(0, _spawnPos.Count - 1)].position;
                 Enemy enemy = _pool.Get();
                 enemy.transform.position = pos;
-                enemy.Init();
 
-                yield return new WaitForSeconds(1f);
+                yield return new WaitForSeconds(10f);
             }
         }
 
@@ -70,6 +70,7 @@ namespace ObjectPool
         private void ActivateEnemy(Enemy enemy)
         {
             enemy.gameObject.SetActive(true);
+            enemy.Init();
         }
         
         private void DeActivateEnemy(Enemy enemy)

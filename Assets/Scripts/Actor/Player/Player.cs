@@ -48,10 +48,7 @@ namespace Actor.Player
             PlayerRigid = GetComponent<Rigidbody2D>();
             PlayerAttackCol = transform.GetChild(0).gameObject;
             PlayerAttackCol.gameObject.SetActive(false);
-        }
-        
-        private void Start()
-        {
+            
             StateMachine = new StateMachine<Player>(this, new PlayerIdleState());
             StateMachine.AddState(new PlayerMoveState());
             StateMachine.AddState(new PlayerAttackState());
@@ -60,6 +57,7 @@ namespace Actor.Player
 
         private void Update()
         {
+            // TODO : if player health below zero, call Died()
             StateMachine.Update();
         }
         
@@ -74,12 +72,15 @@ namespace Actor.Player
     {
         private void _GetHit(DamageData data)
         {
-            throw new System.NotImplementedException();
+            // TODO : get damaged, remove Debug.Log
+            Debug.Log("Player health lost ->" + data.Damage);
         }
 
         protected override void Died()
         {
-            throw new System.NotImplementedException();
+            Debug.Log("Player Died");
+            StopAllCoroutines();
+            StateMachine.ChangeState<PlayerDiedState>();
         }
 
         private void OnMovement(InputValue value)
@@ -98,6 +99,7 @@ namespace Actor.Player
 
         private void OnSkill1(InputValue value)
         {
+            // TODO : Remove hardcoded death
             StateMachine.ChangeState<PlayerDiedState>();
         }
     }

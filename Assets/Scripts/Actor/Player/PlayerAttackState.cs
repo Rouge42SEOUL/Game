@@ -8,12 +8,10 @@ namespace Actor.Player
     public class PlayerAttackState : State<Player>
     {
         private Transform _atkPos;
-        private Collider2D _atkCol;
-        
+
         public override void OnInitialized()
         {
             _atkPos = _context.PlayerAttackCol.transform;
-            _atkCol = _context.PlayerAttackCol.GetComponent<BoxCollider2D>();
         }
         
         public override void OnEnter()
@@ -53,13 +51,8 @@ namespace Actor.Player
         private void _SetAttackCol()
         {
             Vector2 t = new Vector2(Mathf.Abs(_context.Stareing.y), Mathf.Abs(_context.Stareing.x));
-            _atkPos.localScale = t * 0.5f + new Vector2(1, 1);;
+            _atkPos.localScale = t * 0.5f + new Vector2(1, 1);
             _atkPos.localPosition = _context.Stareing * 0.5f;
-        }
-
-        private void _GiveDamage()
-        {
-            
         }
     }
 }

@@ -14,7 +14,10 @@ namespace Actor.Enemy
     {
         protected StateMachine<Enemy> stateMachine;
         
+        internal IObjectPool<Enemy> ManagedPool;
+        internal Collider2D Collider2D;
         internal Rigidbody2D Rigidbody2D;
+        internal Animator EnemyAnim;
         internal GameObject Target => _target;
         internal EnemyStatObject Stat => _stat;
         public SerializedDictionary<AttributeType, int> currentAttributes;
@@ -25,15 +28,7 @@ namespace Actor.Enemy
         public override void GetHit(DamageData data) => _GetHit(data);
         public void SetManagedPool(IObjectPool<Enemy> pool) => _SetManagedPool(pool);
         public void Init() => _Init();
-
-        internal bool IsAttackable
-        {
-            get
-            {
-                float dis = Vector2.Distance(_target.transform.position, transform.position);
-                return attackableDistance >= dis;
-            }
-        }
+        
     }
     
     // Values or methods that other cannot use
@@ -42,7 +37,7 @@ namespace Actor.Enemy
         private GameObject _target;
         [SerializeField] private float attackableDistance = 0.5f;
         [SerializeField] private EnemyStatObject _stat;
-        private IObjectPool<Enemy> _managedPool;
+        
     }
     
     // body of MonoBehaviour
@@ -51,18 +46,21 @@ namespace Actor.Enemy
         private void Awake()
         {
             Rigidbody2D = GetComponent<Rigidbody2D>();
+            EnemyAnim = GetComponent<Animator>();
+            Collider2D = GetComponent<Collider2D>();
+            
             _target = GameObject.Find("Player");
-        }
-        
-        private void Start()
-        {
+            
             stateMachine = new StateMachine<Enemy>(this, new IdleState());
             stateMachine.AddState(new MoveState());
             stateMachine.AddState(new AttackState());
+            stateMachine.AddState(new GetHitState());
+            stateMachine.AddState(new DiedState());
         }
 
         private void Update()
         {
+            // TODO : if enemy health below zero, call Died()
             stateMachine.Update();
         }
 
@@ -70,13 +68,6 @@ namespace Actor.Enemy
         {
             stateMachine.FixedUpdate();
         }
-
-        // private void OnTriggerEnter2D(Collider2D other)
-        // {
-        //     // TODO : Call _GetHit function of Player
-        //     
-        //     throw new System.NotImplementedException();
-        // }
     }
     
     // body of others
@@ -84,20 +75,26 @@ namespace Actor.Enemy
     {
         private void _GetHit(DamageData data)
         {
-            Debug.Log(data.Damage + "health Lost");
-            // TODO : make GetHitState of Enemy and put Addforce func in it
+            Debug.Log( "Enemy health Lost -> " + data.Damage);
+            stateMachine.ChangeState<GetHitState>();
+            
+            Rigidbody2D.velocity = Vector2.zero;
             Rigidbody2D.AddForce(data.KbForce, ForceMode2D.Impulse);
         }
 
         protected override void Died()
         {
-            throw new System.NotImplementedException();
-            // TODO : make 
+            StopAllCoroutines();
+            stateMachine.ChangeState<DiedState>();
         }
         
         private void _Init()
         {
+            Collider2D.enabled = true;
+            stateMachine.ChangeState<IdleState>();
+            
             StartCoroutine(_KillEnemy());
+            
             currentAttributes.Clear();
             foreach (AttributeType type in Enum.GetValues(typeof(AttributeType)))
             {
@@ -108,17 +105,12 @@ namespace Actor.Enemy
         private IEnumerator _KillEnemy()
         {
             yield return new WaitForSeconds(5f);
-            _DestroyEnemy();
-        }
-        
-        private void _DestroyEnemy()
-        {
-            _managedPool.Release(this);
+            Died();
         }
 
         private void _SetManagedPool(IObjectPool<Enemy> pool)
         {
-            _managedPool = pool;
+            ManagedPool = pool;
         }
     }
 }
