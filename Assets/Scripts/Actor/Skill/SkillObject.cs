@@ -23,6 +23,8 @@ namespace Actor.Skill
         }
         public abstract void Use();
 
+        public abstract void Cancel();
+
         public void UnlockSkill()
         {
             isUnlocked = true;

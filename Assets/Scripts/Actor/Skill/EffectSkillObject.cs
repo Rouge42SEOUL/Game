@@ -47,5 +47,11 @@ namespace Actor.Skill
                     break;
             }
         }
+        
+        public override void Cancel()
+        {
+            
+        }
+
     }
 }

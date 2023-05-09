@@ -20,7 +20,7 @@ namespace Actor.Skill
             _type = TargetType.Area;
             _range = range;
         }
-        
+
         public override void Use()
         {
             switch (_type)
@@ -44,7 +44,12 @@ namespace Actor.Skill
                     // get all enemies from spawner
                     break;
                 }
+
             }
+        }
+
+        public override void Cancel()
+        {
             
         }
     }

@@ -36,5 +36,12 @@ namespace Actor.Skill
                 return;
             _skillObject.Use();
         }
+
+        public void CancelSkill()
+        {
+            if (_skillObject == null)
+                return;
+            _skillObject.Cancel();
+        }
     }
 }
