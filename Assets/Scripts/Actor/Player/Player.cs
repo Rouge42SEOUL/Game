@@ -13,7 +13,6 @@ namespace Actor.Player
     public partial class Player
     {
         protected StateMachine<Player> StateMachine;
-        public override void GetHit() => _GetHit();
         internal Vector2 Movement => _movement;
 
         public PlayerStatObject Stat
@@ -92,9 +91,15 @@ namespace Actor.Player
             }
         }
         
-        private void _GetHit()
+        public override void GetHit()
         {
-            throw new System.NotImplementedException();
+            Debug.Log("Hit" + this.gameObject);
+        }
+        
+        public override void GetEffect(AttributeType type, float value)
+        {
+            _skillEffectValues[type] = (int)(_skillEffectValues[type] * value);
+            // _stat.
         }
 
         protected override void Died()

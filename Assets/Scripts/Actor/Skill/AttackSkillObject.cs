@@ -4,14 +4,14 @@ using UnityEngine;
 
 namespace Actor.Skill
 {
-    public class AttackSkillObject : SkillObject
+    public class AttackSkillObject : ActiveSkillObject
     {
         [SerializeField] private TargetType _type;
         [SerializeField] private float _range;
 
         public AttackSkillObject(GameObject context) : base(context)
         {
-            _type = TargetType.Single;
+            _type = TargetType.Projectile;
         }
 
         public AttackSkillObject(GameObject context, float range) : base(context)
@@ -24,7 +24,7 @@ namespace Actor.Skill
         {
             switch (_type)
             {
-                case TargetType.Single:
+                case TargetType.Projectile:
                     GameObject target = null;
                     Attack(target);
                     break;

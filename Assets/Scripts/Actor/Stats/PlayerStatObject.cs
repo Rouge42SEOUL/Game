@@ -12,7 +12,7 @@ namespace Actor.Stats
 
         public List<Attribute> attributes = new();
         public List<Effect> effects = new();
-        public SkillSlot[] skills = new SkillSlot[6];
+        public SkillSlot[] skills = new SkillSlot[6]; // 0: Normal Attack, 1 ~ 3: Skills, 4: Ultimate, 5: Passive
 
         private int _level = 1;
         private int _exp = 0;
