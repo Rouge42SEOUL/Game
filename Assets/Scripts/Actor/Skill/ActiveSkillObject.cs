@@ -1,29 +1,42 @@
 using System.Collections.Generic;
+using Actor.Stats;
 using UnityEngine;
 
 namespace Actor.Skill
 {
-    public class ActiveSkillObject : SkillObject
+    public abstract class ActiveSkillObject : SkillObject
     {
         [SerializeField] protected TargetType targetType;
+        [SerializeField] protected bool isDotEffect = false;
+        [SerializeField] protected bool isMultiplication = false;
+        public AttributeType effectTo;
+        public float effectValue;
         
         public ActiveSkillObject(GameObject context) : base(context)
         {
+            targetType = TargetType.Single;
         }
 
-        public override void Use()
-        {
-            throw new System.NotImplementedException();
-        }
+        public abstract override void Use();
 
-        protected void GetTarget(out GameObject target)
+        protected GameObject GetTarget()
         {
-            target = context;
+            return context;
         }
         
         protected void GetTarget(out List<GameObject> targets)
         {
             targets = new List<GameObject>();
+        }
+
+        protected int Add(int targetValue)
+        {
+            return (int)effectValue;
+        }
+        
+        protected int Multiply(int targetValue)
+        {
+            return (int)(targetValue * effectValue);
         }
     }
 }

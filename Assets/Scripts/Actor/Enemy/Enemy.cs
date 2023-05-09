@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Actor.Skill;
 using Actor.Stats;
 using StateMachine;
 using UnityEngine;
@@ -12,17 +13,23 @@ namespace Actor.Enemy
     public partial class Enemy
     {
         protected StateMachine<Enemy> stateMachine;
-        internal GameObject Target => _target;
-        internal EnemyStatObject Stat => _stat;
+        public GameObject Target => _target;
+        public EnemyStatObject Stat => _stat;
         public Dictionary<AttributeType, int> currentAttributes = new();
+        protected List<Effect> effects;
         
         protected int baseHealthPoint;
         protected int currentHealthPoint;
         
-        public override void GetHit() => _GetHit();
-        public override void GetEffect(AttributeType type, float value)
+        public override void GetEffect(Effect effect, Func<int, int> getValueToAdd)
         {
-            throw new NotImplementedException();
+            currentAttributes[effect.effectTo] += getValueToAdd(currentAttributes[effect.effectTo]);
+            effects.Add(effect);
+        }
+        
+        public override void GetHit()
+        {
+            throw new System.NotImplementedException();
         }
 
         public void SetManagedPool(IObjectPool<Enemy> pool) => _SetManagedPool(pool);
@@ -72,11 +79,6 @@ namespace Actor.Enemy
     // body of others
     public partial class Enemy
     {
-        private void _GetHit()
-        {
-            throw new System.NotImplementedException();
-        }
-
         protected override void Died()
         {
             throw new System.NotImplementedException();

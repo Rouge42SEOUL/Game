@@ -29,14 +29,9 @@ namespace Actor.Stats
             // base health point initialize
         }
         
-        public void AddEffect(EffectType type)
+        public void AddEffect(Effect effect)
         {
-            effects.Add(new Effect(type));
-        }
-
-        public void AddEffect(EffectType type, float duration)
-        {
-            effects.Add(new Effect(type, duration));
+            effects.Add(effect);
         }
     }
 }

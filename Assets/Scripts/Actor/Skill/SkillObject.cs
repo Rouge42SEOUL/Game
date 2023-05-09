@@ -4,12 +4,19 @@ namespace Actor.Skill
 {
     public abstract class SkillObject : ScriptableObject
     {
+        [SerializeField] protected Skill data;
         protected GameObject context;
         protected bool isUnlocked = false;
-        [SerializeField] protected Skill data;
+        
         public SkillType type;
         public ElementalType elementalType;
 
+        public int Id
+        {
+            get => data.id;
+            set => data.id = value;
+        }
+        
         public SkillObject(GameObject context)
         {
             this.context = context;
@@ -20,5 +27,8 @@ namespace Actor.Skill
         {
             isUnlocked = true;
         }
+
+        public string GetName() => data.name;
+        public string GetDescription() => data.description;
     }
 }

@@ -12,8 +12,11 @@ namespace Actor.Stats
 
         public List<Attribute> attributes = new();
         public List<Effect> effects = new();
-        public SkillSlot[] skills = new SkillSlot[6]; // 0: Normal Attack, 1 ~ 3: Skills, 4: Ultimate, 5: Passive
-
+        
+        public SkillSlot[] skills = new SkillSlot[4];
+        public SkillObject passive;
+        public SkillObject attack;
+        
         private int _level = 1;
         private int _exp = 0;
 
@@ -47,9 +50,7 @@ namespace Actor.Stats
             }
             effects.Clear();
             // base health point initialize
-            skills[0].slotType = SkillType.Normal;
-            skills[4].slotType = SkillType.Ultimate;
-            skills[5].slotType = SkillType.Passive;
+            skills[3].slotType = SkillType.Ultimate;
         }
 
         #endregion
@@ -78,14 +79,9 @@ namespace Actor.Stats
             }
         }
 
-        public void AddEffect(EffectType type)
+        public void AddEffect(Effect effect)
         {
-            effects.Add(new Effect(type));
-        }
-
-        public void AddEffect(EffectType type, float duration)
-        {
-            effects.Add(new Effect(type, duration));
+            effects.Add(effect);
         }
 
         public void AddExp(int value)

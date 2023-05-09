@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Actor.Skill
 {
+    [CreateAssetMenu(fileName = "New Skill", menuName = "Skill/Attack")]
     public class AttackSkillObject : ActiveSkillObject
     {
         [SerializeField] private TargetType _type;

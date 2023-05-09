@@ -7,13 +7,13 @@ namespace Actor.Skill
     {
         public int id;
         public string name;
-        public int atk;
+        public string description;
 
         public Skill()
         {
             id = -1;
             name = "";
-            atk = 0;
+            description = "";
         }
     }
 }

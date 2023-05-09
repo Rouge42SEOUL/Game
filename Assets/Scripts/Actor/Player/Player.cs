@@ -25,6 +25,23 @@ namespace Actor.Player
         }
 
         internal bool IsMoving => _movement != Vector2.zero;
+        
+        
+        public override void GetHit()
+        {
+            Debug.Log("Hit" + this.gameObject);
+        }
+        
+        public override void GetEffect(Effect effect, Func<int, int> getValueToAdd)
+        {
+            _skillEffectValues[effect.effectTo] = getValueToAdd(_skillEffectValues[effect.effectTo]);
+            _stat.effects.Add(effect);
+        }
+
+        protected override void Died()
+        {
+            throw new System.NotImplementedException();
+        }
     }
     
     // Values or methods that other cannot use
@@ -89,22 +106,6 @@ namespace Actor.Player
             {
                 _stat.AddAttributeValue(type, _skillEffectValues[type]);
             }
-        }
-        
-        public override void GetHit()
-        {
-            Debug.Log("Hit" + this.gameObject);
-        }
-        
-        public override void GetEffect(AttributeType type, float value)
-        {
-            _skillEffectValues[type] = (int)(_skillEffectValues[type] * value);
-            // _stat.
-        }
-
-        protected override void Died()
-        {
-            throw new System.NotImplementedException();
         }
 
         private void OnMovement(InputValue value)
