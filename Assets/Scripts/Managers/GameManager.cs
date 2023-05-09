@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using Newtonsoft.Json;
 using UnityEngine;
 
@@ -30,6 +32,28 @@ public class InfoToJson
 
 public class GameManager : MonoBehaviour
 {
+    private static GameManager _instance;
+
+    public static GameManager Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                GameManager obj = FindObjectOfType<GameManager>();
+                if (obj != null)
+                {
+                    _instance = obj;
+                }
+                else
+                {
+                    GameManager newObj = new GameObject().AddComponent<GameManager>();
+                    _instance = newObj;
+                }
+            }
+            return _instance;
+        }
+    }
     private EventManager _eventManager;
     private StageManager _stageManager;
     private bool _isDisplayToEventUI = false;
@@ -42,11 +66,22 @@ public class GameManager : MonoBehaviour
     
     public Node currentNode;
 
+
+    private void Awake()
+    {
+        GameManager[] obj = FindObjectsOfType<GameManager>();
+        if (obj.Length != 1)
+        {
+            Destroy(gameObject);
+            return;
+        }
+    }
+
     private void Start()
     {
         _jsonSaveLoder = gameObject.AddComponent<JsonSaveLoder>();
         _eventManager = FindObjectOfType<EventManager>();
-        _stageManager = FindObjectOfType<StageManager>();
+        _stageManager = FindObjectOfType<StageManager>(); // 싱글톤
         
         _isFirstStart = _jsonSaveLoder.Load(out InfoToJson);
         if (_isFirstStart)

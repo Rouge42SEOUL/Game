@@ -10,6 +10,36 @@ public enum RoundTable
 
 public class StageManager : MonoBehaviour
 {
+    private static StageManager _instance;
+    public static StageManager Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                StageManager obj = FindObjectOfType<StageManager>();
+                if (obj != null)
+                {
+                    _instance = obj;
+                }
+                else
+                {
+                    StageManager newObj = new GameObject().AddComponent<StageManager>();
+                    _instance = newObj;
+                }
+            }
+            return _instance;
+        }
+    }
+    private void Awake()
+    {
+        StageManager[] obj = FindObjectsOfType<StageManager>();
+        if (obj.Length != 1)
+        {
+            Destroy(gameObject);
+            return;
+        }
+    }
     public GameObject[] map;
     public int MapNum { get; private set; }
     public EventList[] eventLists;
