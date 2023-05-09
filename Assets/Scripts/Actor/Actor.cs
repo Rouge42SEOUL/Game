@@ -37,9 +37,9 @@ namespace Actor
         {
             while (duration > 0)
             {
+                GetHit();
                 duration -= Time.deltaTime;
                 yield return _waitForOneSeconds;
-                GetHit();
             }
         }
     }

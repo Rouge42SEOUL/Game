@@ -26,38 +26,26 @@ namespace Actor.Skill
             switch (_type)
             {
                 case TargetType.Projectile:
-                    GameObject target = null;
-                    Attack(target);
+                {
+                    GameObject target = GetTarget();
+                    target.GetComponent<Actor>().GetHit();
                     break;
+                }
                 case TargetType.Area:
-                    var targets = new List<GameObject>();
-                    Attack(ref targets);
+                {
+                    List<GameObject> targets;
+                    GetTarget(out targets);
+                    foreach (var target in targets)
+                        target.GetComponent<Actor>().GetHit();
                     break;
+                }
                 case TargetType.World:
-                    Attack();
+                {
+                    // get all enemies from spawner
                     break;
+                }
             }
             
-        }
-
-        private void Attack()
-        {
-            
-        }
-        
-        private void Attack(GameObject target)
-        {
-            
-        }
-        
-        private void Attack(ref List<GameObject> targets)
-        {
-            if (targets.Count == 0)
-                return;
-            foreach (var target in targets)
-            {
-                target.GetComponent<Actor>().GetHit();
-            }
         }
     }
 }

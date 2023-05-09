@@ -36,6 +36,7 @@ namespace Actor.Player
         {
             _skillEffectValues[effect.effectTo] = getValueToAdd(_skillEffectValues[effect.effectTo]);
             _stat.effects.Add(effect);
+            //event call 
         }
 
         protected override void Died()
@@ -115,23 +116,23 @@ namespace Actor.Player
 
         private void OnAutoAttack()
         {
-            _stat.skills[0].UseSkill();
+            _stat.attack.Use();
         }
         private void OnSkill1()
         {
-            _stat.skills[1].UseSkill();
+            _stat.skills[0].UseSkill();
         }
         private void OnSkill2()
         {
-            _stat.skills[2].UseSkill();
+            _stat.skills[1].UseSkill();
         }
         private void OnSkill3()
         {
-            _stat.skills[3].UseSkill();
+            _stat.skills[2].UseSkill();
         }
         private void OnSkillUlt()
         {
-            _stat.skills[4].UseSkill();
+            _stat.skills[3].UseSkill();
         }
     }
 }

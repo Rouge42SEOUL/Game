@@ -27,6 +27,7 @@ namespace Actor.Skill
                     var target = GetTarget().GetComponent<Actor>();
                     if (isDotEffect)
                         target.GetEffect(_effect, isMultiplication ? Multiply : Add);
+                    target.GetDotDamage(_duration);
                     break;
                 }
                 case TargetType.Area:
