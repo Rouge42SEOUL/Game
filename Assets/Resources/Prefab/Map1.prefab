@@ -149,9 +149,9 @@ MonoBehaviour:
   nextNode:
   - {fileID: 5405043293096384268}
   _event: {fileID: 0}
+  eventType: 0
   positionX: 0
   positionY: 0
-  eventType: 0
 --- !u!1 &5405043293096384257
 GameObject:
   m_ObjectHideFlags: 0
@@ -252,9 +252,9 @@ MonoBehaviour:
   nextNode:
   - {fileID: 5405043293096384269}
   _event: {fileID: 0}
+  eventType: 0
   positionX: 1
   positionY: 1
-  eventType: 0
 --- !u!1 &5405043293096384258
 GameObject:
   m_ObjectHideFlags: 0
@@ -356,9 +356,9 @@ MonoBehaviour:
   - {fileID: 5405043293096384270}
   - {fileID: 5405043291704482339}
   _event: {fileID: 0}
+  eventType: 0
   positionX: 1
   positionY: 2
-  eventType: 0
 --- !u!1 &5405043293096384259
 GameObject:
   m_ObjectHideFlags: 0
@@ -459,9 +459,9 @@ MonoBehaviour:
   nextNode:
   - {fileID: 5405043292593438860}
   _event: {fileID: 0}
+  eventType: 0
   positionX: 1
   positionY: 3
-  eventType: 0
 --- !u!1 &5405043293096384260
 GameObject:
   m_ObjectHideFlags: 0
@@ -562,9 +562,9 @@ MonoBehaviour:
   nextNode:
   - {fileID: 5405043292541248591}
   _event: {fileID: 0}
+  eventType: 0
   positionX: 1
   positionY: 5
-  eventType: 0
 --- !u!1 &5405043293096384261
 GameObject:
   m_ObjectHideFlags: 0
@@ -665,9 +665,9 @@ MonoBehaviour:
   nextNode:
   - {fileID: 5405043292674497675}
   _event: {fileID: 0}
+  eventType: 0
   positionX: 1
   positionY: 6
-  eventType: 0
 --- !u!1 &5405043293096384262
 GameObject:
   m_ObjectHideFlags: 0
@@ -769,9 +769,9 @@ MonoBehaviour:
   - {fileID: 5405043291520295006}
   - {fileID: 5405043293075472116}
   _event: {fileID: 0}
+  eventType: 0
   positionX: 1
   positionY: 7
-  eventType: 0
 --- !u!1 &5405043293096384263
 GameObject:
   m_ObjectHideFlags: 0
@@ -872,9 +872,9 @@ MonoBehaviour:
   nextNode:
   - {fileID: 5405043293190393143}
   _event: {fileID: 0}
+  eventType: 0
   positionX: 1
   positionY: 8
-  eventType: 0
 --- !u!1 &5405043293096384272
 GameObject:
   m_ObjectHideFlags: 0
@@ -975,9 +975,9 @@ MonoBehaviour:
   nextNode:
   - {fileID: 5405043293124341031}
   _event: {fileID: 0}
+  eventType: 0
   positionX: 2
   positionY: 9
-  eventType: 0
 --- !u!1 &5405043293096384274
 GameObject:
   m_ObjectHideFlags: 0
@@ -1078,9 +1078,9 @@ MonoBehaviour:
   nextNode:
   - {fileID: 5405043292861859778}
   _event: {fileID: 0}
+  eventType: 0
   positionX: 2
   positionY: 12
-  eventType: 0
 --- !u!1 &5405043293096384275
 GameObject:
   m_ObjectHideFlags: 0
@@ -1180,9 +1180,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextNode: []
   _event: {fileID: 0}
+  eventType: 0
   positionX: 1
   positionY: 13
-  eventType: 0
 --- !u!1 &5405043293096384280
 GameObject:
   m_ObjectHideFlags: 0
@@ -1283,9 +1283,9 @@ MonoBehaviour:
   nextNode:
   - {fileID: 5405043293237465210}
   _event: {fileID: 0}
+  eventType: 0
   positionX: 1
   positionY: 10
-  eventType: 0
 --- !u!1 &5405043293096384281
 GameObject:
   m_ObjectHideFlags: 0
@@ -1387,9 +1387,9 @@ MonoBehaviour:
   - {fileID: 5405043292414325435}
   - {fileID: 5405043292946826191}
   _event: {fileID: 0}
+  eventType: 0
   positionX: 1
   positionY: 11
-  eventType: 0
 --- !u!1 &5405043293096384282
 GameObject:
   m_ObjectHideFlags: 0
@@ -1490,9 +1490,9 @@ MonoBehaviour:
   nextNode:
   - {fileID: 5405043292861859778}
   _event: {fileID: 0}
+  eventType: 0
   positionX: 1
   positionY: 12
-  eventType: 0
 --- !u!1 &5405043293096384283
 GameObject:
   m_ObjectHideFlags: 0
@@ -1593,9 +1593,9 @@ MonoBehaviour:
   nextNode:
   - {fileID: 5405043292593438860}
   _event: {fileID: 0}
+  eventType: 0
   positionX: 2
   positionY: 3
-  eventType: 0
 --- !u!1 &5405043293096384284
 GameObject:
   m_ObjectHideFlags: 0
@@ -1697,9 +1697,9 @@ MonoBehaviour:
   - {fileID: 5405043293096384271}
   - {fileID: 5405043292136391987}
   _event: {fileID: 0}
+  eventType: 0
   positionX: 2
   positionY: 4
-  eventType: 0
 --- !u!1 &5405043293096384285
 GameObject:
   m_ObjectHideFlags: 0
@@ -1800,9 +1800,9 @@ MonoBehaviour:
   nextNode:
   - {fileID: 5405043292541248591}
   _event: {fileID: 0}
+  eventType: 0
   positionX: 2
   positionY: 5
-  eventType: 0
 --- !u!1 &5405043293096384287
 GameObject:
   m_ObjectHideFlags: 0
@@ -1903,6 +1903,6 @@ MonoBehaviour:
   nextNode:
   - {fileID: 5405043293190393143}
   _event: {fileID: 0}
+  eventType: 0
   positionX: 2
   positionY: 8
-  eventType: 0
