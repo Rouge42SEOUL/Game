@@ -3,8 +3,13 @@ using UnityEngine;
 
 public enum EventType
 {
-    BlackSmith,
+    None,
     Battle,
+    Skill,
+    BlackSmith,
+    Merchant,
+    Box,
+    Boss,
 }
 
 [Serializable]
@@ -13,7 +18,6 @@ public struct EventStruct
     public EventType Type;
     public float Probability;
 };
-
 
 namespace RougeEvent
 {
@@ -25,18 +29,12 @@ namespace RougeEvent
 
         public void UIControl()
         {
+            Debug.Log("Event's UIControl");
             if (_isDisplay == false)
                 DisplayEvent();
-            else
-                CloseEvent();
         }
 
-        protected abstract void BuildUI();
-
-        private void Start()
-        {
-            CloseEvent();
-        }
+        public abstract void BuildUI();
 
         private void DisplayEvent()
         {

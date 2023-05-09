@@ -1,7 +1,7 @@
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public enum StandardRound
+public enum RoundTable
 {
     Start = 1,
     Middle = 5,
@@ -11,49 +11,82 @@ public enum StandardRound
 public class StageManager : MonoBehaviour
 {
     public GameObject[] map;
+    public int MapNum { get; private set; }
     public EventList[] eventLists;
-    private GameObject _selectMap;
-    private Node[] _nodes;
-    private EventType _eventType;
-    
+    public GameObject selectMap;
+    public Node[] Nodes { get; private set; }
 
-    private void Start()
+    // 첫시작시 랜덤으로 맵, 노드 초기화
+    public void RandomInit()
     {
         RandomStage();
-        Instantiate(_selectMap);
         RandomSetting();
     }
     
-    public void RandomStage()
+    
+    // 이전데이터를 읽어서 그 데이터로 stage를 구성
+    public void PrevInit(InfoToJson prevData)
     {
-        _selectMap= map[Random.Range(0, 2)];
-    }
+        // 맵 설정
+        MapNum = prevData.Map;
+        selectMap = map[MapNum];
+        selectMap = Instantiate(selectMap);
+        // 노드들 설정
+        int nodeCount = prevData.Events.Count;
+        int[] keys = new int[nodeCount];
+        prevData.Events.Keys.CopyTo(keys, 0);
 
-    public void RandomSetting()
-    {
-        int nodeCount = _selectMap.transform.childCount;
-        _nodes = new Node[nodeCount];
+        Nodes = new Node[nodeCount];
         for (int i = 0; i < nodeCount; i++)
         {
-            _nodes[i] = _selectMap.transform.GetChild(i).gameObject.GetComponent<Node>();
-            if (_nodes[i]._positionY == (int)StandardRound.Start)
-                _nodes[i]._eventType = EventType.Battle;
-            else if (_nodes[i]._positionY == (int)StandardRound.End)
-                _nodes[i]._eventType = EventType.Battle;
-            else if (_nodes[i]._positionY <= (int)StandardRound.Middle)
+            int key = keys[i];
+            Nodes[key] = selectMap.transform.GetChild(i).gameObject.GetComponent<Node>();
+            Nodes[key].eventType = prevData.Events[key];
+            Nodes[key].EventSetting();
+            Nodes[key].ChangeColor();
+        }
+    }
+    
+    private void RandomStage()
+    {
+        MapNum = Random.Range(0, 2);
+        selectMap = map[MapNum];
+        selectMap = Instantiate(selectMap);
+    }
+
+    private void RandomSetting()
+    {
+        int nodeCount = selectMap.transform.childCount;
+        Nodes = new Node[nodeCount];
+        for (int i = 0; i < nodeCount; i++)
+        {
+            Nodes[i] = selectMap.transform.GetChild(i).gameObject.GetComponent<Node>();
+            if (Nodes[i].positionY == 0)
+            {
+                Nodes[i].eventType = EventType.None;
+            }
+            else if (Nodes[i].positionY == (int)RoundTable.Start) // 시작은 배틀로 고정
+            {
+                Nodes[i].eventType = EventType.Battle;
+            }
+            else if (Nodes[i].positionY == (int)RoundTable.End) // 마지막은 보스로 고정
+            {
+                Nodes[i].eventType = EventType.Boss;
+            }
+            else if (Nodes[i].positionY <= (int)RoundTable.Middle) // 처음부터 5라운드까지
             {
                 EventList eventList = eventLists[0];
                 float num = Random.Range(0.0f, 1.0f);
-                foreach (EventStruct e in eventList.EventStructs)
+                foreach (EventStruct e in eventList.EventStructs) // 이벤트 갯수만큼 반복문
                 {
-                    if (num <= e.Probability)
+                    if (num <= e.Probability) // 랜덤값이 어떤 이벤트 구간인지 확인
                     {
-                        _nodes[i]._eventType = e.Type;
+                        Nodes[i].eventType = e.Type;
                         break;
                     }
                 }
             }
-            else
+            else    // 5라운드부터 마지막까지
             {
                 EventList eventList = eventLists[1];
                 float num = Random.Range(0.0f, 1.0f);
@@ -61,13 +94,14 @@ public class StageManager : MonoBehaviour
                 {
                     if (num <= e.Probability)
                     {
-                        _nodes[i]._eventType = e.Type;
+                        Nodes[i].eventType = e.Type;
                         break;
                     }
                 }
             }
+            Nodes[i].EventSetting();
+            Nodes[i].ChangeColor();
         }
     }
 }
 
-// 맵이랑 플레이어 말이랑 따로 구성, 맵 노드의 종속되지 않게

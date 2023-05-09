@@ -28,15 +28,15 @@ namespace Actor.Skill
                 case TargetType.Projectile:
                 {
                     GameObject target = GetTarget();
-                    target.GetComponent<Actor>().GetHit();
+                    // target.GetComponent<Actor>().GetHit();
                     break;
                 }
                 case TargetType.Area:
                 {
                     List<GameObject> targets;
                     GetTarget(out targets);
-                    foreach (var target in targets)
-                        target.GetComponent<Actor>().GetHit();
+                    // foreach (var target in targets)
+                        // target.GetComponent<Actor>().GetHit();
                     break;
                 }
                 case TargetType.World:

@@ -1,11 +1,10 @@
-
 using System;
-using Actor.Stats;
-using StateMachine;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
+using Actor.Stats;
+using StateMachine;
+using Interface;
 
 namespace Actor.Player
 {
@@ -13,7 +12,14 @@ namespace Actor.Player
     public partial class Player
     {
         protected StateMachine<Player> StateMachine;
-        internal Vector2 Movement => _movement;
+        public override void GetHit(DamageData data) => _GetHit(data);
+
+        internal Vector2 Movement;
+        internal Vector2 Stareing;
+
+        internal Animator PlayerAnim;
+        internal Rigidbody2D PlayerRigid;
+        internal GameObject PlayerAttackCol;
 
         public PlayerStatObject Stat
         {
@@ -24,24 +30,11 @@ namespace Actor.Player
             }
         }
 
-        internal bool IsMoving => _movement != Vector2.zero;
-        
-        
-        public override void GetHit()
-        {
-            Debug.Log("Hit" + this.gameObject);
-        }
-        
         public override void GetEffect(Effect effect, Func<int, int> getValueToAdd)
         {
             _skillEffectValues[effect.effectTo] = getValueToAdd(_skillEffectValues[effect.effectTo]);
             _stat.effects.Add(effect);
             //event call 
-        }
-
-        protected override void Died()
-        {
-            throw new System.NotImplementedException();
         }
     }
     
@@ -50,6 +43,7 @@ namespace Actor.Player
     {
         private Vector2 _movement;
         [SerializeField] private PlayerStatObject _stat;
+        private PlayerInput _playerInput;
         [SerializeField] private SerializedDictionary<AttributeType, int> _skillEffectValues;
         [SerializeField] private SerializedDictionary<AttributeType, int> _itemEffectValues;
     }
@@ -60,17 +54,21 @@ namespace Actor.Player
         private void Awake()
         {
             // inventory on equip item += OnEquipItem;
-        }
-
-        private void Start()
-        {
+        
+            PlayerAnim = GetComponent<Animator>();
+            PlayerRigid = GetComponent<Rigidbody2D>();
+            PlayerAttackCol = transform.GetChild(0).gameObject;
+            PlayerAttackCol.gameObject.SetActive(false);
+            
             StateMachine = new StateMachine<Player>(this, new PlayerIdleState());
             StateMachine.AddState(new PlayerMoveState());
             StateMachine.AddState(new PlayerAttackState());
+            StateMachine.AddState(new PlayerDiedState());
         }
 
         private void Update()
         {
+            // TODO : if player health below zero, call Died()
             StateMachine.Update();
         }
         
@@ -89,13 +87,14 @@ namespace Actor.Player
             {
                 _stat.AddAttributeValue(type, -(_itemEffectValues[type]));
             }
+
             // calculate stats effect
             foreach (AttributeType type in Enum.GetValues(typeof(AttributeType)))
             {
                 _stat.AddAttributeValue(type, _itemEffectValues[type]);
             }
         }
-
+        
         private void OnActivateSkill()
         {
             foreach (AttributeType type in Enum.GetValues(typeof(AttributeType)))
@@ -109,18 +108,38 @@ namespace Actor.Player
             }
         }
 
-        private void OnMovement(InputValue value)
+        private void _GetHit(DamageData data)
         {
-            _movement = value.Get<Vector2>();
+            // TODO : get damaged, remove Debug.Log
+            Debug.Log("Player health lost ->" + data.Damage);
         }
 
-        private void OnAutoAttack()
+        protected override void Died()
         {
+            Debug.Log("Player Died");
+            StopAllCoroutines();
+            StateMachine.ChangeState<PlayerDiedState>();
+        }
+
+        private void OnMovement(InputValue value)
+        {
+            Movement = value.Get<Vector2>();
+            if (!Movement.Equals(Vector2.zero))
+            {
+                Stareing = Movement;
+            }
+        }
+
+        private void OnAutoAttack(InputValue value)
+        {
+            StateMachine.ChangeState<PlayerAttackState>();
             _stat.attack.Use();
         }
         private void OnSkill1()
         {
             _stat.skills[0].UseSkill();
+            // TODO : Remove hardcoded death
+            StateMachine.ChangeState<PlayerDiedState>();
         }
         private void OnSkill2()
         {

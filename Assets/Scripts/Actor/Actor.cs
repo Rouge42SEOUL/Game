@@ -9,13 +9,13 @@ namespace Actor
     // Values or methods that other can use
     public abstract partial class Actor
     {
-        public abstract void GetHit();
         public void GetDotDamage(float duration)
         {
             StartCoroutine(AddDotDamage(duration));
         }
         
         public abstract void GetEffect(Effect effect, Func<int, int> getValueToAdd);
+        public abstract void GetHit(DamageData data);
         protected abstract void Died();
     }
     
@@ -37,7 +37,7 @@ namespace Actor
         {
             while (duration > 0)
             {
-                GetHit();
+                // GetHit();
                 duration -= Time.deltaTime;
                 yield return _waitForOneSeconds;
             }
