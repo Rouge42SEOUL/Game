@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Actor.Enemy
 {
-    public class AttackState : State<Enemy>
+    public class EnemyAttackState : State<Enemy>
     {
         private Player.Player _p;
         
@@ -35,7 +35,7 @@ namespace Actor.Enemy
             // 플레이어가 사라지면 기본상태
             if (!_context.Target.activeSelf)
             {
-                _stateMachine.ChangeState<IdleState>();
+                _stateMachine.ChangeState<EnemyIdleState>();
             }
             else
             {
@@ -43,7 +43,7 @@ namespace Actor.Enemy
                 float dist = Vector3.Distance(_context.Target.transform.position, _context.transform.position);
                 if (dist > 1.0f)
                 {
-                    _stateMachine.ChangeState<MoveState>();
+                    _stateMachine.ChangeState<EnemyMoveState>();
                 }
             }
         }

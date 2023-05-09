@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Actor.Enemy
 {
-    public class MoveState : State<Enemy>
+    public class EnemyMoveState : State<Enemy>
     {
         private Transform _playerPos;
         private int _speed => _context.currentAttributes[AttributeType.Speed];
@@ -35,14 +35,14 @@ namespace Actor.Enemy
             // 플레이어가 사라지면 기본상태
             if (!_context.Target)
             {
-                _stateMachine.ChangeState<IdleState>();
+                _stateMachine.ChangeState<EnemyIdleState>();
             }
             
             // 이동상태에서 플레이어와 거리가 0.5f 이하면 공격상태
             float dist = Vector3.Distance(_playerPos.position, _context.transform.position);
             if (dist <= 0.5f)
             {
-                _stateMachine.ChangeState<AttackState>();
+                _stateMachine.ChangeState<EnemyAttackState>();
             }
             else
             {

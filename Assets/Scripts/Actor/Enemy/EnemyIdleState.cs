@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Actor.Enemy
 {
-    public class IdleState : State<Enemy>
+    public class EnemyIdleState : State<Enemy>
     {
         public override void Update()
         {
@@ -14,11 +14,11 @@ namespace Actor.Enemy
                 float dist = Vector3.Distance(_context.Target.transform.position, _context.transform.position);
                 if (dist <= 0.5f)
                 {
-                    _stateMachine.ChangeState<AttackState>();
+                    _stateMachine.ChangeState<EnemyAttackState>();
                 }
                 else
                 {   
-                    _stateMachine.ChangeState<MoveState>();
+                    _stateMachine.ChangeState<EnemyMoveState>();
                 }
             }
         }

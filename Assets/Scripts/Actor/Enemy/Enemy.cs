@@ -51,11 +51,11 @@ namespace Actor.Enemy
             
             _target = GameObject.Find("Player");
             
-            stateMachine = new StateMachine<Enemy>(this, new IdleState());
-            stateMachine.AddState(new MoveState());
-            stateMachine.AddState(new AttackState());
-            stateMachine.AddState(new GetHitState());
-            stateMachine.AddState(new DiedState());
+            stateMachine = new StateMachine<Enemy>(this, new EnemyIdleState());
+            stateMachine.AddState(new EnemyMoveState());
+            stateMachine.AddState(new EnemyAttackState());
+            stateMachine.AddState(new EnemyGetHitState());
+            stateMachine.AddState(new EnemyDiedState());
         }
 
         private void Update()
@@ -76,7 +76,7 @@ namespace Actor.Enemy
         private void _GetHit(DamageData data)
         {
             Debug.Log( "Enemy health Lost -> " + data.Damage);
-            stateMachine.ChangeState<GetHitState>();
+            stateMachine.ChangeState<EnemyGetHitState>();
             
             Rigidbody2D.velocity = Vector2.zero;
             Rigidbody2D.AddForce(data.KbForce, ForceMode2D.Impulse);
@@ -85,13 +85,13 @@ namespace Actor.Enemy
         protected override void Died()
         {
             StopAllCoroutines();
-            stateMachine.ChangeState<DiedState>();
+            stateMachine.ChangeState<EnemyDiedState>();
         }
         
         private void _Init()
         {
             Collider2D.enabled = true;
-            stateMachine.ChangeState<IdleState>();
+            stateMachine.ChangeState<EnemyIdleState>();
             
             StartCoroutine(_KillEnemy());
             
