@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 377561cfd9cccc945bb6ed84eb31af56, type: 3}
   m_Name: FirstRound
   m_EditorClassIdentifier: 
-  EventStructs:
-  - Type: 1
-    Probability: 0.5
-  - Type: 2
-    Probability: 0.7
-  - Type: 4
-    Probability: 0.9
-  - Type: 5
-    Probability: 1
+  eventStructs:
+  - type: 1
+    probability: 0.5
+  - type: 2
+    probability: 0.6
+  - type: 4
+    probability: 0.7
+  - type: 5
+    probability: 1

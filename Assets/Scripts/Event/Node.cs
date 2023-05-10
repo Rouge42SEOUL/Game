@@ -2,8 +2,7 @@ using System;
 using UnityEngine;
 using Event = RougeEvent.Event;
 
-[Serializable]
-public class Node : MonoBehaviour
+public partial class Node // public
 {
     public Node[] nextNode; // 하드코딩
     public Event @event;
@@ -11,9 +10,6 @@ public class Node : MonoBehaviour
     public int positionX;
     public int positionY; // Round 계층
     
-    private readonly Color[] _colors = new Color[7]
-        {Color.white, Color.yellow, Color.cyan, Color.blue, Color.green, Color.gray, Color.black};
-
     public void EventSetting()
     {
         @event = eventType switch
@@ -28,7 +24,13 @@ public class Node : MonoBehaviour
         };
         ChangeColor();
     }
-
+}
+[Serializable]
+public partial class Node : MonoBehaviour // private
+{
+    private readonly Color[] _colors = new Color[7]
+        {Color.white, Color.yellow, Color.cyan, Color.blue, Color.green, Color.gray, Color.black};
+    
     private void ChangeColor()
     {
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();

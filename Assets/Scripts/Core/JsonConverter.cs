@@ -3,7 +3,7 @@ using System.Text;
 using UnityEngine;
 using Newtonsoft.Json;
 
-public class JsonSaveLoder : MonoBehaviour
+public class JsonConverter : MonoBehaviour
 {
 
     public static void Save<T>(T objectToSave, string fileName)

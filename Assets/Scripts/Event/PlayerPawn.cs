@@ -8,7 +8,6 @@ public class PlayerPawn : MonoBehaviour
     {
         _eventManager = EventManager.Instance;
     }
-    
 
     public void MoveToNode(Node node)
     {

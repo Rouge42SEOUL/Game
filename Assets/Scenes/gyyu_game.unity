@@ -897,7 +897,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 426997362}
-        m_TargetAssemblyTypeName: JsonSaveLoder, Assembly-CSharp
+        m_TargetAssemblyTypeName: JsonConverter, Assembly-CSharp
         m_MethodName: DeleteJson
         m_Mode: 5
         m_Arguments:
@@ -2599,10 +2599,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86e649d645a426640ae2f7cf965bdb0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fileName: /test.json
   playerPawn: {fileID: 1365835024}
   eventUI: {fileID: 1633479925}
-  currentNode: {fileID: 0}
+  jsonFileName: /test.json
 --- !u!4 &1942567961
 Transform:
   m_ObjectHideFlags: 0

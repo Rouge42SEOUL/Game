@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using UnityEngine;
 
-
 [JsonObject(MemberSerialization.OptIn)] //지정한 데이터만 변환하게 하는 설정
 public class InfoToJson
 {
@@ -28,6 +27,69 @@ public class InfoToJson
     }
 }
 
+public partial class GameManager // public
+{
+    [SerializeField] private PlayerPawn playerPawn;
+    [SerializeField] private GameObject eventUI;
+    [SerializeField] private string jsonFileName = "/test.json";
+
+    public void MovePlayer(Node node)
+    {
+        OptionUIControl();
+        playerPawn.MoveToNode(node);
+        _currentNode = node;
+        SaveCurrentInfo();
+    }
+    
+    public void OptionUIControl()
+    {
+        if (_isDisplayUI == false)
+        {
+            eventUI.gameObject.SetActive(true);
+            _isDisplayUI = true;
+        }
+        else
+        {
+            eventUI.gameObject.SetActive(false);
+            _isDisplayUI = false;
+        }
+    }
+}
+
+public partial class GameManager : MonoBehaviour // private
+{
+    private EventManager _eventManager;
+    private StageManager _stageManager;
+    private bool _isDisplayUI;
+    private bool _isFirstStart;
+    private InfoToJson _infoToJson;
+    private Node _currentNode;
+
+    private void Start()
+    {
+        _eventManager = EventManager.Instance;
+        _stageManager = StageManager.Instance;
+        _isFirstStart = !JsonConverter.Load(out _infoToJson, Application.dataPath + jsonFileName);
+        if (_isFirstStart)
+        {
+            _stageManager.RandomInit();
+        }
+        else
+        {
+            _stageManager.PrevInit(_infoToJson);
+        }
+        _currentNode = _stageManager.Nodes[_infoToJson.PlayerCurrentNode];
+        playerPawn.MoveToNode(_currentNode);
+        SaveCurrentInfo();
+    }
+
+    private void SaveCurrentInfo()
+    {
+        _infoToJson.SaveInfo(_stageManager.MapNum, _stageManager.Nodes, _currentNode);
+        JsonConverter.Save(_infoToJson, Application.dataPath + jsonFileName);
+    }
+
+}
 public partial class GameManager // singleton
 {
     private static GameManager _instance;
@@ -59,68 +121,6 @@ public partial class GameManager // singleton
         {
             Destroy(gameObject);
             return;
-        }
-    }
-
-}
-
-public partial class GameManager : MonoBehaviour
-{
-    [SerializeField] private string fileName = "/test.json";
-    private EventManager _eventManager;
-    private StageManager _stageManager;
-    private bool _isDisplayUI;
-    private bool _isFirstStart;
-    
-    public InfoToJson InfoToJson;
-    [SerializeField] public PlayerPawn playerPawn;
-    [SerializeField] private GameObject eventUI;
-    
-    public Node currentNode;
-    private void Start()
-    {
-        _eventManager = EventManager.Instance;
-        _stageManager = StageManager.Instance;
-        
-        _isFirstStart = !JsonSaveLoder.Load(out InfoToJson, Application.dataPath + fileName);
-        if (_isFirstStart)
-        {
-            _stageManager.RandomInit();
-        }
-        else
-        {
-            _stageManager.PrevInit(InfoToJson);
-        }
-        currentNode = _stageManager.Nodes[InfoToJson.PlayerCurrentNode];
-        playerPawn.MoveToNode(currentNode);
-        SaveCurrentInfo();
-    }
-
-    public void MovePlayer(Node node)
-    {
-        OptionUIControl();
-        playerPawn.MoveToNode(node);
-        currentNode = node;
-        SaveCurrentInfo();
-    }
-    
-    private void SaveCurrentInfo()
-    {
-        InfoToJson.SaveInfo(_stageManager.MapNum, _stageManager.Nodes, currentNode);
-        JsonSaveLoder.Save(InfoToJson, Application.dataPath + fileName);
-    }
-    
-    public void OptionUIControl()
-    {
-        if (_isDisplayUI == false)
-        {
-            eventUI.gameObject.SetActive(true);
-            _isDisplayUI = true;
-        }
-        else
-        {
-            eventUI.gameObject.SetActive(false);
-            _isDisplayUI = false;
         }
     }
 }
