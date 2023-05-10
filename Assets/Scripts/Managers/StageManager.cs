@@ -12,7 +12,6 @@ public partial class StageManager // public
 {
     public GameObject[] map;
     public EventList[] eventLists;
-    public GameObject selectMap;
     public int MapNum { get; private set; }
     public Node[] Nodes { get; private set; }
     
@@ -27,8 +26,8 @@ public partial class StageManager // public
     {
         // 맵 설정
         MapNum = prevData.Map;
-        selectMap = map[MapNum];
-        selectMap = Instantiate(selectMap);
+        _selectMap = map[MapNum];
+        _selectMap = Instantiate(_selectMap);
         // 노드들 설정
         int nodeCount = prevData.Events.Count;
         int[] keys = new int[nodeCount];
@@ -37,7 +36,7 @@ public partial class StageManager // public
         for (int i = 0; i < nodeCount; i++)
         {
             int key = keys[i];
-            Nodes[key] = selectMap.transform.GetChild(i).gameObject.GetComponent<Node>();
+            Nodes[key] = _selectMap.transform.GetChild(i).gameObject.GetComponent<Node>();
             Nodes[key].eventType = prevData.Events[key];
             Nodes[key].EventSetting();
         }
@@ -46,20 +45,22 @@ public partial class StageManager // public
 
 public partial class StageManager : MonoBehaviour // private
 {
+    private GameObject _selectMap;
+
     private void RandomStage()
     {
         MapNum = Random.Range(0, 2);
-        selectMap = map[MapNum];
-        selectMap = Instantiate(selectMap);
+        _selectMap = map[MapNum];
+        _selectMap = Instantiate(_selectMap);
     }
 
     private void RandomSetting()
     {
-        int nodeCount = selectMap.transform.childCount;
+        int nodeCount = _selectMap.transform.childCount;
         Nodes = new Node[nodeCount];
         for (int i = 0; i < nodeCount; i++)
         {
-            Nodes[i] = selectMap.transform.GetChild(i).gameObject.GetComponent<Node>();
+            Nodes[i] = _selectMap.transform.GetChild(i).gameObject.GetComponent<Node>();
             if (Nodes[i].positionY == 0)
             {
                 Nodes[i].eventType = EventType.None;
