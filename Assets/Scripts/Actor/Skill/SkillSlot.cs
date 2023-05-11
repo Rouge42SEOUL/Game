@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Actor.Stats;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -11,7 +12,7 @@ namespace Actor.Skill
         public SkillType slotType;
         [SerializeField] private SkillObject _skillObject;
 
-        public Action<SkillObject> OnChangeSkill;
+        public Action OnChangeSkill;
 
         public SkillSlot()
         {
@@ -24,7 +25,7 @@ namespace Actor.Skill
             if (skillObject.type == slotType)
             {
                 _skillObject = skillObject;
-                OnChangeSkill?.Invoke(_skillObject);
+                OnChangeSkill?.Invoke();
                 return;
             }
         }

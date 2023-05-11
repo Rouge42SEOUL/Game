@@ -1,4 +1,6 @@
 
+using System;
+using Actor.Stats;
 using Interface;
 using UnityEngine;
 
@@ -8,6 +10,7 @@ namespace Actor.Player
     public partial class PlayerAttackCol
     {
         public DamageData DmgData;
+        public Action<GameObject> OnAttackTrigger;
     }
     
     // Values or methods that other cannot use
@@ -29,9 +32,7 @@ namespace Actor.Player
         {
             if (other.CompareTag("Enemy"))
             {
-                // TOD0 : optimize and reimplement KnockBackForce power
-                DmgData.KbForce = Vector3.Normalize(other.transform.position - _player.transform.position);
-                other.GetComponent<Enemy.Enemy>().GetHit(DmgData);
+                OnAttackTrigger?.Invoke(other.gameObject);
             }
         }
     }

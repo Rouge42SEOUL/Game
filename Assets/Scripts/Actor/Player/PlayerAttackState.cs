@@ -11,16 +11,12 @@ namespace Actor.Player
 
         public override void OnInitialized()
         {
-            _atkPos = _context.PlayerAttackCol.transform;
+            _atkPos = _context.attackCollider.transform;
         }
         
         public override void OnEnter()
         {
             _context.PlayerAnim.SetBool(Animator.StringToHash("isAttacking"), true);
-            
-            _context.PlayerAttackCol.SetActive(true);
-            _SetAttackCol();
-            
             _context.StartCoroutine(_AttackSpeed());
         }
         
@@ -43,16 +39,10 @@ namespace Actor.Player
         private IEnumerator _AttackSpeed()
         {
             yield return new WaitForSeconds(0.1f);
-            _context.PlayerAttackCol.SetActive(false);
+            _context.attackCollider.SetActive(false);
             yield return new WaitForSeconds(0.4f);
             _Finish();
         }
 
-        private void _SetAttackCol()
-        {
-            Vector2 t = new Vector2(Mathf.Abs(_context.Stareing.y), Mathf.Abs(_context.Stareing.x));
-            _atkPos.localScale = t * 0.5f + new Vector2(1, 1);
-            _atkPos.localPosition = _context.Stareing * 0.5f;
-        }
     }
 }

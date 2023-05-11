@@ -1,4 +1,5 @@
 using System;
+using Actor.Stats;
 using UnityEngine;
 
 namespace Actor.Skill
