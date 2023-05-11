@@ -1,5 +1,7 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using Actor.Skill;
 using Actor.Stats;
 using Interface;
 using StateMachine;
@@ -13,22 +15,38 @@ namespace Actor.Enemy
     public partial class Enemy
     {
         protected StateMachine<Enemy> stateMachine;
+        public GameObject Target => _target;
+        public EnemyStatObject Stat => _stat;
+        public Dictionary<AttributeType, int> currentAttributes = new();
+        protected List<Effect> effects;
         
         internal IObjectPool<Enemy> ManagedPool;
         internal Collider2D Collider2D;
         internal Rigidbody2D Rigidbody2D;
         internal Animator EnemyAnim;
-        internal GameObject Target => _target;
-        internal EnemyStatObject Stat => _stat;
-        public SerializedDictionary<AttributeType, int> currentAttributes;
         
         protected int baseHealthPoint;
         protected int currentHealthPoint;
         
         public override void GetHit(DamageData data) => _GetHit(data);
+        
+        public override void GetEffect(Effect effect, Func<int, int> getValueToAdd)
+        {
+            currentAttributes[effect.effectTo] += getValueToAdd(currentAttributes[effect.effectTo]);
+            effects.Add(effect);
+        }
+
         public void SetManagedPool(IObjectPool<Enemy> pool) => _SetManagedPool(pool);
         public void Init() => _Init();
-        
+
+        internal bool IsAttackable
+        {
+            get
+            {
+                float dis = Vector2.Distance(_target.transform.position, transform.position);
+                return attackableDistance >= dis;
+            }
+        }
     }
     
     // Values or methods that other cannot use
@@ -98,7 +116,7 @@ namespace Actor.Enemy
             currentAttributes.Clear();
             foreach (AttributeType type in Enum.GetValues(typeof(AttributeType)))
             {
-                currentAttributes.Add(type, _stat.baseAttributes[type]);
+                currentAttributes[type] = _stat.baseAttributes[(int)type];
             }
         }
 
@@ -111,6 +129,11 @@ namespace Actor.Enemy
         private void _SetManagedPool(IObjectPool<Enemy> pool)
         {
             ManagedPool = pool;
+        }
+        
+        public int GetAttributeValue(AttributeType type)
+        {
+            return currentAttributes[type];
         }
     }
 }

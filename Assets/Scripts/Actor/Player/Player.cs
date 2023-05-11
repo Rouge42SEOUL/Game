@@ -1,11 +1,10 @@
-
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
+using UnityEngine.Rendering;
 using Actor.Stats;
-using Interface;
 using StateMachine;
+using Interface;
 
 namespace Actor.Player
 {
@@ -30,13 +29,23 @@ namespace Actor.Player
                 _stat = value;
             }
         }
+
+        public override void GetEffect(Effect effect, Func<int, int> getValueToAdd)
+        {
+            _skillEffectValues[effect.effectTo] = getValueToAdd(_skillEffectValues[effect.effectTo]);
+            _stat.effects.Add(effect);
+            //event call 
+        }
     }
     
     // Values or methods that other cannot use
     public partial class Player
     {
+        private Vector2 _movement;
         [SerializeField] private PlayerStatObject _stat;
         private PlayerInput _playerInput;
+        [SerializeField] private SerializedDictionary<AttributeType, int> _skillEffectValues;
+        [SerializeField] private SerializedDictionary<AttributeType, int> _itemEffectValues;
     }
     
     // body of MonoBehaviour
@@ -44,6 +53,8 @@ namespace Actor.Player
     {
         private void Awake()
         {
+            // inventory on equip item += OnEquipItem;
+        
             PlayerAnim = GetComponent<Animator>();
             PlayerRigid = GetComponent<Rigidbody2D>();
             PlayerAttackCol = transform.GetChild(0).gameObject;
@@ -70,6 +81,33 @@ namespace Actor.Player
     // body of others
     public partial class Player
     {
+        private void OnEquipItem()
+        {
+            foreach (AttributeType type in Enum.GetValues(typeof(AttributeType)))
+            {
+                _stat.AddAttributeValue(type, -(_itemEffectValues[type]));
+            }
+
+            // calculate stats effect
+            foreach (AttributeType type in Enum.GetValues(typeof(AttributeType)))
+            {
+                _stat.AddAttributeValue(type, _itemEffectValues[type]);
+            }
+        }
+        
+        private void OnActivateSkill()
+        {
+            foreach (AttributeType type in Enum.GetValues(typeof(AttributeType)))
+            {
+                _stat.AddAttributeValue(type, -(_skillEffectValues[type]));
+            }
+            // calculate stats effect
+            foreach (AttributeType type in Enum.GetValues(typeof(AttributeType)))
+            {
+                _stat.AddAttributeValue(type, _skillEffectValues[type]);
+            }
+        }
+
         private void _GetHit(DamageData data)
         {
             // TODO : get damaged, remove Debug.Log
@@ -95,12 +133,25 @@ namespace Actor.Player
         private void OnAutoAttack(InputValue value)
         {
             StateMachine.ChangeState<PlayerAttackState>();
+            _stat.attack.Use();
         }
-
-        private void OnSkill1(InputValue value)
+        private void OnSkill1()
         {
+            _stat.skills[0].UseSkill();
             // TODO : Remove hardcoded death
             StateMachine.ChangeState<PlayerDiedState>();
+        }
+        private void OnSkill2()
+        {
+            _stat.skills[1].UseSkill();
+        }
+        private void OnSkill3()
+        {
+            _stat.skills[2].UseSkill();
+        }
+        private void OnSkillUlt()
+        {
+            _stat.skills[3].UseSkill();
         }
     }
 }

@@ -7,7 +7,10 @@ namespace Actor.Player
 {
     public class PlayerMoveState : State<Player>
     {
-        private float Speed => _context.Stat.attributes[AttributeType.Speed].currentValue;
+        private Rigidbody2D _rigidbody2D;
+        private Transform _playerPos;
+
+        private float Speed => _context.Stat.GetAttributeValue(AttributeType.Speed);
         private int _moveXid;
         private int _moveYid;
 
@@ -35,7 +38,7 @@ namespace Actor.Player
                 _context.PlayerAnim.SetFloat(_moveYid, _context.Stareing.y);
             }
         }
-        
+
         public override void FixedUpdate()
         {
             _context.PlayerRigid.MovePosition(_context.PlayerRigid.position + Speed * Time.fixedDeltaTime * _context.Movement);
