@@ -1,4 +1,5 @@
 using System;
+using UnityEngine.Serialization;
 
 namespace Actor.Stats
 {
@@ -6,14 +7,12 @@ namespace Actor.Stats
     public class Attribute
     {
         public AttributeType type;
-        public int baseValue;
-        public int currentValue;
+        [FormerlySerializedAs("baseValue")] public float value;
 
-        public Attribute(AttributeType type, int value)
+        public Attribute(AttributeType type, float value)
         {
             this.type = type;
-            this.baseValue = value;
-            this.currentValue = value;
+            this.value = value;
         }
     }
 }

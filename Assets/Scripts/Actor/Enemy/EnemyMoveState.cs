@@ -10,11 +10,11 @@ namespace Actor.Enemy
     public class EnemyMoveState : State<Enemy>
     {
         private Transform _playerPos;
-        private int _speed => _context.currentAttributes[AttributeType.Speed];
+        private float _speed => _context.currentAttributes[AttributeType.MoveSpeed].value;
         
         private int _moveXid;
         private int _moveYid;
-
+    
         private Vector2 pos;
 
         public override void OnInitialized()

@@ -169,7 +169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentAttributes:
-    m_Keys: 
-    m_Values: 
+    keys: 
+    values: []
+  stat: {fileID: 11400000, guid: e5249d2542abf3640ac183daaa7e7cd3, type: 2}
   attackableDistance: 0.5
-  _stat: {fileID: 11400000, guid: e5249d2542abf3640ac183daaa7e7cd3, type: 2}

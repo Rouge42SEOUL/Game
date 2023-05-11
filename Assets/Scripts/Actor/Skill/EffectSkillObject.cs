@@ -1,8 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Actor.Stats;
-using ObjectPool;
-using Unity.VisualScripting;
 
 namespace Actor.Skill
 {
@@ -20,11 +18,11 @@ namespace Actor.Skill
             switch (targetType)
             {
                 case TargetType.Self:
-                    context.GetComponent<Actor>().GetEffect(_effect, isMultiplication ? Multiply : Add);
+                    context.GetComponent<Actor<ActorStatObject>>().GetEffect(_effect, isMultiplication ? Multiply : Add);
                     break;
                 case TargetType.Single:
                 {
-                    var target = GetTarget().GetComponent<Actor>();
+                    var target = GetTarget().GetComponent<Actor<ActorStatObject>>();
                     if (isDotEffect)
                         target.GetEffect(_effect, isMultiplication ? Multiply : Add);
                     target.GetDotDamage(_duration);
@@ -35,7 +33,7 @@ namespace Actor.Skill
                     List<GameObject> targets;
                     GetTarget(out targets);
                     foreach (var target in targets)
-                        target.GetComponent<Actor>().GetEffect(_effect, isMultiplication ? Multiply : Add);
+                        target.GetComponent<Actor<ActorStatObject>>().GetEffect(_effect, isMultiplication ? Multiply : Add);
                     break;
                 }
                 case TargetType.World:
