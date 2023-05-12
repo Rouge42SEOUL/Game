@@ -4,13 +4,9 @@ public class PlayerPawn : MonoBehaviour
 {
     private EventManager _eventManager;
 
-    private void Start()
-    {
-        _eventManager = EventManager.Instance;
-    }
-
     public void MoveToNode(Node node)
     {
+        _eventManager = EventManager.Instance;
         transform.position = node.transform.position;
         _eventManager.EventUISetting(node);
     }
