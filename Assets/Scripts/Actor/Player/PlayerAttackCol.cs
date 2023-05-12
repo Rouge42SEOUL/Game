@@ -25,7 +25,7 @@ namespace Actor.Player
         private void Awake()
         {
             _player = transform.parent.GetComponent<Player>();
-            DmgData.Damage = 5;
+            DmgData.damage = 5;
         }
 
         private void OnTriggerEnter2D(Collider2D other)

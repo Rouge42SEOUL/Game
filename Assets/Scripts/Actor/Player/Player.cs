@@ -98,7 +98,7 @@ namespace Actor.Player
         private void _GetHit(DamageData data)
         {
             // TODO : get damaged, remove Debug.Log
-            Debug.Log("Player health lost ->" + data.Damage);
+            Debug.Log("Player health lost ->" + data.damage);
         }
 
         protected override void Died()

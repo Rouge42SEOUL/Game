@@ -14,6 +14,7 @@ namespace Actor.Stats
         public AttackSkillObject normalAttack;
         public SerializableDictionary<AttributeType, Attribute> baseAttributes = new();
         public List<Effect> effects = new();
+        public ElementalType elementalType;
 
         protected virtual void OnEnable()
         {

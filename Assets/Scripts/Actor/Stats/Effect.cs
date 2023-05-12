@@ -34,6 +34,19 @@ namespace Actor.Stats
             isStackable = false;
             this.isPercent = isPercent;
             this.effectValue = effectValue;
+            this.effectTo = new List<AttributeType>();
+
+            switch (this.type)
+            {
+                case EffectType.Bleeding :
+                    effectTo.Add((AttributeType.Health));
+                    break;
+                case EffectType.Fracture :
+                    effectTo.Add(AttributeType.MoveSpeed);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
 
         public Effect(EffectType type, float duration, float effectValue, bool isPercent)
@@ -43,8 +56,32 @@ namespace Actor.Stats
             this.isPercent = isPercent;
             this.duration = duration;
             this.effectValue = effectValue;
+            this.effectTo = new List<AttributeType>();
 
             isStackable = type is EffectType.Burns or EffectType.Frostbite or EffectType.Poison;
+            switch (this.type)
+            {
+                case EffectType.Burns or EffectType.Poison :
+                {
+                    effectTo.Add(AttributeType.Health);
+                    break;
+                }
+                case EffectType.Confuse or EffectType.Frostbite :
+                {
+                    effectTo.Add(AttributeType.MoveSpeed);
+                    break;
+                }
+                case EffectType.Paralysis :
+                {
+                    effectTo.Add(AttributeType.AttackSpeed);
+                    break;
+                }
+                case EffectType.Blind :
+                {
+                    effectTo.Add(AttributeType.Accuracy);
+                    break;
+                }
+            }
         }
     }
 }

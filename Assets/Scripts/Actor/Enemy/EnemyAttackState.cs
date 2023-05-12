@@ -19,8 +19,8 @@ namespace Actor.Enemy
         {
             // TODO : calculate attack time by attack speed;
             _p = _context.Target.GetComponent<Player.Player>();
-            _tempData.Damage = 5;
-            _tempData.KbForce = Vector3.zero;
+            _tempData.damage = 5;
+            _tempData.kbForce = Vector3.zero;
         }
         
         public override void OnEnter()

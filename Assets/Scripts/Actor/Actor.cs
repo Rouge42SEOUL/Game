@@ -12,8 +12,8 @@ namespace Actor
     public abstract partial class Actor<T> where T : ActorStatObject
     {
         public SerializableDictionary<AttributeType, Attribute> currentAttributes;
-        [SerializeField] protected SerializableDictionary<AttributeType, float> skillEffectValues;
-        [SerializeField] protected T stat;
+        [SerializeField] protected static SerializableDictionary<AttributeType, float> skillEffectValues;
+        [SerializeField] protected static T stat;
         
         protected int BaseHealthPoint;
         protected int CurrentHealthPoint;
@@ -89,7 +89,75 @@ namespace Actor
             // TODO: event call 
         }
 
-        public abstract void GetHit(DamageData data);
+        public virtual void GetHit(DamageData data)
+        {
+            switch (data.elementalType)
+            {
+                case ElementalType.Fire:
+                {
+                    if (stat.elementalType == ElementalType.Wind)
+                        data.damage *= 2;
+                    var effect = new Effect(EffectType.Burns, 10, 5, false);
+                    AffectedConfirm(effect);
+                    break;
+                }
+                case ElementalType.Ice :
+                {
+                    if (stat.elementalType == ElementalType.Fire)
+                        data.damage *= 2;
+                    var effect = new Effect(EffectType.Frostbite, 10, 5, false);
+                    AffectedConfirm(effect);
+                    break;
+                }
+                case ElementalType.Ground :
+                {
+                    if (stat.elementalType == ElementalType.Ice)
+                        data.damage *= 2;
+                    var effect = new Effect(EffectType.Fracture, 5, false);
+                    AffectedConfirm(effect);
+                    break;
+                }
+                case ElementalType.Wind :
+                {
+                    if (stat.elementalType == ElementalType.Ground)
+                        data.damage *= 2;
+                    var effect = new Effect(EffectType.Bleeding, 5, false);
+                    AffectedConfirm(effect);
+                    break;
+                }
+                case ElementalType.Holy :
+                {
+                    if (stat.elementalType == ElementalType.Dark)
+                        data.damage *= 2;
+                    var effect = new Effect(EffectType.Blind, 10, 5, false);
+                    AffectedConfirm(effect);
+                    break;
+                }
+                case ElementalType.Dark :
+                {
+                    if (stat.elementalType == ElementalType.Holy)
+                        data.damage *= 2;
+                    var effect = new Effect(EffectType.Blind, 10, 5, false);
+                    AffectedConfirm(effect);
+                    break;
+                }
+            }
+            //TODO: get_damage
+        }
+
+        private static void AffectedConfirm(Effect effect)
+        {
+            var rand = new Unity.Mathematics.Random();
+            var randDouble = rand.NextDouble();
+            if(randDouble < 0.1f)
+                Affected(effect);
+        }
+        private static void Affected(Effect effect)
+        {
+            skillEffectValues[effect.effectTo[0]] = effect.effectValue;
+            stat.effects.Add(effect);
+        }
+
         public void DotDamaged(DamageData data, float duration)
         {
             StartCoroutine(AddDotDamage(duration));

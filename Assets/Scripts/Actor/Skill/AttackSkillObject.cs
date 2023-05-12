@@ -47,7 +47,7 @@ namespace Actor.Skill
         public void OnAttackTrigger(GameObject target)
         {
             // TOD0 : optimize and reimplement KnockBackForce power
-            _damage.KbForce = Vector3.Normalize(target.transform.position - context.Position);
+            _damage.kbForce = Vector3.Normalize(target.transform.position - context.Position);
             target.GetComponent<IDamageable>().GetHit(_damage);
         }
     }

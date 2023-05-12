@@ -70,11 +70,11 @@ namespace Actor.Enemy
     {
         private void _GetHit(DamageData data)
         {
-            Debug.Log( "Enemy health Lost -> " + data.Damage);
+            Debug.Log( "Enemy health Lost -> " + data.damage);
             stateMachine.ChangeState<EnemyGetHitState>();
             
             Rigidbody2D.velocity = Vector2.zero;
-            Rigidbody2D.AddForce(data.KbForce, ForceMode2D.Impulse);
+            Rigidbody2D.AddForce(data.kbForce, ForceMode2D.Impulse);
         }
 
         protected override void Died()
