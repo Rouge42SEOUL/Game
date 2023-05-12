@@ -5,6 +5,8 @@ namespace Actor.Skill
         Normal,
         Passive,
         Active,
+        Buff,
+        DeBuff,
         Ultimate,
     }
 }

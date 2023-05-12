@@ -1,11 +1,9 @@
 using System;
 using System.Collections;
-using Actor.Player;
 using Actor.Stats;
 using Core;
 using Interface;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Attribute = Actor.Stats.Attribute;
 
 namespace Actor
@@ -17,10 +15,10 @@ namespace Actor
         [SerializeField] protected SerializableDictionary<AttributeType, float> skillEffectValues;
         [SerializeField] protected T stat;
         
-        protected int baseHealthPoint;
-        protected int currentHealthPoint;
+        protected int BaseHealthPoint;
+        protected int CurrentHealthPoint;
 
-        protected bool isInitialized = false;
+        protected bool IsInitialized = false;
 
         public GameObject attackCollider;
         public Vector2 forwardVector;
@@ -57,9 +55,9 @@ namespace Actor
 
         protected virtual void OnEnable()
         {
-            if (isInitialized)
+            if (IsInitialized)
                 return;
-            isInitialized = true;
+            IsInitialized = true;
             
             Debug.Log(this.gameObject + " init current stat");
             currentAttributes.Clear();
@@ -80,7 +78,12 @@ namespace Actor
         
         public void Affected(Effect effect, Func<float, float> getValueToAdd)
         {
-            skillEffectValues[effect.effectTo] = getValueToAdd(skillEffectValues[effect.effectTo]);
+            for (int i = 0; i < effect.effectTo.Count;)
+            {
+                skillEffectValues[effect.effectTo[i]] = getValueToAdd(skillEffectValues[effect.effectTo[i]]);
+                i++;
+            }
+            
             stat.effects.Add(effect);
             // TODO: set current attributes
             // TODO: event call 

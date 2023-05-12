@@ -10,6 +10,7 @@ namespace Actor.Skill
         public IActorContext context;
         public SkillType type;
         public ElementalType elementalType;
+        public int level;
         
         [SerializeField] protected Skill data;
         protected bool isUnlocked = false;

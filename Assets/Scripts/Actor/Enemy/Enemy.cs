@@ -90,7 +90,7 @@ namespace Actor.Enemy
             
             StartCoroutine(_KillEnemy());
 
-            isInitialized = false;
+            IsInitialized = false;
         }
 
         private IEnumerator _KillEnemy()
