@@ -16,24 +16,18 @@ namespace Actor.Enemy
     {
         protected StateMachine<Enemy> stateMachine;
         public GameObject Target => _target;
-        public EnemyStatObject Stat => _stat;
-        public Dictionary<AttributeType, int> currentAttributes = new();
-        protected List<Effect> effects;
         
         internal IObjectPool<Enemy> ManagedPool;
         internal Collider2D Collider2D;
         internal Rigidbody2D Rigidbody2D;
         internal Animator EnemyAnim;
-        
-        protected int baseHealthPoint;
-        protected int currentHealthPoint;
-        
+
         public override void GetHit(DamageData data) => _GetHit(data);
         
-        public override void GetEffect(Effect effect, Func<int, int> getValueToAdd)
+        public override void GetEffect(Effect effect, Func<float, float> getValueToAdd)
         {
-            currentAttributes[effect.effectTo] += getValueToAdd(currentAttributes[effect.effectTo]);
-            effects.Add(effect);
+            currentAttributes[effect.effectTo].value += getValueToAdd(currentAttributes[effect.effectTo].value);
+            stat.effects.Add(effect);
         }
 
         public void SetManagedPool(IObjectPool<Enemy> pool) => _SetManagedPool(pool);
@@ -54,12 +48,10 @@ namespace Actor.Enemy
     {
         private GameObject _target;
         [SerializeField] private float attackableDistance = 0.5f;
-        [SerializeField] private EnemyStatObject _stat;
-        
     }
     
     // body of MonoBehaviour
-    public partial class Enemy : Actor
+    public partial class Enemy : Actor<EnemyStatObject>
     {
         private void Awake()
         {
@@ -112,12 +104,8 @@ namespace Actor.Enemy
             stateMachine.ChangeState<EnemyIdleState>();
             
             StartCoroutine(_KillEnemy());
-            
-            currentAttributes.Clear();
-            foreach (AttributeType type in Enum.GetValues(typeof(AttributeType)))
-            {
-                currentAttributes[type] = _stat.baseAttributes[(int)type];
-            }
+
+            isInitialized = false;
         }
 
         private IEnumerator _KillEnemy()
@@ -129,11 +117,6 @@ namespace Actor.Enemy
         private void _SetManagedPool(IObjectPool<Enemy> pool)
         {
             ManagedPool = pool;
-        }
-        
-        public int GetAttributeValue(AttributeType type)
-        {
-            return currentAttributes[type];
         }
     }
 }

@@ -29,14 +29,7 @@ namespace Actor.Skill
             targets = new List<GameObject>();
         }
 
-        protected int Add(int targetValue)
-        {
-            return (int)effectValue;
-        }
-        
-        protected int Multiply(int targetValue)
-        {
-            return (int)(targetValue * effectValue);
-        }
+        protected float Add(float targetValue) => effectValue;
+        protected float Multiply(float targetValue) => targetValue * effectValue;
     }
 }

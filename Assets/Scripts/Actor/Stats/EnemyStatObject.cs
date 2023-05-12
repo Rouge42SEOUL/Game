@@ -5,27 +5,12 @@ using UnityEngine;
 namespace Actor.Stats
 {
     [CreateAssetMenu(fileName = "New Enemy Data", menuName = "Stat/EnemyStat")]
-    public class EnemyStatObject : ScriptableObject
+    public class EnemyStatObject : ActorStatObject
     {
-        public List<int> baseAttributes = new();
-        public List<Effect> effects = new();
-        
-        private int _baseHealthPoint;
-        private bool _isInitialized = false;
 
-        private void OnEnable()
+        protected override void OnEnable()
         {
-            if (_isInitialized)
-                return;
-            _isInitialized = true;
-            
-            Debug.Log("init enemy");
-            baseAttributes.Clear();
-            foreach (AttributeType type in Enum.GetValues(typeof(AttributeType)))
-            {
-                baseAttributes.Add(10);
-            }
-            effects.Clear();
+            base.OnEnable();
             // base health point initialize
         }
         

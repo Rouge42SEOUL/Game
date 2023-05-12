@@ -10,7 +10,7 @@ namespace Actor.Player
         private Rigidbody2D _rigidbody2D;
         private Transform _playerPos;
 
-        private float Speed => _context.Stat.GetAttributeValue(AttributeType.Speed);
+        private float Speed => _context.GetAttributeValue(AttributeType.MoveSpeed);
         private int _moveXid;
         private int _moveYid;
 

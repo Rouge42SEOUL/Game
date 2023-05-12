@@ -157,7 +157,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f755df9d694d16140baa783ff605c4ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _stat: {fileID: 11400000, guid: c6d6312bbd5c7884bb273850f3b45774, type: 2}
+  currentAttributes:
+    keys: 
+    values: []
+  stat: {fileID: 11400000, guid: c6d6312bbd5c7884bb273850f3b45774, type: 2}
+  _skillEffectValues:
+    m_Keys: 
+    m_Values: []
+  _itemEffectValues:
+    m_Keys: 
+    m_Values: []
 --- !u!212 &372495656
 SpriteRenderer:
   m_ObjectHideFlags: 0
