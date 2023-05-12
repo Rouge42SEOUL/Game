@@ -23,7 +23,6 @@ public class GoldUI : MonoBehaviour
 
     public void SetGold()
     {
-        Debug.Log("set");
         _TMP.text = gold.ToString();
     }
 }
