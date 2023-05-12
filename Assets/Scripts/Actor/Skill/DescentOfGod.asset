@@ -48,4 +48,4 @@ MonoBehaviour:
     duration: 0
     effectTo: 
     effectValue: 0
-  isRelease: 0
+  isRelease: 1

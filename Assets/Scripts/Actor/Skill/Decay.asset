@@ -28,7 +28,7 @@ MonoBehaviour:
   dotDamage:
     Damage: 10
     KbForce: {x: 0, y: 0, z: 0}
-  effectTo: 
+  effectTo: 00000000
   isPercent: 1
   effectValue: 10
   coolTime: 10
@@ -41,11 +41,11 @@ MonoBehaviour:
   isStackable: 1
   isPermanent: 0
   effect:
-    type: 0
+    type: 1
     isStackable: 1
     isPermanent: 0
     isPercent: 1
     duration: 10
-    effectTo: 
+    effectTo: 00000000
     effectValue: 10
   isRelease: 0

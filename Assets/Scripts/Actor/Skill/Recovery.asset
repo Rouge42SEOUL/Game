@@ -10,42 +10,42 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f38e8264cb484c76963e119ce4174eec, type: 3}
-  m_Name: Confuse
+  m_Name: Recovery
   m_EditorClassIdentifier: 
-  type: 4
+  type: 0
   elementalType: 0
-  level: 1
+  level: 0
   data:
-    id: 0
-    name: Confuse
+    id: -1
+    name: 
     description: 
-  targetType: 1
+  targetType: 0
   isDotEffect: 0
   isMultiplication: 0
   attackTransform: {fileID: 0}
-  range: 5
-  duration: 10
+  range: 0
+  duration: 0
   dotDamage:
     Damage: 0
     KbForce: {x: 0, y: 0, z: 0}
-  effectTo: 02000000
+  effectTo: 
   isPercent: 0
-  effectValue: -1
-  coolTime: 20
-  activeSpeed: 1
-  changeValueE: -0.25
-  changeValueC: 1
+  effectValue: 0
+  coolTime: 0
+  activeSpeed: 0
+  changeValueE: 0
+  changeValueC: 0
   changeValueA: 0
-  changeValueD: 2.5
+  changeValueD: 0
   effectType: 0
   isStackable: 0
   isPermanent: 0
   effect:
     type: 0
     isStackable: 0
-    isPermanent: 1
+    isPermanent: 0
     isPercent: 0
     duration: 0
-    effectTo: 02000000
-    effectValue: -1
+    effectTo: 
+    effectValue: 0
   isRelease: 0
