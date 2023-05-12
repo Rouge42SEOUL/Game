@@ -2,24 +2,11 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Events;
 
-public class EventManager : MonoBehaviour
+public partial class EventManager // public
 {
     public RougeEvent.Event[] events;
     [SerializeField] private GameObject[] eventSelectionWindow; 
-    private Dictionary<EventType, RougeEvent.Event> _events 
-        = new Dictionary<EventType, RougeEvent.Event>();
-
-    private GameManager _gameManager;
-    private void Start()
-    {
-        foreach (RougeEvent.Event tmpEvent in events)
-        {
-            _events.Add(tmpEvent.Type, tmpEvent);
-        }
-        _gameManager = FindObjectOfType<GameManager>();
-    }
 
     public void EventUISetting(Node node) // next Node를 가져와서 이벤트UI에 띄운다
     {
@@ -39,21 +26,67 @@ public class EventManager : MonoBehaviour
 
     public void EventAction(Node node)
     {
-        // Debug.Log("EventAction ");
         if (_events.TryGetValue(node.eventType, out RougeEvent.Event value) == false)
         {
             Debug.Log("찾고자 하는 이벤트가 없습니다");
         }
         else
         {
-            for (int i = 0; i < eventSelectionWindow.Length; i++)
-                eventSelectionWindow[i].GetComponent<Button>().onClick.RemoveAllListeners();
-            _gameManager.playerPawn.MoveToNode(node);
-            _gameManager.currentNode = node;
-            _gameManager.SaveCurrentInfo();
+            // OnClick에 달린 모든 이벤트들을 해제한다. 이를 안하면 이전에 등록되어있는 이벤트도 실행된다.
+            foreach (GameObject obj in eventSelectionWindow)
+                obj.GetComponent<Button>().onClick.RemoveAllListeners();
             value.BuildUI();
-            _gameManager.UIControl();
+            _gameManager.MovePlayer(node);
         }
     }
+}
+public partial class EventManager : MonoBehaviour // private
+{
+    private readonly Dictionary<EventType, RougeEvent.Event> _events 
+        = new Dictionary<EventType, RougeEvent.Event>();
+    private GameManager _gameManager;
 
+    private void Start()
+    {
+        _gameManager = GameManager.Instance;
+        foreach (RougeEvent.Event tmpEvent in events)
+        {
+            _events.Add(tmpEvent.Type, tmpEvent);
+        }
+    }
+}
+
+public partial class EventManager // singleton
+{
+    private static EventManager _instance;
+    public static EventManager Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                EventManager obj = FindObjectOfType<EventManager>();
+                if (obj != null)
+                {
+                    _instance = obj;
+                }
+                else
+                {
+                    EventManager newObj = new GameObject().AddComponent<EventManager>();
+                    _instance = newObj;
+                }
+            }
+            return _instance;
+        }
+    }
+    
+    private void Awake()
+    {
+        EventManager[] obj = FindObjectsOfType<EventManager>();
+        if (obj.Length != 1)
+        {
+            Destroy(gameObject);
+            return;
+        }
+    }
 }
