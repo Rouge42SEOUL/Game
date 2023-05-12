@@ -5,7 +5,7 @@ public enum RoundTable
 {
     Start = 1,
     Middle = 5,
-    End = 13,
+    End = 15,
 }
 
 public partial class StageManager // public
@@ -49,7 +49,7 @@ public partial class StageManager : MonoBehaviour // private
 
     private void RandomStage()
     {
-        MapNum = Random.Range(0, 2);
+        MapNum = Random.Range(0, map.Length);
         _selectMap = map[MapNum];
         _selectMap = Instantiate(_selectMap);
     }
