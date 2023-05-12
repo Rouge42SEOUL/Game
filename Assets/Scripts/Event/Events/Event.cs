@@ -15,26 +15,27 @@ public enum EventType
 [Serializable]
 public struct EventStruct
 {
-    public EventType Type;
-    public float Probability;
+    public EventType type;
+    public float probability;
 };
 
 namespace RougeEvent
 {
-    public abstract class Event : MonoBehaviour // namespace 
+    public abstract partial class Event
     {
-        private bool _isDisplay = false;
-
         public EventType Type { get; protected set; }
-
+        public abstract void BuildUI();
         public void UIControl()
         {
             Debug.Log("Event's UIControl");
             if (_isDisplay == false)
                 DisplayEvent();
         }
+    }
 
-        public abstract void BuildUI();
+    public abstract partial class Event : MonoBehaviour // private
+    {
+        private bool _isDisplay = false;
 
         private void DisplayEvent()
         {

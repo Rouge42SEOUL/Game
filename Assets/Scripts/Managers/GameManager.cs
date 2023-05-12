@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using UnityEngine;
 
-
 [JsonObject(MemberSerialization.OptIn)] //지정한 데이터만 변환하게 하는 설정
 public class InfoToJson
 {
@@ -28,69 +27,100 @@ public class InfoToJson
     }
 }
 
-public class GameManager : MonoBehaviour
+public partial class GameManager // public
+{
+    [SerializeField] private PlayerPawn playerPawn;
+    [SerializeField] private GameObject eventUI;
+    [SerializeField] private string jsonFileName = "/test.json";
+
+    public void MovePlayer(Node node)
+    {
+        OptionUIControl();
+        playerPawn.MoveToNode(node);
+        _currentNode = node;
+        SaveCurrentInfo();
+    }
+    
+    public void OptionUIControl()
+    {
+        if (_isDisplayUI == false)
+        {
+            eventUI.gameObject.SetActive(true);
+            _isDisplayUI = true;
+        }
+        else
+        {
+            eventUI.gameObject.SetActive(false);
+            _isDisplayUI = false;
+        }
+    }
+}
+
+public partial class GameManager : MonoBehaviour // private
 {
     private EventManager _eventManager;
     private StageManager _stageManager;
-    private bool _isDisplayToEventUI = false;
+    private bool _isDisplayUI;
     private bool _isFirstStart;
-    private JsonSaveLoder _jsonSaveLoder;
-    
-    public InfoToJson InfoToJson;
-    [SerializeField] public PlayerPawn playerPawn;
-    [SerializeField] private GameObject eventUI;
-    
-    public Node currentNode;
+    private InfoToJson _infoToJson;
+    private Node _currentNode;
 
     private void Start()
     {
-        _jsonSaveLoder = gameObject.AddComponent<JsonSaveLoder>();
-        _eventManager = FindObjectOfType<EventManager>();
-        _stageManager = FindObjectOfType<StageManager>();
-        
-        _isFirstStart = _jsonSaveLoder.Load(out InfoToJson);
+        _eventManager = EventManager.Instance;
+        _stageManager = StageManager.Instance;
+        _isFirstStart = !JsonConverter.Load(out _infoToJson, Application.dataPath + jsonFileName);
         if (_isFirstStart)
         {
-            // 첫시작시 랜덤으로 초기화    
             _stageManager.RandomInit();
         }
         else
         {
-            // infoToJson 데이터를 StageManager에 동기화 맵, 노드들
-            _stageManager.PrevInit(InfoToJson);
+            _stageManager.PrevInit(_infoToJson);
         }
-        currentNode = _stageManager.Nodes[InfoToJson.PlayerCurrentNode];
-        playerPawn.MoveToNode(currentNode);
-        CloseEvent();
-        InfoToJson.SaveInfo(_stageManager.MapNum, _stageManager.Nodes, currentNode);
-        _jsonSaveLoder.Save(InfoToJson);
+        _currentNode = _stageManager.Nodes[_infoToJson.PlayerCurrentNode];
+        playerPawn.MoveToNode(_currentNode);
+        SaveCurrentInfo();
     }
 
-    public void SaveCurrentInfo()
+    private void SaveCurrentInfo()
     {
-        InfoToJson.SaveInfo(_stageManager.MapNum, _stageManager.Nodes, currentNode);
-        _jsonSaveLoder.Save(InfoToJson);
-    }
-    
-    public void UIControl()
-    {
-        Debug.Log("gameManager's UIControl");
-        if (_isDisplayToEventUI == false)
-            DisplayEvent();
-        else
-            CloseEvent();
-    }
-    
-    private void DisplayEvent()
-    {
-        eventUI.gameObject.SetActive(true);
-        _isDisplayToEventUI = true;
+        _infoToJson.SaveInfo(_stageManager.MapNum, _stageManager.Nodes, _currentNode);
+        JsonConverter.Save(_infoToJson, Application.dataPath + jsonFileName);
     }
 
-    private void CloseEvent()
+}
+public partial class GameManager // singleton
+{
+    private static GameManager _instance;
+
+    public static GameManager Instance
     {
-        eventUI.gameObject.SetActive(false);
-        _isDisplayToEventUI = false;
+        get
+        {
+            if (_instance == null)
+            {
+                GameManager obj = FindObjectOfType<GameManager>();
+                if (obj != null)
+                {
+                    _instance = obj;
+                }
+                else
+                {
+                    GameManager newObj = new GameObject().AddComponent<GameManager>();
+                    _instance = newObj;
+                }
+            }
+            return _instance;
+        }
     }
-    
+    private void Awake()
+    {
+        GameManager[] obj = FindObjectsOfType<GameManager>();
+        if (obj.Length != 1)
+        {
+            Destroy(gameObject);
+            return;
+        }
+    }
 }
