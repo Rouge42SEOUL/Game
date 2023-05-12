@@ -149,8 +149,16 @@ namespace Actor
         {
             var rand = new Unity.Mathematics.Random();
             var randDouble = rand.NextDouble();
-            if(randDouble < 0.1f)
-                Affected(effect);
+            if (effect.type == EffectType.Bleeding || effect.type == EffectType.Fracture)
+            {
+                if(randDouble < 0.01f)
+                    Affected(effect);
+            }
+            else
+            {
+                if(randDouble < 0.1f)
+                    Affected(effect);
+            }
         }
         private static void Affected(Effect effect)
         {
