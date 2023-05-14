@@ -1,0 +1,95 @@
+
+using System.Collections.Generic;
+using UnityEngine;
+
+// Singleton Manager, Only used in Main Scene and Only this scripts run in Main Scene
+namespace Managers.MainScene
+{
+    public struct CharClassData
+    {
+        public bool IsOpened;
+        public int Id;
+        public string ClassName;
+        public string ImageSourcePath;
+
+        public CharClassData(bool isOpened, int id, string className, string imageSourcePath = "")
+        {
+            IsOpened = isOpened;
+            Id = id;
+            ClassName = className;
+            ImageSourcePath = imageSourcePath;
+        }
+        
+        public CharClassData(CharClassData data)
+        {
+            IsOpened = data.IsOpened;
+            Id = data.Id;
+            ClassName = data.ClassName;
+            ImageSourcePath = data.ImageSourcePath;
+        }
+    }
+    
+    public partial class TitleManager
+    {
+        private static TitleManager _instance;
+        
+        public static TitleManager Instance
+        {
+            get
+            {
+                if (null == _instance)
+                {
+                    return null;
+                }
+                return _instance;
+            }
+        }
+
+        public int selectedClassId;
+        
+        public List<CharClassData> ClassList;
+
+        public void QuitGame() => _QuitGame();
+
+
+        public GameObject confirmPopup;
+    }
+
+    public partial class TitleManager
+    {
+        
+    }
+    
+    public partial class TitleManager : MonoBehaviour
+    {
+        private void Awake()
+        {
+            if (null == _instance)
+            {
+                _instance = this;
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
+
+            selectedClassId = 0;
+            
+            // TODO : get List from serialized data
+            ClassList = new List<CharClassData>();
+            ClassList.Add(new CharClassData(true,1, "Swordsman"));
+            ClassList.Add(new CharClassData(false,0, "Unlocked"));
+            ClassList.Add(new CharClassData(false,0, "Unlocked"));
+            ClassList.Add(new CharClassData(false,0, "Unlocked"));
+        }
+    }
+    
+    public partial class TitleManager
+    {
+        private void _QuitGame()
+        {
+            Application.Quit(0);
+        }
+    }
+}
+
