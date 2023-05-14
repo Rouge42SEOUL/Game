@@ -44,16 +44,20 @@ public partial class GameManager // public
 			_goldUI.Gold = _gold;
 		}
 	}
-
-    public void MovePlayer(Node node)
+	public void MovePlayer(Node node)
     {
         OptionUIControl();
-        playerPawn.MoveToNode(node);
         _currentNode = node;
+        playerPawn.MoveToNode(node);
         SaveCurrentInfo();
     }
-    
-    public void OptionUIControl()
+	public void SaveCurrentInfo()
+	{
+		_infoToJson.SaveInfo(_stageManager.MapNum, _stageManager.Nodes, _currentNode);
+		_infoToJson.Gold = _gold;
+		JsonConverter.Save(_infoToJson, Application.dataPath + jsonFileName);
+	}
+	public void OptionUIControl()
     {
         if (_isDisplayUI == false)
         {
@@ -100,14 +104,6 @@ public partial class GameManager : MonoBehaviour // private
         playerPawn.MoveToNode(_currentNode);
         SaveCurrentInfo();
     }
-
-    private void SaveCurrentInfo()
-    {
-        _infoToJson.SaveInfo(_stageManager.MapNum, _stageManager.Nodes, _currentNode);
-		_infoToJson.Gold = _gold;
-        JsonConverter.Save(_infoToJson, Application.dataPath + jsonFileName);
-    }
-
 }
 public partial class GameManager // singleton
 {
