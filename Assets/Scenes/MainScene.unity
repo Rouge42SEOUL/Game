@@ -1189,7 +1189,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectedClassId: 0
-  ConfirmPopup: {fileID: 1681708432}
+  confirmPopup: {fileID: 1681708432}
 --- !u!4 &1250269174
 Transform:
   m_ObjectHideFlags: 0

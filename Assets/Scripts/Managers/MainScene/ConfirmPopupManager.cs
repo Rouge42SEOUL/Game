@@ -18,7 +18,7 @@ namespace Managers.MainScene
     {
         private void OnEnable()
         {
-            text.text = TitleManager.Instance.ClassList[TitleManager.Instance.selectedClassId - 1].ClassName;
+            text.text = TitleManager.Instance.ClassList[TitleManager.Instance.selectedClassId].ClassName;
         }
     }
     

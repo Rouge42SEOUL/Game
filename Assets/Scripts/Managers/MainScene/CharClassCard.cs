@@ -13,7 +13,7 @@ namespace Managers.MainScene
     public partial class CharClassCard
     {
         private Button _button;
-        private ConfirmPopupManager _confirmPopup;
+        private GameObject _confirmPopup;
         // [SerializeField] private Image classImage;
         [SerializeField] private TMP_Text classText;
     }
@@ -23,7 +23,7 @@ namespace Managers.MainScene
         private void Awake()
         {
             _button = GetComponent<Button>();
-            _confirmPopup = TitleManager.Instance.confirmPopup.GetComponent<ConfirmPopupManager>();
+            _confirmPopup = TitleManager.Instance.confirmPopup;
 
             _button.onClick.AddListener(_ActivatePopup);
         }
@@ -41,7 +41,7 @@ namespace Managers.MainScene
             if (Data.IsOpened)
             {
                 TitleManager.Instance.selectedClassId = Data.Id;
-                _confirmPopup.gameObject.SetActive(true);
+                _confirmPopup.SetActive(true);
             }
             
         }

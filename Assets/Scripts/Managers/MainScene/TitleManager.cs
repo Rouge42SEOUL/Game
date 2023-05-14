@@ -76,11 +76,12 @@ namespace Managers.MainScene
             selectedClassId = 0;
             
             // TODO : get List from serialized data
+            // TODO : establish a rule about class id
             ClassList = new List<CharClassData>();
-            ClassList.Add(new CharClassData(true,1, "Swordsman"));
-            ClassList.Add(new CharClassData(false,0, "Unlocked"));
-            ClassList.Add(new CharClassData(false,0, "Unlocked"));
-            ClassList.Add(new CharClassData(false,0, "Unlocked"));
+            ClassList.Add(new CharClassData(true,0, "Swordsman"));
+            ClassList.Add(new CharClassData(false,-1, "Unlocked"));
+            ClassList.Add(new CharClassData(false,-1, "Unlocked"));
+            ClassList.Add(new CharClassData(false,-1, "Unlocked"));
         }
     }
     
@@ -89,6 +90,11 @@ namespace Managers.MainScene
         private void _QuitGame()
         {
             Application.Quit(0);
+        }
+
+        private void _ToGameScene()
+        {
+            //TODO : get class Id data and send to GameScene
         }
     }
 }
