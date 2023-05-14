@@ -11,6 +11,8 @@ public class InfoToJson
     public Dictionary<int, EventType> Events;
     [JsonProperty]
     public int PlayerCurrentNode;
+	[JsonProperty]
+    public int Gold;
 
     public void SaveInfo(int mapNum, Node[] nodes, Node currentNode)
     {
@@ -32,6 +34,16 @@ public partial class GameManager // public
     [SerializeField] private PlayerPawn playerPawn;
     [SerializeField] private GameObject eventUI;
     [SerializeField] private string jsonFileName = "/test.json";
+	[SerializeField] private int _gold;
+	public int Gold
+	{
+	    get => _gold;
+	    private set
+	    {
+			_gold = value;
+			_goldUI.Gold = _gold;
+		}
+	}
 
     public void MovePlayer(Node node)
     {
@@ -60,15 +72,19 @@ public partial class GameManager : MonoBehaviour // private
 {
     private EventManager _eventManager;
     private StageManager _stageManager;
-    private bool _isDisplayUI;
-    private bool _isFirstStart;
     private InfoToJson _infoToJson;
     private Node _currentNode;
+	private GoldUI _goldUI;
+    private bool _isDisplayUI;
+    private bool _isFirstStart;
 
     private void Start()
     {
+		// Init
         _eventManager = EventManager.Instance;
         _stageManager = StageManager.Instance;
+		_goldUI = FindObjectOfType<GoldUI>();
+		// Load Prev Data
         _isFirstStart = !JsonConverter.Load(out _infoToJson, Application.dataPath + jsonFileName);
         if (_isFirstStart)
         {
@@ -77,7 +93,9 @@ public partial class GameManager : MonoBehaviour // private
         else
         {
             _stageManager.PrevInit(_infoToJson);
-        }
+			Gold = _infoToJson.Gold;
+		}
+		_goldUI.Gold = _gold;
         _currentNode = _stageManager.Nodes[_infoToJson.PlayerCurrentNode];
         playerPawn.MoveToNode(_currentNode);
         SaveCurrentInfo();
@@ -86,6 +104,7 @@ public partial class GameManager : MonoBehaviour // private
     private void SaveCurrentInfo()
     {
         _infoToJson.SaveInfo(_stageManager.MapNum, _stageManager.Nodes, _currentNode);
+		_infoToJson.Gold = _gold;
         JsonConverter.Save(_infoToJson, Application.dataPath + jsonFileName);
     }
 

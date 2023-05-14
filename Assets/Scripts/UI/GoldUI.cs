@@ -3,26 +3,20 @@ using UnityEngine;
 
 public class GoldUI : MonoBehaviour
 {
-    [SerializeField] private int gold;
+    private TextMeshProUGUI _tMP;
+	private int _gold;
     public int Gold
     {
-        get => gold;
+        private get => _gold;
         set
         {
-            gold = value;
-            SetGold();
+            _gold = value;
+			_tMP.text = _gold.ToString();
         }
     }
-    private TextMeshProUGUI _TMP;
     
-    private void Start()
+    private void Awake()
     {
-        _TMP = transform.GetChild(0).GetComponent<TextMeshProUGUI>();
-        SetGold();
-    }
-
-    public void SetGold()
-    {
-        _TMP.text = gold.ToString();
+        _tMP = transform.GetChild(0).GetComponent<TextMeshProUGUI>();
     }
 }
