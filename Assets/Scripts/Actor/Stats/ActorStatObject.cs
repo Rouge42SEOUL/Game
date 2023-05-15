@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Actor.Skill;
 using Core;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Actor.Stats
 {
@@ -20,8 +19,6 @@ namespace Actor.Stats
             if (isInitialized)
                 return;
             isInitialized = true;
-            
-            Debug.Log("init stat");
             baseAttributes.Clear();
             // TODO: set initial stats
             foreach (AttributeType type in Enum.GetValues(typeof(AttributeType)))

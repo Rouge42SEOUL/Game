@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5009c0d7f264b948a3002f5e54b4c8d, type: 3}
   m_Name: Default Enemy
   m_EditorClassIdentifier: 
-  attack: {fileID: 0}
+  normalAttack: {fileID: 0}
   baseAttributes:
     keys: 0000000001000000020000000300000004000000050000000600000007000000
     values:
@@ -21,13 +21,13 @@ MonoBehaviour:
     - type: 1
       value: 10
     - type: 2
-      value: 5
+      value: 10
     - type: 3
       value: 10
     - type: 4
-      value: 5
+      value: 10
     - type: 5
-      value: 5
+      value: 10
     - type: 6
       value: 10
     - type: 7

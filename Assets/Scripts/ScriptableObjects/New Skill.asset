@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 91a3aec108cc4ea09b53199416e671ff, type: 3}
-  m_Name: NormalAttack
+  m_Name: New Skill
   m_EditorClassIdentifier: 
   type: 0
   elementalType: 0
@@ -18,7 +18,7 @@ MonoBehaviour:
     id: -1
     name: 
     description: 
-  targetType: 3
+  targetType: 0
   isDotEffect: 0
   isMultiplication: 0
   attackTransform: {fileID: 0}
@@ -30,5 +30,5 @@ MonoBehaviour:
   effectTo: 0
   effectValue: 0
   _damage:
-    Damage: 5
-    KbForce: {x: -0.7892102, y: -0.61412317, z: 0}
+    Damage: 0
+    KbForce: {x: 0, y: 0, z: 0}
