@@ -11,7 +11,7 @@ namespace Actor.Stats
     {
         protected bool isInitialized = false;
         
-        public SkillObject attack;
+        public AttackSkillObject normalAttack;
         public SerializableDictionary<AttributeType, Attribute> baseAttributes = new();
         public List<Effect> effects = new();
 

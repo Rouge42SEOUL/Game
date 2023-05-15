@@ -23,38 +23,23 @@ namespace Actor.Enemy
         internal Animator EnemyAnim;
 
         public override void GetHit(DamageData data) => _GetHit(data);
-        
-        public override void GetEffect(Effect effect, Func<float, float> getValueToAdd)
-        {
-            currentAttributes[effect.effectTo].value += getValueToAdd(currentAttributes[effect.effectTo].value);
-            stat.effects.Add(effect);
-        }
 
         public void SetManagedPool(IObjectPool<Enemy> pool) => _SetManagedPool(pool);
         public void Init() => _Init();
-
-        internal bool IsAttackable
-        {
-            get
-            {
-                float dis = Vector2.Distance(_target.transform.position, transform.position);
-                return attackableDistance >= dis;
-            }
-        }
     }
     
     // Values or methods that other cannot use
     public partial class Enemy
     {
         private GameObject _target;
-        [SerializeField] private float attackableDistance = 0.5f;
     }
     
     // body of MonoBehaviour
     public partial class Enemy : Actor<EnemyStatObject>
     {
-        private void Awake()
+        protected override void Awake()
         {
+            forwardVector = transform.forward;
             Rigidbody2D = GetComponent<Rigidbody2D>();
             EnemyAnim = GetComponent<Animator>();
             Collider2D = GetComponent<Collider2D>();

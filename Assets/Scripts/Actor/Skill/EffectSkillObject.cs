@@ -1,31 +1,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Actor.Stats;
+using Interface;
 
 namespace Actor.Skill
 {
     [CreateAssetMenu(fileName = "New Skill", menuName = "Skill/Effect")]
     public class EffectSkillObject : ActiveSkillObject
     {
-        private float _duration;
+        public IAffected affectTarget;
         [SerializeField] private Effect _effect;
-        
-        public EffectSkillObject(GameObject context) : base(context)
-        {}
 
         public override void Use()
         {
             switch (targetType)
             {
                 case TargetType.Self:
-                    context.GetComponent<Actor<ActorStatObject>>().GetEffect(_effect, isMultiplication ? Multiply : Add);
+                    affectTarget.Affected(_effect, isMultiplication ? Multiply : Add);
                     break;
                 case TargetType.Single:
                 {
-                    var target = GetTarget().GetComponent<Actor<ActorStatObject>>();
+                    affectTarget = GetTarget().GetComponent<IAffected>();
                     if (isDotEffect)
-                        target.GetEffect(_effect, isMultiplication ? Multiply : Add);
-                    target.GetDotDamage(_duration);
+                        affectTarget.Affected(_effect, isMultiplication ? Multiply : Add);
+                    attackTarget.DotDamaged(dotDamage, duration);
                     break;
                 }
                 case TargetType.Area:
@@ -33,7 +31,7 @@ namespace Actor.Skill
                     List<GameObject> targets;
                     GetTarget(out targets);
                     foreach (var target in targets)
-                        target.GetComponent<Actor<ActorStatObject>>().GetEffect(_effect, isMultiplication ? Multiply : Add);
+                        target.GetComponent<Actor<ActorStatObject>>().Affected(_effect, isMultiplication ? Multiply : Add);
                     break;
                 }
                 case TargetType.World:

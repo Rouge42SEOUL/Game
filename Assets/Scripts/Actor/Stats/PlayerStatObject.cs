@@ -9,7 +9,6 @@ namespace Actor.Stats
     public class PlayerStatObject : ActorStatObject
     {
         #region Variables
-
         
         public SkillSlot[] skills = new SkillSlot[4];
         public SkillObject passive;

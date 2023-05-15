@@ -160,10 +160,12 @@ MonoBehaviour:
   currentAttributes:
     keys: 
     values: []
+  skillEffectValues:
+    keys: 
+    values: []
   stat: {fileID: 11400000, guid: c6d6312bbd5c7884bb273850f3b45774, type: 2}
-  _skillEffectValues:
-    m_Keys: 
-    m_Values: []
+  attackCollider: {fileID: 1482730803}
+  forwardVector: {x: 0, y: 0}
   _itemEffectValues:
     m_Keys: 
     m_Values: []
@@ -3939,7 +3941,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1482730804
 Transform:
   m_ObjectHideFlags: 0
@@ -3993,6 +3995,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baa4681491450d84d88006a422a13ff3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DmgData:
+    Damage: 0
+    KbForce: {x: 0, y: 0, z: 0}
 --- !u!1 &2011757129
 GameObject:
   m_ObjectHideFlags: 3
