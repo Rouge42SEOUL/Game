@@ -13,7 +13,7 @@ namespace Actor.Player
     public partial class Player
     {
         protected StateMachine<Player> StateMachine;
-        public override void GetHit(DamageData data) => _GetHit(data);
+        public override void Damaged(DamageData data) => _GetHit(data);
 
         internal Vector2 Movement;
 

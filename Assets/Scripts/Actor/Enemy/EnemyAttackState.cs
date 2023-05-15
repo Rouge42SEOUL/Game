@@ -60,7 +60,7 @@ namespace Actor.Enemy
             float dist = Vector3.Distance(_context.Target.transform.position, _context.transform.position);
             if (dist <= 1.0f)
             {
-                _p.GetHit(_tempData);
+                _p.Damaged(_tempData);
                 yield return new WaitForSeconds(_attackAfterTime);
             }
         }

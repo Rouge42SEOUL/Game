@@ -22,7 +22,7 @@ namespace Actor.Enemy
         internal Rigidbody2D Rigidbody2D;
         internal Animator EnemyAnim;
 
-        public override void GetHit(DamageData data) => _GetHit(data);
+        public override void Damaged(DamageData data) => _GetHit(data);
 
         public void SetManagedPool(IObjectPool<Enemy> pool) => _SetManagedPool(pool);
         public void Init() => _Init();
