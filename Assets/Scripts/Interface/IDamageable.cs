@@ -1,8 +1,10 @@
 
+using System;
 using UnityEngine;
 
 namespace Interface
 {
+    [Serializable]
     public struct DamageData
     {
         public int Damage;
@@ -12,6 +14,7 @@ namespace Interface
     public interface IDamageable
     {
         void GetHit(DamageData data);
+        void DotDamaged(DamageData data, float duration);
     }
 }
 

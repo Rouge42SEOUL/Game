@@ -1,10 +1,11 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
+using Actor.Player;
 using Actor.Stats;
 using Core;
 using Interface;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Attribute = Actor.Stats.Attribute;
 
 namespace Actor
@@ -13,20 +14,17 @@ namespace Actor
     public abstract partial class Actor<T> where T : ActorStatObject
     {
         public SerializableDictionary<AttributeType, Attribute> currentAttributes;
+        [SerializeField] protected SerializableDictionary<AttributeType, float> skillEffectValues;
         [SerializeField] protected T stat;
         
         protected int baseHealthPoint;
         protected int currentHealthPoint;
 
         protected bool isInitialized = false;
+
+        public GameObject attackCollider;
+        public Vector2 forwardVector;
         
-        public void GetDotDamage(float duration)
-        {
-            StartCoroutine(AddDotDamage(duration));
-        }
-        
-        public abstract void GetEffect(Effect effect, Func<float, float> getValueToAdd);
-        public abstract void GetHit(DamageData data);
         protected abstract void Died();
 
         public float GetAttributeValue(AttributeType type) => currentAttributes[type].value;
@@ -45,12 +43,18 @@ namespace Actor
     // Values or methods that other cannot use
     public abstract partial class Actor<T>
     {
-        private WaitForSeconds _waitForOneSeconds = new WaitForSeconds(1f);
+        private readonly WaitForSeconds _waitForOneSeconds = new WaitForSeconds(1f);
     }
     
     // body of MonoBehaviour
-    public abstract partial class Actor<T> : MonoBehaviour, IDamageable
+    public abstract partial class Actor<T> : MonoBehaviour, IActorContext, IDamageable, IAffected
     {
+        protected virtual void Awake()
+        {
+            attackCollider = transform.GetChild(0).gameObject;
+            attackCollider.gameObject.SetActive(false);
+        }
+
         protected virtual void OnEnable()
         {
             if (isInitialized)
@@ -69,6 +73,25 @@ namespace Actor
     // body of others
     public abstract partial class Actor<T>
     {
+        
+        public GameObject AttackCollider => attackCollider;
+        public Vector2 Forward => forwardVector;
+        public Vector3 Position => transform.position;
+        
+        public void Affected(Effect effect, Func<float, float> getValueToAdd)
+        {
+            skillEffectValues[effect.effectTo] = getValueToAdd(skillEffectValues[effect.effectTo]);
+            stat.effects.Add(effect);
+            // TODO: set current attributes
+            // TODO: event call 
+        }
+
+        public abstract void GetHit(DamageData data);
+        public void DotDamaged(DamageData data, float duration)
+        {
+            StartCoroutine(AddDotDamage(duration));
+        }
+        
         private IEnumerator AddDotDamage(float duration)
         {
             while (duration > 0)

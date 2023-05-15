@@ -1,5 +1,5 @@
-using System.Collections.Generic;
-using Actor.Enemy;
+using Actor.Player;
+using Interface;
 using UnityEngine;
 
 namespace Actor.Skill
@@ -7,36 +7,19 @@ namespace Actor.Skill
     [CreateAssetMenu(fileName = "New Skill", menuName = "Skill/Attack")]
     public class AttackSkillObject : ActiveSkillObject
     {
-        [SerializeField] private TargetType _type;
-        [SerializeField] private float _range;
-
-        public AttackSkillObject(GameObject context) : base(context)
-        {
-            _type = TargetType.Projectile;
-        }
-
-        public AttackSkillObject(GameObject context, float range) : base(context)
-        {
-            _type = TargetType.Area;
-            _range = range;
-        }
-
+        [SerializeField] private DamageData _damage;
+        
         public override void Use()
         {
-            switch (_type)
+            switch (targetType)
             {
                 case TargetType.Projectile:
                 {
-                    GameObject target = GetTarget();
-                    // target.GetComponent<Actor>().GetHit();
                     break;
                 }
                 case TargetType.Area:
                 {
-                    List<GameObject> targets;
-                    GetTarget(out targets);
-                    // foreach (var target in targets)
-                        // target.GetComponent<Actor>().GetHit();
+                    context.AttackCollider.SetActive(true);
                     break;
                 }
                 case TargetType.World:
@@ -51,6 +34,21 @@ namespace Actor.Skill
         public override void Cancel()
         {
             
+        }
+        
+        private void _SetAttackCol()
+        {
+            Vector2 front = context.Forward;
+            Vector2 t = new Vector2(Mathf.Abs(front.y), Mathf.Abs(front.x));
+            attackTransform.localScale = t * 0.5f + new Vector2(1, 1);
+            attackTransform.localPosition = front * 0.5f;
+        }
+
+        public void OnAttackTrigger(GameObject target)
+        {
+            // TOD0 : optimize and reimplement KnockBackForce power
+            _damage.KbForce = Vector3.Normalize(target.transform.position - context.Position);
+            target.GetComponent<IDamageable>().GetHit(_damage);
         }
     }
 }
