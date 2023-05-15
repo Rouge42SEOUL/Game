@@ -10,12 +10,14 @@ namespace ObjectPool
     // Values or methods that other can use
     public partial class EnemySpawner
     {
-        
+        public static EnemySpawner Instance => _instance;
     }
     
     // Values or methods that other cannot use
     public partial class EnemySpawner
     {
+        private static EnemySpawner _instance;
+        
         private IObjectPool<Enemy> _pool;
         private List<Transform> _spawnPos = new List<Transform>();
         private WaitForSeconds _spawnWait;
@@ -30,6 +32,15 @@ namespace ObjectPool
     {
         private void Awake()
         {
+            if (_instance == null)
+            {
+                _instance = this;
+            }
+            else if (_instance != this)
+            {
+                Destroy(gameObject);
+            }
+            
             _spawnWait = new WaitForSeconds(spawnDuration);
             _pool = new ObjectPool<Enemy>(CreateEnemy, ActivateEnemy, DeActivateEnemy, OnDestroyEnemy, maxSize:maxCount);
             
