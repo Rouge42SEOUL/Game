@@ -790,12 +790,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   map:
-  - {fileID: 2800069547761395937, guid: c0cb29ae1619ce2488f8364ae1105252, type: 3}
-  - {fileID: 8285922035824383398, guid: a86fc0b741d0f1842831b68949ff4e70, type: 3}
+  - {fileID: 2800069547761395937, guid: 1a4eae1fee8e5bf4d9023148359783e6, type: 3}
   eventLists:
   - {fileID: 11400000, guid: 3ec16d5000c80a74ba5185d2f1ab2e90, type: 2}
   - {fileID: 11400000, guid: 8d4851db386b0dd47987a9dd2e2ceb08, type: 2}
-  selectMap: {fileID: 0}
 --- !u!4 &416167770
 Transform:
   m_ObjectHideFlags: 0
@@ -1797,7 +1795,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1365835021}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -9.551392, y: -1.7632599, z: -0.015850067}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.6515, y: 0.6167, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
