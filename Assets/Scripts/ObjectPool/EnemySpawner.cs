@@ -71,7 +71,6 @@ namespace ObjectPool
         private void ActivateEnemy(Enemy enemy)
         {
             enemy.gameObject.SetActive(true);
-            enemy.Init();
         }
         
         private void DeActivateEnemy(Enemy enemy)
