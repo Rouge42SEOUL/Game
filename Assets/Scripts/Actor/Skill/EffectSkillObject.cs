@@ -8,7 +8,6 @@ namespace Actor.Skill
     [CreateAssetMenu(fileName = "New Skill", menuName = "Skill/Effect")]
     public class EffectSkillObject : ActiveSkillObject
     {
-        public IAffected affectTarget;
         [SerializeField] private Effect _effect;
 
         public override void Use()
@@ -16,22 +15,20 @@ namespace Actor.Skill
             switch (targetType)
             {
                 case TargetType.Self:
-                    affectTarget.Affected(_effect, isMultiplication ? Multiply : Add);
+                    context.GameObject.GetComponent<IAffected>().Affected(_effect, isMultiplication ? Multiply : Add);
                     break;
                 case TargetType.Single:
                 {
-                    affectTarget = GetTarget().GetComponent<IAffected>();
+                    var target = GetTarget();
                     if (isDotEffect)
-                        affectTarget.Affected(_effect, isMultiplication ? Multiply : Add);
-                    attackTarget.DotDamaged(dotDamage, duration);
+                        target.GetComponent<IAffected>().Affected(_effect, isMultiplication ? Multiply : Add);
+                    target.GetComponent<IDamageable>().DotDamaged(dotDamage, duration);
                     break;
                 }
                 case TargetType.Area:
                 {
-                    List<GameObject> targets;
-                    GetTarget(out targets);
-                    foreach (var target in targets)
-                        target.GetComponent<Actor<ActorStatObject>>().Affected(_effect, isMultiplication ? Multiply : Add);
+                    SetAttackCol();
+                    context.AttackCollider.SetActive(true);
                     break;
                 }
                 case TargetType.World:
@@ -42,11 +39,6 @@ namespace Actor.Skill
                 default:
                     break;
             }
-        }
-        
-        public override void Cancel()
-        {
-            
         }
 
     }

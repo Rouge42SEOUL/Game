@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using Actor.Skill;
 using UnityEngine;
 
@@ -32,9 +30,13 @@ namespace Actor.Stats
 
         protected override void OnEnable()
         {
+            if (!isInitialized)
+                return;
+            
             base.OnEnable();
-            // base health point initialize
             skills[3].slotType = SkillType.Ultimate;
+            _baseHealthPoint = (int)baseAttributes[AttributeType.Health].value * 10;
+            _currentHealthPoint = _baseHealthPoint;
         }
 
         #endregion

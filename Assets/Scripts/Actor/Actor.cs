@@ -73,6 +73,7 @@ namespace Actor
     // body of others
     public abstract partial class Actor<T>
     {
+        public GameObject GameObject => gameObject;
         
         public GameObject AttackCollider => attackCollider;
         public Vector2 Forward => forwardVector;
@@ -87,16 +88,16 @@ namespace Actor
         }
 
         public abstract void GetHit(DamageData data);
-        public void DotDamaged(DamageData data, float duration)
+        public void DotDamaged(DamageData damage, float duration)
         {
-            StartCoroutine(AddDotDamage(duration));
+            StartCoroutine(AddDotDamage(damage, duration));
         }
         
-        private IEnumerator AddDotDamage(float duration)
+        private IEnumerator AddDotDamage(DamageData damage, float duration)
         {
             while (duration > 0)
             {
-                // GetHit();
+                GetHit(damage);
                 duration -= Time.deltaTime;
                 yield return _waitForOneSeconds;
             }
