@@ -87,7 +87,7 @@ namespace Actor
             // TODO: event call 
         }
 
-        public abstract void GetHit(DamageData data);
+        public abstract void Damaged(DamageData data);
         public void DotDamaged(DamageData damage, float duration)
         {
             StartCoroutine(AddDotDamage(damage, duration));
@@ -97,7 +97,7 @@ namespace Actor
         {
             while (duration > 0)
             {
-                GetHit(damage);
+                Damaged(damage);
                 duration -= Time.deltaTime;
                 yield return _waitForOneSeconds;
             }
