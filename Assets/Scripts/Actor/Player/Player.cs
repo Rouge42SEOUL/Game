@@ -81,6 +81,16 @@ namespace Actor.Player
     // body of others
     public partial class Player
     {
+        public override void Damaged(DamageData data)
+        {
+            stat.currentHealthPoint -= data.Damage;
+        }
+
+        protected override void Died()
+        {
+            StateMachine.ChangeState<PlayerDiedState>();
+        }
+
         private void OnEquipItem()
         {
             foreach (AttributeType type in Enum.GetValues(typeof(AttributeType)))
@@ -95,16 +105,18 @@ namespace Actor.Player
             }
         }
 
-        public override void Damaged(DamageData data)
+        private void UseSkill(int index)
         {
-            stat.currentHealthPoint -= data.Damage;
+            if (stat.skills[index] == null)
+                return;
+            StateMachine.ChangeState<PlayerAttackState>();
+            stat.skills[index].UseSkill();
         }
+    }
 
-        protected override void Died()
-        {
-            StateMachine.ChangeState<PlayerDiedState>();
-        }
-
+    // event methods
+    public partial class Player
+    {
         private void OnMovement(InputValue value)
         {
             Movement = value.Get<Vector2>();
@@ -113,33 +125,16 @@ namespace Actor.Player
                 forwardVector = Movement;
             }
         }
-
-        private void OnAutoAttack(InputValue value)
+        
+        private void OnAutoAttack()
         {
             StateMachine.ChangeState<PlayerAttackState>();
             stat.normalAttack.Use();
         }
-        
-        private void OnSkill1()
-        {
-            // TODO : Remove hardcoded death
-            StateMachine.ChangeState<PlayerDiedState>();
-            stat.skills[0].UseSkill();
-        }
-        
-        private void OnSkill2()
-        {
-            stat.skills[1].UseSkill();
-        }
-        
-        private void OnSkill3()
-        {
-            stat.skills[2].UseSkill();
-        }
-        
-        private void OnSkillUlt()
-        {
-            stat.skills[3].UseSkill();
-        }
+
+        private void OnSkill1() => UseSkill(0);
+        private void OnSkill2() => UseSkill(1);
+        private void OnSkill3() => UseSkill(2);
+        private void OnSkillUlt() => UseSkill(3);
     }
 }

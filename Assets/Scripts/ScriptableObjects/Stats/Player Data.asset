@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b702b10af9fb4e58ad395c7cc28030d1, type: 3}
+  m_Name: Player Data
+  m_EditorClassIdentifier: 
+  normalAttack: {fileID: 11400000, guid: 11512af680c6ad14b84eb49880770cf1, type: 2}
+  baseAttributes:
+    keys: 0000000001000000020000000300000004000000050000000600000007000000
+    values:
+    - type: 0
+      value: 10
+    - type: 1
+      value: 10
+    - type: 2
+      value: 10
+    - type: 3
+      value: 10
+    - type: 4
+      value: 10
+    - type: 5
+      value: 10
+    - type: 6
+      value: 10
+    - type: 7
+      value: 10
+  effects: []
+  baseHealthPoint: 100
+  skills:
+  - slotType: 2
+    _skillObject: {fileID: 0}
+  - slotType: 2
+    _skillObject: {fileID: 0}
+  - slotType: 2
+    _skillObject: {fileID: 0}
+  - slotType: 3
+    _skillObject: {fileID: 0}
+  - slotType: 2
+    _skillObject: {fileID: 0}
+  passive: {fileID: 0}
+  currentHealthPoint: 75
