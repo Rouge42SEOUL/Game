@@ -13,6 +13,8 @@ namespace Actor.Stats
         public AttackSkillObject normalAttack;
         public SerializableDictionary<AttributeType, Attribute> baseAttributes = new();
         public List<Effect> effects = new();
+        
+        public int baseHealthPoint;
 
         protected virtual void OnEnable()
         {
@@ -32,6 +34,7 @@ namespace Actor.Stats
         protected void CalculateSideAttributes()
         {
             // TODO: calculate 
+            baseHealthPoint = (int)(baseAttributes[AttributeType.Health].value * 10);
         }
     }
 }

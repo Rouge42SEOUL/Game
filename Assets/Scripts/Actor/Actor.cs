@@ -16,9 +16,6 @@ namespace Actor
         public SerializableDictionary<AttributeType, Attribute> currentAttributes;
         [SerializeField] protected SerializableDictionary<AttributeType, float> skillEffectValues;
         [SerializeField] protected T stat;
-        
-        protected int baseHealthPoint;
-        protected int currentHealthPoint;
 
         protected bool isInitialized = false;
 

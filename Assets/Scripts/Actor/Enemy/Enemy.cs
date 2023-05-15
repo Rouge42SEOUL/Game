@@ -23,13 +23,13 @@ namespace Actor.Enemy
         internal Animator EnemyAnim;
 
         public void SetManagedPool(IObjectPool<Enemy> pool) => _SetManagedPool(pool);
-        public void Init() => _Init();
     }
     
     // Values or methods that other cannot use
     public partial class Enemy
     {
         private GameObject _target;
+        [SerializeField] private int _currentHealthPoint;
     }
     
     // body of MonoBehaviour
@@ -51,9 +51,16 @@ namespace Actor.Enemy
             stateMachine.AddState(new EnemyDiedState());
         }
 
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+            _Init();
+        }
+
         private void Update()
         {
-            // TODO : if enemy health below zero, call Died()
+            if (_currentHealthPoint <= 0)
+                Died();
             stateMachine.Update();
         }
 
@@ -69,6 +76,7 @@ namespace Actor.Enemy
         public override void Damaged(DamageData data)
         {
             Debug.Log( "Enemy health Lost -> " + data.Damage);
+            _currentHealthPoint -= data.Damage;
             stateMachine.ChangeState<EnemyGetHitState>();
             
             Rigidbody2D.velocity = Vector2.zero;
@@ -77,7 +85,6 @@ namespace Actor.Enemy
 
         protected override void Died()
         {
-            StopAllCoroutines();
             stateMachine.ChangeState<EnemyDiedState>();
         }
         
@@ -86,15 +93,11 @@ namespace Actor.Enemy
             Collider2D.enabled = true;
             stateMachine.ChangeState<EnemyIdleState>();
             
-            StartCoroutine(_KillEnemy());
-
-            isInitialized = false;
-        }
-
-        private IEnumerator _KillEnemy()
-        {
-            yield return new WaitForSeconds(5f);
-            Died();
+            foreach (var att in currentAttributes)
+            {
+                att.Value.value = stat.baseAttributes[att.Key].value;
+            }
+            _currentHealthPoint = stat.baseHealthPoint;
         }
 
         private void _SetManagedPool(IObjectPool<Enemy> pool)

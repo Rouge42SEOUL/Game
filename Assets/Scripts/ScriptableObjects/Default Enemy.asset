@@ -17,19 +17,20 @@ MonoBehaviour:
     keys: 0000000001000000020000000300000004000000050000000600000007000000
     values:
     - type: 0
-      value: 10
+      value: 1
     - type: 1
-      value: 10
+      value: 1
     - type: 2
-      value: 10
+      value: 5
     - type: 3
-      value: 10
+      value: 1
     - type: 4
-      value: 10
+      value: 5
     - type: 5
-      value: 10
+      value: 5
     - type: 6
       value: 10
     - type: 7
       value: 10
   effects: []
+  baseHealthPoint: 0
