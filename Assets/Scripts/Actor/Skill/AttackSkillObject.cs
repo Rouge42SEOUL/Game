@@ -19,6 +19,7 @@ namespace Actor.Skill
                 }
                 case TargetType.Area:
                 {
+                    SetAttackCol();
                     context.AttackCollider.SetActive(true);
                     break;
                 }
@@ -31,24 +32,11 @@ namespace Actor.Skill
             }
         }
 
-        public override void Cancel()
-        {
-            
-        }
-        
-        private void _SetAttackCol()
-        {
-            Vector2 front = context.Forward;
-            Vector2 t = new Vector2(Mathf.Abs(front.y), Mathf.Abs(front.x));
-            attackTransform.localScale = t * 0.5f + new Vector2(1, 1);
-            attackTransform.localPosition = front * 0.5f;
-        }
-
         public void OnAttackTrigger(GameObject target)
         {
             // TOD0 : optimize and reimplement KnockBackForce power
             _damage.KbForce = Vector3.Normalize(target.transform.position - context.Position);
-            target.GetComponent<IDamageable>().GetHit(_damage);
+            target.GetComponent<IDamageable>().Damaged(_damage);
         }
     }
 }

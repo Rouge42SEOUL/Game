@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Actor.Skill;
 using Core;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Actor.Stats
 {
@@ -14,14 +13,14 @@ namespace Actor.Stats
         public AttackSkillObject normalAttack;
         public SerializableDictionary<AttributeType, Attribute> baseAttributes = new();
         public List<Effect> effects = new();
+        
+        public int baseHealthPoint;
 
         protected virtual void OnEnable()
         {
             if (isInitialized)
                 return;
             isInitialized = true;
-            
-            Debug.Log("init stat");
             baseAttributes.Clear();
             // TODO: set initial stats
             foreach (AttributeType type in Enum.GetValues(typeof(AttributeType)))
@@ -35,6 +34,7 @@ namespace Actor.Stats
         protected void CalculateSideAttributes()
         {
             // TODO: calculate 
+            baseHealthPoint = (int)(baseAttributes[AttributeType.Health].value * 10);
         }
     }
 }

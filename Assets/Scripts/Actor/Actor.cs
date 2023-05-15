@@ -16,9 +16,6 @@ namespace Actor
         public SerializableDictionary<AttributeType, Attribute> currentAttributes;
         [SerializeField] protected SerializableDictionary<AttributeType, float> skillEffectValues;
         [SerializeField] protected T stat;
-        
-        protected int baseHealthPoint;
-        protected int currentHealthPoint;
 
         protected bool isInitialized = false;
 
@@ -73,6 +70,7 @@ namespace Actor
     // body of others
     public abstract partial class Actor<T>
     {
+        public GameObject GameObject => gameObject;
         
         public GameObject AttackCollider => attackCollider;
         public Vector2 Forward => forwardVector;
@@ -86,17 +84,17 @@ namespace Actor
             // TODO: event call 
         }
 
-        public abstract void GetHit(DamageData data);
-        public void DotDamaged(DamageData data, float duration)
+        public abstract void Damaged(DamageData data);
+        public void DotDamaged(DamageData damage, float duration)
         {
-            StartCoroutine(AddDotDamage(duration));
+            StartCoroutine(AddDotDamage(damage, duration));
         }
         
-        private IEnumerator AddDotDamage(float duration)
+        private IEnumerator AddDotDamage(DamageData damage, float duration)
         {
             while (duration > 0)
             {
-                // GetHit();
+                Damaged(damage);
                 duration -= Time.deltaTime;
                 yield return _waitForOneSeconds;
             }
