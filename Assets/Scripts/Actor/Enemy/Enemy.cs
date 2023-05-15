@@ -22,8 +22,6 @@ namespace Actor.Enemy
         internal Rigidbody2D Rigidbody2D;
         internal Animator EnemyAnim;
 
-        public override void Damaged(DamageData data) => _GetHit(data);
-
         public void SetManagedPool(IObjectPool<Enemy> pool) => _SetManagedPool(pool);
         public void Init() => _Init();
     }
@@ -68,7 +66,7 @@ namespace Actor.Enemy
     // body of others
     public partial class Enemy
     {
-        private void _GetHit(DamageData data)
+        public override void Damaged(DamageData data)
         {
             Debug.Log( "Enemy health Lost -> " + data.Damage);
             stateMachine.ChangeState<EnemyGetHitState>();
