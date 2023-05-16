@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine.Serialization;
 
 namespace Actor.Stats
@@ -8,6 +9,7 @@ namespace Actor.Stats
     {
         public AttributeType type;
         [FormerlySerializedAs("baseValue")] public float value;
+        
 
         public Attribute(AttributeType type, float value)
         {

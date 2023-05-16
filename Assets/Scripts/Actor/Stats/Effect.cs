@@ -14,6 +14,7 @@ namespace Actor.Stats
         public float duration;
         public List<AttributeType> effectTo;
         public float effectValue;
+        public int overlappingCount;
 
         public int DisplayTime
         {
