@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Actor.Stats
@@ -7,13 +5,14 @@ namespace Actor.Stats
     [CreateAssetMenu(fileName = "New Enemy Data", menuName = "Stat/EnemyStat")]
     public class EnemyStatObject : ActorStatObject
     {
-
         protected override void OnEnable()
         {
+            if (!isInitialized)
+                return;
+
             base.OnEnable();
-            // base health point initialize
         }
-        
+
         public void AddEffect(Effect effect)
         {
             effects.Add(effect);

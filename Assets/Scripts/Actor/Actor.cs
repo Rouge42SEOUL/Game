@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Actor.Player;
 using Actor.Stats;
 using Core;
 using Interface;
@@ -15,11 +16,8 @@ namespace Actor
         public SerializableDictionary<AttributeType, Attribute> currentAttributes;
         [SerializeField] public SerializableDictionary<AttributeType, float> skillEffectValues;
         [SerializeField] public T stat;
-        
-        protected int BaseHealthPoint;
-        protected int CurrentHealthPoint;
 
-        protected bool IsInitialized = false;
+        protected bool isInitialized = false;
 
         public GameObject attackCollider;
         public Vector2 forwardVector;
@@ -36,11 +34,6 @@ namespace Actor
         public void AddEffect(Effect effect)
         {
             stat.effects.Add(effect);
-        }
-
-        public void GetHit(DamageData data)
-        {
-            throw new NotImplementedException();
         }
     }
     
@@ -61,9 +54,9 @@ namespace Actor
 
         protected virtual void OnEnable()
         {
-            if (IsInitialized)
+            if (isInitialized)
                 return;
-            IsInitialized = true;
+            isInitialized = true;
             
             Debug.Log(this.gameObject + " init current stat");
             currentAttributes.Clear();
@@ -77,6 +70,7 @@ namespace Actor
     // body of others
     public abstract partial class Actor<T>
     {
+        public GameObject GameObject => gameObject;
         
         public GameObject AttackCollider => attackCollider;
         public Vector2 Forward => forwardVector;
@@ -89,28 +83,31 @@ namespace Actor
                 skillEffectValues[effect.effectTo[i]] = getValueToAdd(skillEffectValues[effect.effectTo[i]]);
                 i++;
             }
-            
             stat.effects.Add(effect);
             // TODO: set current attributes
             // TODO: event call 
         }
 
         public abstract void Damaged(DamageData data);
-        public void DotDamaged(DamageData data, float duration)
+        public void GetHit(DamageData data)
         {
-            StartCoroutine(AddDotDamage(duration));
+            throw new NotImplementedException();
+        }
+
+        public void DotDamaged(DamageData damage, float duration)
+        {
+            StartCoroutine(AddDotDamage(damage, duration));
         }
         
-        private IEnumerator AddDotDamage(float duration)
+        private IEnumerator AddDotDamage(DamageData damage, float duration)
         {
             while (duration > 0)
             {
-                // GetHit();
+                Damaged(damage);
                 duration -= Time.deltaTime;
                 yield return _waitForOneSeconds;
             }
         }
     }
 }
-
 

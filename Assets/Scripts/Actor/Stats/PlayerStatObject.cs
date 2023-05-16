@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using Actor.Skill;
 using UnityEngine;
 

@@ -12,8 +12,7 @@ namespace Actor.Player
     // Values or methods that other can use
     public partial class Player
     {
-        private StateMachine<Player> _stateMachine;
-        public override void GetHit(DamageData data) => _GetHit(data);
+        protected StateMachine<Player> StateMachine;
 
         internal Vector2 Movement;
 
@@ -29,7 +28,7 @@ namespace Actor.Player
         private Vector2 _movement;
         private PlayerInput _playerInput;
         
-        [SerializeField] private SerializedDictionary<AttributeType, float> itemEffectValues;
+        [SerializeField] private SerializedDictionary<AttributeType, float> _itemEffectValues;
     }
     
     // body of MonoBehaviour
@@ -43,10 +42,10 @@ namespace Actor.Player
             PlayerAnim = GetComponent<Animator>();
             PlayerRigid = GetComponent<Rigidbody2D>();
             
-            _stateMachine = new StateMachine<Player>(this, new PlayerIdleState());
-            _stateMachine.AddState(new PlayerMoveState());
-            _stateMachine.AddState(new PlayerAttackState());
-            _stateMachine.AddState(new PlayerDiedState());
+            StateMachine = new StateMachine<Player>(this, new PlayerIdleState());
+            StateMachine.AddState(new PlayerMoveState());
+            StateMachine.AddState(new PlayerAttackState());
+            StateMachine.AddState(new PlayerDiedState());
         }
 
         protected override void OnEnable()
@@ -63,13 +62,14 @@ namespace Actor.Player
 
         private void Update()
         {
-            // TODO : if player health below zero, call Died()
-            _stateMachine.Update();
+            if (stat.currentHealthPoint <= 0)
+                Died();
+            StateMachine.Update();
         }
         
         private void FixedUpdate()
         {
-            _stateMachine.FixedUpdate();
+            StateMachine.FixedUpdate();
         }
 
         private void OnDisable()
@@ -85,27 +85,24 @@ namespace Actor.Player
         {
             foreach (AttributeType type in Enum.GetValues(typeof(AttributeType)))
             {
-                AddAttributeValue(type, -(itemEffectValues[type]));
+                AddAttributeValue(type, -(_itemEffectValues[type]));
             }
 
             // calculate stats effect
             foreach (AttributeType type in Enum.GetValues(typeof(AttributeType)))
             {
-                AddAttributeValue(type, itemEffectValues[type]);
+                AddAttributeValue(type, _itemEffectValues[type]);
             }
         }
 
-        private void _GetHit(DamageData data)
+        public override void Damaged(DamageData data)
         {
-            // TODO : get damaged, remove Debug.Log
-            Debug.Log("Player health lost ->" + data.damage);
+            stat.currentHealthPoint -= data.damage;
         }
 
         protected override void Died()
         {
-            Debug.Log("Player Died");
-            StopAllCoroutines();
-            _stateMachine.ChangeState<PlayerDiedState>();
+            StateMachine.ChangeState<PlayerDiedState>();
         }
 
         private void OnMovement(InputValue value)
@@ -119,23 +116,27 @@ namespace Actor.Player
 
         private void OnAutoAttack(InputValue value)
         {
-            _stateMachine.ChangeState<PlayerAttackState>();
+            StateMachine.ChangeState<PlayerAttackState>();
             stat.normalAttack.Use();
         }
+        
         private void OnSkill1()
         {
             // TODO : Remove hardcoded death
-            _stateMachine.ChangeState<PlayerDiedState>();
+            StateMachine.ChangeState<PlayerDiedState>();
             stat.skills[0].UseSkill();
         }
+        
         private void OnSkill2()
         {
             stat.skills[1].UseSkill();
         }
+        
         private void OnSkill3()
         {
             stat.skills[2].UseSkill();
         }
+        
         private void OnSkillUlt()
         {
             stat.skills[3].UseSkill();

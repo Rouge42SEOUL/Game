@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Actor.Skill;
 using Core;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Actor.Stats
 {
