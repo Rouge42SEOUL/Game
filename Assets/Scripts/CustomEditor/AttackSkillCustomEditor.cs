@@ -17,6 +17,7 @@ namespace CustomEditor
 
         private SerializedProperty _effect;
         private SerializedProperty _damage;
+        private SerializedProperty _projectile;
 
         private void OnEnable()
         {
@@ -31,16 +32,22 @@ namespace CustomEditor
             _hasEffect = serializedObject.FindProperty("hasEffect");
             _effect = serializedObject.FindProperty("effect");
             _damage = serializedObject.FindProperty("_damage");
+            _projectile = serializedObject.FindProperty("_projectile");
         }
 
         public override void OnInspectorGUI()
         {
             EditorGUILayout.PropertyField(_targetType);
-            if (_targetType.enumValueIndex == (int)TargetType.Area)
-            {
-                EditorGUILayout.PropertyField(_range);
-            }
             EditorGUILayout.PropertyField(_damage);
+            switch (_targetType.enumValueIndex)
+            {
+                case (int)TargetType.Area:
+                    EditorGUILayout.PropertyField(_range);
+                    break;
+                case (int)TargetType.Projectile:
+                    EditorGUILayout.PropertyField(_projectile);
+                    break;
+            }
 
             EditorGUILayout.PropertyField(_hasDotDamage);
             if (_hasDotDamage.boolValue)
@@ -56,6 +63,8 @@ namespace CustomEditor
                 EditorGUILayout.PropertyField(_isMultiplication);
                 EditorGUILayout.HelpBox("If this skill has percent effect, mark [Is Multiplication] true", MessageType.Info);
             }
+
+            serializedObject.ApplyModifiedProperties();
         }
     }
 }

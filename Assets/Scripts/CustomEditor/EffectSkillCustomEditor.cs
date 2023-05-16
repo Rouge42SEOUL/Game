@@ -48,6 +48,8 @@ namespace CustomEditor
             
             EditorGUILayout.PropertyField(_isMultiplication);
             EditorGUILayout.HelpBox("If this skill has percent effect, mark [Is Multiplication] true", MessageType.Info);
+            
+            serializedObject.ApplyModifiedProperties();
         }
     }
 }
