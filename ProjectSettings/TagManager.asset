@@ -6,7 +6,6 @@ TagManager:
   tags:
   - PlayerAttackCol
   - Enemy
-  - Obstacle
   layers:
   - Default
   - TransparentFX

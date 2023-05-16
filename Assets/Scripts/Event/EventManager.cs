@@ -35,8 +35,8 @@ public partial class EventManager // public
             // OnClick에 달린 모든 이벤트들을 해제한다. 이를 안하면 이전에 등록되어있는 이벤트도 실행된다.
             foreach (GameObject obj in eventSelectionWindow)
                 obj.GetComponent<Button>().onClick.RemoveAllListeners();
-            _gameManager.MovePlayer(node);
             value.BuildUI();
+            _gameManager.MovePlayer(node);
         }
     }
 }

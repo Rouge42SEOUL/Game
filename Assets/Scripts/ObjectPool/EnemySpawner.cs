@@ -1,9 +1,11 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 
 using Actor.Enemy;
+
 
 namespace ObjectPool
 {
@@ -17,12 +19,9 @@ namespace ObjectPool
     public partial class EnemySpawner
     {
         private IObjectPool<Enemy> _pool;
-        private List<Transform> _spawnPos = new List<Transform>();
-        private WaitForSeconds _spawnWait;
 
-        [SerializeField] private float spawnDuration = 10f;
-        [SerializeField] private int maxCount = 20;
         [SerializeField] private GameObject enemyPrefab;
+        private List<Transform> _spawnPos = new List<Transform>();
     }
     
     // body of MonoBehaviour
@@ -30,8 +29,7 @@ namespace ObjectPool
     {
         private void Awake()
         {
-            _spawnWait = new WaitForSeconds(spawnDuration);
-            _pool = new ObjectPool<Enemy>(CreateEnemy, ActivateEnemy, DeActivateEnemy, OnDestroyEnemy, maxSize:maxCount);
+            _pool = new ObjectPool<Enemy>(CreateEnemy, ActivateEnemy, DeActivateEnemy, OnDestroyEnemy, maxSize:20);
             
             foreach (Transform child in transform)
             {
@@ -57,9 +55,10 @@ namespace ObjectPool
                 Enemy enemy = _pool.Get();
                 enemy.transform.position = pos;
 
-                yield return _spawnWait;
+                yield return new WaitForSeconds(10f);
             }
         }
+
 
         private Enemy CreateEnemy()
         {
@@ -71,6 +70,7 @@ namespace ObjectPool
         private void ActivateEnemy(Enemy enemy)
         {
             enemy.gameObject.SetActive(true);
+            enemy.Init();
         }
         
         private void DeActivateEnemy(Enemy enemy)

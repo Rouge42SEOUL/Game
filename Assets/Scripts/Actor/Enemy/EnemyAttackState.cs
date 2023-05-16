@@ -57,12 +57,8 @@ namespace Actor.Enemy
         private IEnumerator AttackPlayer()
         {
             yield return new WaitForSeconds(_attackTime);
-            float dist = Vector3.Distance(_context.Target.transform.position, _context.transform.position);
-            if (dist <= 1.0f)
-            {
-                _p.Damaged(_tempData);
-                yield return new WaitForSeconds(_attackAfterTime);
-            }
+            _p.GetHit(_tempData);
+            yield return new WaitForSeconds(_attackAfterTime);
         }
     }
 }

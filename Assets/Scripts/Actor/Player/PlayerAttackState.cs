@@ -7,6 +7,13 @@ namespace Actor.Player
 {
     public class PlayerAttackState : State<Player>
     {
+        private Transform _atkPos;
+
+        public override void OnInitialized()
+        {
+            _atkPos = _context.attackCollider.transform;
+        }
+        
         public override void OnEnter()
         {
             _context.PlayerAnim.SetBool(Animator.StringToHash("isAttacking"), true);

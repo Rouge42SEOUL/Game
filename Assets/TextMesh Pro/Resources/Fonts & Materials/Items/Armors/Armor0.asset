@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff830b4e38419b44d9774ffbda922fc8, type: 3}
+  m_Name: Armor0
+  m_EditorClassIdentifier: 
+  itemName: "\uBC29\uC5B4\uAD6C0"
+  description: "\uD14C\uC2A4\uD2B8\uC6A9 \uAE30\uBCF8 \uBC29\uC5B4\uAD6C"
+  icon: {fileID: 0}
+  id: 0
+  durability: 0
+  defense: 0
+  hpRecovery: 0
+  cooldownReduction: 0

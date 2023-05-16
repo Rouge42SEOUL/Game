@@ -1,20 +1,3 @@
-[System.Serializable]
-public struct StatBonusData
-{
-    public int power;
-    public int health;
-    public int speed;
-
-    public static StatBonusData operator +(StatBonusData data1, StatBonusData data2)
-    { 
-        return new StatBonusData
-        {  
-            power = data1.power + data2.power, 
-            health = data1.health + data2.health, 
-            speed = data1.speed + data2.speed,
-        };
-    }
-}
 public enum StatType
 {
     AttackPower,
@@ -22,11 +5,12 @@ public enum StatType
     Health
 }
 
-public enum SlotType
+public enum ClassType
 {
-    Weapon,
-    Armor,
-    Accessory
+    Warrior,
+    Archer,
+    Mage,
+    Paladin
 }
 
 public enum AttributeTypes
@@ -52,4 +36,11 @@ public enum StatusEffect
     Blind,
     Confusion,
     Paralysis
+}
+
+public enum HandSide
+{
+    Left,
+    Right,
+    Both
 }
