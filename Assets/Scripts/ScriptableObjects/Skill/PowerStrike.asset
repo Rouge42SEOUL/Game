@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91a3aec108cc4ea09b53199416e671ff, type: 3}
+  m_Name: PowerStrike
+  m_EditorClassIdentifier: 
+  type: 2
+  elementalType: 0
+  level: 1
+  data:
+    id: -1
+    name: 
+    description: 
+  targetType: 0
+  isDotEffect: 0
+  isMultiplication: 0
+  attackTransform: {fileID: 0}
+  range: 0
+  duration: 10
+  dotDamage:
+    Damage: 0
+    KbForce: {x: 0, y: 0, z: 0}
+  effectTo: 
+  isPercent: 0
+  effectValue: 10
+  coolTime: 10
+  activeSpeed: 1
+  changeValueE: 5
+  changeValueC: 2
+  changeValueA: 0.3
+  changeValueD: 5
+  _damage:
+    Damage: 10
+    KbForce: {x: 1, y: 1, z: 0}
