@@ -14,7 +14,7 @@ public partial class StageManager // public
     public EventList[] eventLists;
     public int MapNum { get; private set; }
     public Node[] Nodes { get; private set; }
-    
+     
     // 첫시작시 랜덤으로 맵, 노드 초기화
     public void RandomInit()
     {
