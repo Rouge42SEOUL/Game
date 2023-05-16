@@ -1,5 +1,6 @@
 using Actor.Player;
 using Interface;
+using ObjectPool;
 using UnityEngine;
 
 namespace Actor.Skill
@@ -25,7 +26,11 @@ namespace Actor.Skill
                 }
                 case TargetType.World:
                 {
-                    // get all enemies from spawner
+                    var enemies = EnemySpawner.Instance.GetAllEnemies();
+                    foreach (var enemy in enemies.Values)
+                    {
+                        enemy.GetComponent<IDamageable>().Damaged(_damage);
+                    }
                     break;
                 }
 

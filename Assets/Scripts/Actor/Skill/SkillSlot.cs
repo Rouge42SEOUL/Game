@@ -32,7 +32,7 @@ namespace Actor.Skill
 
         public void UseSkill()
         {
-            Debug.Log("call SkillObject.Use");
+            Debug.Log("SkillObject.Use: " + _skillObject.name);
             if (_skillObject == null)
                 return;
             _skillObject.Use();

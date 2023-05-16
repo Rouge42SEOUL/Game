@@ -16,6 +16,7 @@ namespace Actor.Enemy
     {
         protected StateMachine<Enemy> stateMachine;
         public GameObject Target => _target;
+        public int spawnId;
         
         internal IObjectPool<Enemy> ManagedPool;
         internal Collider2D Collider2D;
