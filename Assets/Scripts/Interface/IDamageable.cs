@@ -16,7 +16,7 @@ namespace Interface
     
     public interface IDamageable
     {
-        void Damaged(DamageData data);
+        void GetHit(DamageData data);
         void DotDamaged(DamageData data, float duration);
     }
 }
