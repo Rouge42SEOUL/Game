@@ -3984,7 +3984,7 @@ GameObject:
   - component: {fileID: 1482730806}
   m_Layer: 0
   m_Name: Player Attack Collider
-  m_TagString: Untagged
+  m_TagString: PlayerAttackCol
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
