@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f38e8264cb484c76963e119ce4174eec, type: 3}
   m_Name: Recovery
   m_EditorClassIdentifier: 
-  type: 0
+  type: 3
   elementalType: 0
   level: 0
   data:
-    id: -1
-    name: 
+    id: 9
+    name: Recovery
     description: 
   targetType: 0
   isDotEffect: 0
@@ -31,11 +31,11 @@ MonoBehaviour:
   effectTo: 
   isPercent: 0
   effectValue: 0
-  coolTime: 0
-  activeSpeed: 0
+  coolTime: 30
+  activeSpeed: 3
   changeValueE: 0
-  changeValueC: 0
-  changeValueA: 0
+  changeValueC: 5
+  changeValueA: 1
   changeValueD: 0
   effectType: 0
   isStackable: 0
@@ -48,4 +48,4 @@ MonoBehaviour:
     duration: 0
     effectTo: 
     effectValue: 0
-  isRelease: 0
+  isRelease: 1

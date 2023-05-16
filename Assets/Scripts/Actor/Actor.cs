@@ -4,6 +4,7 @@ using Actor.Stats;
 using Core;
 using Interface;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Attribute = Actor.Stats.Attribute;
 
 namespace Actor
@@ -12,8 +13,8 @@ namespace Actor
     public abstract partial class Actor<T> where T : ActorStatObject
     {
         public SerializableDictionary<AttributeType, Attribute> currentAttributes;
-        [SerializeField] protected static SerializableDictionary<AttributeType, float> skillEffectValues;
-        [SerializeField] protected static T stat;
+        [SerializeField] public SerializableDictionary<AttributeType, float> skillEffectValues;
+        [SerializeField] public T stat;
         
         protected int BaseHealthPoint;
         protected int CurrentHealthPoint;
@@ -91,7 +92,7 @@ namespace Actor
 
         public virtual void GetHit(DamageData data)
         {
-            switch (data.elementalType)
+            /*switch (data.elementalType)
             {
                 case ElementalType.Fire:
                 {
@@ -141,31 +142,10 @@ namespace Actor
                     AffectedConfirm(effect);
                     break;
                 }
-            }
+            }*/
             //TODO: get_damage
         }
-
-        private static void AffectedConfirm(Effect effect)
-        {
-            var rand = new Unity.Mathematics.Random();
-            var randDouble = rand.NextDouble();
-            if (effect.type == EffectType.Bleeding || effect.type == EffectType.Fracture)
-            {
-                if(randDouble < 0.01f)
-                    Affected(effect);
-            }
-            else
-            {
-                if(randDouble < 0.1f)
-                    Affected(effect);
-            }
-        }
-        private static void Affected(Effect effect)
-        {
-            skillEffectValues[effect.effectTo[0]] = effect.effectValue;
-            stat.effects.Add(effect);
-        }
-
+        
         public void DotDamaged(DamageData data, float duration)
         {
             StartCoroutine(AddDotDamage(duration));

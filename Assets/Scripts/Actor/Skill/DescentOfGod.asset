@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 5
   elementalType: 0
-  level: 0
+  level: 1
   data:
     id: 3
     name: DescentOfGod
@@ -37,11 +37,11 @@ MonoBehaviour:
   changeValueC: 5
   changeValueA: 1
   changeValueD: 1
-  effectType: 0
+  effectType: 9
   isStackable: 0
   isPermanent: 0
   effect:
-    type: 0
+    type: 9
     isStackable: 0
     isPermanent: 0
     isPercent: 0

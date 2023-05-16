@@ -12,30 +12,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91a3aec108cc4ea09b53199416e671ff, type: 3}
   m_Name: SharpWind
   m_EditorClassIdentifier: 
-  type: 0
-  elementalType: 0
-  level: 0
+  type: 2
+  elementalType: 3
+  level: 1
   data:
     id: -1
     name: 
     description: 
-  targetType: 0
+  targetType: 3
   isDotEffect: 0
-  isMultiplication: 0
+  isMultiplication: 1
   attackTransform: {fileID: 0}
-  range: 0
+  range: 10
   duration: 0
   dotDamage:
     Damage: 0
     KbForce: {x: 0, y: 0, z: 0}
   effectTo: 
   isPercent: 0
-  effectValue: 0
-  coolTime: 0
-  activeSpeed: 0
-  changeValueE: 0
-  changeValueC: 0
-  changeValueA: 0
+  effectValue: 10
+  coolTime: 20
+  activeSpeed: 3
+  changeValueE: 5
+  changeValueC: 5
+  changeValueA: 1
   changeValueD: 0
   _damage:
     Damage: 0
