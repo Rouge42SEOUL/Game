@@ -16,12 +16,11 @@ MonoBehaviour:
   elementalType: 0
   data:
     id: -1
-    name: 
+    name: Normal Attack
     description: 
   targetType: 3
   isDotEffect: 0
   isMultiplication: 0
-  attackTransform: {fileID: 0}
   range: 0
   duration: 0
   dotDamage:
@@ -31,4 +30,4 @@ MonoBehaviour:
   effectValue: 0
   _damage:
     Damage: 5
-    KbForce: {x: -0.7892102, y: -0.61412317, z: 0}
+    KbForce: {x: -0.7968855, y: -0.6041303, z: 0}

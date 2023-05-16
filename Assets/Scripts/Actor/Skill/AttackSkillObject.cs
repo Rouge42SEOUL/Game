@@ -1,4 +1,3 @@
-using Actor.Player;
 using Interface;
 using ObjectPool;
 using UnityEngine;
@@ -27,9 +26,19 @@ namespace Actor.Skill
                 case TargetType.World:
                 {
                     var enemies = EnemySpawner.Instance.GetAllEnemies();
-                    foreach (var enemy in enemies.Values)
+                    if (hasEffect)
                     {
-                        enemy.GetComponent<IDamageable>().Damaged(_damage);
+                        foreach (var enemy in enemies.Values)
+                        {
+                            enemy.GetComponent<IDamageable>().Damaged(_damage);
+                        }
+                    }
+                    else
+                    {
+                        foreach (var enemy in enemies.Values)
+                        {
+                            enemy.GetComponent<IDamageable>().Damaged(_damage);
+                        }
                     }
                     break;
                 }
@@ -42,6 +51,10 @@ namespace Actor.Skill
             // TOD0 : optimize and reimplement KnockBackForce power
             _damage.KbForce = Vector3.Normalize(target.transform.position - context.Position);
             target.GetComponent<IDamageable>().Damaged(_damage);
+            if (hasEffect)
+            {
+                target.GetComponent<IAffected>().Affected(effect, isMultiplication ? Multiply : Add);
+            }
         }
     }
 }

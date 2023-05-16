@@ -17012,6 +17012,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a491526e0489e94d9e5d7021b71b864, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnDuration: 1
-  maxCount: 20
   enemyPrefab: {fileID: 2781783833759806822, guid: f8f27a0c6c890b04eb1e2fae970ff48d, type: 3}
+  spawnDuration: 1
+  poolMax: 20
+  maxCount: 40
