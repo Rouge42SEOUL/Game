@@ -1,11 +1,27 @@
 using UnityEngine;
 
-public class TestPlayer : MonoBehaviour
+namespace Items
 {
-    public Inventory inventory;
-    
-    void Start()
+    public class TestPlayer : MonoBehaviour
     {
-        inventory.GetArmor(0);
+        private Inventory _inventory;
+
+        private void Awake()
+        {
+            _inventory = gameObject.GetComponent<Inventory>();
+        }
+
+        void Start()
+        {
+            _inventory.AddItem(4);
+            _inventory.AddItem(5);
+            _inventory.AddItem(3);
+            _inventory.AddItem(2);
+            _inventory.AddItem(7);
+            _inventory.EquipItem(0);
+            _inventory.EquipItem(3);
+            _inventory.EquipItem(4);
+            _inventory.slot.LogTotalStatus();
+        }
     }
 }

@@ -140,7 +140,7 @@ GameObject:
   - component: {fileID: 372495659}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3995,9 +3995,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baa4681491450d84d88006a422a13ff3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DmgData:
-    Damage: 0
-    KbForce: {x: 0, y: 0, z: 0}
 --- !u!1 &2011757129
 GameObject:
   m_ObjectHideFlags: 3
@@ -17015,4 +17012,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a491526e0489e94d9e5d7021b71b864, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnDuration: 1
+  maxCount: 20
   enemyPrefab: {fileID: 2781783833759806822, guid: f8f27a0c6c890b04eb1e2fae970ff48d, type: 3}
