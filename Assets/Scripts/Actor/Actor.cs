@@ -37,6 +37,11 @@ namespace Actor
         {
             stat.effects.Add(effect);
         }
+
+        public void GetHit(DamageData data)
+        {
+            throw new NotImplementedException();
+        }
     }
     
     // Values or methods that other cannot use
@@ -90,62 +95,7 @@ namespace Actor
             // TODO: event call 
         }
 
-        public virtual void GetHit(DamageData data)
-        {
-            /*switch (data.elementalType)
-            {
-                case ElementalType.Fire:
-                {
-                    if (stat.elementalType == ElementalType.Wind)
-                        data.damage *= 2;
-                    var effect = new Effect(EffectType.Burns, 10, 5, false);
-                    AffectedConfirm(effect);
-                    break;
-                }
-                case ElementalType.Ice :
-                {
-                    if (stat.elementalType == ElementalType.Fire)
-                        data.damage *= 2;
-                    var effect = new Effect(EffectType.Frostbite, 10, 5, false);
-                    AffectedConfirm(effect);
-                    break;
-                }
-                case ElementalType.Ground :
-                {
-                    if (stat.elementalType == ElementalType.Ice)
-                        data.damage *= 2;
-                    var effect = new Effect(EffectType.Fracture, 5, false);
-                    AffectedConfirm(effect);
-                    break;
-                }
-                case ElementalType.Wind :
-                {
-                    if (stat.elementalType == ElementalType.Ground)
-                        data.damage *= 2;
-                    var effect = new Effect(EffectType.Bleeding, 5, false);
-                    AffectedConfirm(effect);
-                    break;
-                }
-                case ElementalType.Holy :
-                {
-                    if (stat.elementalType == ElementalType.Dark)
-                        data.damage *= 2;
-                    var effect = new Effect(EffectType.Blind, 10, 5, false);
-                    AffectedConfirm(effect);
-                    break;
-                }
-                case ElementalType.Dark :
-                {
-                    if (stat.elementalType == ElementalType.Holy)
-                        data.damage *= 2;
-                    var effect = new Effect(EffectType.Blind, 10, 5, false);
-                    AffectedConfirm(effect);
-                    break;
-                }
-            }*/
-            //TODO: get_damage
-        }
-        
+        public abstract void Damaged(DamageData data);
         public void DotDamaged(DamageData data, float duration)
         {
             StartCoroutine(AddDotDamage(duration));
