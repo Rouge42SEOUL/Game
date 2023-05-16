@@ -12,19 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91a3aec108cc4ea09b53199416e671ff, type: 3}
   m_Name: NormalAttack
   m_EditorClassIdentifier: 
+  type: 0
+  elementalType: 0
   data:
     id: -1
     name: 
     description: 
-  type: 0
-  elementalType: 0
   targetType: 3
   isDotEffect: 0
   isMultiplication: 0
   attackTransform: {fileID: 0}
   range: 0
+  duration: 0
+  dotDamage:
+    Damage: 0
+    KbForce: {x: 0, y: 0, z: 0}
   effectTo: 0
   effectValue: 0
   _damage:
     Damage: 5
-    KbForce: {x: 0, y: 0, z: 0}
+    KbForce: {x: -0.7892102, y: -0.61412317, z: 0}
