@@ -36,7 +36,7 @@ MonoBehaviour:
   baseHealthPoint: 100
   skills:
   - slotType: 2
-    _skillObject: {fileID: 0}
+    _skillObject: {fileID: 11400000, guid: cf985d9a164daf24fb36317bf67bc7c1, type: 2}
   - slotType: 2
     _skillObject: {fileID: 0}
   - slotType: 2
@@ -44,4 +44,4 @@ MonoBehaviour:
   - slotType: 3
     _skillObject: {fileID: 11400000, guid: f8f0cf0fac7de9d47bf8d01a9277aa98, type: 2}
   passive: {fileID: 0}
-  currentHealthPoint: 9860
+  currentHealthPoint: 9175

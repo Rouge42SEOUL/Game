@@ -38,6 +38,8 @@ namespace Actor.Enemy
     {
         protected override void Awake()
         {
+            base.Awake();
+            
             forwardVector = transform.forward;
             Rigidbody2D = GetComponent<Rigidbody2D>();
             EnemyAnim = GetComponent<Animator>();

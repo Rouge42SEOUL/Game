@@ -1,4 +1,5 @@
 using System.Collections;
+using Actor.Skill;
 using UnityEngine;
 
 namespace Interface
@@ -9,6 +10,6 @@ namespace Interface
         GameObject AttackCollider { get; }
         Vector3 Position { get; }
         Vector2 Forward { get; }
-        
+        ProjectileLauncher Launcher { get; }
     }
 }

@@ -8,6 +8,7 @@ namespace Actor.Skill
     public class AttackSkillObject : ActiveSkillObject
     {
         [SerializeField] private DamageData _damage;
+        [SerializeField] private ProjectileData _projectile;
         
         public override void Use()
         {
@@ -15,6 +16,7 @@ namespace Actor.Skill
             {
                 case TargetType.Projectile:
                 {
+                    context.Launcher.Launch(_projectile);
                     break;
                 }
                 case TargetType.Area:
@@ -50,10 +52,10 @@ namespace Actor.Skill
         {
             // TOD0 : optimize and reimplement KnockBackForce power
             _damage.KbForce = Vector3.Normalize(target.transform.position - context.Position);
-            target.GetComponent<IDamageable>().Damaged(_damage);
+            target.GetComponent<IDamageable>()?.Damaged(_damage);
             if (hasEffect)
             {
-                target.GetComponent<IAffected>().Affected(effect, isMultiplication ? Multiply : Add);
+                target.GetComponent<IAffected>()?.Affected(effect, isMultiplication ? Multiply : Add);
             }
         }
     }

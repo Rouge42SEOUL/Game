@@ -1,4 +1,5 @@
 using System;
+using Actor.Skill;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
@@ -36,8 +37,8 @@ namespace Actor.Player
     {
         protected override void Awake()
         {
+            base.Awake();
             stat.normalAttack.context = this;
-            // inventory on equip item += OnEquipItem;
         
             PlayerAnim = GetComponent<Animator>();
             PlayerRigid = GetComponent<Rigidbody2D>();
@@ -46,12 +47,18 @@ namespace Actor.Player
             StateMachine.AddState(new PlayerMoveState());
             StateMachine.AddState(new PlayerAttackState());
             StateMachine.AddState(new PlayerDiedState());
+
+            foreach (var slot in stat.skills)
+            {
+                slot.SetContext(GetComponent<IActorContext>());
+            }
         }
 
         protected override void OnEnable()
         {
             base.OnEnable();
             attackCollider.GetComponent<PlayerAttackCol>().OnAttackTrigger += stat.normalAttack.OnAttackTrigger;
+            launcher.OnAttackTrigger += stat.skills[0].OnAttackTrigger;
         }
         
         private void Start()
