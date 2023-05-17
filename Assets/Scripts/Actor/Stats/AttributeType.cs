@@ -1,6 +1,6 @@
 namespace Actor.Stats
 {
-    public enum AttributeType : int
+    public enum AttributeType : float
     {
         Health,
         Attack,

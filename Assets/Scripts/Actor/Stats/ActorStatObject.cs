@@ -15,7 +15,7 @@ namespace Actor.Stats
         public List<Effect> effects = new();
         public ElementalType elementalType;
         
-        public int baseHealthPoint;
+        public float baseHealthPoint;
 
         protected virtual void OnEnable()
         {
@@ -35,7 +35,7 @@ namespace Actor.Stats
         protected void CalculateSideAttributes()
         {
             // TODO: calculate 
-            baseHealthPoint = (int)(baseAttributes[AttributeType.Health].value * 10);
+            baseHealthPoint = baseAttributes[AttributeType.Health].value * 10;
         }
 
         public void AddEffect(Effect effect, Actor<ActorStatObject> target)
@@ -58,10 +58,10 @@ namespace Actor.Stats
                         {
                             case EffectType.Burns:
                                 changeValue = effect.effectValue;
-                                target.stat.baseAttributes.TryGetValue(AttributeType.Defense, out Attribute value).value -= changeValue;
+                                baseHealthPoint -= changeValue;
                                 break;
                             case EffectType.Frostbite:
-                                target.stat.moveSpeed = 0;
+                                target.stat.baseAttributes[AttributeType.MoveSpeed].value = 0;
                                 break;
                             case EffectType.Poison:
                                 changeValue = target.stat.entireHp * effect.effectivePoint;
