@@ -64,8 +64,8 @@ namespace Actor.Stats
                                 target.stat.baseAttributes[AttributeType.MoveSpeed].value = 0;
                                 break;
                             case EffectType.Poison:
-                                changeValue = target.stat.entireHp * effect.effectivePoint;
-                                target.stat.entireHp -= changeValue;
+                                changeValue = target.stat.baseAttributes[AttributeType.Health].value * effect.effectValue;
+                                baseHealthPoint -= changeValue;
                                 break;
                         }
                     }
