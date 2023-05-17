@@ -36,6 +36,7 @@ public class BlackSmithUI : EventUI
         {
             if (i < availableItems.Count)
             {
+                _options[i].SetActive(true);
                 int randomValue = Random.Range(0, numbers.Count);
                 _options[i].GetComponent<BlackSmithOption>().Equipment
                     = availableItems[numbers[randomValue]];
