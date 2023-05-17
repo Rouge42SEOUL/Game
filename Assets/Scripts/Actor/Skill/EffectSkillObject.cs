@@ -15,7 +15,7 @@ namespace Actor.Skill
         {
             hasEffect = true;
         }
-
+        
         public override void Use()
         {
             switch (targetType)
@@ -23,8 +23,8 @@ namespace Actor.Skill
                 case TargetType.Self:
                 {
                     if (_effect.isRelease)
-                        context.GameObject.GetComponent<IAffected>().EffectRelease(_effect);
-                    else
+                        //context.GameObject.GetComponent<IAffected>().EffectRelease(_effect);
+                    //else
                         context.GameObject.GetComponent<IAffected>().Affected(_effect, isMultiplication ? Multiply : Add);
                     break;
                 }

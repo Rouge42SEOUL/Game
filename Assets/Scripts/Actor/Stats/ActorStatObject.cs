@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Actor.Skill;
 using Core;
+using Elemental;
 using UnityEngine;
 
 namespace Actor.Stats
