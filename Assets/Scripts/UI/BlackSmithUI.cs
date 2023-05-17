@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using Items;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,10 +6,12 @@ using UnityEngine.UI;
 public class BlackSmithUI : MonoBehaviour
 {
     private GameObject[] _options;
+    private GameObject _eventUIButton;
 
     private void Start()
     {
         Transform childTransform = transform.Find("Options");
+        _eventUIButton = GameObject.Find("EventUIButton");
         Button[] childrenTransforms = childTransform.GetComponentsInChildren<Button>();
         _options = new GameObject[childrenTransforms.Length];
         for (int i = 0; i < childrenTransforms.Length; i++)
@@ -51,9 +52,11 @@ public class BlackSmithUI : MonoBehaviour
     public void DisplayUI()
     {
         gameObject.SetActive(true);
+        _eventUIButton.gameObject.SetActive(false);
     }
     public void CloseUI()
     {
         gameObject.SetActive(false);
+        _eventUIButton.gameObject.SetActive(true);
     }
 }
