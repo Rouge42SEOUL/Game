@@ -41,6 +41,7 @@ namespace RougeEvent
             gameObject.SetActive(true);
             _isDisplay = true;
         }
+
         private void CloseEvent()
         {
             gameObject.SetActive(false);
