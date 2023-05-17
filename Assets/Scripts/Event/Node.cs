@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using Event = RougeEvent.Event;
 
@@ -30,11 +31,22 @@ public partial class Node : MonoBehaviour // private
 {
     private readonly Color[] _colors = new Color[7]
         {Color.white, Color.yellow, Color.cyan, Color.blue, Color.green, Color.gray, Color.black};
+    private readonly string[] _path = new string[7]
+        {"2D Mega Pack/None",
+            "2D Mega Pack/Battle",
+            "2D Mega Pack/Skill",
+            "2D Mega Pack/BlackSmith",
+            "2D Mega Pack/Merchant",
+            "2D Mega Pack/Box",
+            "2D Mega Pack/Boss"};
     
     private void ChangeColor()
     {
+        Sprite newSprite = Resources.Load<Sprite>(_path[(int)eventType]);
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.color = _colors[(int)eventType];
+        spriteRenderer.sprite = newSprite;
+        GetComponent<Transform>().localScale /= 2;
     }
 
 }
