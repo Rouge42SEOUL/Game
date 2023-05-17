@@ -15,7 +15,9 @@ MonoBehaviour:
   itemName: 
   description: 
   icon: {fileID: 21300000, guid: 5430b5412bcac5b4986be0a875a5e978, type: 3}
+  gold: 0
   id: 7
+  type: 1
   status:
     statBonuses:
       power: 3

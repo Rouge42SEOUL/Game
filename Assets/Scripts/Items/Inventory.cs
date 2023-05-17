@@ -1,6 +1,4 @@
 using System.Collections.Generic;
-using System.Net.Mime;
-using System.IO;
 using UnityEngine;
 using Items.init;
 
@@ -17,15 +15,15 @@ namespace Items
 
         private void Awake()
         {
+            InitBoxes initBoxes = new InitBoxes();
             inventoryItems = new List<Item>(new Equipment[16]);
             slot = gameObject.AddComponent<Slot>();
-            InitBoxes.InitInventoryBoxes(inventoryPanels);
-            InitBoxes.InitSlotBoxes(slotPanels);
+            initBoxes.InitInventoryBoxes(inventoryPanels);
+            initBoxes.InitSlotBoxes(slotPanels);
         }
 
         private void Update()
         {
-            // 예를 들어, 'I' 키를 눌렀을 때 인벤토리를 표시하거나 숨기려면 아래 코드를 사용합니다.
             if (Input.GetKeyDown(KeyCode.I))
             {
                 ToggleInventory();
@@ -37,7 +35,7 @@ namespace Items
             inventoryUI.SetActive(!inventoryUI.activeSelf);
         }
         
-        public bool EquipItem(int index)
+        public bool Equip(int index)
         {
             if (index >= 0 && index < inventoryItems.Count)
             {
@@ -45,9 +43,8 @@ namespace Items
 
                 if (itemToEquip is Equipment equipment)
                 {
-                    Equipment previousItem = equipment.UnEquip(slot);
-                    equipment.Equip(slot); // Equip the new item in the slot
-                    inventoryItems[index] = previousItem; // Move the previous item back to the inventory
+                    Equipment previousItem = equipment.Equip(slot);
+                    inventoryItems[index] = previousItem;
                     UpdateInventory();
                     UpdateSlot();
                     return true;
@@ -56,7 +53,7 @@ namespace Items
             Debug.LogError("Can't find the type of equipment");
             return false;
         }
-        
+
         public Item AddItem(int id)
         {
             int idx;
@@ -103,13 +100,22 @@ namespace Items
                 switch (panel.name)
                 {
                     case "WeaponSlotBlock":
-                        panel.UpdateItem(slot.slotWeapon);
+                        foreach (Weapon weapon in slot.slotWeapon)
+                        {
+                            panel.UpdateItem(weapon);
+                        }
                         break;
                     case "ArmorSlotBlock":
                         panel.UpdateItem(slot.slotArmor);
                         break;
-                    case "AccessorySlotBlock":
-                        panel.UpdateItem(slot.slotAccessory);
+                    case "NecklaceSlotBlock":
+                        panel.UpdateItem(slot.slotNecklace);
+                        break;
+                    case "RingSlotBlock":
+                        foreach (Accessory accessory in slot.slotRing)
+                        {
+                            panel.UpdateItem(accessory);
+                        }
                         break;
                 }
             }

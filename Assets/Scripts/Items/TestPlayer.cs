@@ -18,9 +18,9 @@ namespace Items
             _inventory.AddItem(3);
             _inventory.AddItem(2);
             _inventory.AddItem(7);
-            _inventory.EquipItem(0);
-            _inventory.EquipItem(3);
-            _inventory.EquipItem(4);
+            _inventory.Equip(0);
+            _inventory.Equip(3);
+            _inventory.Equip(4);
             _inventory.slot.LogTotalStatus();
         }
     }

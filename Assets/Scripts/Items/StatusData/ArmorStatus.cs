@@ -3,7 +3,7 @@ using UnityEngine;
 namespace Items.StatusData
 {
     [System.Serializable]
-    public struct ArmorStatus
+    public class ArmorStatus
     {
         [SerializeField]
         public StatBonusData statBonuses;

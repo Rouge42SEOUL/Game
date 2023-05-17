@@ -11,6 +11,8 @@ namespace Items.StatusData
         
         public void AddWeaponStatus(WeaponStatus weaponStatus)
         {
+            if (weaponStatus == null)
+                return;
             statBonuses += weaponStatus.statBonuses;
             attackSpeed += weaponStatus.attackSpeed;
             range += weaponStatus.range;
@@ -19,12 +21,16 @@ namespace Items.StatusData
 
         public void AddArmorStatus(ArmorStatus armorStatus)
         {
+            if (armorStatus == null)
+                return;
             statBonuses += armorStatus.statBonuses;
             defense += armorStatus.defense;
         }
 
         public void AddAccessoryStatus(AccessoryStatus accessoryStatus)
         {
+            if (accessoryStatus == null)
+                return;
             statBonuses += accessoryStatus.statBonuses;
         }
     }

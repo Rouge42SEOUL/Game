@@ -15,7 +15,9 @@ MonoBehaviour:
   itemName: "\uBB34\uAE302"
   description: "\uD14C\uC2A4\uD2B8\uC6A9 \uAE30\uBCF8 \uBB34\uAE30"
   icon: {fileID: 21300000, guid: 9125c204f566db048a92ebcb64d9d14a, type: 3}
+  gold: 0
   id: 4
+  type: 1
   status:
     statBonuses:
       power: 1

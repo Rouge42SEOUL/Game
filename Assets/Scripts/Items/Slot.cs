@@ -5,27 +5,39 @@ namespace Items
 {
     public class Slot: MonoBehaviour
     {
-        public Weapon slotWeapon;
+        public Weapon[] slotWeapon = new Weapon[2];
         public Armor slotArmor;
-        public Accessory slotAccessory;
+        public Accessory slotNecklace;
+        public Accessory[] slotRing = new Accessory[2];
 
         public TotalStatus RequireTotalValue()
         {
             TotalStatus tot = new TotalStatus();
 
-            if (slotWeapon != null)
+            foreach (Weapon weapon in slotWeapon)
             {
-                tot.AddWeaponStatus(slotWeapon.status);
+                if (weapon != null)
+                {
+                    tot.AddWeaponStatus(weapon.status);
+                }
             }
-
+            
             if (slotArmor != null)
             {
                 tot.AddArmorStatus(slotArmor.status);
             }
 
-            if (slotAccessory != null)
+            if (slotNecklace != null)
             {
-                tot.AddAccessoryStatus(slotAccessory.status);
+                tot.AddAccessoryStatus(slotNecklace.status);
+            }
+
+            foreach (Accessory accessory in slotRing)
+            {
+                if (accessory != null)
+                {
+                    tot.AddAccessoryStatus(accessory.status);
+                }
             }
             
             return tot;
