@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Scripts/ScriptableObjects/Skill.meta
+guid: deee44666f98bc243b304421d968a089
+========
 guid: 3f97bd75468a3704282bde6d8dcfaaba
+>>>>>>>> dev:Assets/Resources/2D Mega Pack.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

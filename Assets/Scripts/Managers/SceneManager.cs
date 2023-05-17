@@ -6,7 +6,7 @@ namespace SceneManagement
     {
         public void StartGame()
         {
-            UnityEngine.SceneManagement.SceneManager.LoadScene("GameScene");
+            UnityEngine.SceneManagement.SceneManager.LoadScene("gyyu_game");
         }
         
         public void EndGame()

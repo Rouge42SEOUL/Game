@@ -1,19 +1,22 @@
 
 using System;
+using Actor.Stats;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Interface
 {
     [Serializable]
     public struct DamageData
     {
-        public int Damage;
-        public Vector3 KbForce;
+        public ElementalType elementalType;
+        public int damage;
+        public Vector3 kbForce;
     }
     
     public interface IDamageable
     {
-        void Damaged(DamageData data);
+        void GetHit(DamageData data);
         void DotDamaged(DamageData data, float duration);
     }
 }

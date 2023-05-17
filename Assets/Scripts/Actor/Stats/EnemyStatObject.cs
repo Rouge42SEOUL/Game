@@ -9,10 +9,10 @@ namespace Actor.Stats
         {
             if (!isInitialized)
                 return;
-            
+
             base.OnEnable();
         }
-        
+
         public void AddEffect(Effect effect)
         {
             effects.Add(effect);

@@ -1,4 +1,6 @@
 using System;
+using Actor.Stats;
+using Interface;
 
 namespace Actor.Skill
 {
@@ -8,7 +10,6 @@ namespace Actor.Skill
         public int id;
         public string name;
         public string description;
-
         public Skill()
         {
             id = -1;

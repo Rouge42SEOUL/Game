@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b702b10af9fb4e58ad395c7cc28030d1, type: 3}
   m_Name: Player Data
   m_EditorClassIdentifier: 
-  normalAttack: {fileID: 11400000, guid: 11512af680c6ad14b84eb49880770cf1, type: 2}
+  attack: {fileID: 11400000, guid: 11512af680c6ad14b84eb49880770cf1, type: 2}
   baseAttributes:
     keys: 0000000001000000020000000300000004000000050000000600000007000000
     values:

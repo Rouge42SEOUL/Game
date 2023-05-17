@@ -1,4 +1,7 @@
+
 using System;
+using Actor.Stats;
+using Interface;
 using UnityEngine;
 
 namespace Actor.Player
@@ -6,6 +9,7 @@ namespace Actor.Player
     // Values or methods that other can use
     public partial class PlayerAttackCol
     {
+        public DamageData DmgData;
         public Action<GameObject> OnAttackTrigger;
     }
     
@@ -21,6 +25,7 @@ namespace Actor.Player
         private void Awake()
         {
             _player = transform.parent.GetComponent<Player>();
+            DmgData.damage = 5;
         }
 
         private void OnTriggerEnter2D(Collider2D other)

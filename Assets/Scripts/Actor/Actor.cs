@@ -15,8 +15,8 @@ namespace Actor
     public abstract partial class Actor<T> where T : ActorStatObject
     {
         public SerializableDictionary<AttributeType, Attribute> currentAttributes;
-        [SerializeField] protected SerializableDictionary<AttributeType, float> skillEffectValues;
-        [SerializeField] protected T stat;
+        [SerializeField] public SerializableDictionary<AttributeType, float> skillEffectValues;
+        [SerializeField] public T stat;
 
         protected bool isInitialized = false;
 
@@ -81,13 +81,22 @@ namespace Actor
         
         public void Affected(Effect effect, Func<float, float> getValueToAdd)
         {
-            skillEffectValues[effect.effectTo] = getValueToAdd(skillEffectValues[effect.effectTo]);
+            for (int i = 0; i < effect.effectTo.Count;)
+            {
+                skillEffectValues[effect.effectTo[i]] = getValueToAdd(skillEffectValues[effect.effectTo[i]]);
+                i++;
+            }
             stat.effects.Add(effect);
             // TODO: set current attributes
             // TODO: event call 
         }
 
         public abstract void Damaged(DamageData data);
+        public void GetHit(DamageData data)
+        {
+            throw new NotImplementedException();
+        }
+
         public void DotDamaged(DamageData damage, float duration)
         {
             StartCoroutine(AddDotDamage(damage, duration));
@@ -104,5 +113,4 @@ namespace Actor
         }
     }
 }
-
 

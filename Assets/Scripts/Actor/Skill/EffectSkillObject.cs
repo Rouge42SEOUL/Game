@@ -21,8 +21,13 @@ namespace Actor.Skill
             switch (targetType)
             {
                 case TargetType.Self:
-                    context.GameObject.GetComponent<IAffected>().Affected(_effect, isMultiplication ? Multiply : Add);
+                {
+                    if (isRelease)
+                        context.GameObject.GetComponent<IAffected>().Affected(effect,isRelease ? Release : Add);
+                    else
+                        context.GameObject.GetComponent<IAffected>().Affected(effect, isMultiplication ? Multiply : Add);
                     break;
+                }
                 case TargetType.Single:
                 {
                     var target = GetTarget();
