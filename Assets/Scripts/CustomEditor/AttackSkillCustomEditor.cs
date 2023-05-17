@@ -6,6 +6,11 @@ namespace CustomEditor
     [UnityEditor.CustomEditor(typeof(AttackSkillObject))]
     public class AttackSkillCustomEditor : Editor
     {
+        private SerializedProperty _type;
+        private SerializedProperty _elementalType;
+        private SerializedProperty _data;
+        private SerializedProperty _isUnlocked;
+        
         private SerializedProperty _targetType;
         private SerializedProperty _hasDotDamage;
         private SerializedProperty _hasEffect;
