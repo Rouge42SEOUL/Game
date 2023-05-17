@@ -1,4 +1,5 @@
 using Actor.Stats;
+using Actor.Skill.Strategy;
 using Interface;
 using ObjectPool;
 using UnityEngine;
@@ -10,44 +11,29 @@ namespace Actor.Skill
     {
         [SerializeField] private DamageData _damage;
         [SerializeField] private ProjectileData _projectile;
-        
-        public override void Use()
+
+        protected override void InitSkill()
         {
             switch (targetType)
             {
                 case TargetType.Projectile:
-                {
-                    context.Launcher.Launch(_projectile);
+                    strategy = new ProjectileAttackStrategy(context, _projectile);
                     break;
-                }
                 case TargetType.Area:
-                {
-                    SetAttackCol();
-                    context.AttackCollider.SetActive(true);
+                    strategy = new AreaAttackStrategy(context);
                     break;
-                }
                 case TargetType.World:
-                {
-                    var enemies = EnemySpawner.Instance.GetAllEnemies();
-                    if (hasEffect)
-                    {
-                        foreach (var enemy in enemies.Values)
-                        {
-                            enemy.GetComponent<IDamageable>().Damaged(_damage);
-                        }
-                    }
-                    else
-                    {
-                        foreach (var enemy in enemies.Values)
-                        {
-                            enemy.GetComponent<IDamageable>().Damaged(_damage);
-                        }
-                    }
+                    strategy = new WorldAttackStrategy(context, _damage);
                     break;
-                }
-
+                case TargetType.Self:
+                case TargetType.Single:
+                default:
+                    Debug.LogError("Active Skill: Target Type Invalid");
+                    break;
             }
         }
+
+        public override void Use() => strategy.Use();
 
         public void OnAttackTrigger(GameObject target)
         {
@@ -114,6 +100,7 @@ namespace Actor.Skill
                 }
             }
         }
+        
          private static void AffectedConfirm(Actor<ActorStatObject> target, Effect effect)
          {
              var rand = new Unity.Mathematics.Random();
