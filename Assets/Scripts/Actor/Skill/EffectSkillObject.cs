@@ -23,9 +23,9 @@ namespace Actor.Skill
                 case TargetType.Self:
                 {
                     if (isRelease)
-                        context.GameObject.GetComponent<IAffected>().Affected(effect,isRelease ? Release : Add);
+                        context.GameObject.GetComponent<IAffected>().Affected(_effect, isRelease ? Release : Add);
                     else
-                        context.GameObject.GetComponent<IAffected>().Affected(effect, isMultiplication ? Multiply : Add);
+                        context.GameObject.GetComponent<IAffected>().Affected(_effect, isMultiplication ? Multiply : Add);
                     break;
                 }
                 case TargetType.Single:

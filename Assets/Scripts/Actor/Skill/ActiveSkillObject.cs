@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Actor.Player;
 using Actor.Stats;
 using Interface;
 using UnityEngine;
@@ -9,12 +8,13 @@ namespace Actor.Skill
     public abstract class ActiveSkillObject : SkillObject
     {   
         [SerializeField] protected TargetType targetType;
-        [SerializeField] protected bool isDotEffect = false;
+        [SerializeField] protected bool hasDotDamage = false;
+        [SerializeField] protected bool hasEffect = false;
         [SerializeField] protected bool isMultiplication = false;
         
         [SerializeField] protected float range;
-        [SerializeField] protected float duration;
         [SerializeField] protected DamageData dotDamage;
+        [SerializeField] protected float dotDuration;
         
         public List<AttributeType> effectTo;
         [SerializeField] protected float effectValue;
@@ -33,7 +33,7 @@ namespace Actor.Skill
             this.effectValue += changeValueE;
             this.coolTime -= changeValueC;
             this.activeSpeed -= changeValueA;
-            this.duration += changeValueD;
+            this.dotDuration += changeValueD;
         }
         
         public override void Cancel()

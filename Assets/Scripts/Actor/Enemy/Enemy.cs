@@ -30,7 +30,7 @@ namespace Actor.Enemy
     public partial class Enemy
     {
         private GameObject _target;
-        [SerializeField] private int _currentHealthPoint;
+        [SerializeField] private float _currentHealthPoint;
     }
     
     // body of MonoBehaviour
@@ -78,12 +78,12 @@ namespace Actor.Enemy
     {
         public override void Damaged(DamageData data)
         {
-            Debug.Log( "Enemy health Lost -> " + data.damage);
-            _currentHealthPoint -= data.damage;
+            Debug.Log( "Enemy health Lost -> " + data.Damage);
+            _currentHealthPoint -= data.Damage;
             stateMachine.ChangeState<EnemyGetHitState>();
             
             Rigidbody2D.velocity = Vector2.zero;
-            Rigidbody2D.AddForce(data.kbForce, ForceMode2D.Impulse);
+            Rigidbody2D.AddForce(data.KbForce, ForceMode2D.Impulse);
         }
 
         protected override void Died()

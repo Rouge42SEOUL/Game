@@ -67,48 +67,48 @@ namespace Actor.Skill
                 case ElementalType.Fire:
                 {
                     if (target.stat.elementalType == ElementalType.Wind)
-                        _damage.damage *= 2;
-                    var effect = new Effect(EffectType.Burns, 10, 5, false);
+                        _damage.Damage *= 2;
+                    var effect = new Effect(EffectType.Burns, 10, 5);
                     AffectedConfirm(target, effect);
                     break;
                 }
                 case ElementalType.Ice:
                 {
                     if (target.stat.elementalType == ElementalType.Fire)
-                        _damage.damage *= 2;
-                    var effect = new Effect(EffectType.Frostbite, 10, 5, false);
+                        _damage.Damage *= 2;
+                    var effect = new Effect(EffectType.Frostbite, 10, 5);
                     AffectedConfirm(target, effect);
                     break;
                 }
                 case ElementalType.Ground:
                 {
                     if (target.stat.elementalType == ElementalType.Ice)
-                        _damage.damage *= 2;
-                    var effect = new Effect(EffectType.Fracture, 5, false);
+                        _damage.Damage *= 2;
+                    var effect = new Effect(EffectType.Fracture, 5);
                     AffectedConfirm(target, effect);
                     break;
                 }
                 case ElementalType.Wind:
                 {
                     if (target.stat.elementalType == ElementalType.Ground)
-                        _damage.damage *= 2;
-                    var effect = new Effect(EffectType.Bleeding, 5, false);
+                        _damage.Damage *= 2;
+                    var effect = new Effect(EffectType.Bleeding, 5);
                     AffectedConfirm(target, effect);
                     break;
                 }
                 case ElementalType.Holy:
                 {
                     if (target.stat.elementalType == ElementalType.Dark)
-                        _damage.damage *= 2;
-                    var effect = new Effect(EffectType.Blind, 10, 5, false);
+                        _damage.Damage *= 2;
+                    var effect = new Effect(EffectType.Blind, 10, 5);
                     AffectedConfirm(target, effect);
                     break;
                 }
                 case ElementalType.Dark:
                 {
                     if (target.stat.elementalType == ElementalType.Holy)
-                        _damage.damage *= 2;
-                    var effect = new Effect(EffectType.Blind, 10, 5, false);
+                        _damage.Damage *= 2;
+                    var effect = new Effect(EffectType.Blind, 10, 5);
                     AffectedConfirm(target, effect);
                     break;
                 }

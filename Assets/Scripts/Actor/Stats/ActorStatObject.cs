@@ -64,7 +64,8 @@ namespace Actor.Stats
                                 target.stat.baseAttributes[AttributeType.MoveSpeed].value = 0;
                                 break;
                             case EffectType.Poison:
-                                changeValue = target.stat.baseAttributes[AttributeType.Health].value * effect.effectValue;
+                                changeValue = target.stat.baseAttributes[AttributeType.Health].value *
+                                              effect.effectValue;
                                 baseHealthPoint -= changeValue;
                                 break;
                         }
@@ -85,7 +86,7 @@ namespace Actor.Stats
                     effect.overlappingCount++;
             }
 
-            switch (effect.type)
+            /*switch (effect.type)
             {
                 case EffectType.Bleeding:
                 {
@@ -114,12 +115,7 @@ namespace Actor.Stats
                 }
                 case EffectType.Confuse:
                 {
-                    /*
-                     * if(player)
-                     *  조작 반전
-                     * if(enemy)
-                     *  공격 타겟 변경(가까운 다른 enemy)
-                     */
+    
                     break;
                 }
                 case EffectType.Fracture:
@@ -153,10 +149,9 @@ namespace Actor.Stats
 
                 default:
                     throw new ArgumentOutOfRangeException();
-            }
-            
-        }
-
+            }*/
         }
     }
+
 }
+        

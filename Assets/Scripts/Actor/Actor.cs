@@ -1,12 +1,10 @@
 using System;
 using System.Collections;
-using Actor.Player;
 using Actor.Skill;
 using Actor.Stats;
 using Core;
 using Interface;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Attribute = Actor.Stats.Attribute;
 
 namespace Actor

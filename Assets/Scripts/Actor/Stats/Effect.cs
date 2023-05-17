@@ -10,7 +10,7 @@ namespace Actor.Stats
         public EffectType type;
         public bool isStackable;
         public bool isPermanent;
-        public bool isPercent;
+        public bool isRelease;
         public float duration;
         public List<AttributeType> effectTo;
         public float effectValue;
@@ -28,12 +28,11 @@ namespace Actor.Stats
             }
         }
         
-        public Effect(EffectType type, float effectValue, bool isPercent)
+        public Effect(EffectType type, float effectValue)
         {
             this.type = type;
             isPermanent = true;
             isStackable = false;
-            this.isPercent = isPercent;
             this.effectValue = effectValue;
             this.effectTo = new List<AttributeType>();
 
@@ -50,11 +49,10 @@ namespace Actor.Stats
             }
         }
 
-        public Effect(EffectType type, float duration, float effectValue, bool isPercent)
+        public Effect(EffectType type, float duration, float effectValue)
         {
             this.type = type;
             isPermanent = false;
-            this.isPercent = isPercent;
             this.duration = duration;
             this.effectValue = effectValue;
             this.effectTo = new List<AttributeType>();

@@ -14,7 +14,7 @@ namespace Actor.Stats
         private int _level = 1;
         private int _exp = 0;
 
-        public int currentHealthPoint;
+        public float currentHealthPoint;
 
         #endregion
 
