@@ -33,6 +33,7 @@ namespace Actor.Skill
                         foreach (var enemy in enemies.Values)
                         {
                             enemy.GetComponent<IDamageable>().Damaged(_damage);
+                            enemy.GetComponent<IAffected>().Affected(effect, isMultiplication ? Multiply : Add);
                         }
                     }
                     else
