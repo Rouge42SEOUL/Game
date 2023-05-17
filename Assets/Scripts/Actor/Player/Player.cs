@@ -38,7 +38,6 @@ namespace Actor.Player
         protected override void Awake()
         {
             base.Awake();
-            stat.normalAttack.context = this;
         
             PlayerAnim = GetComponent<Animator>();
             PlayerRigid = GetComponent<Rigidbody2D>();
@@ -47,11 +46,6 @@ namespace Actor.Player
             StateMachine.AddState(new PlayerMoveState());
             StateMachine.AddState(new PlayerAttackState());
             StateMachine.AddState(new PlayerDiedState());
-
-            foreach (var slot in stat.skills)
-            {
-                slot.SetContext(GetComponent<IActorContext>());
-            }
         }
 
         protected override void OnEnable()
@@ -63,8 +57,11 @@ namespace Actor.Player
         
         private void Start()
         {
-            Debug.Log(this.GetType() + " vs " + stat.normalAttack.context.GetType());
-            stat.normalAttack.context = this;
+            stat.normalAttack.SetContext(this);
+            foreach (var slot in stat.skills)
+            {
+                slot.SetContext(GetComponent<IActorContext>());
+            }
         }
 
         private void Update()

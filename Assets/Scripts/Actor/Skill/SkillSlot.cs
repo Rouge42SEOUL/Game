@@ -34,7 +34,7 @@ namespace Actor.Skill
         {
             if (_skillObject == null)
                 return;
-            _skillObject.context = context;
+            _skillObject.SetContext(context);
         }
         
         public void UpdateSlot(SkillObject skillObject, IActorContext context)
@@ -45,14 +45,13 @@ namespace Actor.Skill
             if (skillObject.type == slotType)
             {
                 _skillObject = skillObject;
-                _skillObject.context = context;
+                _skillObject.SetContext(context);
                 OnChangeSkill?.Invoke();
             }
         }
 
         public void UseSkill()
         {
-            Debug.Log("SkillObject.Use: " + _skillObject.name);
             if (_skillObject == null)
                 return;
             _skillObject.Use();

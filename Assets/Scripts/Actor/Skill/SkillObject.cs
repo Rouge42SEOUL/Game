@@ -6,7 +6,7 @@ namespace Actor.Skill
 {
     public abstract class SkillObject : ScriptableObject
     {
-        public IActorContext context;
+        protected IActorContext context;
         public SkillType type;
         public ElementalType elementalType;
         
@@ -17,6 +17,13 @@ namespace Actor.Skill
         {
             get => data.id;
             set => data.id = value;
+        }
+
+        public IActorContext Context => context;
+
+        public virtual void SetContext(IActorContext actor)
+        {
+            context = actor;
         }
 
         public abstract void Use();
