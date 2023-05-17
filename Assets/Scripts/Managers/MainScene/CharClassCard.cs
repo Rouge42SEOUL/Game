@@ -14,7 +14,7 @@ namespace Managers.MainScene
     {
         private Button _button;
         private GameObject _confirmPopup;
-        // [SerializeField] private Image classImage;
+        [SerializeField] private Image classImage;
         [SerializeField] private TMP_Text classText;
     }
     
@@ -30,6 +30,10 @@ namespace Managers.MainScene
 
         private void Start()
         {
+            if (Data.ImageSourcePath != null)
+            {
+                classImage.sprite = Resources.Load<Sprite>(Data.ImageSourcePath);
+            }
             classText.text = Data.ClassName;
         }
     }
