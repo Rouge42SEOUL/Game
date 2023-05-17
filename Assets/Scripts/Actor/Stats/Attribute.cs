@@ -7,7 +7,7 @@ namespace Actor.Stats
     public class Attribute
     {
         public AttributeType type;
-        [FormerlySerializedAs("baseValue")] public float value;
+        public float value;
 
         public Attribute(AttributeType type, float value)
         {
