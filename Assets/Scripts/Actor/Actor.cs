@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using Actor.Player;
+using Actor.Skill;
 using Actor.Stats;
 using Core;
 using Interface;
@@ -21,6 +22,7 @@ namespace Actor
 
         public GameObject attackCollider;
         public Vector2 forwardVector;
+        public ProjectileLauncher launcher;
         
         protected abstract void Died();
 
@@ -44,12 +46,14 @@ namespace Actor
     }
     
     // body of MonoBehaviour
-    public abstract partial class Actor<T> : MonoBehaviour, IActorContext, IDamageable, IAffected
+    public abstract partial class Actor<T> : MonoBehaviour
     {
         protected virtual void Awake()
         {
             attackCollider = transform.GetChild(0).gameObject;
             attackCollider.gameObject.SetActive(false);
+            launcher = transform.GetChild(1).GetComponent<ProjectileLauncher>();
+            launcher.SetContext(gameObject);
         }
 
         protected virtual void OnEnable()
@@ -58,7 +62,6 @@ namespace Actor
                 return;
             isInitialized = true;
             
-            Debug.Log(this.gameObject + " init current stat");
             currentAttributes.Clear();
             foreach (AttributeType type in Enum.GetValues(typeof(AttributeType)))
             {
@@ -68,13 +71,13 @@ namespace Actor
     }
     
     // body of others
-    public abstract partial class Actor<T>
+    public abstract partial class Actor<T> : IActorContext, IDamageable, IAffected
     {
         public GameObject GameObject => gameObject;
-        
         public GameObject AttackCollider => attackCollider;
         public Vector2 Forward => forwardVector;
         public Vector3 Position => transform.position;
+        public ProjectileLauncher Launcher => launcher;
         
         public void Affected(Effect effect, Func<float, float> getValueToAdd)
         {

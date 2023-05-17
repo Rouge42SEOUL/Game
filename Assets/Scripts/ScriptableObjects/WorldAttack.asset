@@ -10,18 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 91a3aec108cc4ea09b53199416e671ff, type: 3}
-  m_Name: New Skill
+  m_Name: WorldAttack
   m_EditorClassIdentifier: 
-  type: 0
+  type: 2
   elementalType: 0
   data:
     id: -1
-    name: 
+    name: World Attack
     description: 
-  targetType: 0
+  targetType: 4
   isDotEffect: 0
   isMultiplication: 0
-  attackTransform: {fileID: 0}
   range: 0
   duration: 0
   dotDamage:
@@ -30,5 +29,5 @@ MonoBehaviour:
   effectTo: 0
   effectValue: 0
   _damage:
-    Damage: 0
+    Damage: 10
     KbForce: {x: 0, y: 0, z: 0}

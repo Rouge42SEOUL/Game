@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 91a3aec108cc4ea09b53199416e671ff, type: 3}
-  m_Name: New Skill 1
+  m_Name: ProjectileAttack
   m_EditorClassIdentifier: 
   type: 0
   elementalType: 0
@@ -18,17 +18,26 @@ MonoBehaviour:
     id: -1
     name: 
     description: 
-  targetType: 0
-  isDotEffect: 0
+  targetType: 2
+  hasDotDamage: 0
+  hasEffect: 0
   isMultiplication: 0
-  attackTransform: {fileID: 0}
   range: 0
-  duration: 0
   dotDamage:
     Damage: 0
     KbForce: {x: 0, y: 0, z: 0}
-  effectTo: 0
-  effectValue: 0
+  dotDuration: 0
+  effect:
+    type: 0
+    isStackable: 0
+    isPermanent: 0
+    duration: 0
+    effectTo: 0
+    effectValue: 0
   _damage:
-    Damage: 0
+    Damage: 5
     KbForce: {x: 0, y: 0, z: 0}
+  _projectile:
+    sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+    radius: 0.5
+    speed: 10

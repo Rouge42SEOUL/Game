@@ -166,6 +166,7 @@ MonoBehaviour:
   stat: {fileID: 11400000, guid: c6d6312bbd5c7884bb273850f3b45774, type: 2}
   attackCollider: {fileID: 1482730803}
   forwardVector: {x: 0, y: 0}
+  launcher: {fileID: 1040016780}
   _itemEffectValues:
     m_Keys: 
     m_Values: []
@@ -234,6 +235,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1482730804}
+  - {fileID: 1040016781}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -757,7 +759,7 @@ GameObject:
   - component: {fileID: 776469837}
   m_Layer: 0
   m_Name: Wall
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3669,6 +3671,51 @@ Transform:
   m_Father: {fileID: 2051534364}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1040016779
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1040016781}
+  - component: {fileID: 1040016780}
+  m_Layer: 0
+  m_Name: Projectile Launcher
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1040016780
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1040016779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18ffd403d4e04f14a5a12ea0c5f3f265, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 4503928405878255456, guid: 66cc1de701416f44e91178fc14799a85, type: 3}
+--- !u!4 &1040016781
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1040016779}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 372495657}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1138230938
 GameObject:
   m_ObjectHideFlags: 0
@@ -3937,7 +3984,7 @@ GameObject:
   - component: {fileID: 1482730806}
   m_Layer: 0
   m_Name: Player Attack Collider
-  m_TagString: Untagged
+  m_TagString: PlayerAttackCol
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -17012,6 +17059,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a491526e0489e94d9e5d7021b71b864, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnDuration: 1
-  maxCount: 20
   enemyPrefab: {fileID: 2781783833759806822, guid: f8f27a0c6c890b04eb1e2fae970ff48d, type: 3}
+  spawnDuration: 5
+  poolMax: 20
+  maxCount: 40

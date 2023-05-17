@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Actor.Stats;
@@ -10,6 +11,11 @@ namespace Actor.Skill
     {
         [SerializeField] private Effect _effect;
 
+        public void OnEnable()
+        {
+            hasEffect = true;
+        }
+
         public override void Use()
         {
             switch (targetType)
@@ -20,9 +26,9 @@ namespace Actor.Skill
                 case TargetType.Single:
                 {
                     var target = GetTarget();
-                    if (isDotEffect)
+                    if (hasDotDamage)
                         target.GetComponent<IAffected>().Affected(_effect, isMultiplication ? Multiply : Add);
-                    target.GetComponent<IDamageable>().DotDamaged(dotDamage, duration);
+                    target.GetComponent<IDamageable>().DotDamaged(dotDamage, dotDuration);
                     break;
                 }
                 case TargetType.Area:

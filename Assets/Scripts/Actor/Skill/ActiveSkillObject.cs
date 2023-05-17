@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using Actor.Player;
 using Actor.Stats;
 using Interface;
 using UnityEngine;
@@ -9,15 +7,15 @@ namespace Actor.Skill
     public abstract class ActiveSkillObject : SkillObject
     {   
         [SerializeField] protected TargetType targetType;
-        [SerializeField] protected bool isDotEffect = false;
+        [SerializeField] protected bool hasDotDamage = false;
+        [SerializeField] protected bool hasEffect = false;
         [SerializeField] protected bool isMultiplication = false;
         
         [SerializeField] protected float range;
-        [SerializeField] protected float duration;
         [SerializeField] protected DamageData dotDamage;
-        
-        public AttributeType effectTo;
-        public float effectValue;
+        [SerializeField] protected float dotDuration;
+
+        public Effect effect;
 
         public abstract override void Use();
 
@@ -40,8 +38,8 @@ namespace Actor.Skill
             attackTransform.localPosition = front * 0.5f;
         }
 
-        protected float Add(float targetValue) => effectValue;
-        protected float Multiply(float targetValue) => targetValue * effectValue;
+        protected float Add(float targetValue) => effect.effectValue;
+        protected float Multiply(float targetValue) => targetValue * effect.effectValue;
         
     }
 }
