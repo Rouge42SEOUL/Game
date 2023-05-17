@@ -1,8 +1,6 @@
-using System.Diagnostics;
 using Items;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 using Debug = UnityEngine.Debug;
 
 public class BlackSmithOption : MonoBehaviour
@@ -29,6 +27,7 @@ public class BlackSmithOption : MonoBehaviour
         // if (Equipment의 가격보다 게임매니저의 Gold가 더 많으면)
         // {
         //     Equipment.level++;
+        //     _gameManager.Gold -= Equipment의 가격
         //     this.transform.parent.parent.gameObject.SetActive(false); 
         // }
         // else

@@ -1,21 +1,18 @@
 using System.Collections.Generic;
+using System.Linq;
 using Items;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class BlackSmithUI : MonoBehaviour
 {
-    private GameManager _gameManager;
     private GameObject[] _options;
-    private Equipment[] _equipments;
 
     private void Start()
     {
-        _gameManager = GameManager.Instance;
         Transform childTransform = transform.Find("Options");
         Button[] childrenTransforms = childTransform.GetComponentsInChildren<Button>();
         _options = new GameObject[childrenTransforms.Length];
-        _equipments = new Equipment[childrenTransforms.Length];
         for (int i = 0; i < childrenTransforms.Length; i++)
         {
             _options[i] = childrenTransforms[i].gameObject;
@@ -37,8 +34,17 @@ public class BlackSmithUI : MonoBehaviour
         // 랜덤으로 리스트에서 뽑아서 _equipments에 등록
         for (int i = 0; i < _options.Length; i++)
         {
-            int randomValue = Random.Range(0, equipments.Length);
-            availableItems[i] = equipments[randomValue];
+            if (i < availableItems.Count)
+            {
+                int randomValue = Random.Range(0, numbers.Count);
+                _options[i].GetComponent<BlackSmithOption>().Equipment
+                    = availableItems[numbers[randomValue]];
+                numbers.RemoveAt(randomValue);
+            }
+            else
+            {
+                _options[i].SetActive(false);
+            }
         }
     }
 

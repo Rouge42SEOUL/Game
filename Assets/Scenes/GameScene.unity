@@ -2510,7 +2510,7 @@ GameObject:
   - component: {fileID: 988449036}
   - component: {fileID: 988449035}
   m_Layer: 5
-  m_Name: Inventory
+  m_Name: InventoryButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2765,7 +2765,7 @@ GameObject:
   - component: {fileID: 1036131127}
   - component: {fileID: 1036131126}
   m_Layer: 5
-  m_Name: Skill
+  m_Name: SkillButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
