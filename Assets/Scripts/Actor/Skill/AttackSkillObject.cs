@@ -62,7 +62,7 @@ namespace Actor.Skill
         
         public void EffectDetermination(Actor<ActorStatObject> target)
         {
-            switch (_damage.elementalType)
+            switch (_damage.ElementalType)
             {
                 case ElementalType.Fire:
                 {

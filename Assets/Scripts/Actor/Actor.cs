@@ -35,6 +35,10 @@ namespace Actor
         {
             stat.effects.Add(effect);
         }
+        public void Realeased(Effect effect)
+        {
+            throw new NotImplementedException();
+        }
     }
     
     // Values or methods that other cannot use

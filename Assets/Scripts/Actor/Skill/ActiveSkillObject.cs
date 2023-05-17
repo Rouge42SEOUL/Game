@@ -16,6 +16,8 @@ namespace Actor.Skill
         [SerializeField] protected DamageData dotDamage;
         [SerializeField] protected float dotDuration;
         
+        public Effect effect;
+        
         public List<AttributeType> effectTo;
         [SerializeField] protected float effectValue;
         [SerializeField] protected float coolTime;
