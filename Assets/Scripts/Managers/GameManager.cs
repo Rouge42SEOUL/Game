@@ -38,7 +38,7 @@ public partial class GameManager // public
 	public int Gold
 	{
 	    get => _gold;
-	    private set
+        set
 	    {
 			_gold = value;
 			_goldUI.Gold = _gold;

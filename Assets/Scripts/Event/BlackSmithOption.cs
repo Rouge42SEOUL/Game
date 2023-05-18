@@ -1,18 +1,20 @@
-using Items;
+using Items.ScriptableObjectSource;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using Debug = UnityEngine.Debug;
 
 public class BlackSmithOption : MonoBehaviour
 {
     private GameManager _gameManager;
+    private Equipment _equipment;
 
     public Equipment Equipment
     {
-        get => Equipment;
+        get => _equipment;
         set
         {
-            Equipment = value;
+            _equipment = value;
             ChangeTextToEqupment();
         }
     }
@@ -20,28 +22,29 @@ public class BlackSmithOption : MonoBehaviour
     private void Start()
     {
         _gameManager = GameManager.Instance;
+        GetComponent<Button>().onClick.AddListener(Upgrade);
     }
 
     public void Upgrade()
     {
-        // if (Equipment의 가격보다 게임매니저의 Gold가 더 많으면)
-        // {
-        //     Equipment.level++;
-        //     _gameManager.Gold -= Equipment의 가격
-        //     this.transform.parent.parent.gameObject.SetActive(false); 
-        // }
-        // else
-        // {
-        //      Debug.Log("골드가 부족합니다.");
-        // }
+        if (_equipment.gold + _equipment.reinforcement * 10 <= _gameManager.Gold)
+        {
+            
+            _gameManager.Gold -= _equipment.gold + _equipment.reinforcement * 10;
+            Equipment.reinforcement++;
+            this.transform.parent.parent.gameObject.GetComponent<BlackSmithUI>().CloseUI(); 
+        }
+        else
+        {
+            Debug.Log("골드가 부족합니다.");
+        }
     }
 
     private void ChangeTextToEqupment()
     {
         TextMeshProUGUI tMP = this.GetComponentInChildren<TextMeshProUGUI>();
 
-        tMP.text = "Equpment";
-        // tMP.text = Equipment.itemName;
+        tMP.text = "[ " + (_equipment.gold + _equipment.reinforcement * 10) + "G ] " + _equipment.itemName + "(" + _equipment.reinforcement + ")";
     }
     
 }

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd894a57327f435bb32812b7fa1ea03d, type: 3}
   m_Name: necklace1
   m_EditorClassIdentifier: 
-  itemName: 
+  itemName: necklace1
   description: 
   icon: {fileID: 1438657142, guid: 364c2532cbb57544a88505acf48e386f, type: 3}
   gold: 0

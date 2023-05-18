@@ -1,16 +1,19 @@
 using System.Collections.Generic;
 using Items;
+using Items.ScriptableObjectSource;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class BlackSmithUI : EventUI
 {
     private GameObject[] _options;
+    private Inventory _playerInventory;
 
     protected override void Start()
     {
         base.Start();
         Transform childTransform = transform.Find("Options");
+        _playerInventory = FindObjectOfType<Inventory>(); // 임시 Player가 정해지면 수정예정
         Button[] childrenTransforms = childTransform.GetComponentsInChildren<Button>();
         _options = new GameObject[childrenTransforms.Length];
         for (int i = 0; i < childrenTransforms.Length; i++)
@@ -18,28 +21,25 @@ public class BlackSmithUI : EventUI
             _options[i] = childrenTransforms[i].gameObject;
         }
     }
-
     public void OptionRandomSetting()
     {
-        Equipment[] equipments = new Equipment[] { }; // 장비 전체를 가져오는 함수를 사용할 예정
+        List<Equipment> equipments = _playerInventory.RequireTotalEquipments();
         List<Equipment> availableItems = new List<Equipment>();
-        List<int> numbers = new List<int>();
         // 강화가능한 아이템들의 리스트를 availableItems에 등록
-        for (int i = 0; i < equipments.Length; i++)
+        for (int i = 0; i < equipments.Count; i++)
         {
             //if (items의 강화 수치가 최대 강화 수치인지, 강화 가능한 장비 아이템인지 체크)
-                availableItems.Add(equipments[i]);
-                numbers.Add(i);
+            availableItems.Add(equipments[i]);
         }
         // 랜덤으로 리스트에서 뽑아서 _equipments에 등록
         for (int i = 0; i < _options.Length; i++)
         {
             if (i < availableItems.Count)
             {
-                int randomValue = Random.Range(0, numbers.Count);
+                int randomValue = Random.Range(0, availableItems.Count);
                 _options[i].GetComponent<BlackSmithOption>().Equipment
-                    = availableItems[numbers[randomValue]];
-                numbers.RemoveAt(randomValue);
+                    = availableItems[randomValue];
+                availableItems.RemoveAt(randomValue);
             }
             else
             {
@@ -47,5 +47,4 @@ public class BlackSmithUI : EventUI
             }
         }
     }
-
 }

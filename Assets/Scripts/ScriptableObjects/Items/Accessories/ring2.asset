@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4479317aa24043c69ee9c7f095377847, type: 3}
   m_Name: ring2
   m_EditorClassIdentifier: 
-  itemName: 
+  itemName: ring2
   description: 
   icon: {fileID: 1860948203, guid: 364c2532cbb57544a88505acf48e386f, type: 3}
   gold: 0

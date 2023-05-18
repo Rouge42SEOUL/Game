@@ -15,5 +15,3 @@ MonoBehaviour:
   eventStructs:
   - type: 3
     probability: 1
-  - type: 5
-    probability: 1
