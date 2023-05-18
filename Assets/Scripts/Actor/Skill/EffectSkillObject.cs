@@ -6,7 +6,7 @@ using Interface;
 
 namespace Actor.Skill
 {
-    [CreateAssetMenu(fileName = "New Skill", menuName = "Skill/Effect")]
+    [CreateAssetMenu(fileName = "New Effect Skill", menuName = "Scriptable Object/Skill/Effect")]
     public class EffectSkillObject : ActiveSkillObject
     {
         [SerializeField] private Effect _effect;
