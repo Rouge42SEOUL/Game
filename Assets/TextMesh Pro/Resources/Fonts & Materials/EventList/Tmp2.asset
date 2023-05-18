@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Tmp2
   m_EditorClassIdentifier: 
   eventStructs:
-  - type: 4
+  - type: 3
     probability: 1

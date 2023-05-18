@@ -28,7 +28,7 @@ public class MerchantOption : MonoBehaviour
         // {
         //     _gameManager.Gold = Item의 가격;
         //     Player.inventory.AddItem();
-        //     this.transform.parent.parent.gameObject.SetActive(false); 
+        // this.transform.parent.parent.GetComponent<MerchantUI>().CloseUI(); 
         // }
         // else
         // {

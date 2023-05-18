@@ -28,7 +28,7 @@ public class BlackSmithOption : MonoBehaviour
         // {
         //     Equipment.level++;
         //     _gameManager.Gold -= Equipment의 가격
-        //     this.transform.parent.parent.gameObject.SetActive(false); 
+        // this.transform.parent.parent.GetComponent<BlackSmithUI>().CloseUI(); 
         // }
         // else
         // {

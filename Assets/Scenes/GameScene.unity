@@ -1466,7 +1466,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 626.32, y: -8.470001}
-  m_SizeDelta: {x: 502.75, y: 667.1}
+  m_SizeDelta: {x: 500, y: 667.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &200425106
 MonoBehaviour:
@@ -2926,7 +2926,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &863788778
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3572,10 +3572,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86e649d645a426640ae2f7cf965bdb0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  firstGold: 100
   playerPawn: {fileID: 538564789}
   eventUI: {fileID: 863788777}
   jsonFileName: /test.json
-  _gold: 10
 --- !u!1 &988449033
 GameObject:
   m_ObjectHideFlags: 0
@@ -3828,8 +3828,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -650.16, y: -8.470001}
-  m_SizeDelta: {x: 463.54, y: 667.1}
+  m_AnchoredPosition: {x: -600, y: -8.470001}
+  m_SizeDelta: {x: 500, y: 667.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1036131124
 GameObject:
@@ -5332,7 +5332,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -2.119995, y: -8.470001}
-  m_SizeDelta: {x: 502.75, y: 667.1}
+  m_SizeDelta: {x: 500, y: 667.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1456974042
 GameObject:

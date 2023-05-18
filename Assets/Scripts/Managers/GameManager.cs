@@ -13,10 +13,11 @@ public class InfoToJson
     public int PlayerCurrentNode;
 	[JsonProperty]
     public int Gold;
+	[JsonProperty]
+    public bool IsEventRunning;
 
-    public void SaveInfo(int mapNum, Node[] nodes, Node currentNode)
+    public void SaveInfo(Node[] nodes, Node currentNode)
     {
-        Map = mapNum;
         Events = new Dictionary<int, EventType>();
         for (int i = 0; i < nodes.Length; i++)
         {
@@ -31,17 +32,18 @@ public class InfoToJson
 
 public partial class GameManager // public
 {
+    public InfoToJson InfoToJson;
+    [SerializeField] private int firstGold;
     [SerializeField] private PlayerPawn playerPawn;
     [SerializeField] private GameObject eventUI;
     [SerializeField] private string jsonFileName = "/test.json";
-	[SerializeField] private int _gold;
 	public int Gold
 	{
-	    get => _gold;
+	    get => InfoToJson.Gold;
 	    private set
 	    {
-			_gold = value;
-			_goldUI.Gold = _gold;
+            InfoToJson.Gold = value;
+			_goldUI.Gold = InfoToJson.Gold;
 		}
 	}
 	public void MovePlayer(Node node)
@@ -52,10 +54,10 @@ public partial class GameManager // public
         SaveCurrentInfo();
     }
 	public void SaveCurrentInfo()
-	{
-		_infoToJson.SaveInfo(_stageManager.MapNum, _stageManager.Nodes, _currentNode);
-		_infoToJson.Gold = _gold;
-		JsonConverter.Save(_infoToJson, Application.dataPath + jsonFileName);
+    {
+        InfoToJson.Map = _stageManager.MapNum;
+		InfoToJson.SaveInfo(_stageManager.Nodes, _currentNode);
+		JsonConverter.Save(InfoToJson, Application.dataPath + jsonFileName);
 	}
 	public void OptionUIControl()
     {
@@ -76,7 +78,6 @@ public partial class GameManager : MonoBehaviour // private
 {
     private EventManager _eventManager;
     private StageManager _stageManager;
-    private InfoToJson _infoToJson;
     private Node _currentNode;
 	private GoldUI _goldUI;
     private bool _isDisplayUI;
@@ -89,18 +90,19 @@ public partial class GameManager : MonoBehaviour // private
         _stageManager = StageManager.Instance;
 		_goldUI = FindObjectOfType<GoldUI>();
 		// Load Prev Data
-        _isFirstStart = !JsonConverter.Load(out _infoToJson, Application.dataPath + jsonFileName);
+        _isFirstStart = !JsonConverter.Load(out InfoToJson, Application.dataPath + jsonFileName);
         if (_isFirstStart)
         {
             _stageManager.RandomInit();
+            Gold = firstGold;
         }
         else
         {
-            _stageManager.PrevInit(_infoToJson);
-			Gold = _infoToJson.Gold;
+            _stageManager.PrevInit(InfoToJson);
+			Gold = InfoToJson.Gold;
 		}
-		_goldUI.Gold = _gold;
-        _currentNode = _stageManager.Nodes[_infoToJson.PlayerCurrentNode];
+		_goldUI.Gold = Gold;
+        _currentNode = _stageManager.Nodes[InfoToJson.PlayerCurrentNode];
         playerPawn.MoveToNode(_currentNode);
         SaveCurrentInfo();
     }
