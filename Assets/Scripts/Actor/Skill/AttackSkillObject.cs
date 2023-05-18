@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Actor.Skill
 {
-    [CreateAssetMenu(fileName = "New Skill", menuName = "Skill/Attack")]
+    [CreateAssetMenu(fileName = "New Attack Skill", menuName = "Scriptable Object/Skill/Attack")]
     public class AttackSkillObject : ActiveSkillObject
     {
         [SerializeField] private DamageData _damage;
