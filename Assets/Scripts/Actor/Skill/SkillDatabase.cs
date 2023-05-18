@@ -13,6 +13,8 @@ namespace Actor.Skill
         {
             for (int i = 0; i < skillObjects.Length; i++)
             {
+                if (skillObjects[i] == null)
+                    continue;
                 skillObjects[i].Id = i;
             }
         }
