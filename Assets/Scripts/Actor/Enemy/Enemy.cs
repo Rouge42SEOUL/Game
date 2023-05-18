@@ -16,6 +16,7 @@ namespace Actor.Enemy
     {
         protected StateMachine<Enemy> stateMachine;
         public GameObject Target => _target;
+        public int Damage => (int)currentAttributes[AttributeType.Attack].value;
         public int spawnId;
         
         internal IObjectPool<Enemy> ManagedPool;
@@ -54,10 +55,16 @@ namespace Actor.Enemy
             stateMachine.AddState(new EnemyDiedState());
         }
 
-        protected override void OnEnable()
+        protected void OnEnable()
         {
-            base.OnEnable();
-            _Init();
+            Collider2D.enabled = true;
+            stateMachine.ChangeState<EnemyIdleState>();
+            
+            foreach (var att in currentAttributes)
+            {
+                att.Value.value = stat.baseAttributes[att.Key].value;
+            }
+            _currentHealthPoint = stat.baseHealthPoint;
         }
 
         private void Update()
@@ -89,18 +96,6 @@ namespace Actor.Enemy
         protected override void Died()
         {
             stateMachine.ChangeState<EnemyDiedState>();
-        }
-        
-        private void _Init()
-        {
-            Collider2D.enabled = true;
-            stateMachine.ChangeState<EnemyIdleState>();
-            
-            foreach (var att in currentAttributes)
-            {
-                att.Value.value = stat.baseAttributes[att.Key].value;
-            }
-            _currentHealthPoint = stat.baseHealthPoint;
         }
 
         private void _SetManagedPool(IObjectPool<Enemy> pool)

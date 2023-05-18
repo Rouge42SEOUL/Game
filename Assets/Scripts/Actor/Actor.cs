@@ -50,24 +50,22 @@ namespace Actor
     {
         protected virtual void Awake()
         {
-            attackCollider = transform.GetChild(0).gameObject;
-            attackCollider.gameObject.SetActive(false);
-            launcher = transform.GetChild(1).GetComponent<ProjectileLauncher>();
-            launcher.SetContext(gameObject);
-        }
-
-        protected virtual void OnEnable()
-        {
             if (isInitialized)
                 return;
             isInitialized = true;
             
+            attackCollider = transform.GetChild(0).gameObject;
+            attackCollider.gameObject.SetActive(false);
+            launcher = transform.GetChild(1).GetComponent<ProjectileLauncher>();
+            launcher.SetContext(gameObject);
+
             currentAttributes.Clear();
             foreach (AttributeType type in Enum.GetValues(typeof(AttributeType)))
             {
                 currentAttributes[type] = new Attribute(type, stat.baseAttributes[type].value);
             }
         }
+
     }
     
     // body of others

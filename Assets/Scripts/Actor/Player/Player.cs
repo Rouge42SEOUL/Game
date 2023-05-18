@@ -46,15 +46,11 @@ namespace Actor.Player
             StateMachine.AddState(new PlayerMoveState());
             StateMachine.AddState(new PlayerAttackState());
             StateMachine.AddState(new PlayerDiedState());
-        }
-
-        protected override void OnEnable()
-        {
-            base.OnEnable();
+            
             attackCollider.GetComponent<PlayerAttackCol>().OnAttackTrigger += stat.normalAttack.OnAttackTrigger;
             launcher.OnAttackTrigger += stat.skills[0].OnAttackTrigger;
         }
-        
+
         private void Start()
         {
             stat.normalAttack.SetContext(this);
