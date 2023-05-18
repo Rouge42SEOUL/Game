@@ -1,13 +1,12 @@
-using System.Collections.Generic;
 using Items.StatusData;
 using UnityEngine;
 
-namespace Items
+namespace Items.ScriptableObjectSource
 {
-    [CreateAssetMenu(fileName = "Weapon Data", menuName = "Inventory/Armor")]
-    public class Armor : Equipment
+    [CreateAssetMenu(fileName = "Necklace Data", menuName = "Inventory/Necklace")]
+    public class Necklace : Equipment
     {
-        public ArmorStatus status;
+        public NecklaceStatus status;
         public override Equipment Equip(Slot slot)
         {
             if (slot == null)
@@ -15,10 +14,11 @@ namespace Items
                 Debug.LogError("Equip Error: slot is null");
                 return null;
             }
-            
-            Equipment previousArmor = UnEquip(slot);
-            slot.slotArmor = this;
-            return previousArmor;
+
+            /* main processing */
+            Equipment prev = UnEquip(slot); 
+            slot.slotNecklace = this;
+            return prev;
         }
 
         public override Equipment UnEquip(Slot slot)
@@ -29,9 +29,10 @@ namespace Items
                 return null;
             }
             
-            Armor previousArmor = slot.slotArmor;
-            slot.slotArmor = null;
-            return previousArmor;
+            /* main processing */
+            Equipment prev = slot.slotNecklace;
+            slot.slotNecklace = null;
+            return prev;
         }
     }
 }

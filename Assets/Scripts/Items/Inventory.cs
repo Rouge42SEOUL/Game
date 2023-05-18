@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Items.ScriptableObjectSource;
 using Items.init;
 
 namespace Items
@@ -12,7 +13,7 @@ namespace Items
         public List<Item> inventoryItems;
         public GameObject inventoryUI;
         public Slot slot;
-
+        
         private void Awake()
         {
             InitBoxes initBoxes = new InitBoxes();
@@ -40,6 +41,8 @@ namespace Items
             if (index >= 0 && index < inventoryItems.Count)
             {
                 Item itemToEquip = inventoryItems[index];
+                if (itemToEquip == null)
+                    return false;
 
                 if (itemToEquip is Equipment equipment)
                 {
@@ -97,13 +100,13 @@ namespace Items
             foreach (GameObject slotPanel in slotPanels)
             {
                 InventoryBoxPanel panel = slotPanel.GetComponent<InventoryBoxPanel>();
-                switch (panel.name)
+                switch (slotPanel.name)
                 {
-                    case "WeaponSlotBlock":
-                        foreach (Weapon weapon in slot.slotWeapon)
-                        {
-                            panel.UpdateItem(weapon);
-                        }
+                    case "WeaponSlotBlock0":
+                        panel.UpdateItem(slot.slotWeapon[0]);
+                        break;
+                    case "WeaponSlotBlock1":
+                        panel.UpdateItem(slot.slotWeapon[1]);
                         break;
                     case "ArmorSlotBlock":
                         panel.UpdateItem(slot.slotArmor);
@@ -111,11 +114,14 @@ namespace Items
                     case "NecklaceSlotBlock":
                         panel.UpdateItem(slot.slotNecklace);
                         break;
-                    case "RingSlotBlock":
-                        foreach (Accessory accessory in slot.slotRing)
-                        {
-                            panel.UpdateItem(accessory);
-                        }
+                    case "RingSlotBlock0":
+                        panel.UpdateItem(slot.slotRing[0]);
+                        break;
+                    case "RingSlotBlock1":
+                        panel.UpdateItem(slot.slotRing[1]);
+                        break;
+                    default:
+                        Debug.LogError("None of Block is correct");
                         break;
                 }
             }

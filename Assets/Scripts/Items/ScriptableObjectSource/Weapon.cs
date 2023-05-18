@@ -1,7 +1,7 @@
 using Items.StatusData;
 using UnityEngine;
 
-namespace Items
+namespace Items.ScriptableObjectSource
 {
         [CreateAssetMenu(fileName = "Weapon Data", menuName = "Inventory/Weapon")]
         public class Weapon : Equipment
@@ -17,7 +17,7 @@ namespace Items
                     return null;
                 }
 
-                if (type == WeaponType.OneHand && slot.slotWeapon[1] == null)
+                if (type == WeaponType.OneHand && slot.slotWeapon[0] != null && slot.slotWeapon[1] == null)
                 { 
                     slot.slotWeapon[1] = this;
                     return null;

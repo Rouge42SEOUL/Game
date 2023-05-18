@@ -27,11 +27,18 @@ namespace Items.StatusData
             defense += armorStatus.defense;
         }
 
-        public void AddAccessoryStatus(AccessoryStatus accessoryStatus)
+        public void AddNecklaceStatus(NecklaceStatus necklaceStatus)
         {
-            if (accessoryStatus == null)
+            if (necklaceStatus == null)
                 return;
-            statBonuses += accessoryStatus.statBonuses;
+            statBonuses += necklaceStatus.statBonuses;
+        }
+        
+        public void AddRingStatus(RingStatus ringStatus)
+        {
+            if (ringStatus == null)
+                return;
+            statBonuses += ringStatus.statBonuses;
         }
     }
 }

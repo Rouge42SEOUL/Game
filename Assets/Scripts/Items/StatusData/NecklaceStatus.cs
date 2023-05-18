@@ -3,9 +3,9 @@ using UnityEngine;
 namespace Items.StatusData
 {
     [System.Serializable]
-    public class AccessoryStatus
+    public class NecklaceStatus
     {
-        [SerializeField]
+        [SerializeField] 
         public StatBonusData statBonuses;
     }
 }

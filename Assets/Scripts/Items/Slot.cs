@@ -1,5 +1,7 @@
+using System.Collections.Generic;
 using Items.StatusData;
 using UnityEngine;
+using Items.ScriptableObjectSource;
 
 namespace Items
 {
@@ -7,8 +9,8 @@ namespace Items
     {
         public Weapon[] slotWeapon = new Weapon[2];
         public Armor slotArmor;
-        public Accessory slotNecklace;
-        public Accessory[] slotRing = new Accessory[2];
+        public Necklace slotNecklace;
+        public Ring[] slotRing = new Ring[2];
 
         public TotalStatus RequireTotalValue()
         {
@@ -29,18 +31,30 @@ namespace Items
 
             if (slotNecklace != null)
             {
-                tot.AddAccessoryStatus(slotNecklace.status);
+                tot.AddNecklaceStatus(slotNecklace.status);
             }
 
-            foreach (Accessory accessory in slotRing)
+            foreach (Ring ring in slotRing)
             {
-                if (accessory != null)
+                if (ring != null)
                 {
-                    tot.AddAccessoryStatus(accessory.status);
+                    tot.AddRingStatus(ring.status);
                 }
             }
             
             return tot;
+        }
+        
+        /* for blacksmith event */
+        public List<Equipment> GetItems()
+        {
+            List<Equipment> items = new List<Equipment>();
+            items.AddRange(slotWeapon);
+            items.Add(slotArmor);
+            items.Add(slotNecklace);
+            items.AddRange(slotRing);
+
+            return items;
         }
         
         public void LogTotalStatus()

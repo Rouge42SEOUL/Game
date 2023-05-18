@@ -805,7 +805,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5577211387975731805, guid: f7cd8a681e5cfd14db908ba8f32c96b5, type: 3}
       propertyPath: m_Name
-      value: WeaponSlotBlock
+      value: WeaponSlotBlock1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f7cd8a681e5cfd14db908ba8f32c96b5, type: 3}
@@ -2333,7 +2333,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5577211387975731805, guid: f7cd8a681e5cfd14db908ba8f32c96b5, type: 3}
       propertyPath: m_Name
-      value: RingSlotBlock
+      value: RingSlotBlock0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f7cd8a681e5cfd14db908ba8f32c96b5, type: 3}
@@ -3529,7 +3529,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5577211387975731805, guid: f7cd8a681e5cfd14db908ba8f32c96b5, type: 3}
       propertyPath: m_Name
-      value: WeaponSlotBlock
+      value: WeaponSlotBlock0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f7cd8a681e5cfd14db908ba8f32c96b5, type: 3}

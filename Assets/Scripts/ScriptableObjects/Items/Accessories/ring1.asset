@@ -9,15 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd894a57327f435bb32812b7fa1ea03d, type: 3}
-  m_Name: ac0
+  m_Script: {fileID: 11500000, guid: 4479317aa24043c69ee9c7f095377847, type: 3}
+  m_Name: ring1
   m_EditorClassIdentifier: 
   itemName: 
   description: 
-  icon: {fileID: 21300000, guid: bb51334c6930f864abac38001f7bdf6e, type: 3}
-  id: 6
+  icon: {fileID: 1013474685, guid: 364c2532cbb57544a88505acf48e386f, type: 3}
+  gold: 0
+  id: 7
+  reinforcement: 0
   status:
     statBonuses:
-      power: 4
-      health: 3
-      speed: 3
+      power: 2
+      health: 2
+      speed: 2
