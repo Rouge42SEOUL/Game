@@ -6,7 +6,7 @@ using Interface;
 
 namespace Actor.Skill
 {
-    [CreateAssetMenu(fileName = "New Skill", menuName = "Skill/Effect")]
+    [CreateAssetMenu(fileName = "New Effect Skill", menuName = "Scriptable Object/Skill/Effect")]
     public class EffectSkillObject : ActiveSkillObject
     {
         [SerializeField] private Effect _effect;
@@ -15,14 +15,19 @@ namespace Actor.Skill
         {
             hasEffect = true;
         }
-
+        
         public override void Use()
         {
             switch (targetType)
             {
                 case TargetType.Self:
-                    context.GameObject.GetComponent<IAffected>().Affected(_effect, isMultiplication ? Multiply : Add);
+                {
+                    if (_effect.isRelease)
+                        //context.GameObject.GetComponent<IAffected>().EffectRelease(_effect);
+                    //else
+                        context.GameObject.GetComponent<IAffected>().Affected(_effect, isMultiplication ? Multiply : Add);
                     break;
+                }
                 case TargetType.Single:
                 {
                     var target = GetTarget();

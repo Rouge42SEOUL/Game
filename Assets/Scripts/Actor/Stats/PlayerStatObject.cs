@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Actor.Stats
 {
-    [CreateAssetMenu(fileName = "New Player Data", menuName = "Stat/PlayerStat")]
+    [CreateAssetMenu(fileName = "New Player Data", menuName = "Scriptable Object/Stat/PlayerStat")]
     public class PlayerStatObject : ActorStatObject
     {
         #region Variables
@@ -14,7 +14,7 @@ namespace Actor.Stats
         private int _level = 1;
         private int _exp = 0;
 
-        public int currentHealthPoint;
+        public float currentHealthPoint;
 
         #endregion
 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Actor.Skill
 {
-    [CreateAssetMenu(fileName = "New Skill Database", menuName = "Skill/Database")]
+    [CreateAssetMenu(fileName = "New Skill Database", menuName = "Scriptable Object/Skill/Database")]
     public class SkillDatabase : ScriptableObject
     {
         public SkillObject[] skillObjects;
