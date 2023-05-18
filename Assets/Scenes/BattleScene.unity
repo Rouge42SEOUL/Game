@@ -166,7 +166,7 @@ MonoBehaviour:
   stat: {fileID: 11400000, guid: c6d6312bbd5c7884bb273850f3b45774, type: 2}
   attackCollider: {fileID: 1482730803}
   forwardVector: {x: 0, y: 0}
-  launcher: {fileID: 1040016780}
+  launcher: {fileID: 0}
   _itemEffectValues:
     m_Keys: 
     m_Values: []
@@ -17060,6 +17060,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 2781783833759806822, guid: f8f27a0c6c890b04eb1e2fae970ff48d, type: 3}
-  spawnDuration: 5
+  spawnDuration: 1
   poolMax: 20
   maxCount: 40

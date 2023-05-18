@@ -16,8 +16,18 @@ namespace Actor.Skill
         
         public int Id
         {
-            get => data.id;
-            set => data.id = value;
+            get
+            {
+                if (data == null)
+                    return -1;
+                return data.id;
+            }
+            set
+            {
+                if (data == null)
+                    data = new Skill();
+                data.id = value;
+            }
         }
 
         public IActorContext Context => context;

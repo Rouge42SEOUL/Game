@@ -8,24 +8,27 @@ namespace Actor.Enemy
     public class EnemyAttackState : State<Enemy>
     {
         private Player.Player _p;
-        
-        private float _attackTime = 0.5f;
-        private float _attackAfterTime = 1.0f;
 
-        // TODO : Change data by Stat
-        private DamageData _tempData;
-        
+        private float _beforeAttackDelay = 0.5f;
+        private float _afterAttackDelay = 1.0f;
+        private WaitForSeconds _waitBefore;
+        private WaitForSeconds _waitAfter;
+
+        private DamageData _damageData;
+        private float _distanceToTarget;
+
         public override void OnInitialized()
         {
             // TODO : calculate attack time by attack speed;
             _p = _context.Target.GetComponent<Player.Player>();
-            _tempData.Damage = 5;
-            _tempData.KbForce = Vector3.zero;
+            _waitBefore = new WaitForSeconds(_beforeAttackDelay);
+            _waitAfter = new WaitForSeconds(_afterAttackDelay);
+            _damageData = new DamageData(_context.Damage);
         }
         
         public override void OnEnter()
         {
-            // TODO : Start attack coroutine, attack animation
+            _distanceToTarget = Vector3.Distance(_context.Target.transform.position, _context.transform.position);
             _context.EnemyAnim.SetBool(Animator.StringToHash("isAttacking"), true);
             _context.StartCoroutine(AttackPlayer());
         }
@@ -40,8 +43,8 @@ namespace Actor.Enemy
             else
             {
                 // 공격상태에서 플레이어와 거리가 1.0f 초과면 이동상태
-                float dist = Vector3.Distance(_context.Target.transform.position, _context.transform.position);
-                if (dist > 1.0f)
+                _distanceToTarget = Vector3.Distance(_context.Target.transform.position, _context.transform.position);
+                if (_distanceToTarget > 1.0f)
                 {
                     _stateMachine.ChangeState<EnemyMoveState>();
                 }
@@ -56,12 +59,12 @@ namespace Actor.Enemy
 
         private IEnumerator AttackPlayer()
         {
-            yield return new WaitForSeconds(_attackTime);
-            float dist = Vector3.Distance(_context.Target.transform.position, _context.transform.position);
-            if (dist <= 1.0f)
+            yield return _waitBefore;
+            while (_distanceToTarget <= 1.0f)
             {
-                _p.Damaged(_tempData);
-                yield return new WaitForSeconds(_attackAfterTime);
+                _damageData.Damage = _context.Damage;
+                _p.Damaged(_damageData);
+                yield return _waitAfter;
             }
         }
     }
