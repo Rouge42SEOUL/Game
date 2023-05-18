@@ -11,7 +11,7 @@ namespace Actor.Skill
     {
         [SerializeField] private Effect _effect;
 
-        public void OnEnable()
+        protected override void InitSkill()
         {
             hasEffect = true;
         }
@@ -33,7 +33,7 @@ namespace Actor.Skill
                 }
                 case TargetType.Area:
                 {
-                    SetAttackCol();
+                    // SetAttackCol();
                     context.AttackCollider.SetActive(true);
                     break;
                 }

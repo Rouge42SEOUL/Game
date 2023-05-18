@@ -88,7 +88,7 @@ namespace ObjectPool
 
         private Enemy CreateEnemy()
         {
-            Enemy enemy = Instantiate(enemyPrefab).GetComponent<Enemy>();
+            Enemy enemy = Instantiate(enemyPrefab, transform).GetComponent<Enemy>();
             enemy.SetManagedPool(_pool);
             return enemy;
         }

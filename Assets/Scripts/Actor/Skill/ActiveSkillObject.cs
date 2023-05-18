@@ -1,3 +1,4 @@
+using Actor.Skill.Strategy;
 using Actor.Stats;
 using Interface;
 using UnityEngine;
@@ -5,7 +6,7 @@ using UnityEngine;
 namespace Actor.Skill
 {
     public abstract class ActiveSkillObject : SkillObject
-    {   
+    {
         [SerializeField] protected TargetType targetType;
         [SerializeField] protected bool hasDotDamage = false;
         [SerializeField] protected bool hasEffect = false;
@@ -16,6 +17,15 @@ namespace Actor.Skill
         [SerializeField] protected float dotDuration;
 
         public Effect effect;
+        protected SkillStrategy strategy;
+
+        protected abstract void InitSkill();
+
+        public override void SetContext(IActorContext actor)
+        {
+            base.SetContext(actor);
+            InitSkill();
+        }
 
         public abstract override void Use();
 
@@ -27,15 +37,6 @@ namespace Actor.Skill
         protected GameObject GetTarget()
         {
             return null;
-        }
-        
-        protected void SetAttackCol()
-        {
-            var front = context.Forward;
-            var t = new Vector2(Mathf.Abs(front.y), Mathf.Abs(front.x));
-            var attackTransform = context.AttackCollider.transform;
-            attackTransform.localScale = t * 0.5f + new Vector2(1, 1);
-            attackTransform.localPosition = front * 0.5f;
         }
 
         protected float Add(float targetValue) => effect.effectValue;
