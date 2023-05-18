@@ -12,43 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91a3aec108cc4ea09b53199416e671ff, type: 3}
   m_Name: WorldAttack
   m_EditorClassIdentifier: 
-<<<<<<<< HEAD:Assets/Scripts/ScriptableObjects/WorldAttack.asset
   type: 2
   elementalType: 0
-========
-  type: 5
-  elementalType: 1
-  level: 1
->>>>>>>> effect:Assets/Scripts/ScriptableObjects/Skill/New Skill.asset
   data:
     id: -1
     name: World Attack
     description: 
-<<<<<<<< HEAD:Assets/Scripts/ScriptableObjects/WorldAttack.asset
   targetType: 4
   isDotEffect: 0
   isMultiplication: 0
   range: 0
-========
-  targetType: 3
-  isDotEffect: 0
-  isMultiplication: 0
-  attackTransform: {fileID: 0}
-  range: 20
->>>>>>>> effect:Assets/Scripts/ScriptableObjects/Skill/New Skill.asset
   duration: 0
   dotDamage:
     Damage: 0
     KbForce: {x: 0, y: 0, z: 0}
-  effectTo: 
-  isPercent: 0
-  effectValue: 50
-  coolTime: 60
-  activeSpeed: 3
-  changeValueE: 10
-  changeValueC: 5
-  changeValueA: 1
-  changeValueD: 0
+  effectTo: 0
+  effectValue: 0
   _damage:
     Damage: 10
     KbForce: {x: 0, y: 0, z: 0}

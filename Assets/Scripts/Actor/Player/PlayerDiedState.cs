@@ -9,7 +9,9 @@ namespace Actor.Player
     {
         public override void OnEnter()
         {
+            Debug.Log("Player Died");
             _context.PlayerAnim.SetBool(Animator.StringToHash("isDead"), true);
+            _context.StopAllCoroutines();
             _context.StartCoroutine(_PlayerDead());
         }
 

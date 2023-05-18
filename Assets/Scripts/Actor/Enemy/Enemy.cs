@@ -30,7 +30,7 @@ namespace Actor.Enemy
     public partial class Enemy
     {
         private GameObject _target;
-        [SerializeField] private float _currentHealthPoint;
+        [SerializeField] private int _currentHealthPoint;
     }
     
     // body of MonoBehaviour

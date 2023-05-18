@@ -94,10 +94,6 @@ namespace Actor
         }
 
         public abstract void Damaged(DamageData data);
-        public void GetHit(DamageData data)
-        {
-            throw new NotImplementedException();
-        }
 
         public void DotDamaged(DamageData damage, float duration)
         {
