@@ -18,7 +18,6 @@ public class InfoToJson
 
     public void SaveInfo(Node[] nodes, Node currentNode)
     {
-        Map = mapNum;
         Events = new Dictionary<int, EventType>();
         for (int i = 0; i < nodes.Length; i++)
         {

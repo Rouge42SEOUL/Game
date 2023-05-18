@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Items;
+using Items.ScriptableObjectSource;
 using UnityEngine;
 using UnityEngine.UI;
 

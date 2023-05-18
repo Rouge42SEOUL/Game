@@ -29,7 +29,7 @@ namespace Items
             _inventory.Equip(4);
             _inventory.Equip(5);
             List<Equipment> totalEquipments = _inventory.RequireTotalEquipments();
-            Debug.LogError(totalEquipments.Count);
+            // Debug.LogError(totalEquipments.Count);
             _inventory.slot.LogTotalStatus();
         }
     }

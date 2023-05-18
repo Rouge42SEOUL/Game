@@ -44,8 +44,7 @@ public class BlackSmithOption : MonoBehaviour
     {
         TextMeshProUGUI tMP = this.GetComponentInChildren<TextMeshProUGUI>();
 
-        tMP.text = "Equpment";
-        // tMP.text = Equipment.itemName;
+        tMP.text = "[ " + (_equipment.gold + _equipment.reinforcement * 10) + "G ] " + _equipment.itemName + "(" + _equipment.reinforcement + ")";
     }
     
 }
