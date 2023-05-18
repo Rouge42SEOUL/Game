@@ -7,5 +7,11 @@ namespace Items.StatusData
     {
         [SerializeField] 
         public StatBonusData statBonuses;
+        
+        // Copy constructor
+        public NecklaceStatus(NecklaceStatus other)
+        {
+            this.statBonuses = other.statBonuses;
+        }
     }
 }

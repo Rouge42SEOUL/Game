@@ -44,19 +44,7 @@ namespace Items
             
             return tot;
         }
-        
-        /* for blacksmith event */
-        public List<Equipment> GetItems()
-        {
-            List<Equipment> items = new List<Equipment>();
-            items.AddRange(slotWeapon);
-            items.Add(slotArmor);
-            items.Add(slotNecklace);
-            items.AddRange(slotRing);
 
-            return items;
-        }
-        
         public void LogTotalStatus()
         {
             TotalStatus totalStatus = RequireTotalValue();

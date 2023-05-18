@@ -22,6 +22,11 @@ namespace Items.ScriptableObjectSource
                     slot.slotWeapon[1] = this;
                     return null;
                 }
+
+                if (type == WeaponType.TwoHand && slot.slotWeapon[1] != null)
+                {
+                    return null;
+                }
                 
                 /* 예외 이후에 main 처리문 */
                 Equipment previousWeapon = UnEquip(slot);
@@ -68,6 +73,22 @@ namespace Items.ScriptableObjectSource
                         break;
                 }
                 return previousWeapon;
+            }
+            
+            public override Equipment DeepCopy()
+            {
+                var copy = ScriptableObject.CreateInstance<Weapon>();
+
+                copy.itemName = this.itemName;
+                copy.description = this.description;
+                copy.icon = this.icon;
+                copy.gold = this.gold;
+                copy.id = this.id;
+                copy.reinforcement = this.reinforcement;
+                copy.status = new WeaponStatus(this.status);
+                copy.type = this.type;
+                
+                return copy;
             }
         }
 }

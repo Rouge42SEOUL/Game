@@ -7,6 +7,7 @@ namespace Items.ScriptableObjectSource
     public class Necklace : Equipment
     {
         public NecklaceStatus status;
+        
         public override Equipment Equip(Slot slot)
         {
             if (slot == null)
@@ -33,6 +34,21 @@ namespace Items.ScriptableObjectSource
             Equipment prev = slot.slotNecklace;
             slot.slotNecklace = null;
             return prev;
+        }
+        
+        public override Equipment DeepCopy()
+        {
+            var copy = ScriptableObject.CreateInstance<Necklace>();
+
+            copy.itemName = this.itemName;
+            copy.description = this.description;
+            copy.icon = this.icon;
+            copy.gold = this.gold;
+            copy.id = this.id;
+            copy.reinforcement = this.reinforcement;
+            copy.status = new NecklaceStatus(this.status);
+            
+            return copy;
         }
     }
 }

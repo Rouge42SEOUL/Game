@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using Items.ScriptableObjectSource;
 using UnityEngine;
 
 namespace Items
@@ -26,6 +28,8 @@ namespace Items
             _inventory.Equip(3);
             _inventory.Equip(4);
             _inventory.Equip(5);
+            List<Equipment> totalEquipments = _inventory.RequireTotalEquipments();
+            Debug.LogError(totalEquipments.Count);
             _inventory.slot.LogTotalStatus();
         }
     }

@@ -14,7 +14,10 @@ namespace Items.ScriptableObjectSource
     {
         public int id;
         public int reinforcement;
+        
         public abstract Equipment Equip(Slot slot);
         public abstract Equipment UnEquip(Slot slot);
+        // Add this:
+        public abstract Equipment DeepCopy();
     }
 }

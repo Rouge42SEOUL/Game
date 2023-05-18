@@ -1,7 +1,9 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Items.ScriptableObjectSource;
 using Items.init;
+using Unity.VisualScripting;
 
 namespace Items
 {
@@ -34,6 +36,38 @@ namespace Items
         private void ToggleInventory()
         {
             inventoryUI.SetActive(!inventoryUI.activeSelf);
+        }
+        
+        /* for blacksmith event */
+        public List<Equipment> RequireTotalEquipments()
+        {
+            HashSet<Equipment> totalEquipmentsSet = new HashSet<Equipment>();
+    
+            foreach (var weapon in slot.slotWeapon)
+            {
+                if (weapon != null) 
+                    totalEquipmentsSet.Add(weapon);
+            }
+
+            if (slot.slotArmor != null) 
+                totalEquipmentsSet.Add(slot.slotArmor);
+
+            if (slot.slotNecklace != null) 
+                totalEquipmentsSet.Add(slot.slotNecklace);
+    
+            foreach (var ring in slot.slotRing)
+            {
+                if (ring != null) 
+                    totalEquipmentsSet.Add(ring);
+            }
+    
+            foreach (var item in inventoryItems.OfType<Equipment>())
+            {
+                if (item != null) 
+                    totalEquipmentsSet.Add(item);
+            }
+    
+            return totalEquipmentsSet.ToList();
         }
         
         public bool Equip(int index)
@@ -81,8 +115,16 @@ namespace Items
             
             if (id >= 0 && id < equipmentDatabase.items.Count)
             {
-                inventoryItems[idx] = equipmentDatabase.items[id];
-                UpdateInventory();
+                if (equipmentDatabase.items[id] is Equipment equipment)
+                {
+                    // Deep copy
+                    inventoryItems[idx] = equipment.DeepCopy();
+                    UpdateInventory();
+                }
+                else
+                {
+                    inventoryItems[idx] = equipmentDatabase.items[id];
+                }
             }
             return null;
         }
