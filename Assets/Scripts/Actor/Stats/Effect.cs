@@ -1,6 +1,6 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 namespace Actor.Stats
 {
@@ -10,9 +10,11 @@ namespace Actor.Stats
         public EffectType type;
         public bool isStackable;
         public bool isPermanent;
+        public bool isRelease;
         public float duration;
-        public AttributeType effectTo;
+        public List<AttributeType> effectTo;
         public float effectValue;
+        public int overlappingCount;
 
         public int DisplayTime
         {
@@ -26,24 +28,59 @@ namespace Actor.Stats
             }
         }
         
-        public Effect(EffectType type, AttributeType effectTo, float effectValue)
+        public Effect(EffectType type, float effectValue)
         {
             this.type = type;
             isPermanent = true;
             isStackable = false;
-            this.effectTo = effectTo;
             this.effectValue = effectValue;
+            this.effectTo = new List<AttributeType>();
+
+            switch (this.type)
+            {
+                case EffectType.Bleeding :
+                    effectTo.Add((AttributeType.Health));
+                    break;
+                case EffectType.Fracture :
+                    effectTo.Add(AttributeType.MoveSpeed);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
 
-        public Effect(EffectType type, float duration, AttributeType effectTo, float effectValue)
+        public Effect(EffectType type, float duration, float effectValue)
         {
             this.type = type;
             isPermanent = false;
             this.duration = duration;
-            this.effectTo = effectTo;
             this.effectValue = effectValue;
+            this.effectTo = new List<AttributeType>();
 
             isStackable = type is EffectType.Burns or EffectType.Frostbite or EffectType.Poison;
+            switch (this.type)
+            {
+                case EffectType.Burns or EffectType.Poison :
+                {
+                    effectTo.Add(AttributeType.Health);
+                    break;
+                }
+                case EffectType.Confuse or EffectType.Frostbite :
+                {
+                    effectTo.Add(AttributeType.MoveSpeed);
+                    break;
+                }
+                case EffectType.Paralysis :
+                {
+                    effectTo.Add(AttributeType.AttackSpeed);
+                    break;
+                }
+                case EffectType.Blind :
+                {
+                    effectTo.Add(AttributeType.Accuracy);
+                    break;
+                }
+            }
         }
     }
 }
