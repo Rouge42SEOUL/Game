@@ -18,6 +18,7 @@ public class InfoToJson
 
     public void SaveInfo(Node[] nodes, Node currentNode)
     {
+        Map = mapNum;
         Events = new Dictionary<int, EventType>();
         for (int i = 0; i < nodes.Length; i++)
         {
@@ -40,7 +41,7 @@ public partial class GameManager // public
 	public int Gold
 	{
 	    get => InfoToJson.Gold;
-	    private set
+        set
 	    {
             InfoToJson.Gold = value;
 			_goldUI.Gold = InfoToJson.Gold;
@@ -78,6 +79,7 @@ public partial class GameManager : MonoBehaviour // private
 {
     private EventManager _eventManager;
     private StageManager _stageManager;
+    private InfoToJson _infoToJson;
     private Node _currentNode;
 	private GoldUI _goldUI;
     private bool _isDisplayUI;
