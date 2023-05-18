@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Actor.Stats
 {
-    [CreateAssetMenu(fileName = "New Player Data", menuName = "Stat/PlayerStat")]
+    [CreateAssetMenu(fileName = "New Player Data", menuName = "Scriptable Object/Stat/PlayerStat")]
     public class PlayerStatObject : ActorStatObject
     {
         #region Variables
