@@ -15,6 +15,7 @@ public struct StatBonusData
         };
     }
 }
+
 public enum StatType
 {
     AttackPower,
