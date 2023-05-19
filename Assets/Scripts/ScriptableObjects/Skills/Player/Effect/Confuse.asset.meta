@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Scripts/ScriptableObjects/ProjectileAttack.asset.meta
+guid: 6988f30b66b265a43b5ff00188c63d74
+========
+guid: 0b128d1e32bf099418bdeee09e231ec6
+>>>>>>>> effect:Assets/Scripts/ScriptableObjects/Skill/Confuse.asset.meta
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

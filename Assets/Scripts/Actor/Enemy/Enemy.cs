@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Actor.Skill;
 using Actor.Stats;
 using Interface;
 using StateMachine;
@@ -16,22 +15,22 @@ namespace Actor.Enemy
     {
         protected StateMachine<Enemy> stateMachine;
         public GameObject Target => _target;
+        public int Damage => (int)currentAttributes[AttributeType.Attack].value;
+        public int spawnId;
         
         internal IObjectPool<Enemy> ManagedPool;
         internal Collider2D Collider2D;
         internal Rigidbody2D Rigidbody2D;
         internal Animator EnemyAnim;
 
-        public override void GetHit(DamageData data) => _GetHit(data);
-
         public void SetManagedPool(IObjectPool<Enemy> pool) => _SetManagedPool(pool);
-        public void Init() => _Init();
     }
     
     // Values or methods that other cannot use
     public partial class Enemy
     {
         private GameObject _target;
+        [SerializeField] private float _currentHealthPoint;
     }
     
     // body of MonoBehaviour
@@ -39,6 +38,8 @@ namespace Actor.Enemy
     {
         protected override void Awake()
         {
+            base.Awake();
+            
             forwardVector = transform.forward;
             Rigidbody2D = GetComponent<Rigidbody2D>();
             EnemyAnim = GetComponent<Animator>();
@@ -53,9 +54,22 @@ namespace Actor.Enemy
             stateMachine.AddState(new EnemyDiedState());
         }
 
+        protected void OnEnable()
+        {
+            Collider2D.enabled = true;
+            stateMachine.ChangeState<EnemyIdleState>();
+            
+            foreach (var att in currentAttributes)
+            {
+                att.Value.value = stat.baseAttributes[att.Key].value;
+            }
+            _currentHealthPoint = stat.baseHealthPoint;
+        }
+
         private void Update()
         {
-            // TODO : if enemy health below zero, call Died()
+            if (_currentHealthPoint <= 0)
+                Died();
             stateMachine.Update();
         }
 
@@ -68,9 +82,10 @@ namespace Actor.Enemy
     // body of others
     public partial class Enemy
     {
-        private void _GetHit(DamageData data)
+        public override void Damaged(DamageData data)
         {
             Debug.Log( "Enemy health Lost -> " + data.Damage);
+            _currentHealthPoint -= data.Damage;
             stateMachine.ChangeState<EnemyGetHitState>();
             
             Rigidbody2D.velocity = Vector2.zero;
@@ -79,24 +94,7 @@ namespace Actor.Enemy
 
         protected override void Died()
         {
-            StopAllCoroutines();
             stateMachine.ChangeState<EnemyDiedState>();
-        }
-        
-        private void _Init()
-        {
-            Collider2D.enabled = true;
-            stateMachine.ChangeState<EnemyIdleState>();
-            
-            StartCoroutine(_KillEnemy());
-
-            isInitialized = false;
-        }
-
-        private IEnumerator _KillEnemy()
-        {
-            yield return new WaitForSeconds(5f);
-            Died();
         }
 
         private void _SetManagedPool(IObjectPool<Enemy> pool)

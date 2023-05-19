@@ -1,11 +1,9 @@
-using System;
-using System.Collections.Generic;
-using Actor.Skill;
+using Skill;
 using UnityEngine;
 
 namespace Actor.Stats
 {
-    [CreateAssetMenu(fileName = "New Player Data", menuName = "Stat/PlayerStat")]
+    [CreateAssetMenu(fileName = "New Player Data", menuName = "Scriptable Object/Stat/PlayerStat")]
     public class PlayerStatObject : ActorStatObject
     {
         #region Variables
@@ -16,15 +14,14 @@ namespace Actor.Stats
         private int _level = 1;
         private int _exp = 0;
 
-        private int _baseHealthPoint;
-        private int _currentHealthPoint;
+        public float currentHealthPoint;
 
         #endregion
 
         #region Properties
 
         public int Level => _level;
-        public float PercentHealPoint => (_baseHealthPoint > 0) ? (_currentHealthPoint / _baseHealthPoint) : 0;
+        public float PercentHealPoint => (baseHealthPoint > 0) ? (currentHealthPoint / baseHealthPoint) : 0;
 
         #endregion
 
@@ -32,9 +29,12 @@ namespace Actor.Stats
 
         protected override void OnEnable()
         {
+            if (!isInitialized)
+                return;
+            
             base.OnEnable();
-            // base health point initialize
             skills[3].slotType = SkillType.Ultimate;
+            currentHealthPoint = baseHealthPoint;
         }
 
         #endregion

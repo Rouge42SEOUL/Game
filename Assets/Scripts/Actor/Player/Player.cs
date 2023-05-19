@@ -13,7 +13,6 @@ namespace Actor.Player
     public partial class Player
     {
         protected StateMachine<Player> StateMachine;
-        public override void GetHit(DamageData data) => _GetHit(data);
 
         internal Vector2 Movement;
 
@@ -37,8 +36,7 @@ namespace Actor.Player
     {
         protected override void Awake()
         {
-            stat.normalAttack.context = this;
-            // inventory on equip item += OnEquipItem;
+            base.Awake();
         
             PlayerAnim = GetComponent<Animator>();
             PlayerRigid = GetComponent<Rigidbody2D>();
@@ -47,23 +45,24 @@ namespace Actor.Player
             StateMachine.AddState(new PlayerMoveState());
             StateMachine.AddState(new PlayerAttackState());
             StateMachine.AddState(new PlayerDiedState());
+            
+            attackCollider.GetComponent<PlayerAttackCol>().OnAttackTrigger += stat.normalAttack.OnAttackTrigger;
+            launcher.OnAttackTrigger += stat.skills[0].OnAttackTrigger;
         }
 
-        protected override void OnEnable()
-        {
-            base.OnEnable();
-            attackCollider.GetComponent<PlayerAttackCol>().OnAttackTrigger += stat.normalAttack.OnAttackTrigger;
-        }
-        
         private void Start()
         {
-            Debug.Log(this.GetType() + " vs " + stat.normalAttack.context.GetType());
-            stat.normalAttack.context = this;
+            stat.normalAttack.SetContext(this);
+            foreach (var slot in stat.skills)
+            {
+                slot.SetContext(GetComponent<IActorContext>());
+            }
         }
 
         private void Update()
         {
-            // TODO : if player health below zero, call Died()
+            if (stat.currentHealthPoint <= 0)
+                Died();
             StateMachine.Update();
         }
         
@@ -81,6 +80,16 @@ namespace Actor.Player
     // body of others
     public partial class Player
     {
+        public override void Damaged(DamageData data)
+        {
+            stat.currentHealthPoint -= data.Damage;
+        }
+
+        protected override void Died()
+        {
+            StateMachine.ChangeState<PlayerDiedState>();
+        }
+
         private void OnEquipItem()
         {
             foreach (AttributeType type in Enum.GetValues(typeof(AttributeType)))
@@ -95,19 +104,18 @@ namespace Actor.Player
             }
         }
 
-        private void _GetHit(DamageData data)
+        private void UseSkill(int index)
         {
-            // TODO : get damaged, remove Debug.Log
-            Debug.Log("Player health lost ->" + data.Damage);
+            if (stat.skills[index] == null)
+                return;
+            StateMachine.ChangeState<PlayerAttackState>();
+            stat.skills[index].UseSkill();
         }
+    }
 
-        protected override void Died()
-        {
-            Debug.Log("Player Died");
-            StopAllCoroutines();
-            StateMachine.ChangeState<PlayerDiedState>();
-        }
-
+    // event methods
+    public partial class Player
+    {
         private void OnMovement(InputValue value)
         {
             Movement = value.Get<Vector2>();
@@ -116,29 +124,16 @@ namespace Actor.Player
                 forwardVector = Movement;
             }
         }
-
-        private void OnAutoAttack(InputValue value)
+        
+        private void OnAutoAttack()
         {
             StateMachine.ChangeState<PlayerAttackState>();
             stat.normalAttack.Use();
         }
-        private void OnSkill1()
-        {
-            // TODO : Remove hardcoded death
-            StateMachine.ChangeState<PlayerDiedState>();
-            stat.skills[0].UseSkill();
-        }
-        private void OnSkill2()
-        {
-            stat.skills[1].UseSkill();
-        }
-        private void OnSkill3()
-        {
-            stat.skills[2].UseSkill();
-        }
-        private void OnSkillUlt()
-        {
-            stat.skills[3].UseSkill();
-        }
+
+        private void OnSkill1() => UseSkill(0);
+        private void OnSkill2() => UseSkill(1);
+        private void OnSkill3() => UseSkill(2);
+        private void OnSkillUlt() => UseSkill(3);
     }
 }
