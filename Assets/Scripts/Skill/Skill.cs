@@ -1,7 +1,6 @@
 using System;
 
-
-namespace Actor.Skill
+namespace Skill
 {
     [Serializable]
     public class Skill

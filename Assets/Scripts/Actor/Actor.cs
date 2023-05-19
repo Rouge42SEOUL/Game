@@ -1,9 +1,9 @@
 using System;
 using System.Collections;
-using Actor.Skill;
 using Actor.Stats;
 using Core;
 using Interface;
+using Skill.Projectile;
 using UnityEngine;
 using Attribute = Actor.Stats.Attribute;
 

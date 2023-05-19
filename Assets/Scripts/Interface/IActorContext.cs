@@ -1,5 +1,5 @@
 using System.Collections;
-using Actor.Skill;
+using Skill.Projectile;
 using UnityEngine;
 
 namespace Interface

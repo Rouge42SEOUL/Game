@@ -1,10 +1,8 @@
-using System;
-using System.Collections.Generic;
-using UnityEngine;
 using Actor.Stats;
 using Interface;
+using UnityEngine;
 
-namespace Actor.Skill
+namespace Skill
 {
     [CreateAssetMenu(fileName = "New Effect Skill", menuName = "Scriptable Object/Skill/Effect")]
     public class EffectSkillObject : ActiveSkillObject

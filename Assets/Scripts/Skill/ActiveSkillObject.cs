@@ -1,10 +1,9 @@
-using Actor.Skill.Strategy;
-using System.Collections.Generic;
 using Actor.Stats;
 using Interface;
+using Skill.Strategy;
 using UnityEngine;
 
-namespace Actor.Skill
+namespace Skill
 {
     public abstract class ActiveSkillObject : SkillObject
     {

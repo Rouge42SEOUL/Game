@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Actor.Skill
+namespace Skill.Projectile
 {
     [Serializable]
     public struct ProjectileData

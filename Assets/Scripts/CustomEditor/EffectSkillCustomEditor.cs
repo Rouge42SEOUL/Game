@@ -1,4 +1,4 @@
-using Actor.Skill;
+using Skill;
 using UnityEditor;
 
 namespace CustomEditor

@@ -1,8 +1,6 @@
-using System;
-using Actor.Stats;
 using UnityEngine;
 
-namespace Actor.Skill
+namespace Skill
 {
     [CreateAssetMenu(fileName = "New Skill Database", menuName = "Scriptable Object/Skill/Database")]
     public class SkillDatabase : ScriptableObject

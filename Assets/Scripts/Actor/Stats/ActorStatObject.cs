@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using Actor.Skill;
 using Core;
 using Elemental;
+using Skill;
 using UnityEngine;
 
 namespace Actor.Stats

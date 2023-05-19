@@ -1,7 +1,7 @@
 using Interface;
 using UnityEngine;
 
-namespace Actor.Skill.Strategy
+namespace Skill.Strategy
 {
     public class AreaAttackStrategy : SkillStrategy
     {

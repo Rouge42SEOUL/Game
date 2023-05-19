@@ -1,11 +1,8 @@
 using System;
-using System.Collections.Generic;
-using Actor.Stats;
 using Interface;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-namespace Actor.Skill
+namespace Skill
 {
     [Serializable]
     public class SkillSlot

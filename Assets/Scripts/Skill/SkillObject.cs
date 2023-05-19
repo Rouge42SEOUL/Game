@@ -2,7 +2,7 @@ using Elemental;
 using Interface;
 using UnityEngine;
 
-namespace Actor.Skill
+namespace Skill
 {
     public abstract class SkillObject : ScriptableObject
     {
@@ -11,7 +11,7 @@ namespace Actor.Skill
         public ElementalType elementalType;
         public int level;
         
-        [SerializeField] protected Skill data;
+        [SerializeField] protected global::Skill.Skill data;
         protected bool isUnlocked = false;
         
         public int Id
@@ -25,7 +25,7 @@ namespace Actor.Skill
             set
             {
                 if (data == null)
-                    data = new Skill();
+                    data = new global::Skill.Skill();
                 data.id = value;
             }
         }

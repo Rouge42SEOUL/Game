@@ -3,7 +3,7 @@ using Interface;
 using UnityEngine;
 using UnityEngine.Pool;
 
-namespace Actor.Skill
+namespace Skill.Projectile
 {
     public partial class ProjectileLauncher
     {

@@ -1,7 +1,7 @@
 using Interface;
-using UnityEngine;
+using Skill.Projectile;
 
-namespace Actor.Skill.Strategy
+namespace Skill.Strategy
 {
     public class ProjectileAttackStrategy : SkillStrategy
     {

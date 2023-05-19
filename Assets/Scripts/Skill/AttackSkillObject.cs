@@ -1,11 +1,12 @@
+using Actor;
 using Actor.Stats;
-using Actor.Skill.Strategy;
 using Elemental;
 using Interface;
-using ObjectPool;
+using Skill.Projectile;
+using Skill.Strategy;
 using UnityEngine;
 
-namespace Actor.Skill
+namespace Skill
 {
     [CreateAssetMenu(fileName = "New Attack Skill", menuName = "Scriptable Object/Skill/Attack")]
     public class AttackSkillObject : ActiveSkillObject

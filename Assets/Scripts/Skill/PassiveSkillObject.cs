@@ -1,7 +1,6 @@
-using Actor.Stats;
 using UnityEngine;
 
-namespace Actor.Skill
+namespace Skill
 {
     [CreateAssetMenu(fileName = "New Passive Skill", menuName = "Scriptable Object/Skill/Passive")]
     public class PassiveSkillObject : SkillObject

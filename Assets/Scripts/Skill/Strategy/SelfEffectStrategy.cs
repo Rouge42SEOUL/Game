@@ -1,6 +1,6 @@
 using Interface;
 
-namespace Actor.Skill.Strategy
+namespace Skill.Strategy
 {
     public class SelfEffectStrategy : SkillStrategy
     {

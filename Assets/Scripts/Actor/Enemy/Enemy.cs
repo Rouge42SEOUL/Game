@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Actor.Skill;
 using Actor.Stats;
 using Interface;
 using StateMachine;

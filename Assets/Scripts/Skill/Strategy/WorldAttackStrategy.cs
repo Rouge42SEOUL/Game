@@ -1,10 +1,9 @@
 using Actor.Stats;
 using Interface;
 using ObjectPool;
-using Unity.VisualScripting;
 using UnityEngine;
 
-namespace Actor.Skill.Strategy
+namespace Skill.Strategy
 {
     public class WorldAttackStrategy : SkillStrategy
     {

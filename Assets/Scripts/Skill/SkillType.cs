@@ -1,4 +1,4 @@
-namespace Actor.Skill
+namespace Skill
 {
     public enum SkillType : int
     {
