@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Actor.Stats
 {
@@ -8,13 +9,17 @@ namespace Actor.Stats
     public class Effect
     {
         public EffectType type;
-        public bool isStackable;
+        
         public bool isPermanent;
-        public bool isRelease;
         public float duration;
+        
         public List<AttributeType> effectTo;
+        public bool isRelease;
+        public bool isMultiplication = false;
         public float effectValue;
-        public int overlappingCount;
+        
+        public bool isStackable;
+        public int stackCount;
 
         public int DisplayTime
         {
@@ -81,6 +86,14 @@ namespace Actor.Stats
                     break;
                 }
             }
+        }
+        
+        private float Add(float targetValue) => effectValue;
+        private float Multiply(float targetValue) => targetValue * effectValue;
+
+        public float GetValueToAdd(float targetValue)
+        {
+            return isMultiplication ? Multiply(targetValue) : Add(targetValue);
         }
     }
 }

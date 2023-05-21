@@ -5,7 +5,7 @@ namespace Interface
 {
     public interface IAffected
     {
-        void Affected(Effect effect, Func<float, float> getValueToAdd);
-        void Realeased(Effect effect);
+        void Affected(Effect effect);
+        void Released(Effect effect);
     }
 }

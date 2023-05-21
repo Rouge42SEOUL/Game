@@ -1,12 +1,11 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using Actor.Stats;
+using Core;
 using Interface;
 using StateMachine;
 using UnityEngine;
 using UnityEngine.Pool;
-using UnityEngine.Rendering;
+using Attribute = Actor.Stats.Attribute;
 
 namespace Actor.Enemy
 {
@@ -15,7 +14,7 @@ namespace Actor.Enemy
     {
         protected StateMachine<Enemy> stateMachine;
         public GameObject Target => _target;
-        public int Damage => (int)currentAttributes[AttributeType.Attack].value;
+        public int Damage => (int)_currentAttributes[AttributeType.Attack].value;
         public int spawnId;
         
         internal IObjectPool<Enemy> ManagedPool;
@@ -23,13 +22,37 @@ namespace Actor.Enemy
         internal Rigidbody2D Rigidbody2D;
         internal Animator EnemyAnim;
 
-        public void SetManagedPool(IObjectPool<Enemy> pool) => _SetManagedPool(pool);
+        public void SetManagedPool(IObjectPool<Enemy> pool)
+        {
+            ManagedPool = pool;
+        }
+        public override float GetAttributeValue(AttributeType type) => _currentAttributes[type].value;
+        public override void AddAttributeValue(AttributeType type, float value)
+        {
+            _currentAttributes[type].value += value;
+        }
+
+        public override void AddEffect(Effect effect)
+        {
+            // TODO: effect addition
+        }
+
+        public override void DeleteEffect(EffectType type)
+        {
+            // TODO: effect delete
+        }
+
+        protected override void Died()
+        {
+            stateMachine.ChangeState<EnemyDiedState>();
+        }
     }
     
     // Values or methods that other cannot use
     public partial class Enemy
     {
         private GameObject _target;
+        [SerializeField] private SerializableDictionary<AttributeType, Attribute> _currentAttributes = new();
         [SerializeField] private float _currentHealthPoint;
     }
     
@@ -39,6 +62,12 @@ namespace Actor.Enemy
         protected override void Awake()
         {
             base.Awake();
+            
+            _currentAttributes.Clear();
+            foreach (AttributeType type in Enum.GetValues(typeof(AttributeType)))
+            {
+                _currentAttributes[type] = new Attribute(type, 0);
+            }
             
             forwardVector = transform.forward;
             Rigidbody2D = GetComponent<Rigidbody2D>();
@@ -59,9 +88,9 @@ namespace Actor.Enemy
             Collider2D.enabled = true;
             stateMachine.ChangeState<EnemyIdleState>();
             
-            foreach (var att in currentAttributes)
+            foreach (AttributeType type in Enum.GetValues(typeof(AttributeType)))
             {
-                att.Value.value = stat.baseAttributes[att.Key].value;
+                _currentAttributes[type].value = stat.baseAttributes[type].value;
             }
             _currentHealthPoint = stat.baseHealthPoint;
         }
@@ -82,6 +111,19 @@ namespace Actor.Enemy
     // body of others
     public partial class Enemy
     {
+        public override void Affected(Effect effect)
+        {
+            AddEffect(effect);
+            // TODO: clac current attributes
+            // TODO: event call 
+        }
+
+        public override void Released(Effect effect)
+        {
+            DeleteEffect(effect.type);
+            // TODO: clac current attributes
+        }
+
         public override void Damaged(DamageData data)
         {
             Debug.Log( "Enemy health Lost -> " + data.Damage);
@@ -90,16 +132,6 @@ namespace Actor.Enemy
             
             Rigidbody2D.velocity = Vector2.zero;
             Rigidbody2D.AddForce(data.KbForce, ForceMode2D.Impulse);
-        }
-
-        protected override void Died()
-        {
-            stateMachine.ChangeState<EnemyDiedState>();
-        }
-
-        private void _SetManagedPool(IObjectPool<Enemy> pool)
-        {
-            ManagedPool = pool;
         }
     }
 }

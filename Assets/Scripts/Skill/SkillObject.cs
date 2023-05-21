@@ -11,7 +11,7 @@ namespace Skill
         public ElementalType elementalType;
         public int level;
         
-        [SerializeField] protected global::Skill.Skill data;
+        [SerializeField] protected Skill data;
         protected bool isUnlocked = false;
         
         public int Id

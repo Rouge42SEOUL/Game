@@ -10,7 +10,6 @@ namespace Skill
         [SerializeField] protected TargetType targetType;
         [SerializeField] protected bool hasDotDamage = false;
         [SerializeField] protected bool hasEffect = false;
-        [SerializeField] protected bool isMultiplication = false;
         
         [SerializeField] protected DamageData dotDamage;
         [SerializeField] protected float dotDuration;
@@ -55,8 +54,5 @@ namespace Skill
         {
             return null;
         }
-
-        protected float Add(float targetValue) => effect.effectValue;
-        protected float Multiply(float targetValue) => targetValue * effect.effectValue;
     }
 }
