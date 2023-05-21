@@ -121,6 +121,7 @@ namespace Actor.Player
             ElementalBalancer.ApplyElementalEffect(data.ElementalType, ref effect);
             if (effect != null)
                 Affected(effect);
+            Debug.Log("Player HP: " + (stat.PercentHealPoint * 100) + "%");
         }
     }
 
