@@ -17,6 +17,7 @@ namespace Actor.Player
         internal Animator PlayerAnim;
         internal Rigidbody2D PlayerRigid;
 
+        public float PercentHealPoint => stat.PercentHealPoint;
         public override float GetAttributeValue(AttributeType type) => stat.currentAttributes[type].value;
         public override void AddAttributeValue(AttributeType type, float value) => stat.AddAttribute(type, value);
         public override void AddEffect(Effect effect) => stat.AddEffect(effect);
