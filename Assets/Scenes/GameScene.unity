@@ -657,6 +657,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1012625604}
     m_Modifications:
+    - target: {fileID: 1407580624864794535, guid: f7cd8a681e5cfd14db908ba8f32c96b5, type: 3}
+      propertyPath: slotType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1407580624864794535, guid: f7cd8a681e5cfd14db908ba8f32c96b5, type: 3}
+      propertyPath: toolTipText
+      value: 
+      objectReference: {fileID: 2019798067273953072}
+    - target: {fileID: 1407580624864794535, guid: f7cd8a681e5cfd14db908ba8f32c96b5, type: 3}
+      propertyPath: toolTipPanel
+      value: 
+      objectReference: {fileID: 2065319148}
     - target: {fileID: 5577211387132582986, guid: f7cd8a681e5cfd14db908ba8f32c96b5, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -763,6 +775,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 900949953}
     m_Modifications:
+    - target: {fileID: 2053720444554638709, guid: a40c0ae6cac99384da1b86a2a74c440a, type: 3}
+      propertyPath: itemIndex
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 2053720444554638709, guid: a40c0ae6cac99384da1b86a2a74c440a, type: 3}
+      propertyPath: toolTipText
+      value: 
+      objectReference: {fileID: 2019798067273953072}
+    - target: {fileID: 2053720444554638709, guid: a40c0ae6cac99384da1b86a2a74c440a, type: 3}
+      propertyPath: toolTipPanel
+      value: 
+      objectReference: {fileID: 2065319148}
     - target: {fileID: 4866457312429227536, guid: a40c0ae6cac99384da1b86a2a74c440a, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -860,6 +884,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 900949953}
     m_Modifications:
+    - target: {fileID: 2053720444554638709, guid: a40c0ae6cac99384da1b86a2a74c440a, type: 3}
+      propertyPath: itemIndex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2053720444554638709, guid: a40c0ae6cac99384da1b86a2a74c440a, type: 3}
+      propertyPath: toolTipText
+      value: 
+      objectReference: {fileID: 2019798067273953072}
+    - target: {fileID: 2053720444554638709, guid: a40c0ae6cac99384da1b86a2a74c440a, type: 3}
+      propertyPath: toolTipPanel
+      value: 
+      objectReference: {fileID: 2065319148}
     - target: {fileID: 4866457312429227536, guid: a40c0ae6cac99384da1b86a2a74c440a, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1017,6 +1053,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1012625604}
     m_Modifications:
+    - target: {fileID: 1407580624864794535, guid: f7cd8a681e5cfd14db908ba8f32c96b5, type: 3}
+      propertyPath: slotType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1407580624864794535, guid: f7cd8a681e5cfd14db908ba8f32c96b5, type: 3}
+      propertyPath: toolTipText
+      value: 
+      objectReference: {fileID: 2019798067273953072}
+    - target: {fileID: 1407580624864794535, guid: f7cd8a681e5cfd14db908ba8f32c96b5, type: 3}
+      propertyPath: toolTipPanel
+      value: 
+      objectReference: {fileID: 2065319148}
     - target: {fileID: 5577211387132582986, guid: f7cd8a681e5cfd14db908ba8f32c96b5, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1107,7 +1155,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5577211387370493775, guid: f7cd8a681e5cfd14db908ba8f32c96b5, type: 3}
       propertyPath: m_text
-      value: Necklace
+      value: Boots
       objectReference: {fileID: 0}
     - target: {fileID: 5577211387975731805, guid: f7cd8a681e5cfd14db908ba8f32c96b5, type: 3}
       propertyPath: m_Name
@@ -1127,6 +1175,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 900949953}
     m_Modifications:
+    - target: {fileID: 2053720444554638709, guid: a40c0ae6cac99384da1b86a2a74c440a, type: 3}
+      propertyPath: itemIndex
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2053720444554638709, guid: a40c0ae6cac99384da1b86a2a74c440a, type: 3}
+      propertyPath: toolTipText
+      value: 
+      objectReference: {fileID: 2019798067273953072}
+    - target: {fileID: 2053720444554638709, guid: a40c0ae6cac99384da1b86a2a74c440a, type: 3}
+      propertyPath: toolTipPanel
+      value: 
+      objectReference: {fileID: 2065319148}
     - target: {fileID: 4866457312429227536, guid: a40c0ae6cac99384da1b86a2a74c440a, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1791,6 +1851,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 900949953}
     m_Modifications:
+    - target: {fileID: 2053720444554638709, guid: a40c0ae6cac99384da1b86a2a74c440a, type: 3}
+      propertyPath: itemIndex
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2053720444554638709, guid: a40c0ae6cac99384da1b86a2a74c440a, type: 3}
+      propertyPath: toolTipText
+      value: 
+      objectReference: {fileID: 2019798067273953072}
+    - target: {fileID: 2053720444554638709, guid: a40c0ae6cac99384da1b86a2a74c440a, type: 3}
+      propertyPath: toolTipPanel
+      value: 
+      objectReference: {fileID: 2065319148}
     - target: {fileID: 4866457312429227536, guid: a40c0ae6cac99384da1b86a2a74c440a, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1888,6 +1960,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1012625604}
     m_Modifications:
+    - target: {fileID: 1407580624864794535, guid: f7cd8a681e5cfd14db908ba8f32c96b5, type: 3}
+      propertyPath: slotType
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1407580624864794535, guid: f7cd8a681e5cfd14db908ba8f32c96b5, type: 3}
+      propertyPath: toolTipText
+      value: 
+      objectReference: {fileID: 2019798067273953072}
+    - target: {fileID: 1407580624864794535, guid: f7cd8a681e5cfd14db908ba8f32c96b5, type: 3}
+      propertyPath: toolTipPanel
+      value: 
+      objectReference: {fileID: 2065319148}
     - target: {fileID: 5577211387132582986, guid: f7cd8a681e5cfd14db908ba8f32c96b5, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2126,17 +2210,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 836394877}
   m_CullTransparentMesh: 1
---- !u!114 &857047966 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4172349023960827914, guid: d88eeebb4d169fc41b4660b4c21d230c, type: 3}
-  m_PrefabInstance: {fileID: 2019798067273953071}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &863788777
 GameObject:
   m_ObjectHideFlags: 0
@@ -2792,7 +2865,7 @@ PrefabInstance:
     - target: {fileID: 1407580624864794535, guid: f7cd8a681e5cfd14db908ba8f32c96b5, type: 3}
       propertyPath: toolTipText
       value: 
-      objectReference: {fileID: 857047966}
+      objectReference: {fileID: 2019798067273953072}
     - target: {fileID: 1407580624864794535, guid: f7cd8a681e5cfd14db908ba8f32c96b5, type: 3}
       propertyPath: toolTipPanel
       value: 
@@ -3385,6 +3458,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1012625604}
     m_Modifications:
+    - target: {fileID: 1407580624864794535, guid: f7cd8a681e5cfd14db908ba8f32c96b5, type: 3}
+      propertyPath: slotType
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1407580624864794535, guid: f7cd8a681e5cfd14db908ba8f32c96b5, type: 3}
+      propertyPath: toolTipText
+      value: 
+      objectReference: {fileID: 2019798067273953072}
+    - target: {fileID: 1407580624864794535, guid: f7cd8a681e5cfd14db908ba8f32c96b5, type: 3}
+      propertyPath: toolTipPanel
+      value: 
+      objectReference: {fileID: 2065319148}
     - target: {fileID: 5577211387132582986, guid: f7cd8a681e5cfd14db908ba8f32c96b5, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -3583,6 +3668,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 900949953}
     m_Modifications:
+    - target: {fileID: 2053720444554638709, guid: a40c0ae6cac99384da1b86a2a74c440a, type: 3}
+      propertyPath: itemIndex
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2053720444554638709, guid: a40c0ae6cac99384da1b86a2a74c440a, type: 3}
+      propertyPath: toolTipText
+      value: 
+      objectReference: {fileID: 2019798067273953072}
+    - target: {fileID: 2053720444554638709, guid: a40c0ae6cac99384da1b86a2a74c440a, type: 3}
+      propertyPath: toolTipPanel
+      value: 
+      objectReference: {fileID: 2065319148}
     - target: {fileID: 4866457312429227536, guid: a40c0ae6cac99384da1b86a2a74c440a, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -3680,6 +3777,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 900949953}
     m_Modifications:
+    - target: {fileID: 2053720444554638709, guid: a40c0ae6cac99384da1b86a2a74c440a, type: 3}
+      propertyPath: itemIndex
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 2053720444554638709, guid: a40c0ae6cac99384da1b86a2a74c440a, type: 3}
+      propertyPath: toolTipText
+      value: 
+      objectReference: {fileID: 2019798067273953072}
+    - target: {fileID: 2053720444554638709, guid: a40c0ae6cac99384da1b86a2a74c440a, type: 3}
+      propertyPath: toolTipPanel
+      value: 
+      objectReference: {fileID: 2065319148}
     - target: {fileID: 4866457312429227536, guid: a40c0ae6cac99384da1b86a2a74c440a, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -3777,6 +3886,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 900949953}
     m_Modifications:
+    - target: {fileID: 2053720444554638709, guid: a40c0ae6cac99384da1b86a2a74c440a, type: 3}
+      propertyPath: itemIndex
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 2053720444554638709, guid: a40c0ae6cac99384da1b86a2a74c440a, type: 3}
+      propertyPath: toolTipText
+      value: 
+      objectReference: {fileID: 2019798067273953072}
+    - target: {fileID: 2053720444554638709, guid: a40c0ae6cac99384da1b86a2a74c440a, type: 3}
+      propertyPath: toolTipPanel
+      value: 
+      objectReference: {fileID: 2065319148}
     - target: {fileID: 4866457312429227536, guid: a40c0ae6cac99384da1b86a2a74c440a, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -4537,6 +4658,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 900949953}
     m_Modifications:
+    - target: {fileID: 2053720444554638709, guid: a40c0ae6cac99384da1b86a2a74c440a, type: 3}
+      propertyPath: itemIndex
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2053720444554638709, guid: a40c0ae6cac99384da1b86a2a74c440a, type: 3}
+      propertyPath: toolTipText
+      value: 
+      objectReference: {fileID: 2019798067273953072}
+    - target: {fileID: 2053720444554638709, guid: a40c0ae6cac99384da1b86a2a74c440a, type: 3}
+      propertyPath: toolTipPanel
+      value: 
+      objectReference: {fileID: 2065319148}
     - target: {fileID: 4866457312429227536, guid: a40c0ae6cac99384da1b86a2a74c440a, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -4634,6 +4767,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 900949953}
     m_Modifications:
+    - target: {fileID: 2053720444554638709, guid: a40c0ae6cac99384da1b86a2a74c440a, type: 3}
+      propertyPath: itemIndex
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2053720444554638709, guid: a40c0ae6cac99384da1b86a2a74c440a, type: 3}
+      propertyPath: toolTipText
+      value: 
+      objectReference: {fileID: 2019798067273953072}
+    - target: {fileID: 2053720444554638709, guid: a40c0ae6cac99384da1b86a2a74c440a, type: 3}
+      propertyPath: toolTipPanel
+      value: 
+      objectReference: {fileID: 2065319148}
     - target: {fileID: 4866457312429227536, guid: a40c0ae6cac99384da1b86a2a74c440a, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -4759,6 +4904,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 900949953}
     m_Modifications:
+    - target: {fileID: 2053720444554638709, guid: a40c0ae6cac99384da1b86a2a74c440a, type: 3}
+      propertyPath: itemIndex
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2053720444554638709, guid: a40c0ae6cac99384da1b86a2a74c440a, type: 3}
+      propertyPath: toolTipText
+      value: 
+      objectReference: {fileID: 2019798067273953072}
+    - target: {fileID: 2053720444554638709, guid: a40c0ae6cac99384da1b86a2a74c440a, type: 3}
+      propertyPath: toolTipPanel
+      value: 
+      objectReference: {fileID: 2065319148}
     - target: {fileID: 4866457312429227536, guid: a40c0ae6cac99384da1b86a2a74c440a, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -5156,6 +5313,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 900949953}
     m_Modifications:
+    - target: {fileID: 2053720444554638709, guid: a40c0ae6cac99384da1b86a2a74c440a, type: 3}
+      propertyPath: itemIndex
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2053720444554638709, guid: a40c0ae6cac99384da1b86a2a74c440a, type: 3}
+      propertyPath: toolTipText
+      value: 
+      objectReference: {fileID: 2019798067273953072}
+    - target: {fileID: 2053720444554638709, guid: a40c0ae6cac99384da1b86a2a74c440a, type: 3}
+      propertyPath: toolTipPanel
+      value: 
+      objectReference: {fileID: 2065319148}
     - target: {fileID: 4866457312429227536, guid: a40c0ae6cac99384da1b86a2a74c440a, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -5433,6 +5602,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 900949953}
     m_Modifications:
+    - target: {fileID: 2053720444554638709, guid: a40c0ae6cac99384da1b86a2a74c440a, type: 3}
+      propertyPath: itemIndex
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2053720444554638709, guid: a40c0ae6cac99384da1b86a2a74c440a, type: 3}
+      propertyPath: toolTipText
+      value: 
+      objectReference: {fileID: 2019798067273953072}
+    - target: {fileID: 2053720444554638709, guid: a40c0ae6cac99384da1b86a2a74c440a, type: 3}
+      propertyPath: toolTipPanel
+      value: 
+      objectReference: {fileID: 2065319148}
     - target: {fileID: 4866457312429227536, guid: a40c0ae6cac99384da1b86a2a74c440a, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -5662,6 +5843,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1012625604}
     m_Modifications:
+    - target: {fileID: 1407580624864794535, guid: f7cd8a681e5cfd14db908ba8f32c96b5, type: 3}
+      propertyPath: slotType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1407580624864794535, guid: f7cd8a681e5cfd14db908ba8f32c96b5, type: 3}
+      propertyPath: toolTipText
+      value: 
+      objectReference: {fileID: 2019798067273953072}
+    - target: {fileID: 1407580624864794535, guid: f7cd8a681e5cfd14db908ba8f32c96b5, type: 3}
+      propertyPath: toolTipPanel
+      value: 
+      objectReference: {fileID: 2065319148}
     - target: {fileID: 5577211387132582986, guid: f7cd8a681e5cfd14db908ba8f32c96b5, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -6075,6 +6268,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 900949953}
     m_Modifications:
+    - target: {fileID: 2053720444554638709, guid: a40c0ae6cac99384da1b86a2a74c440a, type: 3}
+      propertyPath: itemIndex
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2053720444554638709, guid: a40c0ae6cac99384da1b86a2a74c440a, type: 3}
+      propertyPath: toolTipText
+      value: 
+      objectReference: {fileID: 2019798067273953072}
+    - target: {fileID: 2053720444554638709, guid: a40c0ae6cac99384da1b86a2a74c440a, type: 3}
+      propertyPath: toolTipPanel
+      value: 
+      objectReference: {fileID: 2065319148}
     - target: {fileID: 4866457312429227536, guid: a40c0ae6cac99384da1b86a2a74c440a, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -6177,6 +6382,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 900949953}
     m_Modifications:
+    - target: {fileID: 2053720444554638709, guid: a40c0ae6cac99384da1b86a2a74c440a, type: 3}
+      propertyPath: itemIndex
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2053720444554638709, guid: a40c0ae6cac99384da1b86a2a74c440a, type: 3}
+      propertyPath: toolTipText
+      value: 
+      objectReference: {fileID: 2019798067273953072}
+    - target: {fileID: 2053720444554638709, guid: a40c0ae6cac99384da1b86a2a74c440a, type: 3}
+      propertyPath: toolTipPanel
+      value: 
+      objectReference: {fileID: 2065319148}
     - target: {fileID: 4866457312429227536, guid: a40c0ae6cac99384da1b86a2a74c440a, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -6274,6 +6491,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 900949953}
     m_Modifications:
+    - target: {fileID: 2053720444554638709, guid: a40c0ae6cac99384da1b86a2a74c440a, type: 3}
+      propertyPath: itemIndex
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 2053720444554638709, guid: a40c0ae6cac99384da1b86a2a74c440a, type: 3}
+      propertyPath: toolTipText
+      value: 
+      objectReference: {fileID: 2019798067273953072}
+    - target: {fileID: 2053720444554638709, guid: a40c0ae6cac99384da1b86a2a74c440a, type: 3}
+      propertyPath: toolTipPanel
+      value: 
+      objectReference: {fileID: 2065319148}
     - target: {fileID: 4866457312429227536, guid: a40c0ae6cac99384da1b86a2a74c440a, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -6521,6 +6750,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d88eeebb4d169fc41b4660b4c21d230c, type: 3}
+--- !u!114 &2019798067273953072 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3070306116003897557, guid: d88eeebb4d169fc41b4660b4c21d230c, type: 3}
+  m_PrefabInstance: {fileID: 2019798067273953071}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &2051498390011969078
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6589,6 +6829,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 900949953}
     m_Modifications:
+    - target: {fileID: 2053720444554638709, guid: a40c0ae6cac99384da1b86a2a74c440a, type: 3}
+      propertyPath: toolTipText
+      value: 
+      objectReference: {fileID: 2019798067273953072}
+    - target: {fileID: 2053720444554638709, guid: a40c0ae6cac99384da1b86a2a74c440a, type: 3}
+      propertyPath: toolTipPanel
+      value: 
+      objectReference: {fileID: 2065319148}
     - target: {fileID: 4866457312429227536, guid: a40c0ae6cac99384da1b86a2a74c440a, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
