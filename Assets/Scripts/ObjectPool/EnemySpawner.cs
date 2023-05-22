@@ -1,11 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.Pool;
-
 using Actor.Enemy;
-using Interface;
+using Random = UnityEngine.Random;
 
 namespace ObjectPool
 {
@@ -13,8 +13,9 @@ namespace ObjectPool
     public partial class EnemySpawner
     {
         public static EnemySpawner Instance => _instance;
-
         public Dictionary<int, GameObject> GetAllEnemies() => _activeEnemies;
+
+        public Action<int> OnClearBattle;
     }
     
     // Values or methods that other cannot use
@@ -34,6 +35,7 @@ namespace ObjectPool
         [Description("Total spawn count in this stage")]
         [SerializeField] private int maxCount = 50;
         private int _currentCount;
+        private int _killedCount;
     }
     
     // body of MonoBehaviour
@@ -62,6 +64,7 @@ namespace ObjectPool
         void Start()
         {
             _currentCount = 0;
+            _killedCount = 0;
             
             // TODO : Change method of spawn by stored data
             StartCoroutine(_SpawnEnemy());
@@ -101,6 +104,9 @@ namespace ObjectPool
         private void DeActivateEnemy(Enemy enemy)
         {
             _activeEnemies.Remove(enemy.spawnId);
+            _killedCount++;
+            if (_killedCount == maxCount)
+                OnClearBattle.Invoke(_killedCount);
             enemy.gameObject.SetActive(false);
         }
 
