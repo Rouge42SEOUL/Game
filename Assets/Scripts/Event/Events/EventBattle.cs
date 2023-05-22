@@ -9,13 +9,12 @@ public class EventBattle :  RougeEvent.Event
 
     public override void BuildUI()
     {
-        Battle();        
+        Battle();
     }
 
-    private void Battle()
-    {
-        SceneManager sceneManager = gameObject.AddComponent<SceneManager>();
-        sceneManager.StartBattle();
-    }
+    private void Battle() 
+	{
+		SceneManager.StartBattle();
+	}
 }
 

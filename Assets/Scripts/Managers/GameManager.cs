@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using GameScene;
 using Newtonsoft.Json;
 using UnityEngine;
 
@@ -35,20 +36,19 @@ public partial class GameManager // public
     public InfoToJson InfoToJson;
     [SerializeField] private int firstGold;
     [SerializeField] private PlayerPawn playerPawn;
-    [SerializeField] private GameObject eventUI;
-    [SerializeField] private string jsonFileName = "/test.json";
+    [SerializeField] private string jsonFileName = "Json/test.json";
 	public int Gold
 	{
 	    get => InfoToJson.Gold;
         set
 	    {
             InfoToJson.Gold = value;
-			_goldUI.Gold = InfoToJson.Gold;
+			_uiManager.goldUI.Gold = InfoToJson.Gold;
 		}
 	}
 	public void MovePlayer(Node node)
     {
-        OptionUIControl();
+		_uiManager.OptionUIControl();
         _currentNode = node;
         playerPawn.MoveToNode(node);
         SaveCurrentInfo();
@@ -59,29 +59,15 @@ public partial class GameManager // public
 		InfoToJson.SaveInfo(_stageManager.Nodes, _currentNode);
 		JsonConverter.Save(InfoToJson, Application.dataPath + jsonFileName);
 	}
-	public void OptionUIControl()
-    {
-        if (_isDisplayUI == false)
-        {
-            eventUI.gameObject.SetActive(true);
-            _isDisplayUI = true;
-        }
-        else
-        {
-            eventUI.gameObject.SetActive(false);
-            _isDisplayUI = false;
-        }
-    }
 }
 
 public partial class GameManager : MonoBehaviour // private
 {
     private EventManager _eventManager;
     private StageManager _stageManager;
+	private UIManager _uiManager;
     private InfoToJson _infoToJson;
     private Node _currentNode;
-	private GoldUI _goldUI;
-    private bool _isDisplayUI;
     private bool _isFirstStart;
 
     private void Start()
@@ -89,7 +75,7 @@ public partial class GameManager : MonoBehaviour // private
 		// Init
         _eventManager = EventManager.Instance;
         _stageManager = StageManager.Instance;
-		_goldUI = FindObjectOfType<GoldUI>();
+		_uiManager = UIManager.Instance;
 		// Load Prev Data
         _isFirstStart = !JsonConverter.Load(out InfoToJson, Application.dataPath + jsonFileName);
         if (_isFirstStart)
@@ -102,7 +88,7 @@ public partial class GameManager : MonoBehaviour // private
             _stageManager.PrevInit(InfoToJson);
 			Gold = InfoToJson.Gold;
 		}
-		_goldUI.Gold = Gold;
+		_uiManager.goldUI.Gold = Gold;
         _currentNode = _stageManager.Nodes[InfoToJson.PlayerCurrentNode];
         playerPawn.MoveToNode(_currentNode);
         SaveCurrentInfo();

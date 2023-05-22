@@ -46,6 +46,15 @@ public class MerchantOption : MonoBehaviour
     {
         TextMeshProUGUI tMP = this.GetComponentInChildren<TextMeshProUGUI>();
 
-        tMP.text = "[ " + _item.gold + "G ] " + _item.itemName;
+		Equipment obj = Item as Equipment;
+		if (obj != null)
+		{
+			tMP.text = "[ " + _item.gold + "G ] " + _item.itemName + "(+" + obj.reinforcement + ")"; 
+		}
+		else
+		{
+			// eqipment가 아닐떄
+			tMP.text = "[ " + _item.gold + "G ] " + _item.itemName;
+		}
     }
 }
