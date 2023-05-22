@@ -13,7 +13,7 @@ namespace Actor.Stats
         #region Variables
         
         public SkillSlot[] skills = new SkillSlot[4];
-        public SkillObject passive;
+        public PassiveSkillObject passive;
         
         public SerializableDictionary<EffectType, Effect> effects = new();
         
