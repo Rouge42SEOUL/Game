@@ -1,4 +1,7 @@
+using System;
 using System.Collections.Generic;
+using Actor.Stats;
+using Interface;
 
 namespace Elemental
 {
@@ -34,6 +37,88 @@ namespace Elemental
             if (Info[type].StrongTo == target)
                 return 2f * damage;
             return damage;
+        }
+
+        public static void ApplyElementalEffect(ElementalType type, ref Effect effect)
+        {
+            switch (type)
+            {
+                case ElementalType.Fire:
+                {
+                    if (GetProbability(EffectType.Burns))
+                    {
+                        effect = new Effect(EffectType.Burns, 10, 5);
+                    }
+
+                    break;
+                }
+                case ElementalType.Ice:
+                {
+                    if (GetProbability(EffectType.Frostbite))
+                    {
+                        effect = new Effect(EffectType.Frostbite, 10, 5);
+                    }
+
+                    break;
+                }
+                case ElementalType.Ground:
+                {
+                    if (GetProbability(EffectType.Fracture))
+                    {
+                        effect = new Effect(EffectType.Fracture, 5);
+                    }
+
+                    break;
+                }
+                case ElementalType.Wind:
+                {
+                    if (GetProbability(EffectType.Bleeding))
+                    {
+                        effect = new Effect(EffectType.Bleeding, 5);
+                    }
+
+                    break;
+                }
+                case ElementalType.Holy:
+                {
+                    if (GetProbability(EffectType.Blind))
+                    {
+                        effect = new Effect(EffectType.Blind, 10, 5);
+                    }
+
+                    break;
+                }
+                case ElementalType.Dark:
+                {
+                    if (GetProbability(EffectType.Blind))
+                    {
+                        effect = new Effect(EffectType.Blind, 10, 5);
+                    }
+
+                    break;
+                }
+                case ElementalType.Normal:
+                case ElementalType.None:
+                default:
+                    break;
+            }
+        }
+
+        private static bool GetProbability(EffectType type)
+        {
+            var rand = new Unity.Mathematics.Random();
+            var randDouble = rand.NextDouble();
+            if (type is EffectType.Bleeding or EffectType.Fracture)
+            {
+                if (randDouble < 0.01f)
+                    return true;
+            }
+            else
+            {
+                if (randDouble < 0.1f)
+                    return true;
+            }
+            return false;
         }
     }
 }

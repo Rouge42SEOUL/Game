@@ -23,14 +23,14 @@ namespace Skill
                     if (_effect.isRelease)
                         //context.GameObject.GetComponent<IAffected>().EffectRelease(_effect);
                     //else
-                        context.GameObject.GetComponent<IAffected>().Affected(_effect, isMultiplication ? Multiply : Add);
+                        context.GameObject.GetComponent<IAffected>().Affected(_effect);
                     break;
                 }
                 case TargetType.Single:
                 {
                     var target = GetTarget();
                     if (hasDotDamage)
-                        target.GetComponent<IAffected>().Affected(_effect, isMultiplication ? Multiply : Add);
+                        target.GetComponent<IAffected>().Affected(_effect);
                     target.GetComponent<IDamageable>().DotDamaged(dotDamage, dotDuration);
                     break;
                 }

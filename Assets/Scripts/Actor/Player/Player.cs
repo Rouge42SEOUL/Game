@@ -1,25 +1,32 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Rendering;
 using Actor.Stats;
+using Core;
+using Elemental;
 using StateMachine;
 using Interface;
-using Unity.VisualScripting;
 
 namespace Actor.Player
 {
     // Values or methods that other can use
     public partial class Player
     {
-        protected StateMachine<Player> StateMachine;
-
         internal Vector2 Movement;
 
         internal Animator PlayerAnim;
         internal Rigidbody2D PlayerRigid;
 
-        public PlayerStatObject Stat => stat;
+        public float PercentHealPoint => stat.PercentHealPoint;
+        public override float GetAttributeValue(AttributeType type) => stat.currentAttributes[type].value;
+        public override void AddAttributeValue(AttributeType type, float value) => stat.AddAttribute(type, value);
+        public override void AddEffect(Effect effect) => stat.AddEffect(effect);
+        public override void DeleteEffect(EffectType type) => stat.DeleteEffect(type);
+
+        protected override void Died()
+        {
+            StateMachine.ChangeState<PlayerDiedState>();
+        }
     }
     
     // Values or methods that other cannot use
@@ -28,7 +35,16 @@ namespace Actor.Player
         private Vector2 _movement;
         private PlayerInput _playerInput;
         
-        [SerializeField] private SerializedDictionary<AttributeType, float> _itemEffectValues;
+        private StateMachine<Player> StateMachine;
+        [SerializeField] private SerializableDictionary<AttributeType, float> _itemEffectedValues;
+
+        private void UseSkill(int index)
+        {
+            if (stat.skills[index] == null)
+                return;
+            StateMachine.ChangeState<PlayerAttackState>();
+            stat.skills[index].UseSkill();
+        }
     }
     
     // body of MonoBehaviour
@@ -45,7 +61,10 @@ namespace Actor.Player
             StateMachine.AddState(new PlayerMoveState());
             StateMachine.AddState(new PlayerAttackState());
             StateMachine.AddState(new PlayerDiedState());
-            
+        }
+
+        protected void OnEnable()
+        {
             attackCollider.GetComponent<PlayerAttackCol>().OnAttackTrigger += stat.normalAttack.OnAttackTrigger;
             launcher.OnAttackTrigger += stat.skills[0].OnAttackTrigger;
         }
@@ -80,36 +99,30 @@ namespace Actor.Player
     // body of others
     public partial class Player
     {
+        public override void Affected(Effect effect)
+        {
+            foreach (var type in effect.effectTo)
+            {
+                _skillEffectedValues[type] += effect.GetValueToAdd(GetAttributeValue(type));
+            }
+            AddEffect(effect);
+            // TODO: set current attributes
+            // TODO: event call 
+        }
+
+        public override void Released(Effect effect)
+        {
+            throw new NotImplementedException();
+        }
+        
         public override void Damaged(DamageData data)
         {
-            stat.currentHealthPoint -= data.Damage;
-        }
-
-        protected override void Died()
-        {
-            StateMachine.ChangeState<PlayerDiedState>();
-        }
-
-        private void OnEquipItem()
-        {
-            foreach (AttributeType type in Enum.GetValues(typeof(AttributeType)))
-            {
-                AddAttributeValue(type, -(_itemEffectValues[type]));
-            }
-
-            // calculate stats effect
-            foreach (AttributeType type in Enum.GetValues(typeof(AttributeType)))
-            {
-                AddAttributeValue(type, _itemEffectValues[type]);
-            }
-        }
-
-        private void UseSkill(int index)
-        {
-            if (stat.skills[index] == null)
-                return;
-            StateMachine.ChangeState<PlayerAttackState>();
-            stat.skills[index].UseSkill();
+            stat.currentHealthPoint -= ElementalBalancer.ApplyBalance(data.ElementalType, stat.elementalType, data.Damage);
+            Effect effect = null;
+            ElementalBalancer.ApplyElementalEffect(data.ElementalType, ref effect);
+            if (effect != null)
+                Affected(effect);
+            Debug.Log("Player HP: " + (stat.PercentHealPoint * 100) + "%");
         }
     }
 
