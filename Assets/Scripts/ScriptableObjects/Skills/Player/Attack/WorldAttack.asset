@@ -12,22 +12,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91a3aec108cc4ea09b53199416e671ff, type: 3}
   m_Name: WorldAttack
   m_EditorClassIdentifier: 
-  type: 2
+  type: 5
   elementalType: 0
+  level: 0
   data:
     id: -1
     name: World Attack
     description: 
   targetType: 4
-  isDotEffect: 0
-  isMultiplication: 0
-  range: 0
-  duration: 0
+  hasDotDamage: 0
+  hasEffect: 0
   dotDamage:
     Damage: 0
     KbForce: {x: 0, y: 0, z: 0}
-  effectTo: 0
-  effectValue: 0
+    ElementalType: 0
+  dotDuration: 0
+  effect:
+    type: 0
+    isPermanent: 0
+    duration: 0
+    effectTo: 
+    isRelease: 0
+    isMultiplication: 0
+    effectValue: 0
+    isStackable: 0
+    stackCount: 0
+  coolTime: 0
+  activeSpeed: 0
+  range: 0
+  changeValueE: 0
+  changeValueC: 0
+  changeValueA: 0
+  changeValueD: 0
   _damage:
     Damage: 10
     KbForce: {x: 0, y: 0, z: 0}
+    ElementalType: 0
+  _projectile:
+    sprite: {fileID: 0}
+    radius: 0
+    speed: 0

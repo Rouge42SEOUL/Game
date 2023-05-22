@@ -10,7 +10,7 @@ namespace Actor.Enemy
     public class EnemyMoveState : State<Enemy>
     {
         private Transform _playerPos;
-        private float _speed => _context.currentAttributes[AttributeType.MoveSpeed].value;
+        private float _speed => _context.GetAttributeValue(AttributeType.MoveSpeed);
         
         private int _moveXid;
         private int _moveYid;

@@ -157,19 +157,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f755df9d694d16140baa783ff605c4ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentAttributes:
-    keys: 
-    values: []
-  skillEffectValues:
-    keys: 
-    values: []
   stat: {fileID: 11400000, guid: c6d6312bbd5c7884bb273850f3b45774, type: 2}
+  _skillEffectedValues:
+    keys: 
+    values: []
   attackCollider: {fileID: 1482730803}
   forwardVector: {x: 0, y: 0}
-  launcher: {fileID: 0}
-  _itemEffectValues:
-    m_Keys: 
-    m_Values: []
+  launcher: {fileID: 1040016780}
+  _itemEffectedValues:
+    keys: 
+    values: []
 --- !u!212 &372495656
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -211,7 +208,7 @@ SpriteRenderer:
   m_SortingLayerID: -1590234865
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 703195875, guid: 364c2532cbb57544a88505acf48e386f, type: 3}
+  m_Sprite: {fileID: 1618405762, guid: 9c8f4116cf44a2f49aa6639980549ce7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -343,7 +340,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 2}
+    oldSize: {x: 1.3333334, y: 1.3333334}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -17097,7 +17094,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2051534364
 Transform:
   m_ObjectHideFlags: 0

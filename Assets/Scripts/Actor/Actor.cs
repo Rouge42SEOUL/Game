@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using Actor.Stats;
 using Core;
+using Elemental;
 using Interface;
 using Skill.Projectile;
 using UnityEngine;
@@ -12,9 +13,8 @@ namespace Actor
     // Values or methods that other can use
     public abstract partial class Actor<T> where T : ActorStatObject
     {
-        public SerializableDictionary<AttributeType, Attribute> currentAttributes;
-        [SerializeField] public SerializableDictionary<AttributeType, float> skillEffectValues;
-        [SerializeField] public T stat;
+        [SerializeField] protected T stat;
+        [SerializeField] protected SerializableDictionary<AttributeType, float> _skillEffectedValues = new();
 
         protected bool isInitialized = false;
 
@@ -24,21 +24,10 @@ namespace Actor
         
         protected abstract void Died();
 
-        public float GetAttributeValue(AttributeType type) => currentAttributes[type].value;
-        
-        public void AddAttributeValue(AttributeType type, float value)
-        {
-            currentAttributes[type].value += value;
-        }
-        
-        public void AddEffect(Effect effect)
-        {
-            stat.effects.Add(effect);
-        }
-        public void Realeased(Effect effect)
-        {
-            throw new NotImplementedException();
-        }
+        public abstract float GetAttributeValue(AttributeType type);
+        public abstract void AddAttributeValue(AttributeType type, float value);
+        public abstract void AddEffect(Effect effect);
+        public abstract void DeleteEffect(EffectType type);
     }
     
     // Values or methods that other cannot use
@@ -60,14 +49,7 @@ namespace Actor
             attackCollider.gameObject.SetActive(false);
             launcher = transform.GetChild(1).GetComponent<ProjectileLauncher>();
             launcher.SetContext(gameObject);
-
-            currentAttributes.Clear();
-            foreach (AttributeType type in Enum.GetValues(typeof(AttributeType)))
-            {
-                currentAttributes[type] = new Attribute(type, stat.baseAttributes[type].value);
-            }
         }
-
     }
     
     // body of others
@@ -78,21 +60,10 @@ namespace Actor
         public Vector2 Forward => forwardVector;
         public Vector3 Position => transform.position;
         public ProjectileLauncher Launcher => launcher;
-        
-        public void Affected(Effect effect, Func<float, float> getValueToAdd)
-        {
-            for (int i = 0; i < effect.effectTo.Count;)
-            {
-                skillEffectValues[effect.effectTo[i]] = getValueToAdd(skillEffectValues[effect.effectTo[i]]);
-                i++;
-            }
-            stat.effects.Add(effect);
-            // TODO: set current attributes
-            // TODO: event call 
-        }
 
+        public abstract void Affected(Effect effect);
+        public abstract void Released(Effect effect);
         public abstract void Damaged(DamageData data);
-
         public void DotDamaged(DamageData damage, float duration)
         {
             StartCoroutine(AddDotDamage(damage, duration));

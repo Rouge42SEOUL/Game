@@ -6,6 +6,10 @@ namespace CustomEditor
     [UnityEditor.CustomEditor(typeof(EffectSkillObject))]
     public class EffectSkillCustomEditor : Editor
     {
+        private SerializedProperty _type;
+        private SerializedProperty _elementalType;
+        private SerializedProperty _data;
+        
         private SerializedProperty _targetType;
         private SerializedProperty _hasDotDamage;
         private SerializedProperty _isMultiplication;
@@ -18,6 +22,10 @@ namespace CustomEditor
 
         private void OnEnable()
         {
+            _type = serializedObject.FindProperty("type");
+            _elementalType = serializedObject.FindProperty("elementalType");
+            _data = serializedObject.FindProperty("data");
+            
             _targetType = serializedObject.FindProperty("targetType");
             _hasDotDamage = serializedObject.FindProperty("hasDotDamage");
             _isMultiplication = serializedObject.FindProperty("isMultiplication");
@@ -31,6 +39,10 @@ namespace CustomEditor
 
         public override void OnInspectorGUI()
         {
+            EditorGUILayout.PropertyField(_type);
+            EditorGUILayout.PropertyField(_elementalType);
+            EditorGUILayout.PropertyField(_data);
+            
             EditorGUILayout.PropertyField(_targetType);
             if (_targetType.enumValueIndex == (int)TargetType.Area)
             {
