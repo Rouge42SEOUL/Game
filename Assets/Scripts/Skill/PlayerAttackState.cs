@@ -21,6 +21,7 @@ namespace Actor.Player
 
         public override void OnExit()
         {
+            _context.attackCollider.SetActive(false);
             _context.PlayerAnim.SetBool(Animator.StringToHash("isAttacking"), false);
         }
 

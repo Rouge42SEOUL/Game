@@ -9,13 +9,15 @@ namespace Actor.Enemy
     {
         private Player.Player _p;
 
-        private float _beforeAttackDelay = 0.5f;
-        private float _afterAttackDelay = 1.0f;
+        private float _beforeAttackDelay = 1.0f;
+        private float _afterAttackDelay = 0.5f;
         private WaitForSeconds _waitBefore;
         private WaitForSeconds _waitAfter;
 
         private DamageData _damageData;
         private float _distanceToTarget;
+
+        private IEnumerator _coroutine;
 
         public override void OnInitialized()
         {
@@ -24,13 +26,16 @@ namespace Actor.Enemy
             _waitBefore = new WaitForSeconds(_beforeAttackDelay);
             _waitAfter = new WaitForSeconds(_afterAttackDelay);
             _damageData = new DamageData(_context.Damage);
+            _damageData.KbForce = Vector3.zero;
+            _coroutine = AttackPlayer();
         }
         
         public override void OnEnter()
         {
+            Debug.Log("Enemy Attack Started");
             _distanceToTarget = Vector3.Distance(_context.Target.transform.position, _context.transform.position);
             _context.EnemyAnim.SetBool(Animator.StringToHash("isAttacking"), true);
-            _context.StartCoroutine(AttackPlayer());
+            _context.StartCoroutine(_coroutine);
         }
         
         public override void Update()
@@ -53,18 +58,21 @@ namespace Actor.Enemy
 
         public override void OnExit() 
         {
-            _context.StopCoroutine(AttackPlayer());
+            _context.StopCoroutine(_coroutine);
             _context.EnemyAnim.SetBool(Animator.StringToHash("isAttacking"), false);
         }
 
         private IEnumerator AttackPlayer()
         {
-            yield return _waitBefore;
-            while (_distanceToTarget <= 1.0f)
+            while (true)
             {
-                _damageData.Damage = _context.Damage;
-                _p.Damaged(_damageData);
-                yield return _waitAfter;
+                yield return _waitBefore;
+                if (_distanceToTarget <= 1.0f)
+                {
+                    _damageData.Damage = _context.Damage;
+                    _p.Damaged(_damageData);
+                    yield return _waitAfter;
+                }
             }
         }
     }
