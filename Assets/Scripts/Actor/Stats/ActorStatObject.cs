@@ -1,19 +1,23 @@
 using System;
 using System.Collections.Generic;
-using Actor.Skill;
 using Core;
+using Elemental;
+using Skill;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Actor.Stats
 {
     public abstract class ActorStatObject : ScriptableObject
     {
-        protected bool isInitialized = false;
+        [SerializeField] protected bool isInitialized = false;
         
         public AttackSkillObject normalAttack;
         public SerializableDictionary<AttributeType, Attribute> baseAttributes = new();
-        public List<Effect> effects = new();
+        public ElementalType elementalType;
+        
+        public float baseHealthPoint;
+
+        protected abstract void InitElementalType();
 
         protected virtual void OnEnable()
         {
@@ -21,7 +25,6 @@ namespace Actor.Stats
                 return;
             isInitialized = true;
             
-            Debug.Log("init stat");
             baseAttributes.Clear();
             // TODO: set initial stats
             foreach (AttributeType type in Enum.GetValues(typeof(AttributeType)))
@@ -29,12 +32,18 @@ namespace Actor.Stats
                 baseAttributes[type] = new Attribute(type, 10);
             }
             CalculateSideAttributes();
-            effects.Clear();
+            InitElementalType();
         }
 
         protected void CalculateSideAttributes()
         {
-            // TODO: calculate 
+            baseAttributes[AttributeType.MoveSpeed] = baseAttributes[AttributeType.Speed];
+            baseAttributes[AttributeType.AttackSpeed] = baseAttributes[AttributeType.Speed];
+            baseAttributes[AttributeType.Accuracy] = baseAttributes[AttributeType.Health];
+            baseAttributes[AttributeType.Avoidance] = baseAttributes[AttributeType.Speed];
+            
+            baseHealthPoint = baseAttributes[AttributeType.Health].value * 100;
         }
     }
 }
+        

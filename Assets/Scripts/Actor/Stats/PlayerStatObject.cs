@@ -1,11 +1,13 @@
 using System;
 using System.Collections.Generic;
-using Actor.Skill;
+using Core;
+using Elemental;
+using Skill;
 using UnityEngine;
 
 namespace Actor.Stats
 {
-    [CreateAssetMenu(fileName = "New Player Data", menuName = "Stat/PlayerStat")]
+    [CreateAssetMenu(fileName = "New Player Data", menuName = "Scriptable Object/Stat/PlayerStat")]
     public class PlayerStatObject : ActorStatObject
     {
         #region Variables
@@ -13,28 +15,48 @@ namespace Actor.Stats
         public SkillSlot[] skills = new SkillSlot[4];
         public SkillObject passive;
         
+        public SerializableDictionary<EffectType, Effect> effects = new();
+        
         private int _level = 1;
         private int _exp = 0;
 
-        private int _baseHealthPoint;
-        private int _currentHealthPoint;
+        public SerializableDictionary<AttributeType, Attribute> currentAttributes = new();
+        public float currentHealthPoint;
 
         #endregion
 
         #region Properties
 
         public int Level => _level;
-        public float PercentHealPoint => (_baseHealthPoint > 0) ? (_currentHealthPoint / _baseHealthPoint) : 0;
+        public float PercentHealPoint => (baseHealthPoint > 0) ? (currentHealthPoint / baseHealthPoint) : 0;
 
         #endregion
 
         #region PrivateMethods
+        
+        protected override void InitElementalType()
+        {
+            elementalType = passive ? passive.elementalType : ElementalType.None;
+        }
+        
+        #endregion
 
+        #region MonoBehaviourMethods
         protected override void OnEnable()
         {
+            if (isInitialized)
+                return;
+            
             base.OnEnable();
-            // base health point initialize
+            effects.Clear();
+            currentAttributes.Clear();
+            foreach (AttributeType type in Enum.GetValues(typeof(AttributeType)))
+            {
+                currentAttributes[type] = new Attribute(type, baseAttributes[type].value);
+            }
+            
             skills[3].slotType = SkillType.Ultimate;
+            currentHealthPoint = baseHealthPoint;
         }
 
         #endregion
@@ -48,6 +70,21 @@ namespace Actor.Stats
             // add attribute base value by level
         }
 
+        public void AddAttribute(AttributeType type, float value)
+        {
+            currentAttributes[type].value += value;
+        }
+
+        public void AddEffect(Effect effect)
+        {
+            
+        }
+
+        public void DeleteEffect(EffectType type)
+        {
+            
+        }
+        
         #endregion
     }
 }

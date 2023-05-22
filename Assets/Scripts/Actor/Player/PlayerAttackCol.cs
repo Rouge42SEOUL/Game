@@ -9,7 +9,6 @@ namespace Actor.Player
     // Values or methods that other can use
     public partial class PlayerAttackCol
     {
-        public DamageData DmgData;
         public Action<GameObject> OnAttackTrigger;
     }
     
@@ -25,7 +24,6 @@ namespace Actor.Player
         private void Awake()
         {
             _player = transform.parent.GetComponent<Player>();
-            DmgData.Damage = 5;
         }
 
         private void OnTriggerEnter2D(Collider2D other)
