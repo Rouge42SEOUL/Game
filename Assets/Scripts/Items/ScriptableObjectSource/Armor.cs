@@ -1,5 +1,6 @@
 using Items.StatusData;
 using UnityEngine;
+using System.Text;
 
 namespace Items.ScriptableObjectSource
 {
@@ -7,6 +8,20 @@ namespace Items.ScriptableObjectSource
     public class Armor : Equipment
     {
         public ArmorStatus status;
+        
+        public override string ItemDescription()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            sb.AppendLine($"{itemName} (level {reinforcement})");
+            sb.AppendLine(description);
+            sb.AppendLine($"Defense: {status.defense}");
+            sb.AppendLine($"Power: {status.statBonuses.power}");
+            sb.AppendLine($"Health: {status.statBonuses.health}");
+            sb.AppendLine($"Speed: {status.statBonuses.speed}");
+
+            return sb.ToString();
+        }
         
         public override Equipment Equip(Slot slot)
         {

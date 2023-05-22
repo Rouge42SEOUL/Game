@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4479317aa24043c69ee9c7f095377847, type: 3}
+  m_Name: ring4
+  m_EditorClassIdentifier: 
+  itemName: 
+  description: 
+  icon: {fileID: 21300000, guid: 0f1303cfff6593747a97f9c964728649, type: 3}
+  gold: 0
+  id: 4
+  reinforcement: 0
+  status:
+    statBonuses:
+      power: 0
+      health: 0
+      speed: 0

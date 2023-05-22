@@ -8,6 +8,8 @@ namespace Items
 {
     public class Inventory : MonoBehaviour
     {
+        public static Inventory Instance { get; private set; }
+
         public List<GameObject> inventoryPanels;
         public List<GameObject> slotPanels;
         public EquipmentDatabase equipmentDatabase;
@@ -17,12 +19,23 @@ namespace Items
         
         private void Awake()
         {
+            if (Instance != null && Instance != this)
+            {
+                Destroy(this.gameObject);
+            } 
+            else 
+            {
+                Instance = this;
+            }
+
             InitBoxes initBoxes = new InitBoxes();
             inventoryItems = new List<Item>(new Equipment[16]);
             slot = gameObject.AddComponent<Slot>();
             initBoxes.InitInventoryBoxes(inventoryPanels);
             initBoxes.InitSlotBoxes(slotPanels);
             inventoryUI.SetActive(!inventoryUI.activeSelf);
+            UpdateSlot();
+            UpdateInventory();
         }
 
         public bool ReleasingWeaponItem0()
@@ -34,6 +47,10 @@ namespace Items
                 if (inventoryItems[idx] == null)
                 {
                     inventoryItems[idx] = prev;
+                    if (slot.slotWeapon[0].type == WeaponType.TwoHand)
+                    {
+                        slot.slotWeapon[1] = null;
+                    }
                     slot.slotWeapon[0] = null;
                     return true;
                 }
@@ -41,16 +58,30 @@ namespace Items
             Debug.Log("Inventory is full");
             return false;
         }
-        
+
+        public bool EquipItemEvent(int id)
+        {
+            if (inventoryItems[id] is Equipment equipment)
+            {
+                inventoryItems[id] = equipment.Equip(slot);
+                return true;
+            }
+
+            return false;
+        }
         public bool ReleasingWeaponItem1()
         {
             Equipment prev = slot.slotWeapon[1];
-            
+
             for (int idx = 0; idx < 16; idx++)
             {
                 if (inventoryItems[idx] == null)
                 {
                     inventoryItems[idx] = prev;
+                    if (slot.slotWeapon[1].type == WeaponType.TwoHand)
+                    {
+                        slot.slotWeapon[0] = null;
+                    }
                     slot.slotWeapon[1] = null;
                     return true;
                 }

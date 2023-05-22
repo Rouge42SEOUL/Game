@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: 
   description: 
-  icon: {fileID: 1013474685, guid: 364c2532cbb57544a88505acf48e386f, type: 3}
+  icon: {fileID: 21300000, guid: f66c057114b8725409847a8a8e83a75b, type: 3}
   gold: 0
-  id: 7
+  id: 1
   reinforcement: 0
   status:
     statBonuses:

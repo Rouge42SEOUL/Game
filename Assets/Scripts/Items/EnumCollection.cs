@@ -25,9 +25,13 @@ public enum StatType
 
 public enum SlotType
 {
-    Weapon,
+    Weapon0,
+    Weapon1,
     Armor,
-    Accessory
+    Necklace,
+    Ring0,
+    Ring1,
+    Inventory
 }
 
 public enum AccessoryType

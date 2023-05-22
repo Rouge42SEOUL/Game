@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: "\uBC29\uC5B4\uAD6C1"
   description: "\uD14C\uC2A4\uD2B8\uC6A9 \uAE30\uBCF8 \uBC29\uC5B4\uAD6C"
-  icon: {fileID: 21300000, guid: 17fa84703485d314b8d6b5216987d4b1, type: 3}
-  id: 1
-  statBonuses:
-  - statType: 0
-    value: 0
-  - statType: 1
-    value: 0
-  - statType: 2
-    value: 0
-  defense: 1
+  icon: {fileID: 21300000, guid: 28b103e16acf21b45afc90eb7afb7e42, type: 3}
+  gold: 0
+  id: 7
+  reinforcement: 0
+  status:
+    statBonuses:
+      power: 0
+      health: 0
+      speed: 0
+    defense: 0

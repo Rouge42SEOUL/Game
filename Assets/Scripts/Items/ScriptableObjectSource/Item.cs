@@ -8,6 +8,8 @@ namespace Items.ScriptableObjectSource
         public string description;
         public Sprite icon;
         public int gold;
+
+        public abstract string ItemDescription();
     }
 
     public abstract class Equipment : Item
