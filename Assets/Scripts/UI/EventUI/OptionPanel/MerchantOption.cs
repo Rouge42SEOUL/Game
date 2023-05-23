@@ -24,7 +24,7 @@ public class MerchantOption : MonoBehaviour
     {
         _gameManager = GameManager.Instance;
         _playerInventory = FindObjectOfType<Inventory>(); // 임시 Player가 정해지면 수정예정
-        GetComponent<Button>().onClick.AddListener(Buy);
+        // GetComponent<Button>().onClick.AddListener(Buy);
     }
 
     public void Buy()
@@ -44,17 +44,17 @@ public class MerchantOption : MonoBehaviour
 
     private void ChangeTextToEqupment()
     {
-        TextMeshProUGUI tMP = this.GetComponentInChildren<TextMeshProUGUI>();
-
-		Equipment obj = Item as Equipment;
-		if (obj != null)
-		{
-			tMP.text = "[ " + _item.gold + "G ] " + _item.itemName + "(+" + obj.reinforcement + ")"; 
-		}
-		else
-		{
-			// eqipment가 아닐떄
-			tMP.text = "[ " + _item.gold + "G ] " + _item.itemName;
-		}
+  //       TextMeshProUGUI tMP = this.GetComponentInChildren<TextMeshProUGUI>();
+  //
+		// Equipment obj = Item as Equipment;
+		// if (obj != null)
+		// {
+		// 	tMP.text = "[ " + _item.gold + "G ] " + _item.itemName + "(+" + obj.reinforcement + ")"; 
+		// }
+		// else
+		// {
+		// 	// eqipment가 아닐떄
+		// 	tMP.text = "[ " + _item.gold + "G ] " + _item.itemName;
+		// }
     }
 }
