@@ -73,15 +73,15 @@ namespace Managers.MainScene
                 Destroy(gameObject);
             }
 
-            selectedClassId = 0;
+            selectedClassId = -1;
             
             // TODO : get List from serialized data
             // TODO : establish a rule about class id
             ClassList = new List<CharClassData>();
-            ClassList.Add(new CharClassData(true,0, "Swordsman"));
-            ClassList.Add(new CharClassData(false,-1, "Unlocked"));
-            ClassList.Add(new CharClassData(false,-1, "Unlocked"));
-            ClassList.Add(new CharClassData(false,-1, "Unlocked"));
+            ClassList.Add(new CharClassData(true,0, "Warrior", "Illustration/Character/warrior"));
+            ClassList.Add(new CharClassData(false,-1, "Unlocked", "Illustration/Character/locked_1"));
+            ClassList.Add(new CharClassData(false,-1, "Unlocked", "Illustration/Character/locked_2"));
+            ClassList.Add(new CharClassData(false,-1, "Unlocked", "Illustration/Character/locked_3"));
         }
     }
     
