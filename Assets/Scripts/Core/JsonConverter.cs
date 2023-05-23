@@ -34,7 +34,7 @@ public class JsonConverter : MonoBehaviour
         }
     }
 
-    public void DeleteJson(string fileName)
+    public static void DeleteJson(string fileName)
     { 
         if (File.Exists(Application.dataPath + fileName))
             File.Delete(Application.dataPath + fileName);
