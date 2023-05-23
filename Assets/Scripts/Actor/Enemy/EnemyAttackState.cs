@@ -32,7 +32,6 @@ namespace Actor.Enemy
         
         public override void OnEnter()
         {
-            Debug.Log("Enemy Attack Started");
             _distanceToTarget = Vector3.Distance(_context.Target.transform.position, _context.transform.position);
             _context.EnemyAnim.SetBool(Animator.StringToHash("isAttacking"), true);
             _context.StartCoroutine(_coroutine);

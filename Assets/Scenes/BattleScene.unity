@@ -5031,6 +5031,7 @@ MonoBehaviour:
   atkText: {fileID: 1217743078}
   agiText: {fileID: 1495799357}
   defText: {fileID: 1421942890}
+  timerText: {fileID: 2059587305}
 --- !u!1 &2024590327
 GameObject:
   m_ObjectHideFlags: 0
@@ -17962,8 +17963,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 2781783833759806822, guid: f8f27a0c6c890b04eb1e2fae970ff48d, type: 3}
   spawnDuration: 1
-  poolMax: 1
-  maxCount: 1
+  poolMax: 20
+  maxCount: 40
 --- !u!1 &2059587303
 GameObject:
   m_ObjectHideFlags: 0
