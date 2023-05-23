@@ -1,12 +1,30 @@
 using Items.StatusData;
 using UnityEngine;
+using System.Text;
 
 namespace Items.ScriptableObjectSource
 {
-    [CreateAssetMenu(fileName = "Weapon Data", menuName = "Inventory/Armor")]
+    [CreateAssetMenu(fileName = "Weapon Data", menuName = "Scriptable Object/Inventory/Armor")]
     public class Armor : Equipment
     {
         public ArmorStatus status;
+        
+        public override string ItemDescription()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            sb.AppendLine($"{itemName}");
+            sb.AppendLine($"(Level {reinforcement})");
+            sb.AppendLine();
+            sb.AppendLine($"Defense: {status.defense}");
+            sb.AppendLine($"Power: {status.statBonuses.power}");
+            sb.AppendLine($"Health: {status.statBonuses.health}");
+            sb.AppendLine($"Speed: {status.statBonuses.speed}");
+            sb.AppendLine();
+            sb.AppendLine($"Gold: {gold}");
+            
+            return sb.ToString();
+        }
         
         public override Equipment Equip(Slot slot)
         {

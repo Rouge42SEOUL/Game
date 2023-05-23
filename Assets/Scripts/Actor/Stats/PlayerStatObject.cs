@@ -13,12 +13,11 @@ namespace Actor.Stats
         #region Variables
         
         public SkillSlot[] skills = new SkillSlot[4];
-        public SkillObject passive;
+        public PassiveSkillObject passive;
         
         public SerializableDictionary<EffectType, Effect> effects = new();
         
         private int _level = 1;
-        private int _exp = 0;
 
         public SerializableDictionary<AttributeType, Attribute> currentAttributes = new();
         public float currentHealthPoint;
@@ -63,11 +62,21 @@ namespace Actor.Stats
         
         #region PublicMethods
 
-        public void AddExp(int value)
+        public void LevelUp()
         {
-            this._exp += value;
-            // if exp > max, level++ 
-            // add attribute base value by level
+            this._level++;
+            foreach (AttributeType type in Enum.GetValues(typeof(AttributeType)))
+            {
+                if (type == AttributeType.Speed)
+                    baseAttributes[type].value += 2;
+                else
+                    baseAttributes[type].value += 3;
+                if (passive.addTo == type)
+                    baseAttributes[type].value++;
+                if (passive.subTo == type)
+                    baseAttributes[type].value--;
+            }
+            CalculateSideAttributes();
         }
 
         public void AddAttribute(AttributeType type, float value)

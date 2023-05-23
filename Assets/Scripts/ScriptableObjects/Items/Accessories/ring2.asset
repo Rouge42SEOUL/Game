@@ -9,13 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd894a57327f435bb32812b7fa1ea03d, type: 3}
-  m_Name: ac1
+  m_Script: {fileID: 11500000, guid: 4479317aa24043c69ee9c7f095377847, type: 3}
+  m_Name: ring2
   m_EditorClassIdentifier: 
-  itemName: "\uC545\uC138\uC11C\uB9AC1"
+  itemName: MagicSliverRing
   description: 
-  icon: {fileID: 21300000, guid: 5430b5412bcac5b4986be0a875a5e978, type: 3}
-  id: 7
+  icon: {fileID: 21300000, guid: 8bcb07d9c2c4c484caf61c33f48e3dd8, type: 3}
+  gold: 0
+  id: 2
+  reinforcement: 0
   status:
     statBonuses:
       power: 3
