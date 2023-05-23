@@ -99,7 +99,11 @@ namespace Items.Tooltip
                 {
                     toolTipText.text = ring.ItemDescription();
                 }
-                else
+                else if (item is HealingPotion healingPotion)
+                {
+                    toolTipText.text = healingPotion.ItemDescription();
+                }
+                else 
                 {
                     toolTipText.text = "";
                 }
