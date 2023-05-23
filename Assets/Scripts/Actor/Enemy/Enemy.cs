@@ -129,12 +129,12 @@ namespace Actor.Enemy
 
         public override void Damaged(DamageData data)
         {
+            Rigidbody2D.velocity = Vector2.zero;
+            Rigidbody2D.AddForce(data.KbForce, ForceMode2D.Impulse);
+            
             Debug.Log( "Enemy health Lost -> " + data.Damage);
             _currentHealthPoint -= data.Damage;
             stateMachine.ChangeState<EnemyGetHitState>();
-            
-            Rigidbody2D.velocity = Vector2.zero;
-            Rigidbody2D.AddForce(data.KbForce, ForceMode2D.Impulse);
         }
     }
 }

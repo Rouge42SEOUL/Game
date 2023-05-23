@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using Interface;
 using StateMachine;
@@ -8,8 +7,8 @@ namespace Actor.Enemy
 {
     public class EnemyAttackState : State<Enemy>
     {
-        private float _beforeAttackDelay = 0.5f;
-        private float _afterAttackDelay = 1.0f;
+        private float _beforeAttackDelay = 1.0f;
+        private float _afterAttackDelay = 0.5f;
         private WaitForSeconds _waitBefore;
         private WaitForSeconds _waitAfter;
 
@@ -17,11 +16,16 @@ namespace Actor.Enemy
         private DamageData _damageData;
         private float _distanceToTarget;
 
+        private IEnumerator _coroutine;
+
         public override void OnInitialized()
         {
             // TODO : calculate attack time by attack speed;
             _waitBefore = new WaitForSeconds(_beforeAttackDelay);
             _waitAfter = new WaitForSeconds(_afterAttackDelay);
+            _damageData = new DamageData(_context.Damage);
+            _damageData.KbForce = Vector3.zero;
+            _coroutine = AttackPlayer();
 
             switch (_context.AttackType)
             {
@@ -39,7 +43,7 @@ namespace Actor.Enemy
         {
             _distanceToTarget = Vector3.Distance(_context.Target.transform.position, _context.transform.position);
             _context.EnemyAnim.SetBool(Animator.StringToHash("isAttacking"), true);
-            _context.StartCoroutine(AttackPlayer());
+            _context.StartCoroutine(_coroutine);
         }
         
         public override void Update()
@@ -61,18 +65,21 @@ namespace Actor.Enemy
 
         public override void OnExit() 
         {
-            _context.StopCoroutine(AttackPlayer());
+            _context.StopCoroutine(_coroutine);
             _context.EnemyAnim.SetBool(Animator.StringToHash("isAttacking"), false);
         }
 
         private IEnumerator AttackPlayer()
         {
-            yield return _waitBefore;
-            while (_distanceToTarget <= _context.AttackRange)
+            while (true)
             {
-                _damageData.Damage = _context.Damage;
-                _attackStrategy.Attack(_damageData);
-                yield return _waitAfter;
+                yield return _waitBefore;
+                if (_distanceToTarget <= _context.AttackRange)
+                {
+                    _damageData.Damage = _context.Damage;
+                    _attackStrategy.Attack(_damageData);
+                    yield return _waitAfter;
+                }
             }
         }
     }

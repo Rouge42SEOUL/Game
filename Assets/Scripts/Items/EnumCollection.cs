@@ -29,6 +29,19 @@ public enum SlotType
     Accessory
 }
 
+public enum AccessoryType
+{
+    Ring,
+    Necklace
+}
+
+public enum WeaponType
+{
+    OneHand,
+    TwoHand,
+    Shield
+}
+
 public enum AttributeTypes
 {
     Strike,

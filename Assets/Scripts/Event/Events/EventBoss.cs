@@ -15,6 +15,7 @@ public class EventBoss :  RougeEvent.Event
     public void Boss()
     {
         Debug.Log("보스");
+		JsonConverter.DeleteJson("/Json/test.json");
     }
 
 }
