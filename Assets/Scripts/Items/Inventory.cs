@@ -166,7 +166,7 @@ namespace Items
             }
         }
         
-        private void ToggleInventory()
+        public void ToggleInventory()
         {
             inventoryUI.SetActive(!inventoryUI.activeSelf);
         }
