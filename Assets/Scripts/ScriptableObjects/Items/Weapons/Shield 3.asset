@@ -9,17 +9,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd894a57327f435bb32812b7fa1ea03d, type: 3}
-  m_Name: necklace1
+  m_Script: {fileID: 11500000, guid: 4b8de0e8e2990634390ddfa26aa3c49d, type: 3}
+  m_Name: Shield 3
   m_EditorClassIdentifier: 
-  itemName: 
+  itemName: MillitiamanShield
   description: 
-  icon: {fileID: 21300000, guid: 4a59607811bc1f9459591856511467a5, type: 3}
+  icon: {fileID: 21300000, guid: cee802c4711b2cc4c9be089c2d913ba9, type: 3}
   gold: 0
-  id: 0
+  id: 29
   reinforcement: 0
+  type: 2
   status:
     statBonuses:
-      power: 1
-      health: 1
-      speed: 1
+      power: 0
+      health: 0
+      speed: 0
+    attackSpeed: 0
+    range: 0
+    damage: 0

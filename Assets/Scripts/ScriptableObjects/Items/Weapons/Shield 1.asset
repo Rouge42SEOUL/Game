@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b8de0e8e2990634390ddfa26aa3c49d, type: 3}
   m_Name: Shield 1
   m_EditorClassIdentifier: 
-  itemName: 
+  itemName: GladiatorShield
   description: 
   icon: {fileID: 21300000, guid: d1debd018f9877c408ca2c35857bb8c2, type: 3}
   gold: 0

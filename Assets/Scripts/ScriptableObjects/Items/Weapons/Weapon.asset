@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b8de0e8e2990634390ddfa26aa3c49d, type: 3}
   m_Name: Weapon
   m_EditorClassIdentifier: 
-  itemName: 
+  itemName: WarHammer
   description: 
   icon: {fileID: 21300000, guid: 643c42ee4c957c44abcac1152d4794f1, type: 3}
   gold: 0

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Items.ScriptableObjectSource
 {
-    [CreateAssetMenu(fileName = "Necklace Data", menuName = "Inventory/Necklace")]
+    [CreateAssetMenu(fileName = "Necklace Data", menuName = "Scriptable Object/Inventory/Necklace")]
     public class Necklace : Equipment
     {
         public NecklaceStatus status;
@@ -13,8 +13,9 @@ namespace Items.ScriptableObjectSource
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.AppendLine($"{itemName} (level {reinforcement})");
-            sb.AppendLine(description);
+            sb.AppendLine($"{itemName}");
+            sb.AppendLine($"(Level {reinforcement})");
+            sb.AppendLine();
             sb.AppendLine($"Power: {status.statBonuses.power}");
             sb.AppendLine($"Health: {status.statBonuses.health}");
             sb.AppendLine($"Speed: {status.statBonuses.speed}");

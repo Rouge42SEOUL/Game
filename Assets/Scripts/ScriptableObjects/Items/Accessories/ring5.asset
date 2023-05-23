@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4479317aa24043c69ee9c7f095377847, type: 3}
   m_Name: ring5
   m_EditorClassIdentifier: 
-  itemName: 
+  itemName: BronzeRing
   description: 
   icon: {fileID: 21300000, guid: e76b30749d6bac4489c3ccf1ccb2c8fc, type: 3}
   gold: 0

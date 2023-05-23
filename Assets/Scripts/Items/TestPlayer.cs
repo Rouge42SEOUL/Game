@@ -15,7 +15,8 @@ namespace Items
 
         void Start()
         {
-            for (int i = 0; i < 20; i++)
+            _inventory.AddItem(33);
+            for (int i = 0; i < 32; i++)
             {
                 if (i % 2 == 0)
                 {

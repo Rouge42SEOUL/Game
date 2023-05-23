@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b8de0e8e2990634390ddfa26aa3c49d, type: 3}
   m_Name: Shield
   m_EditorClassIdentifier: 
-  itemName: 
+  itemName: WoodenShield
   description: 
   icon: {fileID: 21300000, guid: 0c6de69acca756c409be4810a8510ac5, type: 3}
   gold: 0

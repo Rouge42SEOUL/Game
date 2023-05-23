@@ -1,10 +1,19 @@
 [System.Serializable]
 public struct StatBonusData
 {
-    public int power;
-    public int health;
-    public int speed;
+    public float power;
+    public float health;
+    public float speed;
 
+    public static StatBonusData operator *(StatBonusData data1, float factor)
+    {
+        return new StatBonusData
+        {
+            power = data1.power * factor,
+            health = data1.health * factor, 
+            speed = data1.speed * factor,
+        };
+    }
     public static StatBonusData operator +(StatBonusData data1, StatBonusData data2)
     { 
         return new StatBonusData

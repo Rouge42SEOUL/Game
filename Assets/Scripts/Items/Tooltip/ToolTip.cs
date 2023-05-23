@@ -42,7 +42,14 @@ namespace Items.Tooltip
             yield return new WaitForSeconds(0.8f);
 
             // Set the position of the tooltip panel to the mouse position
-            toolTipPanel.transform.position = Input.mousePosition + new Vector3(10, -10, 0);
+            if (itemIndex is >= 0 and < 4 || slotType == SlotType.Weapon0 || slotType == SlotType.Armor || slotType == SlotType.Weapon1)
+            {
+                toolTipPanel.transform.position = Input.mousePosition + new Vector3(-15, -55, 0);
+            }
+            else
+            {
+                toolTipPanel.transform.position = Input.mousePosition + new Vector3(15, 15, 0);
+            }
             toolTipPanel.SetActive(true);
 
             // Set the text of the tooltip

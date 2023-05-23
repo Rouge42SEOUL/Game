@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Items.ScriptableObjectSource
 {
-        [CreateAssetMenu(fileName = "Weapon Data", menuName = "Inventory/Weapon")]
+        [CreateAssetMenu(fileName = "Weapon Data", menuName = "Scriptable Object/Inventory/Weapon")]
         public class Weapon : Equipment
         {
             public WeaponType type;

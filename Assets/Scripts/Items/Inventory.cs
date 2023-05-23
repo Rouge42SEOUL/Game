@@ -3,6 +3,7 @@ using System.Linq;
 using UnityEngine;
 using Items.ScriptableObjectSource;
 using Items.init;
+using Unity.VisualScripting;
 
 namespace Items
 {
@@ -67,6 +68,10 @@ namespace Items
                 return true;
             }
 
+            // if (inventoryItems[id] is HealingPotion healingPotion)
+            // {
+            //     healingPotion.Use();
+            // }
             return false;
         }
         public bool ReleasingWeaponItem1()

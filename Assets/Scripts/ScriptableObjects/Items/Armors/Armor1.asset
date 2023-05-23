@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff830b4e38419b44d9774ffbda922fc8, type: 3}
   m_Name: Armor1
   m_EditorClassIdentifier: 
-  itemName: "\uBC29\uC5B4\uAD6C1"
-  description: "\uD14C\uC2A4\uD2B8\uC6A9 \uAE30\uBCF8 \uBC29\uC5B4\uAD6C"
+  itemName: BattleguardArmor
+  description: 
   icon: {fileID: 21300000, guid: 28b103e16acf21b45afc90eb7afb7e42, type: 3}
   gold: 0
   id: 7

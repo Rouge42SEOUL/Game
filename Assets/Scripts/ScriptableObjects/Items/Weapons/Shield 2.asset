@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b8de0e8e2990634390ddfa26aa3c49d, type: 3}
   m_Name: Shield 2
   m_EditorClassIdentifier: 
-  itemName: 
+  itemName: SteelTowerShield
   description: 
   icon: {fileID: 21300000, guid: fb6df7dc5ceebe744a0ea02ca322493c, type: 3}
   gold: 0
