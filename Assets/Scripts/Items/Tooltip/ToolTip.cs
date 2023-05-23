@@ -37,6 +37,20 @@ namespace Items.Tooltip
             toolTipPanel.SetActive(false);
         }
 
+        private void OnDisable()
+        {
+            if (_hoverCoroutine != null)
+            {
+                StopCoroutine(_hoverCoroutine);
+                _hoverCoroutine = null;
+            }
+
+            if (toolTipPanel.activeSelf)
+            {
+                toolTipPanel.SetActive(false);
+            }
+        }
+        
         private IEnumerator HoverCoroutine()
         {
             yield return new WaitForSeconds(0.8f);
