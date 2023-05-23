@@ -14,7 +14,10 @@ namespace Items.ScriptableObjectSource
 
             sb.AppendLine($"{itemName}");
             sb.AppendLine();
-            sb.AppendLine($"Restores {healingAmount} health points");
+            sb.AppendLine($"Restores {healingAmount}");
+            sb.AppendLine();
+            sb.AppendLine($"Gold: {gold}");
+            
             return sb.ToString();
         }
 

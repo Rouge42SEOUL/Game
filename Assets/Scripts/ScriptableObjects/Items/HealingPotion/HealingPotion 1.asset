@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d89a014e0594fdc8b5adea922a5f1b9, type: 3}
   m_Name: HealingPotion 1
   m_EditorClassIdentifier: 
+  id: 33
   itemName: PotionOfHealing
   description: 
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: b7d19ec039fa7b141bd165aa95496c75, type: 3}
   gold: 0
   healingAmount: 0
