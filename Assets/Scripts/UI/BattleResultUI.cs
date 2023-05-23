@@ -8,7 +8,7 @@ namespace UI
 {
     public class BattleResultUI : MonoBehaviour
     {
-        [SerializeField] GameObject[] _stars = new GameObject[3];
+        private GameObject[] _stars = new GameObject[3];
         [SerializeField] private GameObject _enemyCount;
         [SerializeField] private GameObject _elapsedTime;
         [SerializeField] private GameObject _earnedMoney;
