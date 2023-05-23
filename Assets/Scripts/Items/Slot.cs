@@ -7,10 +7,24 @@ namespace Items
 {
     public class Slot: MonoBehaviour
     {
+        public static Slot Instance { get; private set; }
+        
         public Weapon[] slotWeapon = new Weapon[2];
         public Armor slotArmor;
         public Necklace slotNecklace;
         public Ring[] slotRing = new Ring[2];
+
+        private void Awake()
+        {
+            if (Instance != null && Instance != this)
+            {
+                Destroy(this.gameObject);
+            }
+            else
+            {
+                Instance = this;
+            }
+        }
 
         public TotalStatus RequireTotalValue()
         {

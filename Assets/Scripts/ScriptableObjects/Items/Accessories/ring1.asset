@@ -9,15 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd894a57327f435bb32812b7fa1ea03d, type: 3}
-  m_Name: ac2
+  m_Script: {fileID: 11500000, guid: 4479317aa24043c69ee9c7f095377847, type: 3}
+  m_Name: ring1
   m_EditorClassIdentifier: 
-  itemName: "\uC545\uC138\uC11C\uB9AC2"
+  itemName: MagicGoldenRing
   description: 
-  icon: {fileID: 21300000, guid: 3458c119c69e9bc4f9647599c2901dee, type: 3}
-  id: 8
+  icon: {fileID: 21300000, guid: f66c057114b8725409847a8a8e83a75b, type: 3}
+  gold: 100
+  id: 1
+  reinforcement: 0
   status:
     statBonuses:
-      power: 0
-      health: 0
-      speed: 0
+      power: 2
+      health: 2
+      speed: 2

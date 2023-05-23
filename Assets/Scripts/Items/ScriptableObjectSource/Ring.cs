@@ -1,12 +1,28 @@
 using Items.StatusData;
 using UnityEngine;
+using System.Text;
 
 namespace Items.ScriptableObjectSource
 {
-    [CreateAssetMenu(fileName = "Ring Data", menuName = "Inventory/Ring")]
+    [CreateAssetMenu(fileName = "Ring Data", menuName = "Scriptable Object/Inventory/Ring")]
     public class Ring : Equipment
     {
         public RingStatus status;
+        
+        
+        public override string ItemDescription()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            sb.AppendLine($"{itemName}");
+            sb.AppendLine($"(Level {reinforcement})");
+            sb.AppendLine();
+            sb.AppendLine($"Power: {status.statBonuses.power}");
+            sb.AppendLine($"Health: {status.statBonuses.health}");
+            sb.AppendLine($"Speed: {status.statBonuses.speed}");
+
+            return sb.ToString();
+        }
         
         public override Equipment Equip(Slot slot)
         {

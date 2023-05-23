@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 5577211387132582983}
   - component: {fileID: 5577211387132582984}
   - component: {fileID: 5577211387132582985}
+  - component: {fileID: 7742938723670976698}
+  - component: {fileID: 1407580624864794535}
   m_Layer: 5
   m_Name: SlotBox
   m_TagString: SlotBoxes
@@ -62,7 +64,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.7058824}
+  m_Color: {r: 0.7294118, g: 0.6666667, b: 0.654902, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -92,6 +94,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemIconImage: {fileID: 0}
+--- !u!114 &7742938723670976698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5577211387132582987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d869363bf44949868d43e21ac824cc2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1407580624864794535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5577211387132582987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1872a087db4f4a29b9817b88ed6a4cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toolTipPanel: {fileID: 2019798069036985283, guid: d88eeebb4d169fc41b4660b4c21d230c, type: 3}
+  toolTipText: {fileID: 1260511100310133166, guid: 59f032f46cc2acb408f76814cf417213, type: 3}
+  slotType: 0
+  itemIndex: 0
 --- !u!1 &5577211387370493777
 GameObject:
   m_ObjectHideFlags: 0
@@ -287,7 +317,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 0.7490196, g: 0.6901961, b: 0.6784314, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
