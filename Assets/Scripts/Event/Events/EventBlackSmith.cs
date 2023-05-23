@@ -1,23 +1,21 @@
 using UnityEngine;
-public class EventBlackSmith :  RougeEvent.Event
+public class EventBlackSmith : RougeEvent.Event
 {
+    private BlackSmithUI _blackSmithUI;
     private void Awake()
     {
         Type = EventType.BlackSmith;
     }
 
+    private void Start()
+    {
+        _blackSmithUI = FindObjectOfType<BlackSmithUI>();
+    }
+
     public override void BuildUI()
     {
-        Debug.Log("대장장이");
-    }
-    
-    // 카드(버튼) 선택시 호출될 함수들 
-    public void Upgrade()
-    {
-        Debug.Log("강화");
-    }
-    public void Dismantle()
-    {
-        Debug.Log("추출");
+        _blackSmithUI.DisplayUI();
+        _blackSmithUI.OptionRandomSetting();
+        _blackSmithUI.transform.localPosition = Vector3.zero;
     }
 }

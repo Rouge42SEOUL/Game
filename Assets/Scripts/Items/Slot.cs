@@ -1,36 +1,50 @@
+using System.Collections.Generic;
 using Items.StatusData;
 using UnityEngine;
+using Items.ScriptableObjectSource;
 
 namespace Items
 {
     public class Slot: MonoBehaviour
     {
-        public Weapon slotWeapon;
+        public Weapon[] slotWeapon = new Weapon[2];
         public Armor slotArmor;
-        public Accessory slotAccessory;
+        public Necklace slotNecklace;
+        public Ring[] slotRing = new Ring[2];
 
         public TotalStatus RequireTotalValue()
         {
             TotalStatus tot = new TotalStatus();
 
-            if (slotWeapon != null)
+            foreach (Weapon weapon in slotWeapon)
             {
-                tot.AddWeaponStatus(slotWeapon.status);
+                if (weapon != null)
+                {
+                    tot.AddWeaponStatus(weapon.status);
+                }
             }
-
+            
             if (slotArmor != null)
             {
                 tot.AddArmorStatus(slotArmor.status);
             }
 
-            if (slotAccessory != null)
+            if (slotNecklace != null)
             {
-                tot.AddAccessoryStatus(slotAccessory.status);
+                tot.AddNecklaceStatus(slotNecklace.status);
+            }
+
+            foreach (Ring ring in slotRing)
+            {
+                if (ring != null)
+                {
+                    tot.AddRingStatus(ring.status);
+                }
             }
             
             return tot;
         }
-        
+
         public void LogTotalStatus()
         {
             TotalStatus totalStatus = RequireTotalValue();

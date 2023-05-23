@@ -1,8 +1,9 @@
 using System.Collections.Generic;
-using System.Net.Mime;
-using System.IO;
+using System.Linq;
 using UnityEngine;
+using Items.ScriptableObjectSource;
 using Items.init;
+using Unity.VisualScripting;
 
 namespace Items
 {
@@ -14,18 +15,18 @@ namespace Items
         public List<Item> inventoryItems;
         public GameObject inventoryUI;
         public Slot slot;
-
+        
         private void Awake()
         {
+            InitBoxes initBoxes = new InitBoxes();
             inventoryItems = new List<Item>(new Equipment[16]);
             slot = gameObject.AddComponent<Slot>();
-            InitBoxes.InitInventoryBoxes(inventoryPanels);
-            InitBoxes.InitSlotBoxes(slotPanels);
+            initBoxes.InitInventoryBoxes(inventoryPanels);
+            initBoxes.InitSlotBoxes(slotPanels);
         }
 
         private void Update()
         {
-            // 예를 들어, 'I' 키를 눌렀을 때 인벤토리를 표시하거나 숨기려면 아래 코드를 사용합니다.
             if (Input.GetKeyDown(KeyCode.I))
             {
                 ToggleInventory();
@@ -37,17 +38,50 @@ namespace Items
             inventoryUI.SetActive(!inventoryUI.activeSelf);
         }
         
-        public bool EquipItem(int index)
+        /* for blacksmith event */
+        public List<Equipment> RequireTotalEquipments()
+        {
+            HashSet<Equipment> totalEquipmentsSet = new HashSet<Equipment>();
+    
+            foreach (var weapon in slot.slotWeapon)
+            {
+                if (weapon != null) 
+                    totalEquipmentsSet.Add(weapon);
+            }
+
+            if (slot.slotArmor != null) 
+                totalEquipmentsSet.Add(slot.slotArmor);
+
+            if (slot.slotNecklace != null) 
+                totalEquipmentsSet.Add(slot.slotNecklace);
+    
+            foreach (var ring in slot.slotRing)
+            {
+                if (ring != null) 
+                    totalEquipmentsSet.Add(ring);
+            }
+    
+            foreach (var item in inventoryItems.OfType<Equipment>())
+            {
+                if (item != null) 
+                    totalEquipmentsSet.Add(item);
+            }
+    
+            return totalEquipmentsSet.ToList();
+        }
+        
+        public bool Equip(int index)
         {
             if (index >= 0 && index < inventoryItems.Count)
             {
                 Item itemToEquip = inventoryItems[index];
+                if (itemToEquip == null)
+                    return false;
 
                 if (itemToEquip is Equipment equipment)
                 {
-                    Equipment previousItem = equipment.UnEquip(slot);
-                    equipment.Equip(slot); // Equip the new item in the slot
-                    inventoryItems[index] = previousItem; // Move the previous item back to the inventory
+                    Equipment previousItem = equipment.Equip(slot);
+                    inventoryItems[index] = previousItem;
                     UpdateInventory();
                     UpdateSlot();
                     return true;
@@ -56,7 +90,7 @@ namespace Items
             Debug.LogError("Can't find the type of equipment");
             return false;
         }
-        
+
         public Item AddItem(int id)
         {
             int idx;
@@ -81,8 +115,16 @@ namespace Items
             
             if (id >= 0 && id < equipmentDatabase.items.Count)
             {
-                inventoryItems[idx] = equipmentDatabase.items[id];
-                UpdateInventory();
+                if (equipmentDatabase.items[id] is Equipment equipment)
+                {
+                    // Deep copy
+                    inventoryItems[idx] = equipment.DeepCopy();
+                    UpdateInventory();
+                }
+                else
+                {
+                    inventoryItems[idx] = equipmentDatabase.items[id];
+                }
             }
             return null;
         }
@@ -100,16 +142,28 @@ namespace Items
             foreach (GameObject slotPanel in slotPanels)
             {
                 InventoryBoxPanel panel = slotPanel.GetComponent<InventoryBoxPanel>();
-                switch (panel.name)
+                switch (slotPanel.name)
                 {
-                    case "WeaponSlotBlock":
-                        panel.UpdateItem(slot.slotWeapon);
+                    case "WeaponSlotBlock0":
+                        panel.UpdateItem(slot.slotWeapon[0]);
+                        break;
+                    case "WeaponSlotBlock1":
+                        panel.UpdateItem(slot.slotWeapon[1]);
                         break;
                     case "ArmorSlotBlock":
                         panel.UpdateItem(slot.slotArmor);
                         break;
-                    case "AccessorySlotBlock":
-                        panel.UpdateItem(slot.slotAccessory);
+                    case "NecklaceSlotBlock":
+                        panel.UpdateItem(slot.slotNecklace);
+                        break;
+                    case "RingSlotBlock0":
+                        panel.UpdateItem(slot.slotRing[0]);
+                        break;
+                    case "RingSlotBlock1":
+                        panel.UpdateItem(slot.slotRing[1]);
+                        break;
+                    default:
+                        Debug.LogError("None of Block is correct");
                         break;
                 }
             }
