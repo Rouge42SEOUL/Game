@@ -19,6 +19,8 @@ namespace Items.ScriptableObjectSource
             sb.AppendLine($"Power: {status.statBonuses.power}");
             sb.AppendLine($"Health: {status.statBonuses.health}");
             sb.AppendLine($"Speed: {status.statBonuses.speed}");
+            sb.AppendLine();
+            sb.AppendLine($"Gold: {gold}");
 
             return sb.ToString();
         }
