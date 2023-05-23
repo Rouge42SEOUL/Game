@@ -32,7 +32,7 @@ namespace Actor.Player
         private IEnumerator _AttackSpeed()
         {
             yield return new WaitForSeconds(0.1f);
-            _context.attackCollider.SetActive(false);
+            _context.AttackCollider.SetActive(false);
             yield return new WaitForSeconds(0.4f);
             _Finish();
         }

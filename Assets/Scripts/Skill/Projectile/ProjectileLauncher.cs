@@ -2,6 +2,7 @@ using System;
 using Interface;
 using UnityEngine;
 using UnityEngine.Pool;
+using UnityEngine.Serialization;
 
 namespace Skill.Projectile
 {
@@ -9,7 +10,9 @@ namespace Skill.Projectile
     {
         private IObjectPool<Projectile> _pool;
         private GameObject _context;
+        
         private readonly int _poolMax = 10;
+        [SerializeField] private ProjectileData projectileData;
         [SerializeField] private GameObject projectilePrefab;
         
         public Action<GameObject> OnAttackTrigger;
@@ -17,6 +20,11 @@ namespace Skill.Projectile
         public void SetContext(GameObject context)
         {
             _context = context;
+        }
+
+        public void SetProjectileData(ProjectileData data)
+        {
+            projectileData = data;
         }
 
         public void Release(Projectile projectile) => _pool.Release(projectile);
@@ -33,12 +41,12 @@ namespace Skill.Projectile
     
     public partial class ProjectileLauncher
     {
-        public void Launch(ProjectileData data)
+        public void Launch()
         {
             Projectile projectile = _pool.Get();
             projectile.SetLauncher(this);
             projectile.transform.position = transform.position;
-            projectile.SetData(data);
+            projectile.SetData(projectileData);
             Rigidbody2D rigidBody = projectile.GetComponent<Rigidbody2D>();
             rigidBody.AddForce(_context.GetComponent<IActorContext>().Forward * projectile.Speed, ForceMode2D.Impulse);
         }

@@ -75,6 +75,7 @@ namespace Actor.Enemy
             Collider2D = GetComponent<Collider2D>();
             
             _target = GameObject.Find("Player");
+            // stat.attackStrategy =
             
             stateMachine = new StateMachine<Enemy>(this, new EnemyIdleState());
             stateMachine.AddState(new EnemyMoveState());

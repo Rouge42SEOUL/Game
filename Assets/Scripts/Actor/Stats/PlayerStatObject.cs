@@ -12,6 +12,7 @@ namespace Actor.Stats
     {
         #region Variables
         
+        public AttackSkillObject normalAttack;
         public SkillSlot[] skills = new SkillSlot[4];
         public SkillObject passive;
         

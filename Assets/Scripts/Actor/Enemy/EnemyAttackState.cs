@@ -7,22 +7,22 @@ namespace Actor.Enemy
 {
     public class EnemyAttackState : State<Enemy>
     {
-        private Player.Player _p;
-
         private float _beforeAttackDelay = 0.5f;
         private float _afterAttackDelay = 1.0f;
         private WaitForSeconds _waitBefore;
         private WaitForSeconds _waitAfter;
 
+        private EnemyAttackStrategy _attackStrategy;
         private DamageData _damageData;
         private float _distanceToTarget;
 
         public override void OnInitialized()
         {
             // TODO : calculate attack time by attack speed;
-            _p = _context.Target.GetComponent<Player.Player>();
             _waitBefore = new WaitForSeconds(_beforeAttackDelay);
             _waitAfter = new WaitForSeconds(_afterAttackDelay);
+
+            _attackStrategy = new CollisionAttackStrategy(_context.Target.GetComponent<Player.Player>());
             _damageData = new DamageData(_context.Damage);
         }
         
@@ -63,7 +63,7 @@ namespace Actor.Enemy
             while (_distanceToTarget <= 1.0f)
             {
                 _damageData.Damage = _context.Damage;
-                _p.Damaged(_damageData);
+                _attackStrategy.Attack(_damageData);
                 yield return _waitAfter;
             }
         }

@@ -10,11 +10,12 @@ namespace Skill.Strategy
         public ProjectileAttackStrategy(IActorContext context, ProjectileData projectile) : base(context)
         {
             _projectile = projectile;
+            base.context.Launcher.SetProjectileData(projectile);
         }
         
         public override void Use()
         {
-            context.Launcher.Launch(_projectile);
+            context.Launcher.Launch();
         }
     }
 }

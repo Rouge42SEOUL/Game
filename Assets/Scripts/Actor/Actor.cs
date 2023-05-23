@@ -6,6 +6,7 @@ using Elemental;
 using Interface;
 using Skill.Projectile;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Attribute = Actor.Stats.Attribute;
 
 namespace Actor
@@ -18,9 +19,9 @@ namespace Actor
 
         protected bool isInitialized = false;
 
-        public GameObject attackCollider;
         public Vector2 forwardVector;
-        public ProjectileLauncher launcher;
+        private GameObject _attackCollider;
+        private ProjectileLauncher _launcher;
         
         protected abstract void Died();
 
@@ -45,10 +46,10 @@ namespace Actor
                 return;
             isInitialized = true;
             
-            attackCollider = transform.GetChild(0).gameObject;
-            attackCollider.gameObject.SetActive(false);
-            launcher = transform.GetChild(1).GetComponent<ProjectileLauncher>();
-            launcher.SetContext(gameObject);
+            _attackCollider = transform.GetChild(0).gameObject;
+            _attackCollider.gameObject.SetActive(false);
+            _launcher = transform.GetChild(1).GetComponent<ProjectileLauncher>();
+            _launcher.SetContext(gameObject);
         }
     }
     
@@ -56,10 +57,10 @@ namespace Actor
     public abstract partial class Actor<T> : IActorContext, IDamageable, IAffected
     {
         public GameObject GameObject => gameObject;
-        public GameObject AttackCollider => attackCollider;
+        public GameObject AttackCollider => _attackCollider;
         public Vector2 Forward => forwardVector;
         public Vector3 Position => transform.position;
-        public ProjectileLauncher Launcher => launcher;
+        public ProjectileLauncher Launcher => _launcher;
 
         public abstract void Affected(Effect effect);
         public abstract void Released(Effect effect);

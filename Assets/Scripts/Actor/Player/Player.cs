@@ -65,8 +65,8 @@ namespace Actor.Player
 
         protected void OnEnable()
         {
-            attackCollider.GetComponent<PlayerAttackCol>().OnAttackTrigger += stat.normalAttack.OnAttackTrigger;
-            launcher.OnAttackTrigger += stat.skills[0].OnAttackTrigger;
+            AttackCollider.GetComponent<PlayerAttackCol>().OnAttackTrigger += stat.normalAttack.OnAttackTrigger;
+            Launcher.OnAttackTrigger += stat.skills[0].OnAttackTrigger;
         }
 
         private void Start()
@@ -92,7 +92,7 @@ namespace Actor.Player
 
         private void OnDisable()
         {
-            attackCollider.GetComponent<PlayerAttackCol>().OnAttackTrigger -= stat.normalAttack.OnAttackTrigger;
+            AttackCollider.GetComponent<PlayerAttackCol>().OnAttackTrigger -= stat.normalAttack.OnAttackTrigger;
         }
     }
     
