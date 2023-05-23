@@ -10,9 +10,9 @@ namespace UI
     {
         private GameObject[] _stars = new GameObject[3];
         [SerializeField] private GameObject _enemyCount;
-        [SerializeField] private GameObject _elapsedTime;
         [SerializeField] private GameObject _earnedMoney;
-        [SerializeField] private GameObject _earnedExp;
+        [SerializeField] private GameObject _elapsedTime;
+        [SerializeField] private GameObject _playerStat;
     
         private WaitForSeconds _wait = new WaitForSeconds(0.5f);
         private GameObject _panel;
@@ -20,7 +20,6 @@ namespace UI
 
         private int _count;
         private int _money;
-        private int _exp;
         private bool[] _isClear = new bool[3];
 
         private void Awake()
@@ -28,7 +27,7 @@ namespace UI
             _enemyCount.SetActive(false);
             _elapsedTime.SetActive(false);
             _earnedMoney.SetActive(false);
-            _earnedExp.SetActive(false);
+            _playerStat.SetActive(false);
         
             _panel = transform.GetChild(0).gameObject;
             var stageGoal = _panel.transform.GetChild(1);
@@ -55,14 +54,19 @@ namespace UI
         {
             _count = killCount;
             _money = killCount * 10;
-            _exp = killCount;
             // TODO: add money and exp to player
-            _enemyCount.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = _count.ToString("N0");
-            // TODO: get clear time in timer
-            _elapsedTime.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "00:00";
+            _enemyCount.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = _count.ToString("N0");
             // TODO: replace tmp values in calculation
-            _earnedMoney.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = _money.ToString("N0");
-            _earnedExp.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = _exp.ToString("N0");
+            _earnedMoney.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = _money.ToString("N0");
+            // TODO: get clear time in timer
+            _elapsedTime.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "00:00";
+            
+            // TODO: player level up, display stat
+            _playerStat.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "10 -> 12";
+            _playerStat.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "10 -> 12";
+            _playerStat.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = "10 -> 12";
+            _playerStat.transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = "10 -> 12";
+            
             _isClear[0] = true;
             _isClear[1] = _player.PercentHealPoint >= 0.8f;
             _isClear[2] = _player.PercentHealPoint >= 0.6f;
@@ -87,7 +91,7 @@ namespace UI
             yield return _wait;
             _earnedMoney.SetActive(true);
             yield return _wait;
-            _earnedExp.SetActive(true);
+            _playerStat.SetActive(true);
         }
     }
 }
