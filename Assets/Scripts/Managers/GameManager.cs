@@ -36,7 +36,7 @@ public partial class GameManager // public
     public InfoToJson InfoToJson;
     [SerializeField] private int firstGold;
     [SerializeField] private PlayerPawn playerPawn;
-    [SerializeField] private string jsonFileName = "Json/test.json";
+    [SerializeField] private string jsonFileName = "Json/GameManager.json";
 	public int Gold
 	{
 	    get => InfoToJson.Gold;

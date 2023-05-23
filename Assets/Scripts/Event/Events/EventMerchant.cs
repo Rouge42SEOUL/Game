@@ -1,8 +1,10 @@
+using Items;
 using UnityEngine;
 
 public class EventMerchant :  RougeEvent.Event
 {
     private MerchantUI _merchantUI;
+    private Inventory _inventory;
     private void Awake()
     {
         Type = EventType.Merchant;
