@@ -87,9 +87,9 @@ namespace UI
             yield return _wait;
             _enemyCount.SetActive(true);
             yield return _wait;
-            _elapsedTime.SetActive(true);
-            yield return _wait;
             _earnedMoney.SetActive(true);
+            yield return _wait;
+            _elapsedTime.SetActive(true);
             yield return _wait;
             _playerStat.SetActive(true);
         }
