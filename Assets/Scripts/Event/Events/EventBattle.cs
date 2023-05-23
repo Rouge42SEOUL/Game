@@ -12,9 +12,10 @@ public class EventBattle :  RougeEvent.Event
         Battle();
     }
 
-    private void Battle() 
-	{
-		SceneManager.StartBattle();
-	}
+    private void Battle()
+    {
+        SceneManager sceneManager = gameObject.AddComponent<SceneManager>();
+        sceneManager.StartBattle();
+    }
 }
 

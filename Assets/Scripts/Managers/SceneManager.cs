@@ -4,17 +4,17 @@ namespace SceneManagement
 {
     public class SceneManager : MonoBehaviour
     {
-        public static void StartGame()
+        public void StartGame()
         {
             UnityEngine.SceneManagement.SceneManager.LoadScene("GameScene");
         }
         
-        public static void EndGame()
+        public void EndGame()
         {
             UnityEngine.SceneManagement.SceneManager.LoadScene("gyyu_end");
         }
 
-        public static void StartBattle()
+        public void StartBattle()
         {
             UnityEngine.SceneManagement.SceneManager.LoadScene("gyyu_battle");
         }
