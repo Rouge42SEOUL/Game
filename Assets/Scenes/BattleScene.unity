@@ -570,9 +570,9 @@ MonoBehaviour:
   _skillEffectedValues:
     keys: 
     values: []
-  attackCollider: {fileID: 1482730803}
+  attackCollider: {fileID: 0}
   forwardVector: {x: 0, y: 0}
-  launcher: {fileID: 1040016780}
+  launcher: {fileID: 0}
   _itemEffectedValues:
     keys: 
     values: []
@@ -18778,10 +18778,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7d60eac09645ba448dce2d13064085f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _stars:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   _enemyCount: {fileID: 967555355}
   _elapsedTime: {fileID: 1211513069}
   _earnedMoney: {fileID: 506182860}
