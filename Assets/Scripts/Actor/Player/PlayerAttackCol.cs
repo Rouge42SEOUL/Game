@@ -1,4 +1,7 @@
+
 using System;
+using Actor.Stats;
+using Interface;
 using UnityEngine;
 
 namespace Actor.Player

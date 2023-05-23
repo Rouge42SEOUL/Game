@@ -1,21 +1,22 @@
+using Elemental;
 using UnityEngine;
 
 namespace Actor.Stats
 {
-    [CreateAssetMenu(fileName = "New Enemy Data", menuName = "Stat/EnemyStat")]
+    [CreateAssetMenu(fileName = "New Enemy Data", menuName = "Scriptable Object/Stat/EnemyStat")]
     public class EnemyStatObject : ActorStatObject
     {
+        protected override void InitElementalType()
+        {
+            elementalType = ElementalType.None;
+        }
+
         protected override void OnEnable()
         {
-            if (!isInitialized)
+            if (isInitialized)
                 return;
             
             base.OnEnable();
-        }
-        
-        public void AddEffect(Effect effect)
-        {
-            effects.Add(effect);
         }
     }
 }
