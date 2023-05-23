@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Interface;
 using StateMachine;
@@ -22,8 +23,16 @@ namespace Actor.Enemy
             _waitBefore = new WaitForSeconds(_beforeAttackDelay);
             _waitAfter = new WaitForSeconds(_afterAttackDelay);
 
-            _attackStrategy = new CollisionAttackStrategy(_context.Target.GetComponent<Player.Player>());
-            _damageData = new DamageData(_context.Damage);
+            switch (_context.AttackType)
+            {
+                case EnemyAttackType.Projectile:
+                    _attackStrategy = new ProjectileAttackStrategy(_context.Target.GetComponent<Player.Player>(), _context.gameObject);
+                    break;
+                case EnemyAttackType.Collision:
+                default:
+                    _attackStrategy = new CollisionAttackStrategy(_context.Target.GetComponent<Player.Player>());
+                    break;
+            }_damageData = new DamageData(_context.Damage);
         }
         
         public override void OnEnter()
@@ -42,9 +51,8 @@ namespace Actor.Enemy
             }
             else
             {
-                // 공격상태에서 플레이어와 거리가 1.0f 초과면 이동상태
                 _distanceToTarget = Vector3.Distance(_context.Target.transform.position, _context.transform.position);
-                if (_distanceToTarget > 1.0f)
+                if (_distanceToTarget > _context.AttackRange)
                 {
                     _stateMachine.ChangeState<EnemyMoveState>();
                 }
@@ -60,7 +68,7 @@ namespace Actor.Enemy
         private IEnumerator AttackPlayer()
         {
             yield return _waitBefore;
-            while (_distanceToTarget <= 1.0f)
+            while (_distanceToTarget <= _context.AttackRange)
             {
                 _damageData.Damage = _context.Damage;
                 _attackStrategy.Attack(_damageData);

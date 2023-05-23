@@ -13,10 +13,7 @@ namespace Skill.Projectile
         
         public void SetData(ProjectileData projectile)
         {
-            _projectileData.sprite = projectile.sprite;
-            _projectileData.radius = projectile.radius;
-            _projectileData.speed = projectile.speed;
-            
+            _projectileData = projectile;
             GetComponent<SpriteRenderer>().sprite = _projectileData.sprite;
             GetComponent<CircleCollider2D>().radius = _projectileData.radius;
             float scale = _projectileData.radius * 2;
@@ -37,7 +34,7 @@ namespace Skill.Projectile
         {
             if (_isCollided) 
                 return;
-            if (other.CompareTag("Enemy") || other.CompareTag("Obstacle"))
+            if (other.CompareTag(_projectileData.targetTag) || other.CompareTag("Obstacle"))
             {
                 _isCollided = true;
                 _launcher.OnAttackTrigger?.Invoke(other.gameObject);

@@ -37,7 +37,7 @@ namespace Actor.Stats
         
         protected override void InitElementalType()
         {
-            elementalType = passive ? passive.elementalType : ElementalType.None;
+            elementalType = passive ? passive.elementalType : ElementalType.Normal;
         }
         
         #endregion
