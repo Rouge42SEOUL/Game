@@ -3,14 +3,6 @@ using UnityEngine;
 
 namespace Items
 {
-    public enum WeaponType
-    {
-        OneHand,
-        TwoHand,
-        Shield,
-        None
-    }
-    
     [CreateAssetMenu(fileName = "Weapon Data", menuName = "Inventory/Weapon")]
     public class Weapon : Equipment
     {
