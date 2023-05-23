@@ -8,9 +8,6 @@ public class EventMerchant :  RougeEvent.Event
     private void Awake()
     {
         Type = EventType.Merchant;
-    }
-    private void Start()
-    {
         _merchantUI = FindObjectOfType<MerchantUI>();
     }
 
