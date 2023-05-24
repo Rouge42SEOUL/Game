@@ -1,5 +1,8 @@
 
 using System.Collections.Generic;
+using Actor.Stats;
+using Skill;
+using Unity.VisualScripting;
 using UnityEngine;
 
 // Singleton Manager, Only used in Main Scene and Only this scripts run in Main Scene
@@ -29,6 +32,24 @@ namespace Managers.MainScene
         }
     }
     
+    public struct PassiveData
+    {
+        public int Id;
+        public string PassiveName;
+
+        public PassiveData(int id, string passiveName)
+        {
+            Id = id;
+            PassiveName = passiveName;
+        }
+        
+        public PassiveData(PassiveData data)
+        {
+            Id = data.Id;
+            PassiveName = data.PassiveName;
+        }
+    }
+    
     public partial class TitleManager
     {
         private static TitleManager _instance;
@@ -46,18 +67,25 @@ namespace Managers.MainScene
         }
 
         public int selectedClassId;
+        public int selectedPassiveId;
         
         public List<CharClassData> ClassList;
+        public List<PassiveData> PassiveList;
 
         public void QuitGame() => _QuitGame();
 
 
         public GameObject confirmPopup;
+        public GameObject passiveSelect;
+        public GameObject classSelect;
+
+        public void SelectPassive(int n) => _SelectPassive(n);
     }
 
     public partial class TitleManager
     {
-        
+        [SerializeField] private PlayerStatObject playerStat;
+        [SerializeField] private List<PassiveSkillObject> passive;
     }
     
     public partial class TitleManager : MonoBehaviour
@@ -82,6 +110,14 @@ namespace Managers.MainScene
             ClassList.Add(new CharClassData(false,-1, "Unlocked", "Illustration/Character/locked_1"));
             ClassList.Add(new CharClassData(false,-1, "Unlocked", "Illustration/Character/locked_2"));
             ClassList.Add(new CharClassData(false,-1, "Unlocked", "Illustration/Character/locked_3"));
+
+            PassiveList = new List<PassiveData>();
+            PassiveList.Add(new PassiveData(0, "Ice"));
+            PassiveList.Add(new PassiveData(1, "Holy"));
+            PassiveList.Add(new PassiveData(2, "Wind"));
+            PassiveList.Add(new PassiveData(3, "Fire"));
+            PassiveList.Add(new PassiveData(4, "Dark"));
+            PassiveList.Add(new PassiveData(5, "Ground"));
         }
     }
     
@@ -95,6 +131,11 @@ namespace Managers.MainScene
         private void _ToGameScene()
         {
             //TODO : get class Id data and send to GameScene
+        }
+
+        private void _SelectPassive(int n)
+        {
+            playerStat.passive = passive[n];
         }
     }
 }
