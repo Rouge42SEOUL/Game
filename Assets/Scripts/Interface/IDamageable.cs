@@ -8,7 +8,7 @@ namespace Interface
     [Serializable]
     public struct DamageData
     {
-        public int Damage;
+        public float Damage;
         public Vector3 KbForce;
         public ElementalType ElementalType;
 

@@ -124,25 +124,13 @@ namespace Actor.Enemy
             DeleteEffect(effect.type);
             // TODO: clac current attributes
         }
-        public override bool CalculateHit(SerializableDictionary<AttributeType, Attribute> baseAttributes)
-        {
-            var random = new Random();
-            var randomValue = (float)random.NextDouble();
-            var hitChance = baseAttributes[AttributeType.Accuracy].value -
-                            baseAttributes[AttributeType.Avoidance].value;
-            return randomValue < hitChance;
-        }
-
-        public override void Damaged(DamageData data)
+     public override void Damaged(DamageData data)
         {
             Rigidbody2D.velocity = Vector2.zero;
             Rigidbody2D.AddForce(data.KbForce, ForceMode2D.Impulse);
-            if (CalculateHit(stat.baseAttributes))
-            {
-                Debug.Log("Enemy health Lost -> " + data.Damage);
-                _currentHealthPoint -= data.Damage;
-                stateMachine.ChangeState<EnemyGetHitState>();
-            }
+            Debug.Log("Enemy health Lost -> " + data.Damage);
+            _currentHealthPoint -= data.Damage;
+            stateMachine.ChangeState<EnemyGetHitState>();
         }
     }
 }
