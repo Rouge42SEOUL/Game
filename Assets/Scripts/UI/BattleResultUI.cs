@@ -84,6 +84,11 @@ namespace UI
             StartCoroutine(DisplayUI());
         }
 
+        public void OnClickContinue()
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene("GameScene");
+        }
+
         IEnumerator DisplayUI()
         {
             for (int i = 0; i < 3; i++)

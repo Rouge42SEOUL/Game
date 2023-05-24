@@ -496,7 +496,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 50}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 240, y: 50}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &364421453
 MonoBehaviour:
@@ -541,7 +541,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 364421454}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2030510213}
+        m_TargetAssemblyTypeName: UI.BattleResultUI, Assembly-CSharp
+        m_MethodName: OnClickcontinue
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &364421454
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1351,7 +1363,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &635057846
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6260,6 +6272,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e28aa1382d384145888af87b4222fd0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _stat: {fileID: 11400000, guid: c6d6312bbd5c7884bb273850f3b45774, type: 2}
   firstGold: 0
   jsonFileName: Json/GameManager.json
 --- !u!4 &1440861609
@@ -6464,8 +6477,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 8
-  m_fontSizeBase: 8
+  m_fontSize: 36
+  m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
