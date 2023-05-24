@@ -7,6 +7,10 @@ TagManager:
   - PlayerAttackCol
   - Enemy
   - Obstacle
+  - InventoryBoxes
+  - SlotBoxes
+  - MerchantSlot
+  - MerchantInventory
   layers:
   - Default
   - TransparentFX

@@ -3,7 +3,6 @@ using System.Linq;
 using UnityEngine;
 using Items.ScriptableObjectSource;
 using Items.init;
-using Unity.VisualScripting;
 
 namespace Items
 {
@@ -32,8 +31,8 @@ namespace Items
             InitBoxes initBoxes = new InitBoxes();
             inventoryItems = new List<Item>(new Equipment[16]);
             slot = gameObject.AddComponent<Slot>();
-            initBoxes.InitInventoryBoxes(inventoryPanels);
-            initBoxes.InitSlotBoxes(slotPanels);
+            initBoxes.InitInventoryBoxes(inventoryPanels, "InventoryBoxes");
+            initBoxes.InitSlotBoxes(slotPanels, "SlotBoxes");
             inventoryUI.SetActive(!inventoryUI.activeSelf);
             UpdateSlot();
             UpdateInventory();

@@ -5,9 +5,9 @@ namespace Items.init
 {
     public class InitBoxes
     {
-        public void InitInventoryBoxes(List<GameObject> inventoryPanels)
+        public void InitInventoryBoxes(List<GameObject> inventoryPanels, string tag)
         {
-            GameObject[] foundPanels = GameObject.FindGameObjectsWithTag("InventoryBoxes");
+            GameObject[] foundPanels = GameObject.FindGameObjectsWithTag(tag);
             if (foundPanels == null)
             {
                 Debug.LogError("None of Inventory Box Tage");
@@ -19,9 +19,9 @@ namespace Items.init
             }
         }
         
-        public void InitSlotBoxes(List<GameObject> slotPanels)
+        public void InitSlotBoxes(List<GameObject> slotPanels, string tag)
         {
-            GameObject[] foundPanels = GameObject.FindGameObjectsWithTag("SlotBoxes");
+            GameObject[] foundPanels = GameObject.FindGameObjectsWithTag(tag);
             if (foundPanels == null)
             {
                 Debug.LogError("None of Slot Box Tage");

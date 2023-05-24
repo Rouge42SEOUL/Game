@@ -1,5 +1,4 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
 using Event = RougeEvent.Event;
 
@@ -29,24 +28,29 @@ public partial class Node // public
 [Serializable]
 public partial class Node : MonoBehaviour // private
 {
-    private readonly Color[] _colors = new Color[7]
-        {Color.white, Color.yellow, Color.cyan, Color.blue, Color.green, Color.gray, Color.black};
-    private readonly string[] _path = new string[7]
-        {"2D Mega Pack/None",
-            "2D Mega Pack/Battle",
-            "2D Mega Pack/Skill",
-            "2D Mega Pack/BlackSmith",
-            "2D Mega Pack/Merchant",
-            "2D Mega Pack/Box",
-            "2D Mega Pack/Boss"};
-    
+    private Sprite[] _sprites;
+
+    private void Awake()
+    {
+        _sprites = Resources.LoadAll<Sprite>("Icon/map_sprite");
+    }
+
     private void ChangeColor()
     {
-        Sprite newSprite = Resources.Load<Sprite>(_path[(int)eventType]);
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
-        spriteRenderer.color = _colors[(int)eventType];
-        spriteRenderer.sprite = newSprite;
-        GetComponent<Transform>().localScale /= 2;
+        if (eventType == EventType.BlackSmith)
+            spriteRenderer.sprite = _sprites[0];
+        else if (eventType == EventType.Merchant)
+            spriteRenderer.sprite = _sprites[1];
+        // else if (eventType == EventType.Elite)
+        //     spriteRenderer.sprite = sprites[2];
+        else if (eventType == EventType.Box)
+            spriteRenderer.sprite = _sprites[3];
+        else if (eventType == EventType.Boss)
+            spriteRenderer.sprite = _sprites[4];
+        else if (eventType == EventType.Battle)
+            spriteRenderer.sprite = _sprites[5];
+        else ;
     }
 
 }
