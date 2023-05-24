@@ -1,3 +1,4 @@
+using Managers.DataManager;
 using UnityEngine;
 
 public class EventBoss :  RougeEvent.Event
@@ -16,7 +17,7 @@ public class EventBoss :  RougeEvent.Event
     public void Boss()
     {
         Debug.Log("보스");
-		JsonConverter.DeleteJson("/Json/test.json");
+        DataManager dataManager = DataManager.Instance;
+        dataManager.DeleteData();
     }
-
 }

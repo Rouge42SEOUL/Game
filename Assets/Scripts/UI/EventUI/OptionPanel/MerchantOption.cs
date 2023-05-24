@@ -1,12 +1,11 @@
 using Items;
 using Items.ScriptableObjectSource;
-using TMPro;
+using Managers.DataManager;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class MerchantOption : MonoBehaviour
 {
-    private GameSceneManager _gameSceneManager;
+    private MapDataManager _mapDataManager;
     private Item _item;
     private Inventory _playerInventory;
     public MerchantUI merchantUI;
@@ -23,7 +22,7 @@ public class MerchantOption : MonoBehaviour
 
     private void Start()
     {
-        _gameSceneManager = GameSceneManager.Instance;
+        _mapDataManager = MapDataManager.Instance;
         _playerInventory = FindObjectOfType<Inventory>(); // 임시 Player가 정해지면 수정예정
         // GetComponent<Button>().onClick.AddListener(Buy);
     }
@@ -32,13 +31,13 @@ public class MerchantOption : MonoBehaviour
     {
         if (!_item)
             return;
-        if (_item.gold <= _gameSceneManager.Gold)
+        if (_item.gold <= DataManager.Instance.Gold)
         {
             Item equipment = _item;
 
             if (_playerInventory.AddItem(equipment.id))
             {
-                _gameSceneManager.Gold -= _item.gold;
+                DataManager.Instance.Gold -= _item.gold;
                 _item = null;
                 merchantUI.UpdateInventory();
                 merchantUI.UpdateMerchant();
