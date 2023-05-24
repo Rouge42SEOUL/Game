@@ -1,6 +1,7 @@
 using System;
 using Actor.Stats;
 using Core;
+using Elemental;
 using Interface;
 using StateMachine;
 using UnityEngine;
@@ -27,6 +28,13 @@ namespace Actor.Enemy
         {
             ManagedPool = pool;
         }
+        
+        public override void AddHP(float value)
+        {
+            _currentHealthPoint += value;
+            OnHPChanged?.Invoke();
+        }
+        
         public override float GetAttributeValue(AttributeType type) => _currentAttributes[type].value;
         public override void AddAttributeValue(AttributeType type, float value)
         {
@@ -43,9 +51,12 @@ namespace Actor.Enemy
             // TODO: effect delete
         }
 
-        protected override void Died()
+        protected override void CheckDied()
         {
-            stateMachine.ChangeState<EnemyDiedState>();
+            if (_currentHealthPoint <= 0)
+            {
+                stateMachine.ChangeState<EnemyDiedState>();
+            }
         }
     }
     
@@ -84,8 +95,9 @@ namespace Actor.Enemy
             stateMachine.AddState(new EnemyDiedState());
         }
 
-        protected void OnEnable()
+        protected override void OnEnable()
         {
+            base.OnEnable();
             Collider2D.enabled = true;
             stateMachine.ChangeState<EnemyIdleState>();
             
@@ -98,8 +110,6 @@ namespace Actor.Enemy
 
         private void Update()
         {
-            if (_currentHealthPoint <= 0)
-                Died();
             stateMachine.Update();
         }
 
@@ -139,7 +149,7 @@ namespace Actor.Enemy
             Rigidbody2D.AddForce(data.KbForce, ForceMode2D.Impulse);
             if (CalculateHit(stat.baseAttributes))
             {
-                _currentHealthPoint -= data.Damage;
+                AddHP(-ElementalBalancer.ApplyBalance(data.ElementalType, stat.elementalType, data.Damage));
                 stateMachine.ChangeState<EnemyGetHitState>();
             }
         }
