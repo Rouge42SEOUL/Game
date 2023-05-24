@@ -18,7 +18,7 @@ MonoBehaviour:
     keys: 0000000001000000020000000300000004000000050000000600000007000000
     values:
     - type: 0
-      value: 10
+      value: 1
     - type: 1
       value: 1
     - type: 2
@@ -34,4 +34,4 @@ MonoBehaviour:
     - type: 7
       value: 10
   elementalType: 7
-  baseHealthPoint: 1000
+  baseHealthPoint: 10
