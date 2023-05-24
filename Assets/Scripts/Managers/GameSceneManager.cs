@@ -31,7 +31,7 @@ public class InfoToJson
     }
 }
 
-public partial class GameManager // public
+public partial class GameSceneManager // public
 {
     public InfoToJson InfoToJson;
     [SerializeField] private int firstGold;
@@ -61,7 +61,7 @@ public partial class GameManager // public
 	}
 }
 
-public partial class GameManager : MonoBehaviour // private
+public partial class GameSceneManager : MonoBehaviour // private
 {
     private EventManager _eventManager;
     private StageManager _stageManager;
@@ -94,24 +94,24 @@ public partial class GameManager : MonoBehaviour // private
         SaveCurrentInfo();
     }
 }
-public partial class GameManager // singleton
+public partial class GameSceneManager // singleton
 {
-    private static GameManager _instance;
+    private static GameSceneManager _instance;
 
-    public static GameManager Instance
+    public static GameSceneManager Instance
     {
         get
         {
             if (_instance == null)
             {
-                GameManager obj = FindObjectOfType<GameManager>();
+                GameSceneManager obj = FindObjectOfType<GameSceneManager>();
                 if (obj != null)
                 {
                     _instance = obj;
                 }
                 else
                 {
-                    GameManager newObj = new GameObject().AddComponent<GameManager>();
+                    GameSceneManager newObj = new GameObject().AddComponent<GameSceneManager>();
                     _instance = newObj;
                 }
             }
@@ -120,7 +120,7 @@ public partial class GameManager // singleton
     }
     private void Awake()
     {
-        GameManager[] obj = FindObjectsOfType<GameManager>();
+        GameSceneManager[] obj = FindObjectsOfType<GameSceneManager>();
         if (obj.Length != 1)
         {
             Destroy(gameObject);

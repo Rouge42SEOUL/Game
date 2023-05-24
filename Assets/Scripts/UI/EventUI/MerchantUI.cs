@@ -1,11 +1,8 @@
-using System;
 using System.Collections.Generic;
 using Items;
 using Items.init;
 using Items.ScriptableObjectSource;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class MerchantUI : EventUI
@@ -27,6 +24,7 @@ public class MerchantUI : EventUI
         {
             _options[i] = childrenTransforms[i].gameObject;
         }
+        // 인벤토리 참조 코드
         InitBoxes initBoxes = new InitBoxes();
         initBoxes.InitInventoryBoxes(inventoryPanels, "MerchantInventory");
         initBoxes.InitSlotBoxes(slotPanels, "MerchantSlot");

@@ -21,7 +21,7 @@ namespace Items.init
         
         public void InitSlotBoxes(List<GameObject> slotPanels, string tag)
         {
-            GameObject[] foundPanels = GameObject.FindGameObjectsWithTag("SlotBoxes");
+            GameObject[] foundPanels = GameObject.FindGameObjectsWithTag(tag);
             if (foundPanels == null)
             {
                 Debug.LogError("None of Slot Box Tage");
