@@ -28,6 +28,8 @@ namespace Elemental
             { ElementalType.Ground, new EBalance(ElementalType.Wind, ElementalType.Ice) },
             { ElementalType.Holy, new EBalance(ElementalType.Dark, ElementalType.Dark) },
             { ElementalType.Dark, new EBalance(ElementalType.Holy, ElementalType.Holy) },
+            { ElementalType.Buff, new EBalance(ElementalType.Buff, ElementalType.DeBuff) },
+            { ElementalType.DeBuff, new EBalance(ElementalType.DeBuff, ElementalType.Buff) },
         };
 
         public static float ApplyBalance(ElementalType type, ElementalType target, float damage)
@@ -99,6 +101,8 @@ namespace Elemental
                 }
                 case ElementalType.Normal:
                 case ElementalType.None:
+                case ElementalType.Buff:
+                case ElementalType.DeBuff:
                 default:
                     break;
             }

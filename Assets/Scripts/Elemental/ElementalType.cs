@@ -13,5 +13,7 @@ namespace Elemental
         Holy,
         Dark,
         None,
+        Buff,
+        DeBuff
     }
 }
