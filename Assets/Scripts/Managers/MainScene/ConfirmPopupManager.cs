@@ -18,7 +18,8 @@ namespace Managers.MainScene
     {
         private void OnEnable()
         {
-            text.text = TitleManager.Instance.ClassList[TitleManager.Instance.selectedClassId].ClassName;
+            text.text = TitleManager.Instance.PassiveList[TitleManager.Instance.selectedPassiveId].PassiveName
+                        + " " + TitleManager.Instance.ClassList[TitleManager.Instance.selectedClassId].ClassName;
         }
     }
     
