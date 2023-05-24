@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class MerchantOption : MonoBehaviour
 {
-    private GameSceneManager _gameSceneManager;
+    private MapDataManager _mapDataManager;
     private Item _item;
     private Inventory _playerInventory;
 
@@ -22,16 +22,16 @@ public class MerchantOption : MonoBehaviour
 
     private void Start()
     {
-        _gameSceneManager = GameSceneManager.Instance;
+        _mapDataManager = MapDataManager.Instance;
         _playerInventory = FindObjectOfType<Inventory>(); // 임시 Player가 정해지면 수정예정
         // GetComponent<Button>().onClick.AddListener(Buy);
     }
 
     public void Buy()
     {
-        if (_item.gold <= _gameSceneManager.Gold)
+        if (_item.gold <= _mapDataManager.Gold)
         {
-            _gameSceneManager.Gold -= _item.gold;
+            _mapDataManager.Gold -= _item.gold;
             Equipment equipment = (Equipment)_item;
             _playerInventory.AddItem(equipment.id);
             this.transform.parent.parent.GetComponent<MerchantUI>().CloseUI(); 

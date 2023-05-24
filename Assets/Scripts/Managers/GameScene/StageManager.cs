@@ -1,3 +1,4 @@
+using Managers.DataManager;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -22,7 +23,7 @@ public partial class StageManager // public
         RandomSetting();
     }
     // 이전데이터를 읽어서 그 데이터로 stage를 구성
-    public void PrevInit(InfoToJson prevData)
+    public void PrevInit(DataContainer prevData)
     {
         // 맵 설정
         MapNum = prevData.Map;
