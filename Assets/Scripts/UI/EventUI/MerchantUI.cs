@@ -12,6 +12,7 @@ public class MerchantUI : EventUI
     private Inventory _inventory;
     public List<GameObject> inventoryPanels;
     public List<GameObject> slotPanels;
+    public List<GameObject> merchantPanels;
     
     protected override void Start()
     {
@@ -40,6 +41,16 @@ public class MerchantUI : EventUI
         }
     }
 
+    public void UpdateMerchant()
+    {
+        for (int i = 0; i < _options.Length; i++)
+        {
+            var child = _options[i].transform.GetChild(0);
+            InventoryBoxPanel panel = child.GetComponent<InventoryBoxPanel>();
+            panel.UpdateItem(_options[i].GetComponent<MerchantOption>().Item);
+        }
+    }
+    
     public void UpdateInventory()
     {
         for (int i = 0; i < _inventory.inventoryItems.Count; i++)
@@ -97,6 +108,7 @@ public class MerchantUI : EventUI
             {
                 _options[i].SetActive(false);
             }
+            UpdateMerchant();
         }
 
     }

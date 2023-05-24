@@ -10,22 +10,39 @@ namespace Items.ClickEvent.InventoryClick
     {
         public Inventory inventory;
         public List<Button> buttons;
-    
+        public InventoryClickEventType inventoryClickEventType;
+        public GameSceneManager gameSceneManager;
+        public MerchantUI merchantUI;
+
         private void Start()
         {
             for (int i = 0; i < 16; i++)
             {
                 int id = i;
-                buttons[i].gameObject.AddComponent<RightClickable>().onClickRight.AddListener(delegate { InventoryClick(id); });
+                if (inventoryClickEventType	== InventoryClickEventType.NormalEvent)
+                    buttons[i].gameObject.AddComponent<RightClickable>().onClickRight.AddListener(delegate { NormalClick(id); });
+                else if (inventoryClickEventType == InventoryClickEventType.MerchantEvent)
+                    buttons[i].gameObject.AddComponent<RightClickable>().onClickRight.AddListener(delegate { MerchantClick(id); });
+
             }
         }
     
-        private void InventoryClick(int id)
+        private void NormalClick(int id)
         {
             if (inventory.EquipItemEvent(id))
             {
                 inventory.UpdateInventory();
                 inventory.UpdateSlot();
+            }
+        }
+        
+        private void MerchantClick(int id)
+        {
+            if (inventory.inventoryItems[id])
+            {
+                gameSceneManager.Gold += (int)(inventory.inventoryItems[id].gold * 0.7);
+                inventory.inventoryItems[id] = null;
+                merchantUI.UpdateInventory();
             }
         }
     }

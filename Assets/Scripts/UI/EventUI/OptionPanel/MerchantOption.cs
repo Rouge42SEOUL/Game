@@ -9,6 +9,7 @@ public class MerchantOption : MonoBehaviour
     private GameSceneManager _gameSceneManager;
     private Item _item;
     private Inventory _playerInventory;
+    public MerchantUI merchantUI;
 
     public Item Item
     {
@@ -29,12 +30,19 @@ public class MerchantOption : MonoBehaviour
 
     public void Buy()
     {
+        if (!_item)
+            return;
         if (_item.gold <= _gameSceneManager.Gold)
         {
-            _gameSceneManager.Gold -= _item.gold;
-            Equipment equipment = (Equipment)_item;
-            _playerInventory.AddItem(equipment.id);
-            this.transform.parent.parent.GetComponent<MerchantUI>().CloseUI(); 
+            Item equipment = _item;
+
+            if (_playerInventory.AddItem(equipment.id))
+            {
+                _gameSceneManager.Gold -= _item.gold;
+                _item = null;
+                merchantUI.UpdateInventory();
+                merchantUI.UpdateMerchant();
+            }
         }
         else
         {
