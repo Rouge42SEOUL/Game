@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Managers.DataManager;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -11,7 +12,6 @@ namespace Items.ClickEvent.InventoryClick
         public Inventory inventory;
         public List<Button> buttons;
         public InventoryClickEventType inventoryClickEventType;
-        public GameSceneManager gameSceneManager;
         public MerchantUI merchantUI;
 
         private void Start()
@@ -40,7 +40,7 @@ namespace Items.ClickEvent.InventoryClick
         {
             if (inventory.inventoryItems[id])
             {
-                gameSceneManager.Gold += (int)(inventory.inventoryItems[id].gold * 0.7);
+                DataManager.Instance.Gold += (int)(inventory.inventoryItems[id].gold * 0.7);
                 inventory.inventoryItems[id] = null;
                 merchantUI.UpdateInventory();
             }

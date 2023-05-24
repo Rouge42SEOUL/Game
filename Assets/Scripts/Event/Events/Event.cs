@@ -1,4 +1,5 @@
 using System;
+using Managers.DataManager;
 using UnityEngine;
 
 public enum EventType
@@ -27,18 +28,12 @@ namespace RougeEvent
 
         public virtual void BuildUI()
         {
-            GameSceneManager.InfoToJson.IsEventRunning = true;
-            GameSceneManager.SaveCurrentInfo();
+            DataManager.Instance.SetRunningEvent(true);
+            DataManager.Instance.SaveData();
         }
     }
 
     public abstract partial class Event : MonoBehaviour // private
     {
-        protected GameSceneManager GameSceneManager;
-
-        private void Start()
-        {
-            GameSceneManager = GameSceneManager.Instance;
-        }
     }
 }

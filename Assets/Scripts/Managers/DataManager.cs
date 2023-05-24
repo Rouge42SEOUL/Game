@@ -68,6 +68,15 @@ namespace Managers.DataManager
             return true;
         }
 
+        public bool GetRunningEvent()
+        {
+            return _data.IsEventRunning;
+        }
+        public void SetRunningEvent(bool b)
+        {
+            _data.IsEventRunning = b;
+        }
+
         public bool LoadData()
         {
             return JsonConverter.Load(out _data, Application.dataPath + jsonFileName);

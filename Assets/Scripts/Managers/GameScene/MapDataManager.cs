@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using GameScene;
 using Managers.DataManager;
 using Newtonsoft.Json;
@@ -48,6 +49,16 @@ public partial class MapDataManager : MonoBehaviour // private
         _currentNode = _stageManager.Nodes[DataManager.Instance.CurrentNode];
         playerPawn.MoveToNode(_currentNode);
         DataManager.Instance.SaveData();
+        CheckPrevEventRun(_currentNode);
+    }
+    async void CheckPrevEventRun(Node node) // 객체들간의 초기화순서때문에 Null Reference Exception이.. 호출돼서
+    {
+        if (DataManager.Instance.GetRunningEvent())
+        {
+            _uiManager.OptionUIControl();
+            await Task.Delay(10);
+            _eventManager.EventAction(node);
+        }
     }
 }
 public partial class MapDataManager // singleton
