@@ -6,7 +6,7 @@ using Debug = UnityEngine.Debug;
 
 public class BlackSmithOption : MonoBehaviour
 {
-    private GameManager _gameManager;
+    private GameSceneManager _gameSceneManager;
     private Equipment _equipment;
 
     public Equipment Equipment
@@ -21,16 +21,16 @@ public class BlackSmithOption : MonoBehaviour
 
     private void Start()
     {
-        _gameManager = GameManager.Instance;
+        _gameSceneManager = GameSceneManager.Instance;
         GetComponent<Button>().onClick.AddListener(Upgrade);
     }
 
     public void Upgrade()
     {
-        if (_equipment.gold + _equipment.reinforcement * 10 <= _gameManager.Gold)
+        if (_equipment.gold + _equipment.reinforcement * 10 <= _gameSceneManager.Gold)
         {
             
-            _gameManager.Gold -= _equipment.gold + _equipment.reinforcement * 10;
+            _gameSceneManager.Gold -= _equipment.gold + _equipment.reinforcement * 10;
             Equipment.reinforcement++;
             this.transform.parent.parent.gameObject.GetComponent<BlackSmithUI>().CloseUI(); 
         }
