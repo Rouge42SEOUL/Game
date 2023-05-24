@@ -60,8 +60,8 @@ namespace UI
             
             _enemyCount.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = _count.ToString("N0");
             _earnedMoney.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = _money.ToString("N0");
-            // TODO: get clear time in timer
-            _elapsedTime.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "00:00";
+            _elapsedTime.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text =
+                BattleDataManager.Instance.Minutes + ":" + BattleDataManager.Instance.Seconds.ToString("f2");
 
             string con = DataManager.Instance.GetBaseStat(AttributeType.Health).ToString("N0");
             string agi = DataManager.Instance.GetBaseStat(AttributeType.Speed).ToString("N0");

@@ -42,6 +42,7 @@ public partial class MapDataManager : MonoBehaviour // private
         }
         else
         {
+            Debug.Log("PrevInit");
             _stageManager.PrevInit();
 		}
         _currentNode = _stageManager.Nodes[DataManager.Instance.CurrentNode];

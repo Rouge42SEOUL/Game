@@ -7,8 +7,6 @@ namespace Managers.DataManager
 {
     public class DataManager : MonoBehaviour
     {
-        #region Variables & Properties
-
         public static DataManager Instance => _instance ? _instance : null;
         private static DataManager _instance;
         
@@ -16,7 +14,7 @@ namespace Managers.DataManager
         private PlayerStatObject _stat;
         
         [SerializeField] private int firstGold;
-        [SerializeField] private string jsonFileName = "Json/GameManager.json";
+        [SerializeField] private string jsonFileName = "/Json/GameManager.json";
 
         public Action<int> OnGoldUpdate;
 
@@ -33,10 +31,6 @@ namespace Managers.DataManager
         public int Map => _data.Map;
         public Dictionary<int, EventType> Events => _data.Events;
         public int CurrentNode => _data.PlayerCurrentNode;
-
-        #endregion
-
-        #region MonoBehaviour
 
         private void Awake()
         {
@@ -56,8 +50,6 @@ namespace Managers.DataManager
             OnGoldUpdate?.Invoke(_data.Gold);
         }
 
-        #endregion
-        
         public void InitData()
         {
             Gold = firstGold;
@@ -70,7 +62,7 @@ namespace Managers.DataManager
 
         public bool SaveData()
         {
-            if (StageManager.Instance)
+            if (StageManager.Instance == null)
                 return false;
             _data.Map = StageManager.Instance.MapNum;
             _data.SaveInfo(StageManager.Instance.Nodes, MapDataManager.Instance.CurrentNode);
@@ -83,8 +75,12 @@ namespace Managers.DataManager
             return JsonConverter.Load(out _data, Application.dataPath + jsonFileName);
         }
 
+        public void DeleteData()
+        {
+            JsonConverter.DeleteJson(Application.dataPath + jsonFileName);
+        }
+
         public void LevelUP() => _stat.LevelUp();
         public float GetBaseStat(AttributeType type) => _stat.baseAttributes[type].value;
-        public float GetCurrentStat(AttributeType type) => _stat.currentAttributes[type].value;
     }
 }
