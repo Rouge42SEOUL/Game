@@ -84,6 +84,11 @@ namespace Actor.Stats
             currentAttributes[type].value += value;
         }
 
+        public void SubAttribute(AttributeType type, float value)
+        {
+            currentAttributes[type].value -= value;
+        }
+
         public void AddEffect(Effect effect)
         {
             
