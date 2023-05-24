@@ -7,6 +7,10 @@ using UnityEngine.UI;
 
 public class BattleDataManager : MonoBehaviour
 {
+    public static BattleDataManager Instance => _instance ? _instance : null;
+    public int Minutes => (int)(_t / 60);
+    public float Seconds => _t % 60;
+    
     #region SerializedFiledData
 
     [SerializeField] private Slider healthSlider;
@@ -20,9 +24,9 @@ public class BattleDataManager : MonoBehaviour
     #endregion
 
     #region Private_Values
-
+    
+    private static BattleDataManager _instance;
     private Player _player;
-
     private float _t;
 
     #endregion
@@ -31,6 +35,16 @@ public class BattleDataManager : MonoBehaviour
 
     private void Awake()
     {
+        if (_instance == null)
+        {
+            _instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+        
         _player = GameObject.Find("Player").GetComponent<Player>();
         _t = 0;
     }

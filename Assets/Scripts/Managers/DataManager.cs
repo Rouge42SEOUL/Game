@@ -1,15 +1,19 @@
 using System;
 using System.Collections.Generic;
+using Actor.Stats;
 using UnityEngine;
 
 namespace Managers.DataManager
 {
     public class DataManager : MonoBehaviour
     {
+        #region Variables & Properties
+
         public static DataManager Instance => _instance ? _instance : null;
         private static DataManager _instance;
         
         private DataContainer _data;
+        private PlayerStatObject _stat;
         
         [SerializeField] private int firstGold;
         [SerializeField] private string jsonFileName = "Json/GameManager.json";
@@ -30,6 +34,10 @@ namespace Managers.DataManager
         public Dictionary<int, EventType> Events => _data.Events;
         public int CurrentNode => _data.PlayerCurrentNode;
 
+        #endregion
+
+        #region MonoBehaviour
+
         private void Awake()
         {
             if (_instance == null)
@@ -48,6 +56,8 @@ namespace Managers.DataManager
             OnGoldUpdate?.Invoke(_data.Gold);
         }
 
+        #endregion
+        
         public void InitData()
         {
             Gold = firstGold;
@@ -72,6 +82,9 @@ namespace Managers.DataManager
         {
             return JsonConverter.Load(out _data, Application.dataPath + jsonFileName);
         }
-        
+
+        public void LevelUP() => _stat.LevelUp();
+        public float GetBaseStat(AttributeType type) => _stat.baseAttributes[type].value;
+        public float GetCurrentStat(AttributeType type) => _stat.currentAttributes[type].value;
     }
 }

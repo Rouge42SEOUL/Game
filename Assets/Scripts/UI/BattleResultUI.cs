@@ -1,5 +1,7 @@
 using System.Collections;
 using Actor.Player;
+using Actor.Stats;
+using Managers.DataManager;
 using ObjectPool;
 using TMPro;
 using UnityEngine;
@@ -54,18 +56,27 @@ namespace UI
         {
             _count = killCount;
             _money = killCount * 10;
-            // TODO: add money and exp to player
+            DataManager.Instance.Gold += _money;
+            
             _enemyCount.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = _count.ToString("N0");
-            // TODO: replace tmp values in calculation
             _earnedMoney.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = _money.ToString("N0");
             // TODO: get clear time in timer
             _elapsedTime.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "00:00";
+
+            string con = DataManager.Instance.GetBaseStat(AttributeType.Health).ToString("N0");
+            string agi = DataManager.Instance.GetBaseStat(AttributeType.Speed).ToString("N0");
+            string atk = DataManager.Instance.GetBaseStat(AttributeType.Attack).ToString("N0");
+            string def = DataManager.Instance.GetBaseStat(AttributeType.Defense).ToString("N0");
+            DataManager.Instance.LevelUP();
+            con += " -> " + DataManager.Instance.GetBaseStat(AttributeType.Health).ToString("N0");
+            agi += " -> " + DataManager.Instance.GetBaseStat(AttributeType.Speed).ToString("N0");
+            atk += " -> " + DataManager.Instance.GetBaseStat(AttributeType.Attack).ToString("N0");
+            def += " -> " + DataManager.Instance.GetBaseStat(AttributeType.Defense).ToString("N0");
             
-            // TODO: player level up, display stat
-            _playerStat.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "10 -> 12";
-            _playerStat.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "10 -> 12";
-            _playerStat.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = "10 -> 12";
-            _playerStat.transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = "10 -> 12";
+            _playerStat.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = con;
+            _playerStat.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = agi;
+            _playerStat.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = atk;
+            _playerStat.transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = def;
             
             _isClear[0] = true;
             _isClear[1] = _player.PercentHealPoint >= 0.8f;
