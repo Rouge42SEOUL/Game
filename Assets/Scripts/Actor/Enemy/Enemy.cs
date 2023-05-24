@@ -139,7 +139,6 @@ namespace Actor.Enemy
             Rigidbody2D.AddForce(data.KbForce, ForceMode2D.Impulse);
             if (CalculateHit(stat.baseAttributes))
             {
-                Debug.Log("Enemy health Lost -> " + data.Damage);
                 _currentHealthPoint -= data.Damage;
                 stateMachine.ChangeState<EnemyGetHitState>();
             }

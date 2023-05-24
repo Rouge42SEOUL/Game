@@ -21,7 +21,7 @@ namespace Actor
         public GameObject attackCollider;
         public Vector2 forwardVector;
         public ProjectileLauncher launcher;
-        
+
         protected abstract void Died();
 
         public abstract float GetAttributeValue(AttributeType type);

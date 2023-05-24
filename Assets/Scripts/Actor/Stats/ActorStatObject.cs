@@ -34,8 +34,13 @@ namespace Actor.Stats
             CalculateSideAttributes();
             InitElementalType();
         }
+        
+        private void OnValidate()
+        {
+            CalculateSideAttributes();
+        }
 
-        protected void CalculateSideAttributes()
+        public void CalculateSideAttributes()
         {
             baseAttributes[AttributeType.MoveSpeed].value = baseAttributes[AttributeType.Speed].value * 1.25f;
             baseAttributes[AttributeType.AttackSpeed].value = baseAttributes[AttributeType.Speed].value * 1.15f;
