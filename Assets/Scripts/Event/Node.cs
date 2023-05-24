@@ -1,5 +1,4 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
 using Event = RougeEvent.Event;
 
@@ -38,9 +37,7 @@ public partial class Node : MonoBehaviour // private
 
     private void ChangeColor()
     {
-        Debug.Log(_sprites.Length);
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
-        // 대장장이0, 상인1, 엘리트2 , 상자3, 보스4, 배틀5
         if (eventType == EventType.BlackSmith)
             spriteRenderer.sprite = _sprites[0];
         else if (eventType == EventType.Merchant)
