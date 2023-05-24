@@ -19,7 +19,8 @@ public abstract class EventUI : MonoBehaviour
     }
     public void CloseUI()
     {
-        _gameSceneManager.InfoToJson.IsEventRunning = true;
+        _gameSceneManager.InfoToJson.IsEventRunning = false;
+        _gameSceneManager.SaveCurrentInfo();
         EventUIButton.gameObject.SetActive(true);
         gameObject.SetActive(false);
     }

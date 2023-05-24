@@ -1,6 +1,9 @@
+using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using GameScene;
 using Newtonsoft.Json;
+using TMPro;
 using UnityEngine;
 
 [JsonObject(MemberSerialization.OptIn)] //지정한 데이터만 변환하게 하는 설정
@@ -66,7 +69,6 @@ public partial class GameSceneManager : MonoBehaviour // private
     private EventManager _eventManager;
     private StageManager _stageManager;
 	private UIManager _uiManager;
-    private InfoToJson _infoToJson;
     private Node _currentNode;
     private bool _isFirstStart;
 
@@ -92,6 +94,15 @@ public partial class GameSceneManager : MonoBehaviour // private
         _currentNode = _stageManager.Nodes[InfoToJson.PlayerCurrentNode];
         playerPawn.MoveToNode(_currentNode);
         SaveCurrentInfo();
+        CheckPrevEventRun(_currentNode);
+    }
+    async void CheckPrevEventRun(Node node) // 객체들간의 초기화순서때문에 Null Reference Exception이.. 호출돼서
+    {
+        if (InfoToJson.IsEventRunning == true)
+        {
+            await Task.Delay(10);
+            _eventManager.EventAction(node);
+        }
     }
 }
 public partial class GameSceneManager // singleton

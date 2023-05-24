@@ -24,28 +24,21 @@ namespace RougeEvent
     public abstract partial class Event
     {
         public EventType Type { get; protected set; }
-        public abstract void BuildUI();
-        public void UIControl()
+
+        public virtual void BuildUI()
         {
-            if (_isDisplay == false)
-                DisplayEvent();
+            GameSceneManager.InfoToJson.IsEventRunning = true;
+            GameSceneManager.SaveCurrentInfo();
         }
     }
 
     public abstract partial class Event : MonoBehaviour // private
     {
-        private bool _isDisplay = false;
+        protected GameSceneManager GameSceneManager;
 
-        private void DisplayEvent()
+        private void Start()
         {
-            gameObject.SetActive(true);
-            _isDisplay = true;
-        }
-
-        private void CloseEvent()
-        {
-            gameObject.SetActive(false);
-            _isDisplay = false;
+            GameSceneManager = GameSceneManager.Instance;
         }
     }
 }
