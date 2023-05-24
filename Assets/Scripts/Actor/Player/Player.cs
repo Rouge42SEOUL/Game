@@ -6,6 +6,9 @@ using Core;
 using Elemental;
 using StateMachine;
 using Interface;
+using Attribute = Actor.Stats.Attribute;
+using Random = System.Random;
+
 
 namespace Actor.Player
 {
@@ -28,13 +31,13 @@ namespace Actor.Player
             StateMachine.ChangeState<PlayerDiedState>();
         }
     }
-    
+
     // Values or methods that other cannot use
     public partial class Player
     {
         private Vector2 _movement;
         private PlayerInput _playerInput;
-        
+
         private StateMachine<Player> StateMachine;
         [SerializeField] private SerializableDictionary<AttributeType, float> _itemEffectedValues;
 
@@ -46,17 +49,17 @@ namespace Actor.Player
             stat.skills[index].UseSkill();
         }
     }
-    
+
     // body of MonoBehaviour
     public partial class Player : Actor<PlayerStatObject>
     {
         protected override void Awake()
         {
             base.Awake();
-        
+
             PlayerAnim = GetComponent<Animator>();
             PlayerRigid = GetComponent<Rigidbody2D>();
-            
+
             StateMachine = new StateMachine<Player>(this, new PlayerIdleState());
             StateMachine.AddState(new PlayerMoveState());
             StateMachine.AddState(new PlayerAttackState());
@@ -84,7 +87,7 @@ namespace Actor.Player
                 Died();
             StateMachine.Update();
         }
-        
+
         private void FixedUpdate()
         {
             StateMachine.FixedUpdate();
@@ -95,7 +98,7 @@ namespace Actor.Player
             attackCollider.GetComponent<PlayerAttackCol>().OnAttackTrigger -= stat.normalAttack.OnAttackTrigger;
         }
     }
-    
+
     // body of others
     public partial class Player
     {
@@ -105,6 +108,7 @@ namespace Actor.Player
             {
                 _skillEffectedValues[type] += effect.GetValueToAdd(GetAttributeValue(type));
             }
+
             AddEffect(effect);
             // TODO: set current attributes
             // TODO: event call 
@@ -114,17 +118,31 @@ namespace Actor.Player
         {
             throw new NotImplementedException();
         }
-        
+
+        public override bool CalculateHit(SerializableDictionary<AttributeType, Attribute> baseAttributes)
+        {
+            var random = new Random();
+            var randomValue = (float)random.NextDouble();
+            var hitChance = baseAttributes[AttributeType.Accuracy].value -
+                            baseAttributes[AttributeType.Avoidance].value;
+            return randomValue < hitChance;
+        }
+
         public override void Damaged(DamageData data)
         {
-            stat.currentHealthPoint -= ElementalBalancer.ApplyBalance(data.ElementalType, stat.elementalType, data.Damage);
-            Effect effect = null;
-            ElementalBalancer.ApplyElementalEffect(data.ElementalType, ref effect);
-            if (effect != null)
-                Affected(effect);
-            Debug.Log("Player HP: " + (stat.PercentHealPoint * 100) + "%");
+            if (CalculateHit(this.stat.baseAttributes))
+            {
+                stat.currentHealthPoint -=
+                ElementalBalancer.ApplyBalance(data.ElementalType, stat.elementalType, data.Damage);
+                Effect effect = null;
+                ElementalBalancer.ApplyElementalEffect(data.ElementalType, ref effect);
+                if (effect != null)
+                    Affected(effect);
+                Debug.Log("Player HP: " + (stat.PercentHealPoint * 100) + "%");
+            }
         }
     }
+    
 
     // event methods
     public partial class Player
@@ -137,7 +155,7 @@ namespace Actor.Player
                 forwardVector = Movement;
             }
         }
-        
+
         private void OnAutoAttack()
         {
             StateMachine.ChangeState<PlayerAttackState>();

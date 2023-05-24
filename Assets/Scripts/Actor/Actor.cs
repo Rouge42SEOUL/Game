@@ -64,6 +64,8 @@ namespace Actor
         public abstract void Affected(Effect effect);
         public abstract void Released(Effect effect);
         public abstract void Damaged(DamageData data);
+        
+        public abstract bool CalculateHit(SerializableDictionary<AttributeType, Attribute> baseAttributes);
         public void DotDamaged(DamageData damage, float duration)
         {
             StartCoroutine(AddDotDamage(damage, duration));
