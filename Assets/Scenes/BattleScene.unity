@@ -618,9 +618,9 @@ MonoBehaviour:
   _skillEffectedValues:
     keys: 
     values: []
-  attackCollider: {fileID: 0}
+  attackCollider: {fileID: 1482730803}
   forwardVector: {x: 0, y: 0}
-  launcher: {fileID: 0}
+  launcher: {fileID: 1040016780}
   _itemEffectedValues:
     keys: 
     values: []

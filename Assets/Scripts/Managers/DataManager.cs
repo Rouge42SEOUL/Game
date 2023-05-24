@@ -11,7 +11,7 @@ namespace Managers.DataManager
         private static DataManager _instance;
         
         private DataContainer _data;
-        private PlayerStatObject _stat;
+        [SerializeField] private PlayerStatObject _stat;
         
         [SerializeField] private int firstGold;
         [SerializeField] private string jsonFileName = "/Json/GameManager.json";
@@ -20,9 +20,16 @@ namespace Managers.DataManager
 
         public int Gold
         {
-            get => _data.Gold;
+            get
+            {
+                if (_data == null)
+                    return -1;
+                return _data.Gold;
+            }
             set
             {
+                if (_data == null)
+                    return;
                 _data.Gold = value;
                 OnGoldUpdate?.Invoke(value);
             }

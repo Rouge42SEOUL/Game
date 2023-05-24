@@ -26,24 +26,24 @@ MonoBehaviour:
     - type: 3
       value: 10
     - type: 4
-      value: 10
+      value: 12.5
     - type: 5
-      value: 10
+      value: 11.5
     - type: 6
-      value: 10
+      value: 0.6
     - type: 7
-      value: 10
+      value: 0.074999996
   elementalType: 7
   baseHealthPoint: 1000
   skills:
   - slotType: 2
-    _skillObject: {fileID: 11400000, guid: cf985d9a164daf24fb36317bf67bc7c1, type: 2}
+    _skillObject: {fileID: 0}
+  - slotType: 2
+    _skillObject: {fileID: 0}
   - slotType: 2
     _skillObject: {fileID: 0}
   - slotType: 2
     _skillObject: {fileID: 0}
-  - slotType: 5
-    _skillObject: {fileID: 11400000, guid: f8f0cf0fac7de9d47bf8d01a9277aa98, type: 2}
   passive: {fileID: 0}
   effects:
     keys: 
@@ -60,11 +60,11 @@ MonoBehaviour:
     - type: 3
       value: 10
     - type: 4
-      value: 10
+      value: 12.5
     - type: 5
-      value: 10
+      value: 11.5
     - type: 6
-      value: 10
+      value: 0.6
     - type: 7
-      value: 10
+      value: 0.074999996
   currentHealthPoint: 1000

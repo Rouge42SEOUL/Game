@@ -61,7 +61,7 @@ namespace UI
             _enemyCount.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = _count.ToString("N0");
             _earnedMoney.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = _money.ToString("N0");
             _elapsedTime.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text =
-                BattleDataManager.Instance.Minutes + ":" + BattleDataManager.Instance.Seconds.ToString("f2");
+                BattleDataManager.Instance.Minutes.ToString("D2") + ":" + BattleDataManager.Instance.Seconds.ToString("f0");
 
             string con = DataManager.Instance.GetBaseStat(AttributeType.Health).ToString("N0");
             string agi = DataManager.Instance.GetBaseStat(AttributeType.Speed).ToString("N0");

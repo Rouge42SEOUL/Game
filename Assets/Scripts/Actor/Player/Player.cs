@@ -6,6 +6,7 @@ using Core;
 using Elemental;
 using StateMachine;
 using Interface;
+using Skill;
 using Attribute = Actor.Stats.Attribute;
 using Random = System.Random;
 
@@ -19,10 +20,18 @@ namespace Actor.Player
 
         internal Animator PlayerAnim;
         internal Rigidbody2D PlayerRigid;
+        
+        public Action OnAttributeChanged;
 
         public float PercentHealPoint => stat.PercentHealPoint;
         public override float GetAttributeValue(AttributeType type) => stat.currentAttributes[type].value;
-        public override void AddAttributeValue(AttributeType type, float value) => stat.AddAttribute(type, value);
+
+        public override void AddAttributeValue(AttributeType type, float value)
+        {
+            stat.AddAttribute(type, value);
+            OnAttributeChanged?.Invoke();
+        }
+
         public override void AddEffect(Effect effect) => stat.AddEffect(effect);
         public override void DeleteEffect(EffectType type) => stat.DeleteEffect(type);
 
@@ -68,6 +77,7 @@ namespace Actor.Player
 
         protected void OnEnable()
         {
+            OnAttributeChanged += stat.CalculateSideAttributes;
             attackCollider.GetComponent<PlayerAttackCol>().OnAttackTrigger += stat.normalAttack.OnAttackTrigger;
             launcher.OnAttackTrigger += stat.skills[0].OnAttackTrigger;
         }
@@ -79,6 +89,8 @@ namespace Actor.Player
             {
                 slot.SetContext(GetComponent<IActorContext>());
             }
+
+            stat.skills[3].slotType = SkillType.Ultimate;
         }
 
         private void Update()
@@ -95,7 +107,9 @@ namespace Actor.Player
 
         private void OnDisable()
         {
+            OnAttributeChanged -= stat.CalculateSideAttributes;
             attackCollider.GetComponent<PlayerAttackCol>().OnAttackTrigger -= stat.normalAttack.OnAttackTrigger;
+            launcher.OnAttackTrigger += stat.skills[0].OnAttackTrigger;
         }
     }
 

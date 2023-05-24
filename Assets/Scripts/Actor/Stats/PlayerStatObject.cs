@@ -53,8 +53,6 @@ namespace Actor.Stats
             {
                 currentAttributes[type] = new Attribute(type, baseAttributes[type].value);
             }
-            
-            skills[3].slotType = SkillType.Ultimate;
             currentHealthPoint = baseHealthPoint;
         }
 

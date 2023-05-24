@@ -130,7 +130,6 @@ namespace Actor.Enemy
             var randomValue = (float)random.NextDouble();
             var hitChance = baseAttributes[AttributeType.Accuracy].value -
                             baseAttributes[AttributeType.Avoidance].value;
-            Debug.Log(randomValue + ", " + hitChance + ": " + (randomValue < hitChance));
             return randomValue < hitChance;
         }
 
@@ -140,7 +139,6 @@ namespace Actor.Enemy
             Rigidbody2D.AddForce(data.KbForce, ForceMode2D.Impulse);
             if (CalculateHit(stat.baseAttributes))
             {
-                Debug.Log("Enemy health Lost -> " + data.Damage);
                 _currentHealthPoint -= data.Damage;
                 stateMachine.ChangeState<EnemyGetHitState>();
             }
