@@ -12,7 +12,7 @@ namespace Managers.DataManager
         private DataContainer _data;
         
         [SerializeField] private int firstGold;
-        [SerializeField] private string jsonFileName = "Json/GameManager.json";
+        [SerializeField] private string jsonFileName = "/Json/GameManager.json";
 
         public Action<int> OnGoldUpdate;
 
@@ -60,7 +60,7 @@ namespace Managers.DataManager
 
         public bool SaveData()
         {
-            if (StageManager.Instance)
+            if (StageManager.Instance == null)
                 return false;
             _data.Map = StageManager.Instance.MapNum;
             _data.SaveInfo(StageManager.Instance.Nodes, MapDataManager.Instance.CurrentNode);
@@ -72,6 +72,10 @@ namespace Managers.DataManager
         {
             return JsonConverter.Load(out _data, Application.dataPath + jsonFileName);
         }
-        
+
+        public void DeleteData()
+        {
+            JsonConverter.DeleteJson(Application.dataPath + jsonFileName);
+        }
     }
 }

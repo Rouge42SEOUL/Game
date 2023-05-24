@@ -62,7 +62,7 @@ namespace Items
         public void LogTotalStatus()
         {
             TotalStatus totalStatus = RequireTotalValue();
-            Debug.Log($"Total Status: StatBonuses - Power: {totalStatus.statBonuses.power}, Health: {totalStatus.statBonuses.health}, Speed: {totalStatus.statBonuses.speed}, AttackSpeed: {totalStatus.attackSpeed}, Range: {totalStatus.range}, Damage: {totalStatus.damage}, Defense: {totalStatus.defense}");
+            // Debug.Log($"Total Status: StatBonuses - Power: {totalStatus.statBonuses.power}, Health: {totalStatus.statBonuses.health}, Speed: {totalStatus.statBonuses.speed}, AttackSpeed: {totalStatus.attackSpeed}, Range: {totalStatus.range}, Damage: {totalStatus.damage}, Defense: {totalStatus.defense}");
         }
     }
 }

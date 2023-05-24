@@ -1931,10 +1931,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 151062962}
-        m_TargetAssemblyTypeName: JsonConverter, Assembly-CSharp
-        m_MethodName: DeleteJson
-        m_Mode: 5
+      - m_Target: {fileID: 1667353473}
+        m_TargetAssemblyTypeName: Managers.DataManager.DataManager, Assembly-CSharp
+        m_MethodName: DeleteData
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -9604,7 +9604,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firstGold: 0
-  jsonFileName: Json/GameManager.json
+  jsonFileName: /Json/GameManager.json
 --- !u!1001 &1711071821
 PrefabInstance:
   m_ObjectHideFlags: 0
