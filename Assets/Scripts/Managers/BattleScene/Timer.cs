@@ -46,5 +46,10 @@ public class Timer : MonoBehaviour
         timerText.text = Minutes + ":" + Seconds.ToString("F2");
     }
 
+    public void Stop()
+    {
+        gameObject.SetActive(false);
+    }
+
     #endregion
 }

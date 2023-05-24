@@ -15,7 +15,7 @@ namespace UI
         [SerializeField] private GameObject _earnedMoney;
         [SerializeField] private GameObject _elapsedTime;
         [SerializeField] private GameObject _playerStat;
-    
+
         private WaitForSeconds _wait = new WaitForSeconds(0.5f);
         private GameObject _panel;
         private Player _player;
@@ -54,6 +54,8 @@ namespace UI
 
         private void OnClearBattle(int killCount)
         {
+            Timer.Instance.Stop();
+            
             _count = killCount;
             _money = killCount * 10;
             DataManager.Instance.Gold += _money;
