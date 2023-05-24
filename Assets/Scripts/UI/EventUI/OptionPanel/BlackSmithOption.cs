@@ -1,4 +1,5 @@
 using Items.ScriptableObjectSource;
+using Managers.DataManager;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -27,10 +28,10 @@ public class BlackSmithOption : MonoBehaviour
 
     public void Upgrade()
     {
-        if (_equipment.gold + _equipment.reinforcement * 10 <= _mapDataManager.Gold)
+        if (_equipment.gold + _equipment.reinforcement * 10 <= DataManager.Instance.Gold)
         {
             
-            _mapDataManager.Gold -= _equipment.gold + _equipment.reinforcement * 10;
+            DataManager.Instance.Gold -= _equipment.gold + _equipment.reinforcement * 10;
             Equipment.reinforcement++;
             this.transform.parent.parent.gameObject.GetComponent<BlackSmithUI>().CloseUI(); 
         }

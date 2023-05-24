@@ -1,5 +1,6 @@
 using Items;
 using Items.ScriptableObjectSource;
+using Managers.DataManager;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -29,9 +30,9 @@ public class MerchantOption : MonoBehaviour
 
     public void Buy()
     {
-        if (_item.gold <= _mapDataManager.Gold)
+        if (_item.gold <= DataManager.Instance.Gold)
         {
-            _mapDataManager.Gold -= _item.gold;
+            DataManager.Instance.Gold -= _item.gold;
             Equipment equipment = (Equipment)_item;
             _playerInventory.AddItem(equipment.id);
             this.transform.parent.parent.GetComponent<MerchantUI>().CloseUI(); 

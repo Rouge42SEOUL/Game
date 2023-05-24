@@ -13,13 +13,13 @@ public abstract class EventUI : MonoBehaviour
 
     public void DisplayUI()
     {
-        _mapDataManager.SetEventRunning();
+        GameManager.Instance.PauseGame();
         gameObject.SetActive(true);
         EventUIButton.gameObject.SetActive(false);
     }
     public void CloseUI()
     {
-        _mapDataManager.SetEventRunning();
+        GameManager.Instance.ContinueGame();
         EventUIButton.gameObject.SetActive(true);
         gameObject.SetActive(false);
     }

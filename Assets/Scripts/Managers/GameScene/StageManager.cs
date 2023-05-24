@@ -23,22 +23,22 @@ public partial class StageManager // public
         RandomSetting();
     }
     // 이전데이터를 읽어서 그 데이터로 stage를 구성
-    public void PrevInit(DataContainer prevData)
+    public void PrevInit()
     {
         // 맵 설정
-        MapNum = prevData.Map;
+        MapNum = DataManager.Instance.Map;
         _selectMap = map[MapNum];
         _selectMap = Instantiate(_selectMap);
         // 노드들 설정
-        int nodeCount = prevData.Events.Count;
+        int nodeCount = DataManager.Instance.Events.Count;
         int[] keys = new int[nodeCount];
-        prevData.Events.Keys.CopyTo(keys, 0);
+        DataManager.Instance.InitEventKeys(ref keys);
         Nodes = new Node[nodeCount];
         for (int i = 0; i < nodeCount; i++)
         {
             int key = keys[i];
             Nodes[key] = _selectMap.transform.GetChild(i).gameObject.GetComponent<Node>();
-            Nodes[key].eventType = prevData.Events[key];
+            Nodes[key].eventType = DataManager.Instance.Events[key];
             Nodes[key].EventSetting();
         }
     }
