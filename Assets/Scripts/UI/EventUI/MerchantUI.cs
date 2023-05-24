@@ -29,7 +29,7 @@ public class MerchantUI : EventUI
         InitBoxes initBoxes = new InitBoxes();
         initBoxes.InitInventoryBoxes(inventoryPanels, "MerchantInventory");
         initBoxes.InitSlotBoxes(slotPanels, "MerchantSlot");
-        CloseUI();
+        gameObject.SetActive(false);
     }
 
     private void OnEnable()

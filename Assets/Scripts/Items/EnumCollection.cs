@@ -60,7 +60,8 @@ public enum WeaponType
 {
     OneHand,
     TwoHand,
-    Shield
+    Shield,
+    None
 }
 
 public enum AttributeTypes
