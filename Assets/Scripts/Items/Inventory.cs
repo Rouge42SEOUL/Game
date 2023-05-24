@@ -240,7 +240,7 @@ namespace Items
                     break;
                 if (idx == 15)
                 {
-                    Debug.Log("Inventory is full");
+                    // Debug.Log("Inventory is full");
                     return null;
                 }
             }
