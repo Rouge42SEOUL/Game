@@ -145,5 +145,4 @@ namespace Actor.Enemy
             }
         }
     }
-    }
 }
