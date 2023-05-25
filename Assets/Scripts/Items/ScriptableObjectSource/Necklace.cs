@@ -1,6 +1,7 @@
 using Items.StatusData;
 using UnityEngine;
 using System.Text;
+using Actor.Stats;
 
 namespace Items.ScriptableObjectSource
 {
@@ -8,7 +9,7 @@ namespace Items.ScriptableObjectSource
     public class Necklace : Equipment
     {
         public NecklaceStatus status;
-        
+
         public override string ItemDescription()
         {
             StringBuilder sb = new StringBuilder();
@@ -16,43 +17,48 @@ namespace Items.ScriptableObjectSource
             sb.AppendLine($"{itemName}");
             sb.AppendLine($"(Level {reinforcement})");
             sb.AppendLine();
-            sb.AppendLine($"Power: {status.statBonuses.power}");
-            sb.AppendLine($"Health: {status.statBonuses.health}");
-            sb.AppendLine($"Speed: {status.statBonuses.speed}");
+            sb.AppendLine($"Move Speed: {status.moveSpeed}");
+            sb.AppendLine($"Avoidance: {status.avoidance}");
             sb.AppendLine();
             sb.AppendLine($"Gold: {gold}");
 
             return sb.ToString();
         }
-        
-        public override Equipment Equip(Slot slot)
+
+        public override Equipment Equip(Slot slot, PlayerStatObject playerStatObject)
         {
             if (slot == null)
             {
                 Debug.LogError("Equip Error: slot is null");
                 return null;
             }
-
-            /* main processing */
-            Equipment prev = UnEquip(slot); 
+            
+            Equipment previousNecklace = UnEquip(slot, playerStatObject);
             slot.slotNecklace = this;
-            return prev;
+            playerStatObject.AddAttribute(AttributeType.MoveSpeed, status.moveSpeed);
+            playerStatObject.AddAttribute(AttributeType.Avoidance, status.avoidance);
+            
+            return previousNecklace;
         }
 
-        public override Equipment UnEquip(Slot slot)
+        public override Equipment UnEquip(Slot slot, PlayerStatObject playerStatObject)
         {
             if (slot == null)
             {
                 Debug.LogError("UnEquip Error: slot is null");
                 return null;
             }
-            
-            /* main processing */
-            Equipment prev = slot.slotNecklace;
+
+            Necklace previousNecklace = slot.slotNecklace;
             slot.slotNecklace = null;
-            return prev;
+            if (previousNecklace != null)
+            {
+                playerStatObject.SubAttribute(AttributeType.MoveSpeed, previousNecklace.status.moveSpeed);
+                playerStatObject.SubAttribute(AttributeType.Avoidance, previousNecklace.status.avoidance);
+            }
+            return previousNecklace;
         }
-        
+
         public override Equipment DeepCopy()
         {
             var copy = ScriptableObject.CreateInstance<Necklace>();
@@ -64,7 +70,7 @@ namespace Items.ScriptableObjectSource
             copy.id = this.id;
             copy.reinforcement = this.reinforcement;
             copy.status = new NecklaceStatus(this.status);
-            
+
             return copy;
         }
     }

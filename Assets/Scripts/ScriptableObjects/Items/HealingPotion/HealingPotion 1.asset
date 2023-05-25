@@ -16,5 +16,5 @@ MonoBehaviour:
   itemName: PotionOfHealing
   description: 
   icon: {fileID: 21300000, guid: b7d19ec039fa7b141bd165aa95496c75, type: 3}
-  gold: 0
-  healingAmount: 0
+  gold: 30
+  healingAmount: 100

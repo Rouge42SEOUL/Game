@@ -1,6 +1,7 @@
 using Items.StatusData;
 using UnityEngine;
 using System.Text;
+using Actor.Stats;
 
 namespace Items.ScriptableObjectSource
 {
@@ -14,22 +15,33 @@ namespace Items.ScriptableObjectSource
             {
                 StringBuilder sb = new StringBuilder();
 
-                sb.AppendLine($"{itemName}");
-                sb.AppendLine($"(Level {reinforcement})");
-                sb.AppendLine();
-                sb.AppendLine($"Damage: {status.damage}");
-                sb.AppendLine($"Range: {status.range}");
-                sb.AppendLine($"Attack Speed: {status.attackSpeed}");
-                sb.AppendLine($"Power: {status.statBonuses.power}");
-                sb.AppendLine($"Health: {status.statBonuses.health}");
-                sb.AppendLine($"Speed: {status.statBonuses.speed}");
-                sb.AppendLine();
-                sb.AppendLine($"Gold: {gold}");
+                if (type == WeaponType.Shield)
+                {
+                    sb.AppendLine($"{itemName}");
+                    sb.AppendLine($"(Level {reinforcement})");
+                    sb.AppendLine();
+                    sb.AppendLine($"Health: {status.health}");
+                    sb.AppendLine($"Defense: {status.defense}");
+                    sb.AppendLine();
+                    sb.AppendLine($"Gold: {gold}");
+
+                }
+                else
+                {
+                    sb.AppendLine($"{itemName}");
+                    sb.AppendLine($"(Level {reinforcement})");
+                    sb.AppendLine();
+                    sb.AppendLine($"Damage: {status.damage}");
+                    sb.AppendLine($"Attack Speed: {status.attackSpeed}");
+                    sb.AppendLine();
+                    sb.AppendLine($"Gold: {gold}");
+
+                }
                 
                 return sb.ToString();
             }
             
-            public override Equipment Equip(Slot slot)
+            public override Equipment Equip(Slot slot, PlayerStatObject playerStatObject)
             {
                 if (slot == null)
                 {
@@ -40,31 +52,39 @@ namespace Items.ScriptableObjectSource
                 if (type == WeaponType.OneHand && slot.slotWeapon[0] != null && slot.slotWeapon[1] == null)
                 { 
                     slot.slotWeapon[1] = this;
+                    playerStatObject.AddAttribute(AttributeType.Attack, status.damage);
+                    playerStatObject.AddAttribute(AttributeType.AttackSpeed, status.attackSpeed);
                     return null;
                 }
 
                 /* 예외 이후에 main 처리문 */
-                Equipment previousWeapon = UnEquip(slot);
+                Equipment previousWeapon = UnEquip(slot, playerStatObject);
                 switch (type)
                 {
                     case WeaponType.OneHand:
                         slot.slotWeapon[0] = this;
+                        playerStatObject.AddAttribute(AttributeType.Attack, status.damage);
+                        playerStatObject.AddAttribute(AttributeType.AttackSpeed, status.attackSpeed);
                         break;
                     case WeaponType.Shield:
                         slot.slotWeapon[1] = this;
+                        playerStatObject.AddAttribute(AttributeType.Health, status.health);
+                        playerStatObject.AddAttribute(AttributeType.Defense, status.defense);
                         break;
                     case WeaponType.TwoHand:
                         slot.slotWeapon[0] = this;
                         slot.slotWeapon[1] = this;
+                        playerStatObject.AddAttribute(AttributeType.Attack, status.damage);
+                        playerStatObject.AddAttribute(AttributeType.AttackSpeed, status.attackSpeed);
                         break;
                 }
 
                 return previousWeapon;
             }
 
-            public override Equipment UnEquip(Slot slot)
+            public override Equipment UnEquip(Slot slot, PlayerStatObject playerStatObject)
             {
-                Equipment previousWeapon = null;
+                Weapon previousWeapon = null;
 
                 if (slot == null)
                 {
@@ -77,6 +97,8 @@ namespace Items.ScriptableObjectSource
                     previousWeapon = slot.slotWeapon[0];
                     slot.slotWeapon[0] = null;
                     slot.slotWeapon[1] = null;
+                    playerStatObject.SubAttribute(AttributeType.Attack, previousWeapon.status.damage);
+                    playerStatObject.SubAttribute(AttributeType.AttackSpeed, previousWeapon.status.attackSpeed);
                     return previousWeapon;
                 }
                 
@@ -106,12 +128,21 @@ namespace Items.ScriptableObjectSource
                         slot.slotWeapon[1] = null;
                         break;
                 }
+
+                if (previousWeapon != null)
+                {
+                    playerStatObject.SubAttribute(AttributeType.Attack, previousWeapon.status.damage);
+                    playerStatObject.SubAttribute(AttributeType.AttackSpeed, previousWeapon.status.attackSpeed);
+                    playerStatObject.SubAttribute(AttributeType.Health, previousWeapon.status.health);
+                    playerStatObject.SubAttribute(AttributeType.Defense, previousWeapon.status.defense);
+                }
+
                 return previousWeapon;
             }
             
             public override Equipment DeepCopy()
             {
-                var copy = ScriptableObject.CreateInstance<Weapon>();
+                var copy = CreateInstance<Weapon>();
 
                 copy.itemName = this.itemName;
                 copy.description = this.description;

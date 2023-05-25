@@ -16,10 +16,8 @@ MonoBehaviour:
   itemName: GoldenRing
   description: 
   icon: {fileID: 21300000, guid: 8661c2c7e325a33438f06b02458fd199, type: 3}
-  gold: 10
+  gold: 50
   reinforcement: 0
   status:
-    statBonuses:
-      power: 1
-      health: 1
-      speed: 1
+    accuracy: 0.5
+    attackSpeed: 0.5

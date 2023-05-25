@@ -12,14 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4479317aa24043c69ee9c7f095377847, type: 3}
   m_Name: ring1
   m_EditorClassIdentifier: 
+  id: 1
   itemName: MagicGoldenRing
   description: 
   icon: {fileID: 21300000, guid: f66c057114b8725409847a8a8e83a75b, type: 3}
-  gold: 100
-  id: 1
+  gold: 60
   reinforcement: 0
   status:
-    statBonuses:
-      power: 2
-      health: 2
-      speed: 2
+    accuracy: 0.6
+    attackSpeed: 0.6

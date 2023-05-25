@@ -98,7 +98,7 @@ namespace Items.Tooltip
                     item = GetComponent<MerchantOption>().Item;
                     break;
             }
-
+            Debug.Log(item.itemName);
             if (item != null)
             {
                 if(item is Weapon weapon)

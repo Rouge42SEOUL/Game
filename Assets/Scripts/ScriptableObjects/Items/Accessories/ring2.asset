@@ -12,14 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4479317aa24043c69ee9c7f095377847, type: 3}
   m_Name: ring2
   m_EditorClassIdentifier: 
+  id: 2
   itemName: MagicSliverRing
   description: 
   icon: {fileID: 21300000, guid: 8bcb07d9c2c4c484caf61c33f48e3dd8, type: 3}
-  gold: 0
-  id: 2
+  gold: 40
   reinforcement: 0
   status:
-    statBonuses:
-      power: 3
-      health: 3
-      speed: 3
+    accuracy: 0.4
+    attackSpeed: 0.4

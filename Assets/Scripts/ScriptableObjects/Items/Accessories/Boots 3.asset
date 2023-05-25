@@ -12,14 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd894a57327f435bb32812b7fa1ea03d, type: 3}
   m_Name: Boots 3
   m_EditorClassIdentifier: 
+  id: 26
   itemName: GreyKnightBoots
   description: 
   icon: {fileID: 21300000, guid: c544836e2ceee34428d1abdac6b5ac59, type: 3}
-  gold: 0
-  id: 26
+  gold: 30
   reinforcement: 0
   status:
-    statBonuses:
-      power: 1
-      health: 1
-      speed: 1
+    moveSpeed: 0.3
+    avoidance: 0.3

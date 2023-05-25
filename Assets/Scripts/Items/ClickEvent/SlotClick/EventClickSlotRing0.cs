@@ -14,6 +14,7 @@ namespace Items.ClickEvent.SlotClick
         }
         public void OnPointerClick(PointerEventData eventData)
         {
+            _inventory.Save();
             if (eventData.button == PointerEventData.InputButton.Right)
             {
                 if (_inventory.slot.slotRing[0] == null)

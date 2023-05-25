@@ -12,15 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff830b4e38419b44d9774ffbda922fc8, type: 3}
   m_Name: Armor5
   m_EditorClassIdentifier: 
+  id: 23
   itemName: ScoutArmor
   description: 
   icon: {fileID: 21300000, guid: 17790c504822a7041b2cb232729c9b19, type: 3}
-  gold: 0
-  id: 23
+  gold: 70
   reinforcement: 0
   status:
-    statBonuses:
-      power: 0
-      health: 0
-      speed: 0
-    defense: 0
+    health: 350
+    defense: 70

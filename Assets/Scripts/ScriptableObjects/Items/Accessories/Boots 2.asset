@@ -12,14 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd894a57327f435bb32812b7fa1ea03d, type: 3}
   m_Name: Boots 2
   m_EditorClassIdentifier: 
+  id: 25
   itemName: BattleguardBoots
   description: 
   icon: {fileID: 21300000, guid: 12bba31e10a26b645908ca35cce3ac2a, type: 3}
-  gold: 0
-  id: 25
+  gold: 20
   reinforcement: 0
   status:
-    statBonuses:
-      power: 1
-      health: 1
-      speed: 1
+    moveSpeed: 0.2
+    avoidance: 0.2

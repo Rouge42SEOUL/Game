@@ -3551,7 +3551,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9210b9c3d68dd4a46a07ba6afe48cccb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  goldUI: {fileID: 0}
+  goldUI: {fileID: 2029533312}
 --- !u!1 &236171740 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4866457312429227539, guid: a40c0ae6cac99384da1b86a2a74c440a, type: 3}
@@ -18581,6 +18581,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f31396d28bdb29f459b980f28057900d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerStatObject: {fileID: 11400000, guid: c6d6312bbd5c7884bb273850f3b45774, type: 2}
   inventoryPanels: []
   slotPanels: []
   equipmentDatabase: {fileID: 11400000, guid: b63368440ba056747a38ae73ec33bffd, type: 2}
