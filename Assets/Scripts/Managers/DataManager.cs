@@ -16,7 +16,7 @@ namespace Managers.DataManager
         private PlayData _playData;
         [SerializeField] private PlayerStatObject _stat;
 
-        private int _firstGold = 10000;
+        private int _firstGold;
         private readonly string _mapDataPath = "/Json/MapData.json";
         private readonly string _playDataPath = "/Json/PlayData.json";
 
