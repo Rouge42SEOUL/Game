@@ -1,5 +1,4 @@
 
-using System;
 using System.Collections.Generic;
 using Actor.Stats;
 using Skill;
@@ -68,8 +67,8 @@ namespace Managers.MainScene
             }
         }
 
-        public int selectedClassId;
-        public int selectedPassiveId;
+        [HideInInspector]public int selectedClassId;
+        [HideInInspector]public int selectedPassiveId;
         
         public List<CharClassData> ClassList;
         public List<PassiveData> PassiveList;
@@ -77,10 +76,15 @@ namespace Managers.MainScene
         public void QuitGame() => _QuitGame();
         public void ToGameScene() => _ToGameScene();
 
+        public void NewGame() => _NewGame();
+        public void LoadGame() => _LoadGame();
+        public void StartNewGame() => _StartNewGame();
 
         public GameObject confirmPopup;
         public GameObject passiveSelect;
         public GameObject classSelect;
+        public GameObject newGamePopUp;
+        public GameObject charSelect;
 
         public void SelectPassive(int n) => _SelectPassive(n);
     }
@@ -122,11 +126,6 @@ namespace Managers.MainScene
             PassiveList.Add(new PassiveData(4, "Dark"));
             PassiveList.Add(new PassiveData(5, "Ground"));
         }
-
-        private void Start()
-        {
-            DataManager.DataManager.Instance.InitData();
-        }
     }
     
     public partial class TitleManager
@@ -145,6 +144,35 @@ namespace Managers.MainScene
         {
             playerStat.passive = passive[n];
         }
+
+        private void _NewGame()
+        {
+            if (DataManager.DataManager.Instance.HasData())
+            {
+                newGamePopUp.SetActive(true);
+            }
+            else
+            {
+                charSelect.SetActive(true);
+            }
+        }
+
+        private void _StartNewGame()
+        {
+            DataManager.DataManager.Instance.DeleteData();
+            DataManager.DataManager.Instance.InitData();
+        }
+
+        private void _LoadGame()
+        {
+            if (DataManager.DataManager.Instance.HasData())
+            {
+                DataManager.DataManager.Instance.LoadData();
+                _ToGameScene();
+            }
+        }
+        
+        //private void 
     }
 }
 
