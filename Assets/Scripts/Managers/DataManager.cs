@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Actor.Stats;
 using UnityEngine;
+using UnityEngine.Windows;
 
 namespace Managers.DataManager
 {
@@ -62,6 +63,7 @@ namespace Managers.DataManager
         public void InitData()
         {
             Gold = firstGold;
+            //SaveData();
         }
 
         public void InitEventKeys(ref int[] keys)
@@ -101,6 +103,11 @@ namespace Managers.DataManager
         {
             JsonConverter.DeleteJson(Application.dataPath + jsonFileName);
             JsonConverter.DeleteJson(Application.dataPath + _runningEventFile);
+        }
+
+        public bool HasData()
+        {
+            return File.Exists(Application.dataPath + jsonFileName);
         }
 
         public void LevelUP() => _stat.LevelUp();
