@@ -7,6 +7,7 @@ namespace Items.ClickEvent.SlotClick
     public class EventClickSlotWeapon1 : MonoBehaviour, IPointerClickHandler
     {
         private Inventory _inventory;
+        public MerchantUI merchantUI;
 
         private void Start()
         {
@@ -23,6 +24,9 @@ namespace Items.ClickEvent.SlotClick
                 _inventory.ReleasingWeaponItem1();
                 _inventory.UpdateInventory();
                 _inventory.UpdateSlot();
+                if (merchantUI == null) return;
+                merchantUI.UpdateInventory();
+                merchantUI.UpdateSlot();
             }
         }
     }

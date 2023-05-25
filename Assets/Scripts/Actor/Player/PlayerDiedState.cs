@@ -1,7 +1,9 @@
 
 using System.Collections;
+using Managers.DataManager;
 using StateMachine;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Actor.Player
 {
@@ -24,6 +26,8 @@ namespace Actor.Player
         {
             yield return new WaitForSeconds(3f);
             _context.gameObject.SetActive(false);
+            DataManager.Instance.DeleteData();
+            SceneManager.LoadScene("MainScene");
         }
     }
 }

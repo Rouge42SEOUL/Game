@@ -1,4 +1,5 @@
 using System;
+using Managers.DataManager;
 using UnityEngine;
 
 public enum EventType
@@ -24,28 +25,15 @@ namespace RougeEvent
     public abstract partial class Event
     {
         public EventType Type { get; protected set; }
-        public abstract void BuildUI();
-        public void UIControl()
+
+        public virtual void BuildUI()
         {
-            if (_isDisplay == false)
-                DisplayEvent();
+            DataManager.Instance.SetRunningEvent(true);
+            DataManager.Instance.SaveData();
         }
     }
 
     public abstract partial class Event : MonoBehaviour // private
     {
-        private bool _isDisplay = false;
-
-        private void DisplayEvent()
-        {
-            gameObject.SetActive(true);
-            _isDisplay = true;
-        }
-
-        private void CloseEvent()
-        {
-            gameObject.SetActive(false);
-            _isDisplay = false;
-        }
     }
 }

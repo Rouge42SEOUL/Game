@@ -15,6 +15,7 @@ namespace Managers.DataManager
         [JsonProperty]
         public int Gold;
 
+
         public void SaveInfo(Node[] nodes, Node currentNode)
         {
             Events = new Dictionary<int, EventType>();
@@ -27,5 +28,12 @@ namespace Managers.DataManager
                 }
             }
         }
+    }
+
+    [JsonObject(MemberSerialization.OptIn)]
+    public class DataRunningEvent
+    {
+        [JsonProperty]
+        public bool IsEventRunning;
     }
 }

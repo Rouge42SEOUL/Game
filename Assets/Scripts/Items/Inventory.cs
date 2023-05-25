@@ -201,6 +201,8 @@ namespace Items
         public void ToggleInventory()
         {
             inventoryUI.SetActive(!inventoryUI.activeSelf);
+            UpdateInventory();
+            UpdateSlot();
         }
         
         /* for blacksmith event */
@@ -257,7 +259,7 @@ namespace Items
             return false;
         }
 
-        public Item AddItem(int id)
+        public bool AddItem(int id)
         {
             Save();
             int idx;
@@ -266,7 +268,7 @@ namespace Items
             if (inventoryItems == null)
             {
                 Debug.LogError("Inventory items not initialized.");
-                return null;
+                return false;
             }
             
             for (idx = 0; idx < 16; idx++)
@@ -275,8 +277,8 @@ namespace Items
                     break;
                 if (idx == 15)
                 {
-                    // Debug.Log("Inventory is full");
-                    return null;
+                    Debug.Log("Inventory is full");
+                    return false;
                 }
             }
             
@@ -293,7 +295,7 @@ namespace Items
                     inventoryItems[idx] = equipmentDatabase.items[id];
                 }
             }
-            return null;
+            return true;
         }
         public void UpdateInventory()
         {

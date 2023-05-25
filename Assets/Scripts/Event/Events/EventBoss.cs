@@ -10,6 +10,7 @@ public class EventBoss :  RougeEvent.Event
 
     public override void BuildUI()
     {
+        base.BuildUI();
         Boss();
     }
     

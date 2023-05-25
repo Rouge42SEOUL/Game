@@ -6,6 +6,7 @@ namespace Items.ClickEvent.SlotClick
     public class EventClickSlotRing1 : MonoBehaviour, IPointerClickHandler
     {
         private Inventory _inventory;
+        public MerchantUI merchantUI;
 
         private void Start()
         {
@@ -21,6 +22,9 @@ namespace Items.ClickEvent.SlotClick
                 _inventory.ReleasingRingItem1();
                 _inventory.UpdateInventory();
                 _inventory.UpdateSlot();
+                if (merchantUI == null) return;
+                merchantUI.UpdateInventory();
+                merchantUI.UpdateSlot();
             }
         }
     }

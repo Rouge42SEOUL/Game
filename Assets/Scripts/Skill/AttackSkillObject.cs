@@ -1,7 +1,8 @@
+using Actor.Stats;
 using Interface;
-using Skill.Projectile;
 using Skill.Strategy;
 using UnityEngine;
+using Random = System.Random;
 
 namespace Skill
 {
@@ -9,14 +10,15 @@ namespace Skill
     public class AttackSkillObject : ActiveSkillObject
     {
         [SerializeField] private DamageData _damage;
-        [SerializeField] private ProjectileData _projectile;
+        [SerializeField] private GameObject _projectile;
 
+        private Random _random = new Random();
         protected override void InitSkill()
         {
             switch (targetType)
             {
                 case TargetType.Projectile:
-                    strategy = new ProjectileAttackStrategy(context, _projectile);
+                    strategy = new ProjectileAttackStrategy(context, ref _projectile);
                     break;
                 case TargetType.Area:
                     strategy = new AreaAttackStrategy(context);
@@ -33,10 +35,26 @@ namespace Skill
         }
 
         public override void Use() => strategy.Use();
+        
+        private void CalculateHit(float userAccuracy, float targetAvoid, float targetDefense, ref DamageData damageData)
+        {
+            var randomValue = (float)_random.NextDouble();
+            var hitChance = userAccuracy - targetAvoid;
+            if (randomValue > hitChance)
+                damageData.Damage = 0;
+            else
+            {
+                damageData.Damage -= targetDefense;
+            }
+        }
 
         public void OnAttackTrigger(GameObject target)
         {
             // TOD0 : optimize and reimplement KnockBackForce power
+            var userAccuracy = context.GetAttributeValue(AttributeType.Accuracy);
+            var targetAvoid = target.GetComponent<IActorContext>().GetAttributeValue(AttributeType.Avoidance);
+            var targetDefense = target.GetComponent<IActorContext>().GetAttributeValue(AttributeType.Defense);
+            CalculateHit(userAccuracy, targetAvoid, targetDefense,ref _damage);
             _damage.KbForce = Vector3.Normalize(target.transform.position - context.Position);
             target.GetComponent<IDamageable>()?.Damaged(_damage);
             if (hasEffect)

@@ -9,5 +9,6 @@ namespace Skill.Projectile
         public Sprite sprite;
         public float radius;
         public float speed;
+        public string targetTag;
     }
 }

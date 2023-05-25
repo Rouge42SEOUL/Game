@@ -15,7 +15,7 @@ namespace UI
         [SerializeField] private GameObject _earnedMoney;
         [SerializeField] private GameObject _elapsedTime;
         [SerializeField] private GameObject _playerStat;
-    
+
         private WaitForSeconds _wait = new WaitForSeconds(0.5f);
         private GameObject _panel;
         private Player _player;
@@ -54,6 +54,8 @@ namespace UI
 
         private void OnClearBattle(int killCount)
         {
+            Timer.Instance.Stop();
+            
             _count = killCount;
             _money = killCount * 10;
             DataManager.Instance.Gold += _money;
@@ -61,7 +63,7 @@ namespace UI
             _enemyCount.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = _count.ToString("N0");
             _earnedMoney.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = _money.ToString("N0");
             _elapsedTime.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text =
-                BattleDataManager.Instance.Minutes.ToString("D2") + ":" + BattleDataManager.Instance.Seconds.ToString("f0");
+                Timer.Instance.Minutes.ToString("D2") + ":" + Timer.Instance.Seconds.ToString("f0");
 
             string con = DataManager.Instance.GetBaseStat(AttributeType.Health).ToString("N0");
             string agi = DataManager.Instance.GetBaseStat(AttributeType.Speed).ToString("N0");
@@ -86,6 +88,7 @@ namespace UI
 
         public void OnClickContinue()
         {
+            DataManager.Instance.SetRunningEvent(false);
             UnityEngine.SceneManagement.SceneManager.LoadScene("GameScene");
         }
 

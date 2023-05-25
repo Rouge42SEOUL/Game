@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5009c0d7f264b948a3002f5e54b4c8d, type: 3}
+  m_Name: Shooter
+  m_EditorClassIdentifier: 
+  isInitialized: 1
+  baseAttributes:
+    keys: 0000000001000000020000000300000004000000050000000600000007000000
+    values:
+    - type: 0
+      value: 1
+    - type: 1
+      value: 1
+    - type: 2
+      value: 1
+    - type: 3
+      value: 10
+    - type: 4
+      value: 1.25
+    - type: 5
+      value: 1.15
+    - type: 6
+      value: 0.51
+    - type: 7
+      value: 0.0075
+  elementalType: 0
+  baseHealthPoint: 100

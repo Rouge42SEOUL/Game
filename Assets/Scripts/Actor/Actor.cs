@@ -18,13 +18,15 @@ namespace Actor
 
         protected bool isInitialized = false;
 
-        public GameObject attackCollider;
-        public Vector2 forwardVector;
-        public ProjectileLauncher launcher;
+        protected Vector2 forwardVector;
+        protected GameObject attackCollider;
+        protected ProjectileLauncher launcher;
+        
+        public Action OnHPChanged;
+        public abstract void AddHP(float value);
+        protected abstract void CheckDied();
 
-        protected abstract void Died();
-
-        public abstract float GetAttributeValue(AttributeType type);
+        
         public abstract void AddAttributeValue(AttributeType type, float value);
         public abstract void AddEffect(Effect effect);
         public abstract void DeleteEffect(EffectType type);
@@ -50,23 +52,34 @@ namespace Actor
             launcher = transform.GetChild(1).GetComponent<ProjectileLauncher>();
             launcher.SetContext(gameObject);
         }
+
+        protected virtual void OnEnable()
+        {
+            forwardVector = Vector2.down;
+            OnHPChanged += CheckDied;
+        }
+
+        protected virtual void OnDisable()
+        {
+            OnHPChanged -= CheckDied;
+        }
     }
     
     // body of others
     public abstract partial class Actor<T> : IActorContext, IDamageable, IAffected
     {
+        public abstract float GetAttributeValue(AttributeType type);
         public GameObject GameObject => gameObject;
         public GameObject AttackCollider => attackCollider;
         public Vector2 Forward => forwardVector;
         public Vector3 Position => transform.position;
         public ProjectileLauncher Launcher => launcher;
-
+        
         public abstract void Affected(Effect effect);
         public abstract void Released(Effect effect);
         public abstract void Damaged(DamageData data);
         
-        public abstract bool CalculateHit(SerializableDictionary<AttributeType, Attribute> baseAttributes);
-        public void DotDamaged(DamageData damage, float duration)
+      public void DotDamaged(DamageData damage, float duration)
         {
             StartCoroutine(AddDotDamage(damage, duration));
         }

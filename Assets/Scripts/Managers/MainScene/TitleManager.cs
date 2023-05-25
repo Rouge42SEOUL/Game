@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using Actor.Stats;
 using Skill;
-using Unity.VisualScripting;
+
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 // Singleton Manager, Only used in Main Scene and Only this scripts run in Main Scene
 namespace Managers.MainScene
@@ -66,18 +67,24 @@ namespace Managers.MainScene
             }
         }
 
-        public int selectedClassId;
-        public int selectedPassiveId;
+        [HideInInspector]public int selectedClassId;
+        [HideInInspector]public int selectedPassiveId;
         
         public List<CharClassData> ClassList;
         public List<PassiveData> PassiveList;
 
         public void QuitGame() => _QuitGame();
+        public void ToGameScene() => _ToGameScene();
 
+        public void NewGame() => _NewGame();
+        public void LoadGame() => _LoadGame();
+        public void StartNewGame() => _StartNewGame();
 
         public GameObject confirmPopup;
         public GameObject passiveSelect;
         public GameObject classSelect;
+        public GameObject newGamePopUp;
+        public GameObject charSelect;
 
         public void SelectPassive(int n) => _SelectPassive(n);
     }
@@ -130,13 +137,42 @@ namespace Managers.MainScene
 
         private void _ToGameScene()
         {
-            //TODO : get class Id data and send to GameScene
+            SceneManager.LoadScene("GameScene");
         }
 
         private void _SelectPassive(int n)
         {
             playerStat.passive = passive[n];
         }
+
+        private void _NewGame()
+        {
+            if (DataManager.DataManager.Instance.HasData())
+            {
+                newGamePopUp.SetActive(true);
+            }
+            else
+            {
+                charSelect.SetActive(true);
+            }
+        }
+
+        private void _StartNewGame()
+        {
+            DataManager.DataManager.Instance.DeleteData();
+            DataManager.DataManager.Instance.InitData();
+        }
+
+        private void _LoadGame()
+        {
+            if (DataManager.DataManager.Instance.HasData())
+            {
+                DataManager.DataManager.Instance.LoadData();
+                _ToGameScene();
+            }
+        }
+        
+        //private void 
     }
 }
 

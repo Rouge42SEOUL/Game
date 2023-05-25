@@ -1,15 +1,14 @@
 using Items;
 using Items.ScriptableObjectSource;
 using Managers.DataManager;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class MerchantOption : MonoBehaviour
 {
     private MapDataManager _mapDataManager;
     private Item _item;
     private Inventory _playerInventory;
+    public MerchantUI merchantUI;
 
     public Item Item
     {
@@ -30,12 +29,19 @@ public class MerchantOption : MonoBehaviour
 
     public void Buy()
     {
+        if (!_item)
+            return;
         if (_item.gold <= DataManager.Instance.Gold)
         {
-            DataManager.Instance.Gold -= _item.gold;
-            Equipment equipment = (Equipment)_item;
-            _playerInventory.AddItem(equipment.id);
-            this.transform.parent.parent.GetComponent<MerchantUI>().CloseUI(); 
+            Item equipment = _item;
+
+            if (_playerInventory.AddItem(equipment.id))
+            {
+                DataManager.Instance.Gold -= _item.gold;
+                _item = null;
+                merchantUI.UpdateInventory();
+                merchantUI.UpdateMerchant();
+            }
         }
         else
         {
