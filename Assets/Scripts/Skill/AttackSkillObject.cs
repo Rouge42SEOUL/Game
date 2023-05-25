@@ -1,28 +1,24 @@
-using Actor;
 using Actor.Stats;
-using Core;
 using Interface;
-using Skill.Projectile;
 using Skill.Strategy;
 using UnityEngine;
 using Random = System.Random;
 
 namespace Skill
 {
-    
     [CreateAssetMenu(fileName = "New Attack Skill", menuName = "Scriptable Object/Skill/Attack")]
     public class AttackSkillObject : ActiveSkillObject
     {
         [SerializeField] private DamageData _damage;
-        [SerializeField] private ProjectileData _projectile;
-        
+        [SerializeField] private GameObject _projectile;
+
         private Random _random = new Random();
         protected override void InitSkill()
         {
             switch (targetType)
             {
                 case TargetType.Projectile:
-                    strategy = new ProjectileAttackStrategy(context, _projectile);
+                    strategy = new ProjectileAttackStrategy(context, ref _projectile);
                     break;
                 case TargetType.Area:
                     strategy = new AreaAttackStrategy(context);

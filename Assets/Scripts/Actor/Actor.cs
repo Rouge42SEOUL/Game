@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using Actor.Stats;
 using Core;
+using Elemental;
 using Interface;
 using Skill.Projectile;
 using UnityEngine;
@@ -17,9 +18,9 @@ namespace Actor
 
         protected bool isInitialized = false;
 
-        public GameObject attackCollider;
-        public Vector2 forwardVector;
-        public ProjectileLauncher launcher;
+        protected Vector2 forwardVector;
+        protected GameObject attackCollider;
+        protected ProjectileLauncher launcher;
         
         public Action OnHPChanged;
         public abstract void AddHP(float value);
@@ -54,6 +55,7 @@ namespace Actor
 
         protected virtual void OnEnable()
         {
+            forwardVector = Vector2.down;
             OnHPChanged += CheckDied;
         }
 

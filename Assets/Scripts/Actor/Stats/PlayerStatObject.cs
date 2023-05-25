@@ -11,6 +11,7 @@ namespace Actor.Stats
     {
         #region Variables
         
+        public AttackSkillObject normalAttack;
         public SkillSlot[] skills = new SkillSlot[4];
         public PassiveSkillObject passive;
         
@@ -34,7 +35,7 @@ namespace Actor.Stats
         
         protected override void InitElementalType()
         {
-            elementalType = passive ? passive.elementalType : ElementalType.None;
+            elementalType = passive ? passive.elementalType : ElementalType.Normal;
         }
         
         #endregion
