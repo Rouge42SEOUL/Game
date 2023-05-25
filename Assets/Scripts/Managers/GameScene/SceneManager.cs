@@ -1,3 +1,5 @@
+using Managers.DataManager;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace SceneManagement
@@ -6,6 +8,7 @@ namespace SceneManagement
     {
         public void StartGame()
         {
+            DataManager.Instance.SetRunningEvent(false);
             UnityEngine.SceneManagement.SceneManager.LoadScene("GameScene");
         }
         

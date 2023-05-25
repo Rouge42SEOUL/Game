@@ -10,9 +10,11 @@ namespace Managers.DataManager
         private static DataManager _instance;
         
         private DataContainer _data;
+        private DataRunningEvent _runningData;
         
         [SerializeField] private int firstGold;
         [SerializeField] private string jsonFileName = "/Json/GameManager.json";
+        private string _runningEventFile = "/Json/runningEvent.json";
 
         public Action<int> OnGoldUpdate;
 
@@ -70,11 +72,13 @@ namespace Managers.DataManager
 
         public bool GetRunningEvent()
         {
-            return _data.IsEventRunning;
+            JsonConverter.Load(out _runningData, Application.dataPath + _runningEventFile);
+            return _runningData.IsEventRunning;
         }
         public void SetRunningEvent(bool b)
         {
-            _data.IsEventRunning = b;
+            _runningData.IsEventRunning = b;
+            JsonConverter.Save(_runningData, Application.dataPath + _runningEventFile);
         }
 
         public bool LoadData()
@@ -85,6 +89,7 @@ namespace Managers.DataManager
         public void DeleteData()
         {
             JsonConverter.DeleteJson(Application.dataPath + jsonFileName);
+            JsonConverter.DeleteJson(Application.dataPath + _runningEventFile);
         }
     }
 }

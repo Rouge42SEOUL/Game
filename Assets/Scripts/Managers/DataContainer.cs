@@ -14,8 +14,7 @@ namespace Managers.DataManager
         public int PlayerCurrentNode;
         [JsonProperty]
         public int Gold;
-        [JsonProperty]
-        public bool IsEventRunning;
+
 
         public void SaveInfo(Node[] nodes, Node currentNode)
         {
@@ -29,5 +28,12 @@ namespace Managers.DataManager
                 }
             }
         }
+    }
+
+    [JsonObject(MemberSerialization.OptIn)]
+    public class DataRunningEvent
+    {
+        [JsonProperty]
+        public bool IsEventRunning;
     }
 }
