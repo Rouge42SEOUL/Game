@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel;
 using Actor.Stats;
 using Core;
 using Elemental;
@@ -16,14 +17,26 @@ namespace Actor.Enemy
     {
         protected StateMachine<Enemy> stateMachine;
         public GameObject Target => _target;
-        public int Damage => (int)_currentAttributes[AttributeType.Attack].value;
         public int spawnId;
         
+        /* This 3 variables must be set by Inspector */
+        public EnemyAttackType attackType;
+        public float attackRange;
+        public GameObject projectile;
+
         internal IObjectPool<Enemy> ManagedPool;
         internal Collider2D Collider2D;
         internal Rigidbody2D Rigidbody2D;
         internal Animator EnemyAnim;
 
+        public int Damage => (int)_currentAttributes[AttributeType.Attack].value;
+
+        public void SetForward(float x, float y)
+        {
+            forwardVector.x = x;
+            forwardVector.y = y;
+        }
+        
         public void SetManagedPool(IObjectPool<Enemy> pool)
         {
             ManagedPool = pool;

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7303676596017586359}
   - component: {fileID: 3702479905196355345}
   m_Layer: 0
-  m_Name: Projectile
+  m_Name: Leaf
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: -1590234865
   m_SortingLayer: 3
   m_SortingOrder: 10
-  m_Sprite: {fileID: -1623681991, guid: a709d74b21b97d24b9fefc89262fea1b, type: 3}
+  m_Sprite: {fileID: 2060998858, guid: a709d74b21b97d24b9fefc89262fea1b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -100,10 +100,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _projectileData:
-    sprite: {fileID: -1623681991, guid: a709d74b21b97d24b9fefc89262fea1b, type: 3}
+    sprite: {fileID: 2060998858, guid: a709d74b21b97d24b9fefc89262fea1b, type: 3}
     radius: 0.5
     speed: 10
-    targetTag: Enemy
+    targetTag: Player
 --- !u!50 &7303676596017586359
 Rigidbody2D:
   serializedVersion: 4

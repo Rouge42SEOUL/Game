@@ -7,13 +7,12 @@ namespace Actor.Enemy
 {
     public class EnemyAttackState : State<Enemy>
     {
-        private Player.Player _p;
-
         private float _beforeAttackDelay = 1.0f;
         private float _afterAttackDelay = 0.5f;
         private WaitForSeconds _waitBefore;
         private WaitForSeconds _waitAfter;
 
+        private EnemyAttackStrategy _attackStrategy;
         private DamageData _damageData;
         private float _distanceToTarget;
 
@@ -22,12 +21,22 @@ namespace Actor.Enemy
         public override void OnInitialized()
         {
             // TODO : calculate attack time by attack speed;
-            _p = _context.Target.GetComponent<Player.Player>();
             _waitBefore = new WaitForSeconds(_beforeAttackDelay);
             _waitAfter = new WaitForSeconds(_afterAttackDelay);
             _damageData = new DamageData(_context.Damage);
             _damageData.KbForce = Vector3.zero;
             _coroutine = AttackPlayer();
+
+            switch (_context.attackType)
+            {
+                case EnemyAttackType.Projectile:
+                    _attackStrategy = new ProjectileAttackStrategy(_context.Target.GetComponent<Player.Player>(), ref _context, ref _context.projectile);
+                    break;
+                case EnemyAttackType.Collision:
+                default:
+                    _attackStrategy = new CollisionAttackStrategy(_context.Target.GetComponent<Player.Player>());
+                    break;
+            }_damageData = new DamageData(_context.Damage);
         }
         
         public override void OnEnter()
@@ -46,9 +55,8 @@ namespace Actor.Enemy
             }
             else
             {
-                // 공격상태에서 플레이어와 거리가 1.0f 초과면 이동상태
                 _distanceToTarget = Vector3.Distance(_context.Target.transform.position, _context.transform.position);
-                if (_distanceToTarget > 1.0f)
+                if (_distanceToTarget > _context.attackRange)
                 {
                     _stateMachine.ChangeState<EnemyMoveState>();
                 }
@@ -66,10 +74,10 @@ namespace Actor.Enemy
             while (true)
             {
                 yield return _waitBefore;
-                if (_distanceToTarget <= 1.0f)
+                if (_distanceToTarget <= _context.attackRange)
                 {
                     _damageData.Damage = _context.Damage;
-                    _p.Damaged(_damageData);
+                    _attackStrategy.Attack(ref _damageData);
                     yield return _waitAfter;
                 }
             }

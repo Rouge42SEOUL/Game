@@ -48,13 +48,13 @@ namespace Actor.Player
             }
         }
     }
-
+    
     // Values or methods that other cannot use
     public partial class Player
     {
         private Vector2 _movement;
         private PlayerInput _playerInput;
-
+        
         private StateMachine<Player> StateMachine;
         [SerializeField] private SerializableDictionary<AttributeType, float> _itemEffectedValues;
 
@@ -66,17 +66,17 @@ namespace Actor.Player
             stat.skills[index].UseSkill();
         }
     }
-
+    
     // body of MonoBehaviour
     public partial class Player : Actor<PlayerStatObject>
     {
         protected override void Awake()
         {
             base.Awake();
-
+        
             PlayerAnim = GetComponent<Animator>();
             PlayerRigid = GetComponent<Rigidbody2D>();
-
+            
             StateMachine = new StateMachine<Player>(this, new PlayerIdleState());
             StateMachine.AddState(new PlayerMoveState());
             StateMachine.AddState(new PlayerAttackState());
@@ -106,7 +106,7 @@ namespace Actor.Player
         {
             StateMachine.Update();
         }
-
+        
         private void FixedUpdate()
         {
             StateMachine.FixedUpdate();
@@ -120,7 +120,7 @@ namespace Actor.Player
             launcher.OnAttackTrigger += stat.skills[0].OnAttackTrigger;
         }
     }
-
+    
     // body of others
     public partial class Player
     {
@@ -130,7 +130,6 @@ namespace Actor.Player
             {
                 _skillEffectedValues[type] += effect.GetValueToAdd(GetAttributeValue(type));
             }
-
             AddEffect(effect);
             // TODO: set current attributes
             // TODO: event call 
@@ -148,10 +147,8 @@ namespace Actor.Player
             ElementalBalancer.ApplyElementalEffect(data.ElementalType, ref effect);
             if (effect != null)
                 Affected(effect);
-            Debug.Log("Player HP: " + (stat.PercentHealPoint * 100) + "%");
         }
     }
-    
 
     // event methods
     public partial class Player
@@ -164,7 +161,7 @@ namespace Actor.Player
                 forwardVector = Movement;
             }
         }
-
+        
         private void OnAutoAttack()
         {
             StateMachine.ChangeState<PlayerAttackState>();

@@ -10,7 +10,6 @@ namespace Actor.Stats
     {
         [SerializeField] protected bool isInitialized = false;
         
-        public AttackSkillObject normalAttack;
         public SerializableDictionary<AttributeType, Attribute> baseAttributes = new();
         public ElementalType elementalType;
         
