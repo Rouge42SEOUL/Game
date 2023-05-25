@@ -24,6 +24,13 @@ namespace Actor.Player
         public Action OnAttributeChanged;
 
         public float PercentHealPoint => stat.PercentHealPoint;
+
+        public override void AddHP(float value)
+        {
+            stat.currentHealthPoint += value;
+            OnHPChanged?.Invoke();
+        }
+        
         public override float GetAttributeValue(AttributeType type) => stat.currentAttributes[type].value;
 
         public override void AddAttributeValue(AttributeType type, float value)
@@ -35,9 +42,12 @@ namespace Actor.Player
         public override void AddEffect(Effect effect) => stat.AddEffect(effect);
         public override void DeleteEffect(EffectType type) => stat.DeleteEffect(type);
 
-        protected override void Died()
+        protected override void CheckDied()
         {
-            StateMachine.ChangeState<PlayerDiedState>();
+            if (stat.currentHealthPoint <= 0)
+            {
+                StateMachine.ChangeState<PlayerDiedState>();
+            }
         }
     }
     
@@ -57,6 +67,7 @@ namespace Actor.Player
             StateMachine.ChangeState<PlayerAttackState>();
             stat.skills[index].UseSkill();
         }
+
     }
     
     // body of MonoBehaviour
@@ -75,8 +86,9 @@ namespace Actor.Player
             StateMachine.AddState(new PlayerDiedState());
         }
 
-        protected void OnEnable()
+        protected override void OnEnable()
         {
+            base.OnEnable();
             OnAttributeChanged += stat.CalculateSideAttributes;
             attackCollider.GetComponent<PlayerAttackCol>().OnAttackTrigger += stat.normalAttack.OnAttackTrigger;
             launcher.OnAttackTrigger += stat.skills[0].OnAttackTrigger;
@@ -95,8 +107,6 @@ namespace Actor.Player
 
         private void Update()
         {
-            if (stat.currentHealthPoint <= 0)
-                Died();
             StateMachine.Update();
         }
         
@@ -105,8 +115,9 @@ namespace Actor.Player
             StateMachine.FixedUpdate();
         }
 
-        private void OnDisable()
+        protected override void OnDisable()
         {
+            base.OnDisable();
             OnAttributeChanged -= stat.CalculateSideAttributes;
             attackCollider.GetComponent<PlayerAttackCol>().OnAttackTrigger -= stat.normalAttack.OnAttackTrigger;
             launcher.OnAttackTrigger += stat.skills[0].OnAttackTrigger;
@@ -145,8 +156,7 @@ namespace Actor.Player
         {
             if (CalculateHit(this.stat.baseAttributes))
             {
-                stat.currentHealthPoint -=
-                ElementalBalancer.ApplyBalance(data.ElementalType, stat.elementalType, data.Damage);
+                AddHP(-ElementalBalancer.ApplyBalance(data.ElementalType, stat.elementalType, data.Damage));
                 Effect effect = null;
                 ElementalBalancer.ApplyElementalEffect(data.ElementalType, ref effect);
                 if (effect != null)
