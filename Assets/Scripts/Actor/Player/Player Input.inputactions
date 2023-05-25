@@ -172,6 +172,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "UI",
+            "id": "797b9e00-5fda-41f3-8c86-1a175c7f9789",
+            "actions": [
+                {
+                    "name": " GiveUp",
+                    "type": "Button",
+                    "id": "c70535cc-9cf6-405b-84a8-8c640044841b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "2c52093d-941a-417f-88d5-362f76d211aa",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": " GiveUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [
