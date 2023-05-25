@@ -13,6 +13,7 @@ public class EventMerchant :  RougeEvent.Event
 
     public override void BuildUI()
     {
+        base.BuildUI();
         _merchantUI.DisplayUI();
         _merchantUI.OptionRandomSetting();
         _merchantUI.transform.localPosition = Vector3.zero;

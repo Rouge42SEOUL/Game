@@ -25,6 +25,12 @@ public struct StatBonusData
     }
 }
 
+public enum InventoryClickEventType
+{
+    MerchantEvent,
+    NormalEvent,
+}
+
 public enum StatType
 {
     AttackPower,
@@ -40,7 +46,8 @@ public enum SlotType
     Necklace,
     Ring0,
     Ring1,
-    Inventory
+    Inventory,
+    Merchant
 }
 
 public enum AccessoryType

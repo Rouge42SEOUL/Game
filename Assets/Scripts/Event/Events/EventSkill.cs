@@ -9,6 +9,7 @@ public class EventSkill :  RougeEvent.Event
 
     public override void BuildUI()
     {
+        base.BuildUI();
         Skill();
     }
     

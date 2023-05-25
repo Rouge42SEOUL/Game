@@ -75,8 +75,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1590234865
   m_SortingLayer: 3
-  m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_SortingOrder: 10
+  m_Sprite: {fileID: -1623681991, guid: a709d74b21b97d24b9fefc89262fea1b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -99,6 +99,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86c60497122a4988a680051184598a0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _projectileData:
+    sprite: {fileID: -1623681991, guid: a709d74b21b97d24b9fefc89262fea1b, type: 3}
+    radius: 0.5
+    speed: 10
+    targetTag: Enemy
 --- !u!50 &7303676596017586359
 Rigidbody2D:
   serializedVersion: 4

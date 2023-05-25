@@ -1,3 +1,4 @@
+using Managers.DataManager;
 using UnityEngine;
 
 public abstract class EventUI : MonoBehaviour
@@ -19,6 +20,8 @@ public abstract class EventUI : MonoBehaviour
     }
     public void CloseUI()
     {
+        DataManager.Instance.SetRunningEvent(false);
+        DataManager.Instance.SaveData();
         GameManager.Instance.ContinueGame();
         EventUIButton.gameObject.SetActive(true);
         gameObject.SetActive(false);
