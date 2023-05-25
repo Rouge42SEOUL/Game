@@ -107,7 +107,7 @@ namespace Actor.Stats
                         currentAttributes[type].value += count * 0.025f;
                         break;
                     case (AttributeType.Health):
-                        currentHealthPoint += count * 100f;
+                        currentHealthPoint += count * 10f;
                         break;
                 }
             }

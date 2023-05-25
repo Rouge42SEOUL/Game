@@ -142,9 +142,10 @@ namespace Actor.Player
 
         public override void Damaged(DamageData data)
         {
-            ElementalBalancer.ApplyBalance(data.ElementalType, stat.elementalType, data.Damage);
+            AddHP(-ElementalBalancer.ApplyBalance(data.ElementalType, stat.elementalType, data.Damage));
             Effect effect = null;
             ElementalBalancer.ApplyElementalEffect(data.ElementalType, ref effect);
+            Debug.Log("player damaged");
             if (effect != null)
                 Affected(effect);
         }

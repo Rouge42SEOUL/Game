@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Actor.Stats;
+using Managers.SaveData;
 using UnityEngine;
 using UnityEngine.Windows;
 
@@ -10,14 +11,17 @@ namespace Managers.DataManager
     {
         public static DataManager Instance => _instance ? _instance : null;
         private static DataManager _instance;
+
+        public bool IsFirstStart => _isFirstStart;
         
-        private DataContainer _data;
-        private DataRunningEvent _runningData;
+        private MapData _mapData = new ();
+        private PlayData _playData;
         [SerializeField] private PlayerStatObject _stat;
-        
-        [SerializeField] private int firstGold;
-        [SerializeField] private string jsonFileName = "/Json/GameManager.json";
-        [SerializeField] private string _runningEventFile = "/Json/runningEvent.json";
+
+        private bool _isFirstStart = true;
+        private int _firstGold;
+        private readonly string _mapDataPath = "/Json/GameManager.json";
+        private readonly string _playDataPath = "/Json/runningEvent.json";
 
         public Action<int> OnGoldUpdate;
 
@@ -25,22 +29,27 @@ namespace Managers.DataManager
         {
             get
             {
-                if (_data == null)
+                if (_mapData == null)
                     return -1;
-                return _data.Gold;
+                return _playData.Gold;
             }
             set
             {
-                if (_data == null)
+                if (_mapData == null)
                     return;
-                _data.Gold = value;
+                _playData.Gold = value;
                 OnGoldUpdate?.Invoke(value);
             }
         }
 
-        public int Map => _data.Map;
-        public Dictionary<int, EventType> Events => _data.Events;
-        public int CurrentNode => _data.PlayerCurrentNode;
+        public int MapIndex => _mapData.MapIndex;
+        public Dictionary<int, EventType> Events => _mapData.Events;
+
+        public int CurrentNode
+        {
+            get => _playData.CurrentNodeIdx;
+            set => _playData.CurrentNodeIdx = value;
+        }
 
         private void Awake()
         {
@@ -57,59 +66,62 @@ namespace Managers.DataManager
 
         private void Start()
         {
-            OnGoldUpdate?.Invoke(_data.Gold);
+            OnGoldUpdate?.Invoke(_playData.Gold);
+            InitData();
         }
 
         public void InitData()
         {
-            Gold = firstGold;
-            //SaveData();
+            _playData = new PlayData
+            {
+                Gold = _firstGold,
+                CurrentNodeIdx = 0,
+                IsEventRunning = false
+            };
         }
 
         public void InitEventKeys(ref int[] keys)
         {
-            _data.Events.Keys.CopyTo(keys, 0);
+            _mapData.Events.Keys.CopyTo(keys, 0);
         }
 
         public bool SaveData()
         {
+            _isFirstStart = false;
             if (StageManager.Instance == null)
                 return false;
-            _data.Map = StageManager.Instance.MapNum;
-            _data.SaveInfo(StageManager.Instance.Nodes, MapDataManager.Instance.CurrentNode);
-            JsonConverter.Save(_data, Application.dataPath + jsonFileName);
-            JsonConverter.Save(_runningData, Application.dataPath + _runningEventFile);
+            _mapData.MapIndex = StageManager.Instance.MapNum;
+            _mapData.SaveInfo(StageManager.Instance.Nodes, MapDataManager.Instance.CurrentNode);
+            JsonConverter.Save(_mapData, Application.dataPath + _mapDataPath);
+            JsonConverter.Save(_playData, Application.dataPath + _playDataPath);
             return true;
         }
 
         public bool GetRunningEvent()
         {
-            JsonConverter.Load(out _runningData, Application.dataPath + _runningEventFile);
-            return _runningData.IsEventRunning;
+            JsonConverter.Load(out _playData, Application.dataPath + _playDataPath);
+            return _playData.IsEventRunning;
         }
+        
         public void SetRunningEvent(bool b)
         {
-            _runningData.IsEventRunning = b;
-            JsonConverter.Save(_runningData, Application.dataPath + _runningEventFile);
+            _playData.IsEventRunning = b;
+            JsonConverter.Save(_playDataPath, Application.dataPath + _playDataPath);
         }
 
         public bool LoadData()
         {
-            JsonConverter.Load(out _runningData, Application.dataPath + _runningEventFile);
-            return JsonConverter.Load(out _data, Application.dataPath + jsonFileName);
+            JsonConverter.Load(out _playData, Application.dataPath + _playDataPath);
+            return JsonConverter.Load(out _mapData, Application.dataPath + _mapDataPath);
         }
 
         public void DeleteData()
         {
-            JsonConverter.DeleteJson(Application.dataPath + jsonFileName);
-            JsonConverter.DeleteJson(Application.dataPath + _runningEventFile);
+            JsonConverter.DeleteJson(Application.dataPath + _mapDataPath);
+            JsonConverter.DeleteJson(Application.dataPath + _playDataPath);
         }
 
-        public bool HasData()
-        {
-            return File.Exists(Application.dataPath + jsonFileName);
-        }
-
+        public bool HasData() => File.Exists(Application.dataPath + _mapDataPath);
         public void LevelUP() => _stat.LevelUp();
         public float GetBaseStat(AttributeType type) => _stat.baseAttributes[type].value;
     }

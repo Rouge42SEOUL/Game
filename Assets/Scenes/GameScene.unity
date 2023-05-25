@@ -9985,7 +9985,7 @@ GameObject:
   - component: {fileID: 973431967}
   - component: {fileID: 973431968}
   m_Layer: 0
-  m_Name: GameSceneManager
+  m_Name: MapDataManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16528,9 +16528,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stat: {fileID: 0, guid: c6d6312bbd5c7884bb273850f3b45774, type: 2}
   _stat: {fileID: 11400000, guid: c6d6312bbd5c7884bb273850f3b45774, type: 2}
-  firstGold: 0
-  jsonFileName: /Json/GameManager.json
-  _runningEventFile: /Json/runningEvent.json
 --- !u!114 &1670437929 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1456973929674583798, guid: a40c0ae6cac99384da1b86a2a74c440a,

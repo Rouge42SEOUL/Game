@@ -1,20 +1,15 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace Managers.DataManager
+namespace Managers.SaveData
 {
     [JsonObject(MemberSerialization.OptIn)]
-    public class DataContainer
+    public class MapData
     {
         [JsonProperty]
-        public int Map;
+        public int MapIndex;
         [JsonProperty] 
         public Dictionary<int, EventType> Events;
-        [JsonProperty]
-        public int PlayerCurrentNode;
-        [JsonProperty]
-        public int Gold;
-
 
         public void SaveInfo(Node[] nodes, Node currentNode)
         {
@@ -24,16 +19,9 @@ namespace Managers.DataManager
                 Events.Add(i, nodes[i].eventType);
                 if (nodes[i] == currentNode)
                 {
-                    PlayerCurrentNode = i;
+                    DataManager.DataManager.Instance.CurrentNode = i;
                 }
             }
         }
-    }
-
-    [JsonObject(MemberSerialization.OptIn)]
-    public class DataRunningEvent
-    {
-        [JsonProperty]
-        public bool IsEventRunning;
     }
 }
