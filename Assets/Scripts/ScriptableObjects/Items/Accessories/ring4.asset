@@ -12,14 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4479317aa24043c69ee9c7f095377847, type: 3}
   m_Name: ring4
   m_EditorClassIdentifier: 
+  id: 4
   itemName: MagicBronzeRing
   description: 
   icon: {fileID: 21300000, guid: 0f1303cfff6593747a97f9c964728649, type: 3}
-  gold: 0
-  id: 4
+  gold: 20
   reinforcement: 0
   status:
-    statBonuses:
-      power: 0
-      health: 0
-      speed: 0
+    accuracy: 0.2
+    attackSpeed: 0.2

@@ -9603,6 +9603,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e28aa1382d384145888af87b4222fd0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _stat: {fileID: 0}
   firstGold: 0
   jsonFileName: /Json/GameManager.json
 --- !u!1001 &1711071821
@@ -10842,6 +10843,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f31396d28bdb29f459b980f28057900d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerStatObject: {fileID: 11400000, guid: c6d6312bbd5c7884bb273850f3b45774, type: 2}
   inventoryPanels: []
   slotPanels: []
   equipmentDatabase: {fileID: 11400000, guid: b63368440ba056747a38ae73ec33bffd, type: 2}

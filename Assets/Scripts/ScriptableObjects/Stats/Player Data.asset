@@ -62,9 +62,9 @@ MonoBehaviour:
     - type: 4
       value: 12.5
     - type: 5
-      value: 11.5
+      value: 11.7
     - type: 6
       value: 0.6
     - type: 7
       value: 0.074999996
-  currentHealthPoint: 996
+  currentHealthPoint: 1500

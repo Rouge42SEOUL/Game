@@ -1,6 +1,7 @@
 using Items.StatusData;
 using UnityEngine;
 using System.Text;
+using Actor.Stats;
 
 namespace Items.ScriptableObjectSource
 {
@@ -9,7 +10,6 @@ namespace Items.ScriptableObjectSource
     {
         public RingStatus status;
         
-        
         public override string ItemDescription()
         {
             StringBuilder sb = new StringBuilder();
@@ -17,16 +17,15 @@ namespace Items.ScriptableObjectSource
             sb.AppendLine($"{itemName}");
             sb.AppendLine($"(Level {reinforcement})");
             sb.AppendLine();
-            sb.AppendLine($"Power: {status.statBonuses.power}");
-            sb.AppendLine($"Health: {status.statBonuses.health}");
-            sb.AppendLine($"Speed: {status.statBonuses.speed}");
+            sb.AppendLine($"Attack Speed: {status.attackSpeed}");
+            sb.AppendLine($"Accuracy: {status.accuracy}");
             sb.AppendLine();
             sb.AppendLine($"Gold: {gold}");
-            
+
             return sb.ToString();
         }
         
-        public override Equipment Equip(Slot slot)
+        public override Equipment Equip(Slot slot, PlayerStatObject playerStatObject)
         {
             if (slot == null)
             {
@@ -34,19 +33,22 @@ namespace Items.ScriptableObjectSource
                 return null;
             }
 
+            Equipment previousRing = UnEquip(slot, playerStatObject);
             if (slot.slotRing[0] != null && slot.slotRing[1] == null)
             {
                 slot.slotRing[1] = this;
+                playerStatObject.AddAttribute(AttributeType.AttackSpeed, this.status.attackSpeed);
+                playerStatObject.AddAttribute(AttributeType.Accuracy, this.status.accuracy);
                 return null;
             }
             
-            /* main processing */
-            Equipment prev = UnEquip(slot); 
             slot.slotRing[0] = this;
-            return prev;
+            playerStatObject.AddAttribute(AttributeType.AttackSpeed, this.status.attackSpeed);
+            playerStatObject.AddAttribute(AttributeType.Accuracy, this.status.accuracy);
+            return previousRing;
         }
 
-        public override Equipment UnEquip(Slot slot)
+        public override Equipment UnEquip(Slot slot, PlayerStatObject playerStatObject)
         {
             if (slot == null)
             {
@@ -54,10 +56,14 @@ namespace Items.ScriptableObjectSource
                 return null;
             }
             
-            /* main processing */
-            Equipment prev = slot.slotRing[0];
+            Ring previousRing = slot.slotRing[0];
             slot.slotRing[0] = null;
-            return prev;
+            if (previousRing != null)
+            {
+                playerStatObject.SubAttribute(AttributeType.AttackSpeed, previousRing.status.attackSpeed);
+                playerStatObject.SubAttribute(AttributeType.Accuracy, previousRing.status.accuracy);
+            }
+            return previousRing;
         }
         
         public override Equipment DeepCopy()

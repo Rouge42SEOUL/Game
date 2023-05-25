@@ -6,13 +6,14 @@ namespace Items.StatusData
     public class ArmorStatus
     {
         [SerializeField]
-        public StatBonusData statBonuses;
+        // public StatBonusData statBonuses;
+        public int health;
         public int defense;
         
         // Copy constructor
         public ArmorStatus(ArmorStatus other)
         {
-            this.statBonuses = other.statBonuses;
+            this.health = other.health;
             this.defense = other.defense;
         }
     }

@@ -25,7 +25,6 @@ namespace Items
             }
             List<Equipment> totalEquipments = _inventory.RequireTotalEquipments();
             // Debug.LogError(totalEquipments.Count);
-            _inventory.slot.LogTotalStatus();
         }
     }
 }

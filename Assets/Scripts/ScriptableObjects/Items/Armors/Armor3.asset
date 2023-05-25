@@ -12,15 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff830b4e38419b44d9774ffbda922fc8, type: 3}
   m_Name: Armor3
   m_EditorClassIdentifier: 
+  id: 9
   itemName: GreyKnightArmor
   description: 
   icon: {fileID: 21300000, guid: 131ae7d5c3bf62f4ca9d47f57e1ef952, type: 3}
-  gold: 0
-  id: 9
+  gold: 50
   reinforcement: 0
   status:
-    statBonuses:
-      power: 0
-      health: 0
-      speed: 0
-    defense: 0
+    health: 250
+    defense: 50

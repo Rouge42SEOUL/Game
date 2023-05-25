@@ -1,4 +1,5 @@
 using System.Text;
+using Actor.Player;
 using UnityEngine;
 
 namespace Items.ScriptableObjectSource
@@ -21,9 +22,18 @@ namespace Items.ScriptableObjectSource
             return sb.ToString();
         }
 
-        // public void Use(Player player)
-        // {
-        //     player.Health += healingAmount;
-        // }
+        public void Use()
+        {
+            // /* 수정 필요 */
+            // GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+            // if (playerObject != null)
+            // {
+            //     Player player = playerObject.GetComponent<Player>();
+            //     if (player != null)
+            //     {
+            //         player.Heal(healingAmount);
+            //     }
+            // }
+        }
     }
 }

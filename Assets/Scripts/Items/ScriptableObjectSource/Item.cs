@@ -1,3 +1,4 @@
+using Actor.Stats;
 using UnityEngine;
 
 namespace Items.ScriptableObjectSource
@@ -17,8 +18,8 @@ namespace Items.ScriptableObjectSource
     {
         public int reinforcement;
         
-        public abstract Equipment Equip(Slot slot);
-        public abstract Equipment UnEquip(Slot slot);
+        public abstract Equipment Equip(Slot slot, PlayerStatObject playerStatObject);
+        public abstract Equipment UnEquip(Slot slot, PlayerStatObject playerStatObject);
         // Add this:
         public abstract Equipment DeepCopy();
     }

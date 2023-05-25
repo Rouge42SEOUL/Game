@@ -12,18 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b8de0e8e2990634390ddfa26aa3c49d, type: 3}
   m_Name: Shield 5
   m_EditorClassIdentifier: 
+  id: 31
   itemName: HardWoodenShield
   description: 
   icon: {fileID: 21300000, guid: 4097dec1e9a0ede4c85bf4caa28e9bcf, type: 3}
-  gold: 0
-  id: 31
+  gold: 20
   reinforcement: 0
   type: 2
   status:
-    statBonuses:
-      power: 0
-      health: 0
-      speed: 0
     attackSpeed: 0
-    range: 0
     damage: 0
+    health: 100
+    defense: 20
