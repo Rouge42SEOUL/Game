@@ -19,7 +19,7 @@ namespace Managers.DataManager
         private int _firstGold;
         private readonly string _mapDataPath = "/Json/MapData.json";
         private readonly string _playDataPath = "/Json/PlayData.json";
-        private readonly string _statDataPath = "/Json/StatData.json";
+        //private readonly string _statDataPath = "/Json/StatData.json";
 
         public Action<int> OnGoldUpdate;
 
@@ -84,7 +84,7 @@ namespace Managers.DataManager
             _mapData.SaveInfo();
             JsonConverter.Save(_mapData, Application.dataPath + _mapDataPath);
             JsonConverter.Save(_playData, Application.dataPath + _playDataPath);
-            JsonConverter.Save(_stat, Application.dataPath + _statDataPath);
+            //JsonConverter.Save(_stat, Application.dataPath + _statDataPath);
             Debug.Log("Save Data");
             return true;
         }
@@ -117,7 +117,7 @@ namespace Managers.DataManager
         {
             var isLoaded = JsonConverter.Load(out _mapData, Application.dataPath + _mapDataPath);
             isLoaded = isLoaded && JsonConverter.Load(out _playData, Application.dataPath + _playDataPath);
-            isLoaded = isLoaded && JsonConverter.Load(out _stat, Application.dataPath + _statDataPath);
+            //isLoaded = isLoaded && JsonConverter.Load(out _stat, Application.dataPath + _statDataPath);
             return isLoaded;
         }
 
@@ -125,7 +125,7 @@ namespace Managers.DataManager
         {
             JsonConverter.DeleteJson(Application.dataPath + _mapDataPath);
             JsonConverter.DeleteJson(Application.dataPath + _playDataPath);
-            JsonConverter.DeleteJson(Application.dataPath + _statDataPath);
+            //JsonConverter.DeleteJson(Application.dataPath + _statDataPath);
         }
 
         public bool HasData() => File.Exists(Application.dataPath + _mapDataPath);
