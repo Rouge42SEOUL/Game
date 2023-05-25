@@ -9,14 +9,14 @@ namespace Skill
     public class AttackSkillObject : ActiveSkillObject
     {
         [SerializeField] private DamageData _damage;
-        [SerializeField] private ProjectileData _projectile;
+        [SerializeField] private GameObject _projectile;
 
         protected override void InitSkill()
         {
             switch (targetType)
             {
                 case TargetType.Projectile:
-                    strategy = new ProjectileAttackStrategy(context, _projectile);
+                    strategy = new ProjectileAttackStrategy(context, ref _projectile);
                     break;
                 case TargetType.Area:
                     strategy = new AreaAttackStrategy(context);

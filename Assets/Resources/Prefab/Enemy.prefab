@@ -174,10 +174,10 @@ MonoBehaviour:
   _skillEffectedValues:
     keys: 
     values: []
-  attackCollider: {fileID: 0}
-  forwardVector: {x: 0, y: 0}
-  launcher: {fileID: 8353722050477121601}
   spawnId: 0
+  attackType: 0
+  attackRange: 2
+  projectile: {fileID: 0}
   _currentAttributes:
     keys: 
     values: []
@@ -226,11 +226,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18ffd403d4e04f14a5a12ea0c5f3f265, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileData:
-    sprite: {fileID: 0}
-    radius: 0
-    speed: 0
-  projectilePrefab: {fileID: 4503928405878255456, guid: 66cc1de701416f44e91178fc14799a85, type: 3}
 --- !u!1 &6921025127976137362
 GameObject:
   m_ObjectHideFlags: 0

@@ -27,10 +27,10 @@ namespace Actor.Enemy
             _damageData.KbForce = Vector3.zero;
             _coroutine = AttackPlayer();
 
-            switch (_context.AttackType)
+            switch (_context.attackType)
             {
                 case EnemyAttackType.Projectile:
-                    _attackStrategy = new ProjectileAttackStrategy(_context.Target.GetComponent<Player.Player>(), _context.gameObject);
+                    _attackStrategy = new ProjectileAttackStrategy(_context.Target.GetComponent<Player.Player>(), ref _context, ref _context.projectile);
                     break;
                 case EnemyAttackType.Collision:
                 default:
@@ -56,7 +56,7 @@ namespace Actor.Enemy
             else
             {
                 _distanceToTarget = Vector3.Distance(_context.Target.transform.position, _context.transform.position);
-                if (_distanceToTarget > _context.AttackRange)
+                if (_distanceToTarget > _context.attackRange)
                 {
                     _stateMachine.ChangeState<EnemyMoveState>();
                 }
@@ -74,10 +74,10 @@ namespace Actor.Enemy
             while (true)
             {
                 yield return _waitBefore;
-                if (_distanceToTarget <= _context.AttackRange)
+                if (_distanceToTarget <= _context.attackRange)
                 {
                     _damageData.Damage = _context.Damage;
-                    _attackStrategy.Attack(_damageData);
+                    _attackStrategy.Attack(ref _damageData);
                     yield return _waitAfter;
                 }
             }

@@ -80,7 +80,7 @@ SpriteRenderer:
   m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 1889042743, guid: b43e0aadbb5fbc74fa444187c71b3891, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.6879595, g: 0.8679245, b: 0.58462083, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -170,14 +170,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fe429f7cf9995245ad21e731e2544d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stat: {fileID: 11400000, guid: e5249d2542abf3640ac183daaa7e7cd3, type: 2}
+  stat: {fileID: 11400000, guid: ddba9a33bae6c8c449dc4c002018d17a, type: 2}
   _skillEffectedValues:
     keys: 
     values: []
-  attackCollider: {fileID: 0}
-  forwardVector: {x: 0, y: 0}
-  launcher: {fileID: 8353722050477121601}
   spawnId: 0
+  attackType: 1
+  attackRange: 5
+  projectile: {fileID: 4503928405878255456, guid: 65562f63f1edf1c4e9fbba007bdf8910, type: 3}
   _currentAttributes:
     keys: 
     values: []
@@ -226,11 +226,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18ffd403d4e04f14a5a12ea0c5f3f265, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileData:
-    sprite: {fileID: 0}
-    radius: 0
-    speed: 0
-  projectilePrefab: {fileID: 4503928405878255456, guid: 66cc1de701416f44e91178fc14799a85, type: 3}
 --- !u!1 &6921025127976137362
 GameObject:
   m_ObjectHideFlags: 0

@@ -630,9 +630,6 @@ MonoBehaviour:
   _skillEffectedValues:
     keys: 
     values: []
-  attackCollider: {fileID: 1482730803}
-  forwardVector: {x: 0, y: 0}
-  launcher: {fileID: 1040016780}
   _itemEffectedValues:
     keys: 
     values: []
@@ -4845,7 +4842,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18ffd403d4e04f14a5a12ea0c5f3f265, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 4503928405878255456, guid: 66cc1de701416f44e91178fc14799a85, type: 3}
 --- !u!4 &1040016781
 Transform:
   m_ObjectHideFlags: 0
@@ -20902,7 +20898,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a491526e0489e94d9e5d7021b71b864, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 2781783833759806822, guid: f8f27a0c6c890b04eb1e2fae970ff48d, type: 3}
+  enemyPrefab: {fileID: 2781783833759806822, guid: dfc8466b8d24b5e459283adeabdccfe2, type: 3}
   spawnDuration: 1
   poolMax: 10
   maxCount: 10

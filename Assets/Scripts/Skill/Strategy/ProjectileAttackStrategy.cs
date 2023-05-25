@@ -1,16 +1,17 @@
 using Interface;
 using Skill.Projectile;
+using UnityEngine;
 
 namespace Skill.Strategy
 {
     public class ProjectileAttackStrategy : SkillStrategy
     {
-        private ProjectileData _projectile;
+        private GameObject _projectile;
 
-        public ProjectileAttackStrategy(IActorContext context, ProjectileData projectile) : base(context)
+        public ProjectileAttackStrategy(IActorContext context, ref GameObject projectile) : base(context)
         {
             _projectile = projectile;
-            base.context.Launcher.SetProjectileData(projectile);
+            base.context.Launcher.SetProjectile(_projectile);
         }
         
         public override void Use()

@@ -55,6 +55,7 @@ namespace Actor
 
         protected virtual void OnEnable()
         {
+            forwardVector = Vector2.down;
             OnHPChanged += CheckDied;
         }
 

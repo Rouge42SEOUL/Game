@@ -12,6 +12,6 @@ namespace Actor.Enemy
             _target = target;
         }
         
-        public abstract void Attack(DamageData data);
+        public abstract void Attack(ref DamageData data);
     }
 }

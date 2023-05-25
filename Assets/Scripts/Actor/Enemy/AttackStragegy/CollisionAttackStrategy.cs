@@ -8,9 +8,8 @@ namespace Actor.Enemy
         public CollisionAttackStrategy(Player.Player target) : base(target)
         {}
 
-        public override void Attack(DamageData data)
+        public override void Attack(ref DamageData data)
         {
-            Debug.Log(_target + "to" + data.Damage);
             _target.Damaged(data);
         }
     }

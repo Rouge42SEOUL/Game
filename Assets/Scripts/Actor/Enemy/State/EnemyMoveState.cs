@@ -16,6 +16,7 @@ namespace Actor.Enemy
         private int _moveYid;
     
         private Vector2 pos;
+        private float dist;
 
         public override void OnInitialized()
         {
@@ -37,9 +38,8 @@ namespace Actor.Enemy
                 _stateMachine.ChangeState<EnemyIdleState>();
             }
             
-            // 이동상태에서 플레이어와 거리가 0.5f 이하면 공격상태
-            float dist = Vector3.Distance(_playerPos.position, _context.transform.position);
-            if (dist <= 0.5f)
+            dist = Vector3.Distance(_playerPos.position, _context.transform.position);
+            if (dist <= _context.attackRange - 0.5f)
             {
                 _stateMachine.ChangeState<EnemyAttackState>();
             }
@@ -47,6 +47,7 @@ namespace Actor.Enemy
             {
                 _context.EnemyAnim.SetFloat(_moveXid, pos.x);
                 _context.EnemyAnim.SetFloat(_moveYid, pos.y);
+                _context.SetForward(pos.x, pos.y);
             }
         }
 

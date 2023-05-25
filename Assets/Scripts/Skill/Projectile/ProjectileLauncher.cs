@@ -12,8 +12,7 @@ namespace Skill.Projectile
         private GameObject _context;
         
         private readonly int _poolMax = 10;
-        [SerializeField] private ProjectileData projectileData;
-        [SerializeField] private GameObject projectilePrefab;
+        private GameObject _projectilePrefab;
         
         public Action<GameObject> OnAttackTrigger;
 
@@ -21,10 +20,10 @@ namespace Skill.Projectile
         {
             _context = context;
         }
-
-        public void SetProjectileData(ProjectileData data)
+        
+        public void SetProjectile(GameObject projectile)
         {
-            projectileData = data;
+            _projectilePrefab = projectile;
         }
 
         public void Release(Projectile projectile) => _pool.Release(projectile);
@@ -46,14 +45,13 @@ namespace Skill.Projectile
             Projectile projectile = _pool.Get();
             projectile.SetLauncher(this);
             projectile.transform.position = transform.position;
-            projectile.SetData(projectileData);
             Rigidbody2D rigidBody = projectile.GetComponent<Rigidbody2D>();
             rigidBody.AddForce(_context.GetComponent<IActorContext>().Forward * projectile.Speed, ForceMode2D.Impulse);
         }
 
         private Projectile CreateProjectile()
         {
-            Projectile projectile = Instantiate(projectilePrefab, transform).GetComponent<Projectile>();
+            Projectile projectile = Instantiate(_projectilePrefab, transform).GetComponent<Projectile>();
             return projectile;
         }
 
