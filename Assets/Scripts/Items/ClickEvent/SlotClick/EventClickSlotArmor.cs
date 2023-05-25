@@ -6,10 +6,11 @@ namespace Items.ClickEvent.SlotClick
     public class EventClickSlotArmor : MonoBehaviour, IPointerClickHandler
     {
         private Inventory _inventory;
+        public MerchantUI merchantUI;
 
         private void Start()
         {
-            _inventory = Inventory.Instance;
+            _inventory = Inventory.Instance;   
         }
         public void OnPointerClick(PointerEventData eventData)
         {
@@ -20,6 +21,9 @@ namespace Items.ClickEvent.SlotClick
                 _inventory.ReleasingArmorItem();
                 _inventory.UpdateInventory();
                 _inventory.UpdateSlot();
+                if (merchantUI == null) return;
+                merchantUI.UpdateInventory();
+                merchantUI.UpdateSlot();
             }
         }
     }

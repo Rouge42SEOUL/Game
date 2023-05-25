@@ -88,6 +88,7 @@ namespace UI
 
         public void OnClickContinue()
         {
+            DataManager.Instance.SetRunningEvent(false);
             UnityEngine.SceneManagement.SceneManager.LoadScene("GameScene");
         }
 

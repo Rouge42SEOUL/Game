@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using Items.ScriptableObjectSource;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -62,7 +63,7 @@ namespace Items.Tooltip
             }
             else
             {
-                toolTipPanel.transform.position = Input.mousePosition + new Vector3(15, 15, 0);
+                toolTipPanel.transform.position = Input.mousePosition + new Vector3(15, 55, 0);
             }
             toolTipPanel.SetActive(true);
 
@@ -93,6 +94,9 @@ namespace Items.Tooltip
                 case SlotType.Ring1:
                     item = Slot.Instance.slotRing[1];
                     break;
+                case SlotType.Merchant:
+                    item = GetComponent<MerchantOption>().Item;
+                    break;
             }
 
             if (item != null)
@@ -119,12 +123,12 @@ namespace Items.Tooltip
                 }
                 else 
                 {
-                    toolTipText.text = "";
+                    toolTipPanel.SetActive(false);
                 }
             }
             else
             {
-                toolTipText.text = "";
+                toolTipPanel.SetActive(false);
             }
         }
     }

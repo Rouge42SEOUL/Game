@@ -57,7 +57,7 @@ public partial class StageManager : MonoBehaviour // private
 
     private void RandomSetting()
     {
-        int nodeCount = _selectMap.transform.childCount - 1; // -1은  화살표 오브젝트들 때문
+        int nodeCount = _selectMap.transform.childCount - 4; // -1은  화살표 오브젝트들 때문
         Nodes = new Node[nodeCount];
         for (int i = 0; i < nodeCount; i++)
         {

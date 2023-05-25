@@ -14,6 +14,7 @@ public class EventBlackSmith : RougeEvent.Event
 
     public override void BuildUI()
     {
+        base.BuildUI();
         _blackSmithUI.DisplayUI();
         _blackSmithUI.OptionRandomSetting();
         _blackSmithUI.transform.localPosition = Vector3.zero;
