@@ -36,7 +36,7 @@ namespace Skill
 
         public override void Use() => strategy.Use();
         
-        private void CalculateHit(float userAccuracy, float targetAvoid, float targetDefense, ref DamageData damageData)
+        private void CalculateHit(float userAccuracy, float targetAvoid, float targetDefense, DamageData damageData)
         {
             var randomValue = (float)_random.NextDouble();
             var hitChance = userAccuracy - targetAvoid;
@@ -54,7 +54,7 @@ namespace Skill
             var userAccuracy = context.GetAttributeValue(AttributeType.Accuracy);
             var targetAvoid = target.GetComponent<IActorContext>().GetAttributeValue(AttributeType.Avoidance);
             var targetDefense = target.GetComponent<IActorContext>().GetAttributeValue(AttributeType.Defense);
-            CalculateHit(userAccuracy, targetAvoid, targetDefense,ref _damage);
+            CalculateHit(userAccuracy, targetAvoid, targetDefense, _damage);
             _damage.KbForce = Vector3.Normalize(target.transform.position - context.Position);
             target.GetComponent<IDamageable>()?.Damaged(_damage);
             if (hasEffect)
