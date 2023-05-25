@@ -19,6 +19,7 @@ public partial class StageManager // public
     // 첫시작시 랜덤으로 맵, 노드 초기화
     public void RandomInit()
     {
+        Debug.Log("init");
         RandomStage();
         RandomSetting();
     }
@@ -26,7 +27,7 @@ public partial class StageManager // public
     public void PrevInit()
     {
         // 맵 설정
-        MapNum = DataManager.Instance.Map;
+        MapNum = DataManager.Instance.MapIndex;
         _selectMap = map[MapNum];
         _selectMap = Instantiate(_selectMap);
         // 노드들 설정
