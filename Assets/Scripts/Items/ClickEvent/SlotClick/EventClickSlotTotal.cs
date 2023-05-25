@@ -35,6 +35,7 @@ namespace Items.ClickEvent.SlotClick
         {
             if (eventData.button == PointerEventData.InputButton.Right)
             {
+                _inventory.Save();
                 switch (slotType)
                 {
                     case SlotType.Weapon0:

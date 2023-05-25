@@ -1,6 +1,7 @@
 using Items.StatusData;
 using UnityEngine;
 using System.Text;
+using Actor.Stats;
 
 namespace Items.ScriptableObjectSource
 {
@@ -16,17 +17,15 @@ namespace Items.ScriptableObjectSource
             sb.AppendLine($"{itemName}");
             sb.AppendLine($"(Level {reinforcement})");
             sb.AppendLine();
+            sb.AppendLine($"Health: {status.health}");
             sb.AppendLine($"Defense: {status.defense}");
-            sb.AppendLine($"Power: {status.statBonuses.power}");
-            sb.AppendLine($"Health: {status.statBonuses.health}");
-            sb.AppendLine($"Speed: {status.statBonuses.speed}");
             sb.AppendLine();
             sb.AppendLine($"Gold: {gold}");
             
             return sb.ToString();
         }
         
-        public override Equipment Equip(Slot slot)
+        public override Equipment Equip(Slot slot, PlayerStatObject playerStatObject)
         {
             if (slot == null)
             {
@@ -34,12 +33,14 @@ namespace Items.ScriptableObjectSource
                 return null;
             }
             
-            Equipment previousArmor = UnEquip(slot);
+            Equipment previousArmor = UnEquip(slot, playerStatObject);
             slot.slotArmor = this;
+            playerStatObject.AddAttribute(AttributeType.Health, status.health);
+            playerStatObject.AddAttribute(AttributeType.Defense, status.defense);
             return previousArmor;
         }
 
-        public override Equipment UnEquip(Slot slot)
+        public override Equipment UnEquip(Slot slot, PlayerStatObject playerStatObject)
         {
             if (slot == null)
             {
@@ -49,6 +50,11 @@ namespace Items.ScriptableObjectSource
             
             Armor previousArmor = slot.slotArmor;
             slot.slotArmor = null;
+            if (previousArmor != null)
+            {
+                playerStatObject.SubAttribute(AttributeType.Health, previousArmor.status.health);
+                playerStatObject.SubAttribute(AttributeType.Defense, previousArmor.status.defense);
+            }
             return previousArmor;
         }
         

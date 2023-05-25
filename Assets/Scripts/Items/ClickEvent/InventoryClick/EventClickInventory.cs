@@ -29,6 +29,7 @@ namespace Items.ClickEvent.InventoryClick
     
         private void NormalClick(int id)
         {
+            inventory.Save();
             if (inventory.EquipItemEvent(id))
             {
                 inventory.UpdateInventory();

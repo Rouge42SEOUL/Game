@@ -16,7 +16,7 @@ namespace Managers.DataManager
         private PlayData _playData = new ();
         [SerializeField] private PlayerStatObject _stat;
 
-        private int _firstGold;
+        private int _firstGold = 10000;
         private readonly string _mapDataPath = "/Json/MapData.json";
         private readonly string _playDataPath = "/Json/PlayData.json";
         private readonly string _statDataPath = "/Json/StatData.json";
@@ -125,6 +125,7 @@ namespace Managers.DataManager
         {
             JsonConverter.DeleteJson(Application.dataPath + _mapDataPath);
             JsonConverter.DeleteJson(Application.dataPath + _playDataPath);
+            JsonConverter.DeleteJson(Application.dataPath + "/Json/item.json");
             JsonConverter.DeleteJson(Application.dataPath + _statDataPath);
         }
 

@@ -12,15 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff830b4e38419b44d9774ffbda922fc8, type: 3}
   m_Name: Armor2
   m_EditorClassIdentifier: 
+  id: 8
   itemName: DarkMountainArmor
   description: 
   icon: {fileID: 21300000, guid: 62b4a2f3dff4a9a4ba03a764d5fdd006, type: 3}
-  gold: 0
-  id: 8
+  gold: 40
   reinforcement: 0
   status:
-    statBonuses:
-      power: 2
-      health: 2
-      speed: 2
-    defense: 2
+    health: 200
+    defense: 40

@@ -12,14 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd894a57327f435bb32812b7fa1ea03d, type: 3}
   m_Name: Boots 4
   m_EditorClassIdentifier: 
+  id: 27
   itemName: ManticoreBoots
   description: 
   icon: {fileID: 21300000, guid: 6f6648c32a819be4a87ef3bad2807bad, type: 3}
-  gold: 0
-  id: 27
+  gold: 40
   reinforcement: 0
   status:
-    statBonuses:
-      power: 1
-      health: 1
-      speed: 1
+    moveSpeed: 0.4
+    avoidance: 0.4
