@@ -44,7 +44,7 @@ namespace Skill
                 damageData.Damage = 0;
             else
             {
-                damageData.Damage -= targetDefense;
+                damageData.Damage -= targetDefense * 0.1f;
             }
         }
 
