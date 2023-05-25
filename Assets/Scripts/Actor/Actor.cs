@@ -19,9 +19,9 @@ namespace Actor
 
         protected bool isInitialized = false;
 
-        public Vector2 forwardVector;
-        private GameObject _attackCollider;
-        private ProjectileLauncher _launcher;
+        protected Vector2 forwardVector;
+        protected GameObject attackCollider;
+        protected ProjectileLauncher launcher;
         
         protected abstract void Died();
 
@@ -34,6 +34,7 @@ namespace Actor
     // Values or methods that other cannot use
     public abstract partial class Actor<T>
     {
+        
         private readonly WaitForSeconds _waitForOneSeconds = new WaitForSeconds(1f);
     }
     
@@ -46,10 +47,10 @@ namespace Actor
                 return;
             isInitialized = true;
             
-            _attackCollider = transform.GetChild(0).gameObject;
-            _attackCollider.gameObject.SetActive(false);
-            _launcher = transform.GetChild(1).GetComponent<ProjectileLauncher>();
-            _launcher.SetContext(gameObject);
+            attackCollider = transform.GetChild(0).gameObject;
+            attackCollider.gameObject.SetActive(false);
+            launcher = transform.GetChild(1).GetComponent<ProjectileLauncher>();
+            launcher.SetContext(gameObject);
         }
     }
     
@@ -57,14 +58,16 @@ namespace Actor
     public abstract partial class Actor<T> : IActorContext, IDamageable, IAffected
     {
         public GameObject GameObject => gameObject;
-        public GameObject AttackCollider => _attackCollider;
+        public GameObject AttackCollider => attackCollider;
         public Vector2 Forward => forwardVector;
         public Vector3 Position => transform.position;
-        public ProjectileLauncher Launcher => _launcher;
+        public ProjectileLauncher Launcher => launcher;
 
         public abstract void Affected(Effect effect);
         public abstract void Released(Effect effect);
         public abstract void Damaged(DamageData data);
+        
+        public abstract bool CalculateHit(SerializableDictionary<AttributeType, Attribute> baseAttributes);
         public void DotDamaged(DamageData damage, float duration)
         {
             StartCoroutine(AddDotDamage(damage, duration));

@@ -35,7 +35,7 @@ public partial class EventManager // public
             // OnClick에 달린 모든 이벤트들을 해제한다. 이를 안하면 이전에 등록되어있는 이벤트도 실행된다.
             foreach (GameObject obj in eventSelectionWindow)
                 obj.GetComponent<Button>().onClick.RemoveAllListeners();
-            _gameManager.MovePlayer(node);
+            _mapDataManager.MovePlayer(node);
             value.BuildUI();
         }
     }
@@ -44,11 +44,11 @@ public partial class EventManager : MonoBehaviour // private
 {
     private readonly Dictionary<EventType, RougeEvent.Event> _events 
         = new Dictionary<EventType, RougeEvent.Event>();
-    private GameManager _gameManager;
+    private MapDataManager _mapDataManager;
 
     private void Start()
     {
-        _gameManager = GameManager.Instance;
+        _mapDataManager = MapDataManager.Instance;
         foreach (RougeEvent.Event tmpEvent in events)
         {
             _events.Add(tmpEvent.Type, tmpEvent);

@@ -1,22 +1,83 @@
 using System.Collections.Generic;
+using Items;
+using Items.init;
 using Items.ScriptableObjectSource;
 using UnityEngine;
-using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class MerchantUI : EventUI
 { 
     [SerializeField] private EquipmentDatabase productList;
     private GameObject[] _options;
-
+    private Inventory _inventory;
+    public List<GameObject> inventoryPanels;
+    public List<GameObject> slotPanels;
+    
     protected override void Start()
     {
         base.Start();
+        _inventory = Inventory.Instance;
         Transform childTransform = transform.Find("Options");
-        Button[] childrenTransforms = childTransform.GetComponentsInChildren<Button>();
+        MerchantOption[] childrenTransforms = childTransform.GetComponentsInChildren<MerchantOption>();
         _options = new GameObject[childrenTransforms.Length];
         for (int i = 0; i < childrenTransforms.Length; i++)
         {
             _options[i] = childrenTransforms[i].gameObject;
+        }
+        // 인벤토리 참조 코드
+        InitBoxes initBoxes = new InitBoxes();
+        initBoxes.InitInventoryBoxes(inventoryPanels, "MerchantInventory");
+        initBoxes.InitSlotBoxes(slotPanels, "MerchantSlot");
+        CloseUI();
+    }
+
+    private void OnEnable()
+    {
+        if (_inventory)
+        {
+            UpdateSlot();
+            UpdateInventory();
+        }
+    }
+
+    public void UpdateInventory()
+    {
+        for (int i = 0; i < _inventory.inventoryItems.Count; i++)
+        {
+            InventoryBoxPanel panel = inventoryPanels[i].GetComponent<InventoryBoxPanel>();
+            panel.UpdateItem(_inventory.inventoryItems[i]);
+        }
+    }
+
+    public void UpdateSlot()
+    {
+        foreach (GameObject slotPanel in slotPanels)
+        {
+            InventoryBoxPanel panel = slotPanel.GetComponent<InventoryBoxPanel>();
+            switch (slotPanel.name)
+            {
+                case "WeaponSlotBlock0":
+                    panel.UpdateItem(_inventory.slot.slotWeapon[0]);
+                    break;
+                case "WeaponSlotBlock1":
+                    panel.UpdateItem(_inventory.slot.slotWeapon[1]);
+                    break;
+                case "ArmorSlotBlock":
+                    panel.UpdateItem(_inventory.slot.slotArmor);
+                    break;
+                case "NecklaceSlotBlock":
+                    panel.UpdateItem(_inventory.slot.slotNecklace);
+                    break;
+                case "RingSlotBlock0":
+                    panel.UpdateItem(_inventory.slot.slotRing[0]);
+                    break;
+                case "RingSlotBlock1":
+                    panel.UpdateItem(_inventory.slot.slotRing[1]);
+                    break;
+                default:
+                    Debug.LogError("None of Block is correct");
+                    break;
+            }
         }
     }
 
@@ -29,8 +90,7 @@ public class MerchantUI : EventUI
             {
                 int randomValue = Random.Range(0, items.Count);
                 _options[i].SetActive(true);
-                _options[i].GetComponent<MerchantOption>().Item = 
-                    items[randomValue];
+                _options[i].GetComponent<MerchantOption>().Item = items[randomValue];
                 items.RemoveAt(randomValue);
             }
             else
@@ -38,11 +98,6 @@ public class MerchantUI : EventUI
                 _options[i].SetActive(false);
             }
         }
-        // 아이템을 랜덤으로 골라서 패널 set에 넣어준다.
-        // 패널에서 set한 아이템의 정보를 텍스트에 띄운다.
-        // 패널의 OnClick 함수는 아이템을 살 수 있게 한다.
-        // buy() 함수에서 게임매니저의 Gold랑 비교한다.
-        // 돈이 되면 아이템을 플레이어가 얻고, 이벤트 창은 닫는다.
-        // 돈이 안된다면 아무 일도 일어나지 않는다.
+
     }
 }

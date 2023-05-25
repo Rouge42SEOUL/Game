@@ -6,6 +6,7 @@ using StateMachine;
 using UnityEngine;
 using UnityEngine.Pool;
 using Attribute = Actor.Stats.Attribute;
+using Random = System.Random;
 
 namespace Actor.Enemy
 {
@@ -126,15 +127,24 @@ namespace Actor.Enemy
             DeleteEffect(effect.type);
             // TODO: clac current attributes
         }
+        public override bool CalculateHit(SerializableDictionary<AttributeType, Attribute> baseAttributes)
+        {
+            var random = new Random();
+            var randomValue = (float)random.NextDouble();
+            var hitChance = baseAttributes[AttributeType.Accuracy].value -
+                            baseAttributes[AttributeType.Avoidance].value;
+            return randomValue < hitChance;
+        }
 
         public override void Damaged(DamageData data)
         {
             Rigidbody2D.velocity = Vector2.zero;
             Rigidbody2D.AddForce(data.KbForce, ForceMode2D.Impulse);
-            
-            Debug.Log( "Enemy health Lost -> " + data.Damage);
-            _currentHealthPoint -= data.Damage;
-            stateMachine.ChangeState<EnemyGetHitState>();
+            if (CalculateHit(stat.baseAttributes))
+            {
+                _currentHealthPoint -= data.Damage;
+                stateMachine.ChangeState<EnemyGetHitState>();
+            }
         }
     }
 }

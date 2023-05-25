@@ -6,6 +6,10 @@ using Core;
 using Elemental;
 using StateMachine;
 using Interface;
+using Skill;
+using Attribute = Actor.Stats.Attribute;
+using Random = System.Random;
+
 
 namespace Actor.Player
 {
@@ -16,10 +20,18 @@ namespace Actor.Player
 
         internal Animator PlayerAnim;
         internal Rigidbody2D PlayerRigid;
+        
+        public Action OnAttributeChanged;
 
         public float PercentHealPoint => stat.PercentHealPoint;
         public override float GetAttributeValue(AttributeType type) => stat.currentAttributes[type].value;
-        public override void AddAttributeValue(AttributeType type, float value) => stat.AddAttribute(type, value);
+
+        public override void AddAttributeValue(AttributeType type, float value)
+        {
+            stat.AddAttribute(type, value);
+            OnAttributeChanged?.Invoke();
+        }
+
         public override void AddEffect(Effect effect) => stat.AddEffect(effect);
         public override void DeleteEffect(EffectType type) => stat.DeleteEffect(type);
 
@@ -65,8 +77,9 @@ namespace Actor.Player
 
         protected void OnEnable()
         {
-            AttackCollider.GetComponent<PlayerAttackCol>().OnAttackTrigger += stat.normalAttack.OnAttackTrigger;
-            Launcher.OnAttackTrigger += stat.skills[0].OnAttackTrigger;
+            OnAttributeChanged += stat.CalculateSideAttributes;
+            attackCollider.GetComponent<PlayerAttackCol>().OnAttackTrigger += stat.normalAttack.OnAttackTrigger;
+            launcher.OnAttackTrigger += stat.skills[0].OnAttackTrigger;
         }
 
         private void Start()
@@ -76,6 +89,8 @@ namespace Actor.Player
             {
                 slot.SetContext(GetComponent<IActorContext>());
             }
+
+            stat.skills[3].slotType = SkillType.Ultimate;
         }
 
         private void Update()
@@ -92,7 +107,9 @@ namespace Actor.Player
 
         private void OnDisable()
         {
-            AttackCollider.GetComponent<PlayerAttackCol>().OnAttackTrigger -= stat.normalAttack.OnAttackTrigger;
+            OnAttributeChanged -= stat.CalculateSideAttributes;
+            attackCollider.GetComponent<PlayerAttackCol>().OnAttackTrigger -= stat.normalAttack.OnAttackTrigger;
+            launcher.OnAttackTrigger += stat.skills[0].OnAttackTrigger;
         }
     }
     
@@ -114,15 +131,28 @@ namespace Actor.Player
         {
             throw new NotImplementedException();
         }
-        
+
+        public override bool CalculateHit(SerializableDictionary<AttributeType, Attribute> baseAttributes)
+        {
+            var random = new Random();
+            var randomValue = (float)random.NextDouble();
+            var hitChance = baseAttributes[AttributeType.Accuracy].value -
+                            baseAttributes[AttributeType.Avoidance].value;
+            return randomValue < hitChance;
+        }
+
         public override void Damaged(DamageData data)
         {
-            stat.currentHealthPoint -= ElementalBalancer.ApplyBalance(data.ElementalType, stat.elementalType, data.Damage);
-            Effect effect = null;
-            ElementalBalancer.ApplyElementalEffect(data.ElementalType, ref effect);
-            if (effect != null)
-                Affected(effect);
-            Debug.Log("Player HP: " + (stat.PercentHealPoint * 100) + "%");
+            if (CalculateHit(this.stat.baseAttributes))
+            {
+                stat.currentHealthPoint -=
+                ElementalBalancer.ApplyBalance(data.ElementalType, stat.elementalType, data.Damage);
+                Effect effect = null;
+                ElementalBalancer.ApplyElementalEffect(data.ElementalType, ref effect);
+                if (effect != null)
+                    Affected(effect);
+                Debug.Log("Player HP: " + (stat.PercentHealPoint * 100) + "%");
+            }
         }
     }
 

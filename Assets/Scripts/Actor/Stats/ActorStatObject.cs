@@ -33,13 +33,18 @@ namespace Actor.Stats
             CalculateSideAttributes();
             InitElementalType();
         }
-
-        protected void CalculateSideAttributes()
+        
+        private void OnValidate()
         {
-            baseAttributes[AttributeType.MoveSpeed] = baseAttributes[AttributeType.Speed];
-            baseAttributes[AttributeType.AttackSpeed] = baseAttributes[AttributeType.Speed];
-            baseAttributes[AttributeType.Accuracy] = baseAttributes[AttributeType.Health];
-            baseAttributes[AttributeType.Avoidance] = baseAttributes[AttributeType.Speed];
+            CalculateSideAttributes();
+        }
+
+        public void CalculateSideAttributes()
+        {
+            baseAttributes[AttributeType.MoveSpeed].value = baseAttributes[AttributeType.Speed].value * 1.25f;
+            baseAttributes[AttributeType.AttackSpeed].value = baseAttributes[AttributeType.Speed].value * 1.15f;
+            baseAttributes[AttributeType.Accuracy].value = 0.5f + (baseAttributes[AttributeType.Speed].value * 0.01f);
+            baseAttributes[AttributeType.Avoidance].value = baseAttributes[AttributeType.Speed].value * 0.0075f;
             
             baseHealthPoint = baseAttributes[AttributeType.Health].value * 100;
         }

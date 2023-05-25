@@ -1,4 +1,5 @@
 using Items.ScriptableObjectSource;
+using Managers.DataManager;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,7 +7,7 @@ using Debug = UnityEngine.Debug;
 
 public class BlackSmithOption : MonoBehaviour
 {
-    private GameManager _gameManager;
+    private MapDataManager _mapDataManager;
     private Equipment _equipment;
 
     public Equipment Equipment
@@ -21,16 +22,16 @@ public class BlackSmithOption : MonoBehaviour
 
     private void Start()
     {
-        _gameManager = GameManager.Instance;
+        _mapDataManager = MapDataManager.Instance;
         GetComponent<Button>().onClick.AddListener(Upgrade);
     }
 
     public void Upgrade()
     {
-        if (_equipment.gold + _equipment.reinforcement * 10 <= _gameManager.Gold)
+        if (_equipment.gold + _equipment.reinforcement * 10 <= DataManager.Instance.Gold)
         {
             
-            _gameManager.Gold -= _equipment.gold + _equipment.reinforcement * 10;
+            DataManager.Instance.Gold -= _equipment.gold + _equipment.reinforcement * 10;
             Equipment.reinforcement++;
             this.transform.parent.parent.gameObject.GetComponent<BlackSmithUI>().CloseUI(); 
         }

@@ -3,12 +3,13 @@ using System.Linq;
 using UnityEngine;
 using Items.ScriptableObjectSource;
 using Items.init;
-using Unity.VisualScripting;
 
 namespace Items
 {
     public class Inventory : MonoBehaviour
     {
+        public static Inventory Instance { get; private set; }
+
         public List<GameObject> inventoryPanels;
         public List<GameObject> slotPanels;
         public EquipmentDatabase equipmentDatabase;
@@ -18,13 +19,144 @@ namespace Items
         
         private void Awake()
         {
+            if (Instance != null && Instance != this)
+            {
+                Destroy(this.gameObject);
+            } 
+            else 
+            {
+                Instance = this;
+            }
+
             InitBoxes initBoxes = new InitBoxes();
             inventoryItems = new List<Item>(new Equipment[16]);
             slot = gameObject.AddComponent<Slot>();
-            initBoxes.InitInventoryBoxes(inventoryPanels);
-            initBoxes.InitSlotBoxes(slotPanels);
+            initBoxes.InitInventoryBoxes(inventoryPanels, "InventoryBoxes");
+            initBoxes.InitSlotBoxes(slotPanels, "SlotBoxes");
+            inventoryUI.SetActive(!inventoryUI.activeSelf);
+            UpdateSlot();
+            UpdateInventory();
         }
 
+        public bool ReleasingWeaponItem0()
+        {
+            Equipment prev = slot.slotWeapon[0];
+            
+            for (int idx = 0; idx < 16; idx++)
+            {
+                if (inventoryItems[idx] == null)
+                {
+                    inventoryItems[idx] = prev;
+                    if (slot.slotWeapon[0].type == WeaponType.TwoHand)
+                    {
+                        slot.slotWeapon[1] = null;
+                    }
+                    slot.slotWeapon[0] = null;
+                    return true;
+                }
+            }
+            Debug.Log("Inventory is full");
+            return false;
+        }
+
+        public bool EquipItemEvent(int id)
+        {
+            if (inventoryItems[id] is Equipment equipment)
+            {
+                inventoryItems[id] = equipment.Equip(slot);
+                return true;
+            }
+
+            // if (inventoryItems[id] is HealingPotion healingPotion)
+            // {
+            //     healingPotion.Use();
+            // }
+            return false;
+        }
+        public bool ReleasingWeaponItem1()
+        {
+            Equipment prev = slot.slotWeapon[1];
+
+            for (int idx = 0; idx < 16; idx++)
+            {
+                if (inventoryItems[idx] == null)
+                {
+                    inventoryItems[idx] = prev;
+                    if (slot.slotWeapon[1].type == WeaponType.TwoHand)
+                    {
+                        slot.slotWeapon[0] = null;
+                    }
+                    slot.slotWeapon[1] = null;
+                    return true;
+                }
+            }
+            Debug.Log("Inventory is full");
+            return false;
+        }
+        public bool ReleasingArmorItem()
+        {
+            Equipment prev = slot.slotArmor;
+            
+            for (int idx = 0; idx < 16; idx++)
+            {
+                if (inventoryItems[idx] == null)
+                {
+                    inventoryItems[idx] = prev;
+                    slot.slotArmor = null;
+                    return true;
+                }
+            }
+            Debug.Log("Inventory is full");
+            return false;
+        }
+        public bool ReleasingRingItem0()
+        {
+            Equipment prev = slot.slotRing[0];
+            
+            for (int idx = 0; idx < 16; idx++)
+            {
+                if (inventoryItems[idx] == null)
+                {
+                    inventoryItems[idx] = prev;
+                    slot.slotRing[0] = null;
+                    return true;
+                }
+            }
+            Debug.Log("Inventory is full");
+            return false;
+        }
+        public bool ReleasingRingItem1()
+        {
+            Equipment prev = slot.slotRing[1];
+            
+            for (int idx = 0; idx < 16; idx++)
+            {
+                if (inventoryItems[idx] == null)
+                {
+                    inventoryItems[idx] = prev;
+                    slot.slotRing[1] = null;
+                    return true;
+                }
+            }
+            Debug.Log("Inventory is full");
+            return false;
+        }
+        public bool ReleasingNecklaceItem()
+        {
+            Equipment prev = slot.slotNecklace;
+            
+            for (int idx = 0; idx < 16; idx++)
+            {
+                if (inventoryItems[idx] == null)
+                {
+                    inventoryItems[idx] = prev;
+                    slot.slotNecklace = null;
+                    return true;
+                }
+            }
+            Debug.Log("Inventory is full");
+            return false;
+        }
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.I))
@@ -33,7 +165,7 @@ namespace Items
             }
         }
         
-        private void ToggleInventory()
+        public void ToggleInventory()
         {
             inventoryUI.SetActive(!inventoryUI.activeSelf);
         }
@@ -108,7 +240,7 @@ namespace Items
                     break;
                 if (idx == 15)
                 {
-                    Debug.Log("Inventory is full");
+                    // Debug.Log("Inventory is full");
                     return null;
                 }
             }
@@ -128,7 +260,7 @@ namespace Items
             }
             return null;
         }
-        private void UpdateInventory()
+        public void UpdateInventory()
         {
             for (int i = 0; i < inventoryItems.Count; i++)
             {
@@ -137,7 +269,7 @@ namespace Items
             }
         }
 
-        private void UpdateSlot()
+        public void UpdateSlot()
         {
             foreach (GameObject slotPanel in slotPanels)
             {
