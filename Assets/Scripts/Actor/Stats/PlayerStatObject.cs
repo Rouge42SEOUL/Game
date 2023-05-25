@@ -75,7 +75,7 @@ namespace Actor.Stats
                         baseAttributes[type].value += 2;
                         currentAttributes[type].value += 2;
                         break;
-                    case AttributeType.Attack or AttributeType.Health:
+                    case AttributeType.Attack or AttributeType.Health or AttributeType.Defense:
                         count += 3;
                         baseAttributes[type].value += 3;
                         currentAttributes[type].value += 3;
