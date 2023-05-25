@@ -45,6 +45,7 @@ namespace Items
         {
             Equipment prev = slot.slotWeapon[0];
             
+            Save();
             for (int idx = 0; idx < 16; idx++)
             {
                 if (inventoryItems[idx] == null)
@@ -68,6 +69,7 @@ namespace Items
 
         public bool EquipItemEvent(int id)
         {
+            Save();
             switch (inventoryItems[id])
             {
                 case Equipment equipment:
@@ -88,6 +90,7 @@ namespace Items
         }
         public bool ReleasingWeaponItem1()
         {
+            Save();
             Equipment prev = slot.slotWeapon[1];
 
             for (int idx = 0; idx < 16; idx++)
@@ -112,6 +115,7 @@ namespace Items
         }
         public bool ReleasingArmorItem()
         {
+            Save();
             Equipment prev = slot.slotArmor;
             
             for (int idx = 0; idx < 16; idx++)
@@ -130,6 +134,7 @@ namespace Items
         }
         public bool ReleasingRingItem0()
         {
+            Save();
             Equipment prev = slot.slotRing[0];
             
             for (int idx = 0; idx < 16; idx++)
@@ -148,6 +153,7 @@ namespace Items
         }
         public bool ReleasingRingItem1()
         {
+            Save();
             Equipment prev = slot.slotRing[1];
             
             for (int idx = 0; idx < 16; idx++)
@@ -167,6 +173,7 @@ namespace Items
         }
         public bool ReleasingNecklaceItem()
         {
+            Save();
             Equipment prev = slot.slotNecklace;
             
             for (int idx = 0; idx < 16; idx++)
@@ -230,6 +237,7 @@ namespace Items
         
         public bool Equip(int index)
         {
+            Save();
             if (index >= 0 && index < inventoryItems.Count)
             {
                 Item itemToEquip = inventoryItems[index];
@@ -251,6 +259,7 @@ namespace Items
 
         public Item AddItem(int id)
         {
+            Save();
             int idx;
 
             // when check the inventoryItems null
@@ -288,6 +297,7 @@ namespace Items
         }
         public void UpdateInventory()
         {
+            Save();
             for (int i = 0; i < inventoryItems.Count; i++)
             {
                 InventoryBoxPanel panel = inventoryPanels[i].GetComponent<InventoryBoxPanel>();
@@ -297,6 +307,7 @@ namespace Items
 
         public void UpdateSlot()
         {
+            Save();
             foreach (GameObject slotPanel in slotPanels)
             {
                 InventoryBoxPanel panel = slotPanel.GetComponent<InventoryBoxPanel>();
@@ -339,39 +350,98 @@ namespace Items
             public PlayerData(Inventory inventory, Slot slot)
             {
                 // Deep copy
+                // Deep copy
                 inventoryItems = new List<Item>(inventory.inventoryItems);
-                slotWeapon = (Weapon[])slot.slotWeapon.Clone();
-                slotArmor = slot.slotArmor;
-                slotNecklace = slot.slotNecklace;
-                slotRing = (Ring[])slot.slotRing.Clone();
+
+                if (slot.slotWeapon[0] != null)
+                    slotWeapon[0] = (Weapon)slot.slotWeapon[0].DeepCopy();
+
+                if (slot.slotWeapon[1] != null)
+                    slotWeapon[1] = (Weapon)slot.slotWeapon[1].DeepCopy();
+
+                if (slot.slotArmor != null)
+                    slotArmor = (Armor)slot.slotArmor.DeepCopy();
+
+                if (slot.slotNecklace != null)
+                    slotNecklace = (Necklace)slot.slotNecklace.DeepCopy();
+
+                if (slot.slotRing[0] != null)
+                    slotRing[0] = (Ring)slot.slotRing[0].DeepCopy();
+
+                if (slot.slotRing[1] != null)
+                    slotRing[1] = (Ring)slot.slotRing[1].DeepCopy();
             }
         }
 
         public void Save()
         {
-            PlayerData data = new PlayerData(this, Slot.Instance);
-            string json = JsonUtility.ToJson(data);
-
-            // Write JSON string to file
-            System.IO.File.WriteAllText(Application.persistentDataPath + "/savefile.json", json);
+            PlayerData data = new PlayerData(this, slot);
+            JsonConverter.Save(data, Application.dataPath + "/Json/item");
+            // string json = JsonUtility.ToJson(data);
+            // Debug.Log("Save function called");
+            //
+            // // Write JSON string to file
+            // System.IO.File.WriteAllText(Application.persistentDataPath + "/Items.json", json);
         }
 
         public void Load()
         {
-            // Read JSON string from file
-            string json = System.IO.File.ReadAllText(Application.persistentDataPath + "/savefile.json");
+            string filePath = Application.persistentDataPath + "/Items.json";
+            Debug.Log("Load function called");
+            if (!System.IO.File.Exists(filePath))
+            {
+                Init();
+                return;
+            }
 
+            // Read JSON string from file
+            string json = System.IO.File.ReadAllText(Application.persistentDataPath + "/Items.json");
+            
             PlayerData data = JsonUtility.FromJson<PlayerData>(json);
 
             // Set variables from loaded data
             inventoryItems = new List<Item>(data.inventoryItems);
-            slot.slotWeapon = (Weapon[])data.slotWeapon.Clone();
-            slot.slotArmor = data.slotArmor;
-            slot.slotNecklace = data.slotNecklace;
-            slot.slotRing = (Ring[])data.slotRing.Clone();
+            if (data.slotWeapon[0] != null)
+                slot.slotWeapon[0] = (Weapon)data.slotWeapon[0].DeepCopy();
+
+            if (data.slotWeapon[1] != null)
+                slot.slotWeapon[1] = (Weapon)data.slotWeapon[1].DeepCopy();
+
+            if (data.slotArmor != null)
+                slot.slotArmor = (Armor)data.slotArmor.DeepCopy();
+
+            if (data.slotNecklace != null)
+                slot.slotNecklace = (Necklace)data.slotNecklace.DeepCopy();
+
+            if (data.slotRing[0] != null)
+                slot.slotRing[0] = (Ring)data.slotRing[0].DeepCopy();
+
+            if (data.slotRing[1] != null)
+                slot.slotRing[1] = (Ring)data.slotRing[1].DeepCopy();
+
 
             UpdateInventory();
             UpdateSlot();
+        }
+        
+        public void Init()
+        {
+            Debug.Log("Init function called");
+            // 아이템 슬롯 초기화
+            inventoryItems = new List<Item>(16);
+            slot.slotWeapon = new Weapon[2];
+            slot.slotArmor = new Armor();
+            slot.slotNecklace = new Necklace();
+            slot.slotRing = new Ring[2];
+        }
+        
+        public void Delete()
+        {
+            string filePath = Application.persistentDataPath + "/Items.json";
+            if (System.IO.File.Exists(filePath))
+            {
+                System.IO.File.Delete(filePath);
+            }
         }
     }
 }

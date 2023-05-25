@@ -33,7 +33,6 @@ namespace Items.ScriptableObjectSource
                 return null;
             }
 
-            Equipment previousRing = UnEquip(slot, playerStatObject);
             if (slot.slotRing[0] != null && slot.slotRing[1] == null)
             {
                 slot.slotRing[1] = this;
@@ -41,6 +40,7 @@ namespace Items.ScriptableObjectSource
                 playerStatObject.AddAttribute(AttributeType.Accuracy, this.status.accuracy);
                 return null;
             }
+            Equipment previousRing = UnEquip(slot, playerStatObject);
             
             slot.slotRing[0] = this;
             playerStatObject.AddAttribute(AttributeType.AttackSpeed, this.status.attackSpeed);

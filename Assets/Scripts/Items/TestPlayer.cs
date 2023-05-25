@@ -15,6 +15,7 @@ namespace Items
 
         void Start()
         {
+            _inventory.Load();
             _inventory.AddItem(33);
             for (int i = 0; i < 32; i++)
             {
@@ -23,8 +24,6 @@ namespace Items
                     _inventory.AddItem(i);
                 }
             }
-            List<Equipment> totalEquipments = _inventory.RequireTotalEquipments();
-            // Debug.LogError(totalEquipments.Count);
         }
     }
 }

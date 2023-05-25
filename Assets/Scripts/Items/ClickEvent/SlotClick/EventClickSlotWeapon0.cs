@@ -13,6 +13,7 @@ namespace Items.ClickEvent.SlotClick
         }
         public void OnPointerClick(PointerEventData eventData)
         {
+            _inventory.Save();
             if (eventData.button == PointerEventData.InputButton.Right)
             {
                 if (_inventory.slot.slotWeapon[0] == null)

@@ -142,7 +142,7 @@ namespace Items.ScriptableObjectSource
             
             public override Equipment DeepCopy()
             {
-                var copy = ScriptableObject.CreateInstance<Weapon>();
+                var copy = CreateInstance<Weapon>();
 
                 copy.itemName = this.itemName;
                 copy.description = this.description;
