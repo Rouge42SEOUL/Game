@@ -84,7 +84,6 @@ namespace Managers.MainScene
         public GameObject passiveSelect;
         public GameObject classSelect;
         public GameObject newGamePopUp;
-        public GameObject charSelect;
 
         public void SelectPassive(int n) => _SelectPassive(n);
     }
@@ -153,14 +152,13 @@ namespace Managers.MainScene
             }
             else
             {
-                charSelect.SetActive(true);
+                classSelect.SetActive(true);
             }
         }
 
         private void _StartNewGame()
         {
-            DataManager.DataManager.Instance.DeleteData();
-            DataManager.DataManager.Instance.InitData();
+            GameManager.Instance.InitGame();
         }
 
         private void _LoadGame()

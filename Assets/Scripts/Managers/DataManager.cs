@@ -20,8 +20,8 @@ namespace Managers.DataManager
 
         private bool _isFirstStart = true;
         private int _firstGold;
-        private readonly string _mapDataPath = "/Json/GameManager.json";
-        private readonly string _playDataPath = "/Json/runningEvent.json";
+        private readonly string _mapDataPath = "/Json/MapData.json";
+        private readonly string _playDataPath = "/Json/PlayData.json";
 
         public Action<int> OnGoldUpdate;
 
@@ -67,7 +67,6 @@ namespace Managers.DataManager
         private void Start()
         {
             OnGoldUpdate?.Invoke(_playData.Gold);
-            InitData();
         }
 
         public void InitData()
@@ -94,6 +93,7 @@ namespace Managers.DataManager
             _mapData.SaveInfo(StageManager.Instance.Nodes, MapDataManager.Instance.CurrentNode);
             JsonConverter.Save(_mapData, Application.dataPath + _mapDataPath);
             JsonConverter.Save(_playData, Application.dataPath + _playDataPath);
+            Debug.Log("Save Data");
             return true;
         }
 

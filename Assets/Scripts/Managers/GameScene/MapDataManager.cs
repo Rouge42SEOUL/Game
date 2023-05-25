@@ -35,11 +35,10 @@ public partial class MapDataManager : MonoBehaviour // private
         _stageManager = StageManager.Instance;
 		_uiManager = UIManager.Instance;
 		// Load Prev Data
-        _isFirstStart = DataManager.Instance.IsFirstStart;
+        _isFirstStart = !DataManager.Instance.HasData();
         if (_isFirstStart)
         {
             _stageManager.RandomInit();
-            DataManager.Instance.InitData();
         }
         else
         {

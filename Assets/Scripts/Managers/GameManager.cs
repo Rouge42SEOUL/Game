@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
 
     public void InitGame()
     {
+        DataManager.Instance.DeleteData();
         DataManager.Instance.InitData();
     }
 
