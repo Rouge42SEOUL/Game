@@ -11,8 +11,8 @@ namespace Managers.DataManager
         private static DataManager _instance;
         
         private DataContainer _data;
-        [SerializeField] private PlayerStatObject _stat;
         private DataRunningEvent _runningData;
+        [SerializeField] private PlayerStatObject _stat;
         
         [SerializeField] private int firstGold;
         [SerializeField] private string jsonFileName = "/Json/GameManager.json";
@@ -93,6 +93,7 @@ namespace Managers.DataManager
 
         public bool LoadData()
         {
+            JsonConverter.Load(out _runningData, Application.dataPath + _runningEventFile);
             return JsonConverter.Load(out _data, Application.dataPath + jsonFileName);
         }
 
