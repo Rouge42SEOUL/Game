@@ -12,16 +12,13 @@ namespace Managers.DataManager
         public static DataManager Instance => _instance ? _instance : null;
         private static DataManager _instance;
 
-        public bool IsFirstStart => _isFirstStart;
-        
         private MapData _mapData = new ();
         private PlayData _playData;
         [SerializeField] private PlayerStatObject _stat;
 
-        private bool _isFirstStart = true;
         private int _firstGold = 10000;
-        private readonly string _mapDataPath = "/Json/GameManager.json";
-        private readonly string _playDataPath = "/Json/runningEvent.json";
+        private readonly string _mapDataPath = "/Json/MapData.json";
+        private readonly string _playDataPath = "/Json/PlayData.json";
 
         public Action<int> OnGoldUpdate;
 
@@ -64,12 +61,6 @@ namespace Managers.DataManager
             }
         }
 
-        private void Start()
-        {
-            OnGoldUpdate?.Invoke(_playData.Gold);
-            InitData();
-        }
-
         public void InitData()
         {
             _playData = new PlayData
@@ -87,13 +78,13 @@ namespace Managers.DataManager
 
         public bool SaveData()
         {
-            _isFirstStart = false;
             if (StageManager.Instance == null)
                 return false;
             _mapData.MapIndex = StageManager.Instance.MapNum;
             _mapData.SaveInfo(StageManager.Instance.Nodes, MapDataManager.Instance.CurrentNode);
             JsonConverter.Save(_mapData, Application.dataPath + _mapDataPath);
             JsonConverter.Save(_playData, Application.dataPath + _playDataPath);
+            Debug.Log("Save Data");
             return true;
         }
 
@@ -119,6 +110,7 @@ namespace Managers.DataManager
         {
             JsonConverter.DeleteJson(Application.dataPath + _mapDataPath);
             JsonConverter.DeleteJson(Application.dataPath + _playDataPath);
+            JsonConverter.DeleteJson(Application.dataPath + "/Json/item.json");
         }
 
         public bool HasData() => File.Exists(Application.dataPath + _mapDataPath);

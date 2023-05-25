@@ -6,16 +6,6 @@ using UnityEngine;
 public class GoldUI : MonoBehaviour
 {
     private TextMeshProUGUI _tMP;
-	private int _gold;
-    public int Gold
-    {
-        private get => _gold;
-        set
-        {
-            _gold = value;
-			_tMP.text = _gold.ToString();
-        }
-    }
 
     private void Awake()
     {
@@ -25,15 +15,18 @@ public class GoldUI : MonoBehaviour
     private void OnEnable()
     {
         DataManager.Instance.OnGoldUpdate += OnGoldUpdated;
+        _tMP.text = DataManager.Instance.Gold.ToString();
     }
 
     private void OnDisable()
     {
+        if (DataManager.Instance == null)
+            return;
         DataManager.Instance.OnGoldUpdate -= OnGoldUpdated;
     }
 
     private void OnGoldUpdated(int gold)
     {
-        Gold = gold;
+        _tMP.text = gold.ToString();
     }
 }

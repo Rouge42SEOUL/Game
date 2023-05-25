@@ -300,7 +300,6 @@ namespace Items
         }
         public void UpdateInventory()
         {
-            Save();
             for (int i = 0; i < inventoryItems.Count; i++)
             {
                 InventoryBoxPanel panel = inventoryPanels[i].GetComponent<InventoryBoxPanel>();
@@ -309,8 +308,7 @@ namespace Items
         }
 
         public void UpdateSlot()
-        {
-            Save();
+        { 
             foreach (GameObject slotPanel in slotPanels)
             {
                 InventoryBoxPanel panel = slotPanel.GetComponent<InventoryBoxPanel>();
@@ -418,20 +416,6 @@ namespace Items
             
             UpdateInventory();
             UpdateSlot();
-        }
-        
-        public void Init()
-        {
-            Debug.Log("Init function called");
-        }
-        
-        public void Delete()
-        {
-            string filePath = Application.persistentDataPath + "/Items.json";
-            if (System.IO.File.Exists(filePath))
-            {
-                System.IO.File.Delete(filePath);
-            }
         }
     }
 }
