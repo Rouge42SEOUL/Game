@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using Actor.Stats;
 using Core;
-using Elemental;
 using Interface;
 using Skill.Projectile;
 using UnityEngine;
@@ -21,8 +20,10 @@ namespace Actor
         public GameObject attackCollider;
         public Vector2 forwardVector;
         public ProjectileLauncher launcher;
-
-        protected abstract void Died();
+        
+        public Action OnHPChanged;
+        public abstract void AddHP(float value);
+        protected abstract void CheckDied();
 
         public abstract float GetAttributeValue(AttributeType type);
         public abstract void AddAttributeValue(AttributeType type, float value);
@@ -49,6 +50,16 @@ namespace Actor
             attackCollider.gameObject.SetActive(false);
             launcher = transform.GetChild(1).GetComponent<ProjectileLauncher>();
             launcher.SetContext(gameObject);
+        }
+
+        protected virtual void OnEnable()
+        {
+            OnHPChanged += CheckDied;
+        }
+
+        protected virtual void OnDisable()
+        {
+            OnHPChanged -= CheckDied;
         }
     }
     
