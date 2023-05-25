@@ -13,10 +13,10 @@ namespace Managers.DataManager
         private static DataManager _instance;
 
         private MapData _mapData = new ();
-        private PlayData _playData;
+        private PlayData _playData = new ();
         [SerializeField] private PlayerStatObject _stat;
 
-        private int _firstGold;
+        private int _firstGold = 10000;
         private readonly string _mapDataPath = "/Json/MapData.json";
         private readonly string _playDataPath = "/Json/PlayData.json";
 

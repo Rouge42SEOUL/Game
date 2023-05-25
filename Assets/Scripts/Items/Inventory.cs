@@ -70,11 +70,11 @@ namespace Items
 
         public bool EquipItemEvent(int id)
         {
-            Save();
             switch (inventoryItems[id])
             {
                 case Equipment equipment:
                     inventoryItems[id] = equipment.Equip(slot, playerStatObject);
+                    Save();
                     return true;
                 case HealingPotion healingPotion:
                 {
@@ -83,15 +83,16 @@ namespace Items
                     {
                         playerStatObject.currentHealthPoint += healingPotion.healingAmount;
                     }
+                    Save();
                     return true;
                 }
                 default:
+                    Save();
                     return false;
             }
         }
         public bool ReleasingWeaponItem1()
         {
-            Save();
             Equipment prev = slot.slotWeapon[1];
 
             for (int idx = 0; idx < 16; idx++)
@@ -108,15 +109,16 @@ namespace Items
                         slot.slotWeapon[0] = null;
                     }
                     slot.slotWeapon[1] = null;
+                    Save();
                     return true;
                 }
             }
             Debug.Log("Inventory is full");
+            Save();
             return false;
         }
         public bool ReleasingArmorItem()
         {
-            Save();
             Equipment prev = slot.slotArmor;
             
             for (int idx = 0; idx < 16; idx++)
@@ -127,15 +129,16 @@ namespace Items
                     playerStatObject.SubAttribute(AttributeType.Defense, slot.slotArmor.status.defense);
                     inventoryItems[idx] = prev;
                     slot.slotArmor = null;
+                    Save();
                     return true;
                 }
             }
             Debug.Log("Inventory is full");
+            Save();
             return false;
         }
         public bool ReleasingRingItem0()
         {
-            Save();
             Equipment prev = slot.slotRing[0];
             
             for (int idx = 0; idx < 16; idx++)
@@ -146,15 +149,16 @@ namespace Items
                     playerStatObject.SubAttribute(AttributeType.Accuracy, slot.slotRing[0].status.accuracy);
                     inventoryItems[idx] = prev;
                     slot.slotRing[0] = null;
+                    Save();
                     return true;
                 }
             }
             Debug.Log("Inventory is full");
+            Save();
             return false;
         }
         public bool ReleasingRingItem1()
         {
-            Save();
             Equipment prev = slot.slotRing[1];
             
             for (int idx = 0; idx < 16; idx++)
@@ -166,15 +170,16 @@ namespace Items
                     playerStatObject.SubAttribute(AttributeType.Accuracy, slot.slotRing[1].status.accuracy);
                     inventoryItems[idx] = prev;
                     slot.slotRing[1] = null;
+                    Save();
                     return true;
                 }
             }
             Debug.Log("Inventory is full");
+            Save();
             return false;
         }
         public bool ReleasingNecklaceItem()
         {
-            Save();
             Equipment prev = slot.slotNecklace;
             
             for (int idx = 0; idx < 16; idx++)
@@ -185,10 +190,12 @@ namespace Items
                     playerStatObject.SubAttribute(AttributeType.Avoidance, slot.slotNecklace.status.avoidance);
                     inventoryItems[idx] = prev;
                     slot.slotNecklace = null;
+                    Save();
                     return true;
                 }
             }
             Debug.Log("Inventory is full");
+            Save();
             return false;
         }
         private void Update()
@@ -240,7 +247,6 @@ namespace Items
         
         public bool Equip(int index)
         {
-            Save();
             if (index >= 0 && index < inventoryItems.Count)
             {
                 Item itemToEquip = inventoryItems[index];
@@ -253,16 +259,17 @@ namespace Items
                     inventoryItems[index] = previousItem;
                     UpdateInventory();
                     UpdateSlot();
+                    Save();
                     return true;
                 }
             }
             Debug.LogError("Can't find the type of equipment");
+            Save();
             return false;
         }
 
         public bool AddItem(int id)
         {
-            Save();
             int idx;
 
             // when check the inventoryItems null
@@ -279,6 +286,7 @@ namespace Items
                 if (idx == 15)
                 {
                     Debug.Log("Inventory is full");
+                    Save();
                     return false;
                 }
             }
@@ -296,6 +304,7 @@ namespace Items
                     inventoryItems[idx] = equipmentDatabase.items[id];
                 }
             }
+            Save();
             return true;
         }
         public void UpdateInventory()
@@ -385,6 +394,7 @@ namespace Items
 
         public void Save()
         {
+            Debug.Log("Inventory save");
             PlayerData data = new PlayerData(this, slot);
             JsonConverter.Save(data, Application.dataPath + "/Json/item.json");
             // string json = JsonUtility.ToJson(data);
@@ -396,6 +406,7 @@ namespace Items
 
         public void Load()
         {
+            Debug.Log("Inventory load");
             if (!JsonConverter.Load(out PlayerData data, Application.dataPath + "/Json/item.json"))
             {
                 return;
