@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using Core;
 using Elemental;
 using Skill;
@@ -34,12 +33,17 @@ namespace Actor.Stats
             CalculateSideAttributes();
             InitElementalType();
         }
-
-        protected void CalculateSideAttributes()
+        
+        private void OnValidate()
         {
-            baseAttributes[AttributeType.MoveSpeed].value = baseAttributes[AttributeType.Speed].value * 1.25f;
-            baseAttributes[AttributeType.AttackSpeed].value = baseAttributes[AttributeType.Speed].value * 1.15f;
-            baseAttributes[AttributeType.Accuracy].value = 0.5f + (baseAttributes[AttributeType.Speed].value * 0.01f);
+            CalculateSideAttributes();
+        }
+
+        public void CalculateSideAttributes()
+        {
+            baseAttributes[AttributeType.MoveSpeed].value = baseAttributes[AttributeType.Speed].value * 1.025f;
+            baseAttributes[AttributeType.AttackSpeed].value = baseAttributes[AttributeType.Speed].value * 1.015f;
+            baseAttributes[AttributeType.Accuracy].value = 1f + (baseAttributes[AttributeType.Speed].value * 0.01f);
             baseAttributes[AttributeType.Avoidance].value = baseAttributes[AttributeType.Speed].value * 0.0075f;
             
             baseHealthPoint = baseAttributes[AttributeType.Health].value * 100;

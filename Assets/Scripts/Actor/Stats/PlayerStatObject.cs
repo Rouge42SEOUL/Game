@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using Core;
 using Elemental;
 using Skill;
@@ -53,8 +52,6 @@ namespace Actor.Stats
             {
                 currentAttributes[type] = new Attribute(type, baseAttributes[type].value);
             }
-            
-            skills[3].slotType = SkillType.Ultimate;
             currentHealthPoint = baseHealthPoint;
         }
 
@@ -64,17 +61,54 @@ namespace Actor.Stats
 
         public void LevelUp()
         {
+            float count;
             this._level++;
             foreach (AttributeType type in Enum.GetValues(typeof(AttributeType)))
             {
-                if (type == AttributeType.Speed)
-                    baseAttributes[type].value += 2;
-                else
-                    baseAttributes[type].value += 3;
+                count = 0;
+                switch (type)
+                {
+                    case AttributeType.Speed:
+                        count += 2;
+                        baseAttributes[type].value += 2;
+                        currentAttributes[type].value += 2;
+                        break;
+                    case AttributeType.Attack or AttributeType.Health or AttributeType.Defense:
+                        count += 3;
+                        baseAttributes[type].value += 3;
+                        currentAttributes[type].value += 3;
+                        break;
+                }
+
                 if (passive.addTo == type)
+                {
+                    count++;
                     baseAttributes[type].value++;
+                    currentAttributes[type].value++;
+                }
+
                 if (passive.subTo == type)
+                {
+                    count--;
                     baseAttributes[type].value--;
+                    currentAttributes[type].value--;
+                }
+
+                switch (type)
+                {
+                    case (AttributeType.Accuracy or AttributeType.Avoidance):
+                        currentAttributes[type].value += count * 0.01f;
+                        break;
+                    case (AttributeType.AttackSpeed):
+                        currentAttributes[type].value += count * 0.015f;
+                        break;
+                    case (AttributeType.MoveSpeed):
+                        currentAttributes[type].value += count * 0.025f;
+                        break;
+                    case (AttributeType.Health):
+                        currentHealthPoint += count * 100f;
+                        break;
+                }
             }
             CalculateSideAttributes();
         }

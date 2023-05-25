@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Actor.Stats;
 using UnityEngine;
 
 namespace Managers.DataManager
@@ -10,6 +11,7 @@ namespace Managers.DataManager
         private static DataManager _instance;
         
         private DataContainer _data;
+        [SerializeField] private PlayerStatObject _stat;
         private DataRunningEvent _runningData;
         
         [SerializeField] private int firstGold;
@@ -20,9 +22,16 @@ namespace Managers.DataManager
 
         public int Gold
         {
-            get => _data.Gold;
+            get
+            {
+                if (_data == null)
+                    return -1;
+                return _data.Gold;
+            }
             set
             {
+                if (_data == null)
+                    return;
                 _data.Gold = value;
                 OnGoldUpdate?.Invoke(value);
             }
@@ -89,7 +98,9 @@ namespace Managers.DataManager
         public void DeleteData()
         {
             JsonConverter.DeleteJson(Application.dataPath + jsonFileName);
-            JsonConverter.DeleteJson(Application.dataPath + _runningEventFile);
         }
+
+        public void LevelUP() => _stat.LevelUp();
+        public float GetBaseStat(AttributeType type) => _stat.baseAttributes[type].value;
     }
 }
