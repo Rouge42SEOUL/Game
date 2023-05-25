@@ -1,9 +1,11 @@
 
+using System;
 using System.Collections.Generic;
 using Actor.Stats;
 using Skill;
-using Unity.VisualScripting;
+
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 // Singleton Manager, Only used in Main Scene and Only this scripts run in Main Scene
 namespace Managers.MainScene
@@ -73,6 +75,7 @@ namespace Managers.MainScene
         public List<PassiveData> PassiveList;
 
         public void QuitGame() => _QuitGame();
+        public void ToGameScene() => _ToGameScene();
 
 
         public GameObject confirmPopup;
@@ -119,6 +122,11 @@ namespace Managers.MainScene
             PassiveList.Add(new PassiveData(4, "Dark"));
             PassiveList.Add(new PassiveData(5, "Ground"));
         }
+
+        private void Start()
+        {
+            DataManager.DataManager.Instance.InitData();
+        }
     }
     
     public partial class TitleManager
@@ -130,7 +138,7 @@ namespace Managers.MainScene
 
         private void _ToGameScene()
         {
-            //TODO : get class Id data and send to GameScene
+            SceneManager.LoadScene("GameScene");
         }
 
         private void _SelectPassive(int n)
