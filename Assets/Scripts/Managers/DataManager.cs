@@ -16,7 +16,7 @@ namespace Managers.DataManager
         
         [SerializeField] private int firstGold;
         [SerializeField] private string jsonFileName = "/Json/GameManager.json";
-        private string _runningEventFile = "/Json/runningEvent.json";
+        [SerializeField] private string _runningEventFile = "/Json/runningEvent.json";
 
         public Action<int> OnGoldUpdate;
 
@@ -98,6 +98,7 @@ namespace Managers.DataManager
         public void DeleteData()
         {
             JsonConverter.DeleteJson(Application.dataPath + jsonFileName);
+            JsonConverter.DeleteJson(Application.dataPath + _runningEventFile);
         }
 
         public void LevelUP() => _stat.LevelUp();

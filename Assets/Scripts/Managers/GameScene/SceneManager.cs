@@ -19,7 +19,7 @@ namespace SceneManagement
 
         public void StartBattle()
         {
-            UnityEngine.SceneManagement.SceneManager.LoadScene("gyyu_battle");
+            UnityEngine.SceneManagement.SceneManager.LoadScene("BattleScene");
         }
     }
 }
