@@ -45,7 +45,7 @@ namespace Actor.Stats
             baseAttributes[AttributeType.Accuracy].value = 1f + (baseAttributes[AttributeType.Speed].value * 0.01f);
             baseAttributes[AttributeType.Avoidance].value = baseAttributes[AttributeType.Speed].value * 0.0075f;
             
-            baseHealthPoint = baseAttributes[AttributeType.Health].value * 100;
+            baseHealthPoint = baseAttributes[AttributeType.Health].value * 10;
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Actor.Stats;
 using Managers.SaveData;
 using UnityEngine;
+using UnityEngine.Windows;
 
 namespace Managers.DataManager
 {
@@ -120,6 +121,7 @@ namespace Managers.DataManager
             JsonConverter.DeleteJson(Application.dataPath + _playDataPath);
         }
 
+        public bool HasData() => File.Exists(Application.dataPath + _mapDataPath);
         public void LevelUP() => _stat.LevelUp();
         public float GetBaseStat(AttributeType type) => _stat.baseAttributes[type].value;
     }
