@@ -25,7 +25,7 @@ namespace Actor
         public abstract void AddHP(float value);
         protected abstract void CheckDied();
 
-        public abstract float GetAttributeValue(AttributeType type);
+        
         public abstract void AddAttributeValue(AttributeType type, float value);
         public abstract void AddEffect(Effect effect);
         public abstract void DeleteEffect(EffectType type);
@@ -66,18 +66,18 @@ namespace Actor
     // body of others
     public abstract partial class Actor<T> : IActorContext, IDamageable, IAffected
     {
+        public abstract float GetAttributeValue(AttributeType type);
         public GameObject GameObject => gameObject;
         public GameObject AttackCollider => attackCollider;
         public Vector2 Forward => forwardVector;
         public Vector3 Position => transform.position;
         public ProjectileLauncher Launcher => launcher;
-
+        
         public abstract void Affected(Effect effect);
         public abstract void Released(Effect effect);
         public abstract void Damaged(DamageData data);
         
-        public abstract bool CalculateHit(SerializableDictionary<AttributeType, Attribute> baseAttributes);
-        public void DotDamaged(DamageData damage, float duration)
+      public void DotDamaged(DamageData damage, float duration)
         {
             StartCoroutine(AddDotDamage(damage, duration));
         }

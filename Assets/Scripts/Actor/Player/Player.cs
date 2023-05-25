@@ -7,8 +7,6 @@ using Elemental;
 using StateMachine;
 using Interface;
 using Skill;
-using Attribute = Actor.Stats.Attribute;
-using Random = System.Random;
 
 
 namespace Actor.Player
@@ -67,7 +65,6 @@ namespace Actor.Player
             StateMachine.ChangeState<PlayerAttackState>();
             stat.skills[index].UseSkill();
         }
-
     }
 
     // body of MonoBehaviour
@@ -144,26 +141,14 @@ namespace Actor.Player
             throw new NotImplementedException();
         }
 
-        public override bool CalculateHit(SerializableDictionary<AttributeType, Attribute> baseAttributes)
-        {
-            var random = new Random();
-            var randomValue = (float)random.NextDouble();
-            var hitChance = baseAttributes[AttributeType.Accuracy].value -
-                            baseAttributes[AttributeType.Avoidance].value;
-            return randomValue < hitChance;
-        }
-
         public override void Damaged(DamageData data)
         {
-            if (CalculateHit(this.stat.baseAttributes))
-            {
-                AddHP(-ElementalBalancer.ApplyBalance(data.ElementalType, stat.elementalType, data.Damage));
-                Effect effect = null;
-                ElementalBalancer.ApplyElementalEffect(data.ElementalType, ref effect);
-                if (effect != null)
-                    Affected(effect);
-                Debug.Log("Player HP: " + (stat.PercentHealPoint * 100) + "%");
-            }
+            ElementalBalancer.ApplyBalance(data.ElementalType, stat.elementalType, data.Damage);
+            Effect effect = null;
+            ElementalBalancer.ApplyElementalEffect(data.ElementalType, ref effect);
+            if (effect != null)
+                Affected(effect);
+            Debug.Log("Player HP: " + (stat.PercentHealPoint * 100) + "%");
         }
     }
     
