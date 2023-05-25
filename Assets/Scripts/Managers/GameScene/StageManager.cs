@@ -19,7 +19,6 @@ public partial class StageManager // public
     // 첫시작시 랜덤으로 맵, 노드 초기화
     public void RandomInit()
     {
-        Debug.Log("init");
         RandomStage();
         RandomSetting();
     }

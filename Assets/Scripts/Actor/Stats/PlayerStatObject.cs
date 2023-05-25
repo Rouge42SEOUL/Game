@@ -1,11 +1,13 @@
 using System;
 using Core;
 using Elemental;
+using Newtonsoft.Json;
 using Skill;
 using UnityEngine;
 
 namespace Actor.Stats
 {
+    [JsonObject(MemberSerialization.Fields)]
     [CreateAssetMenu(fileName = "New Player Data", menuName = "Scriptable Object/Stat/PlayerStat")]
     public class PlayerStatObject : ActorStatObject
     {
@@ -59,6 +61,12 @@ namespace Actor.Stats
         #endregion
         
         #region PublicMethods
+        
+        public void InitStat()
+        {
+            isInitialized = false;
+            OnEnable();
+        }
 
         public void LevelUp()
         {

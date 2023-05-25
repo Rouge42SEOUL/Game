@@ -13,7 +13,7 @@ namespace Actor.Stats
         public bool isPermanent;
         public float duration;
         
-        public List<AttributeType> effectTo;
+        public List<AttributeType> effectTo = new ();
         public bool isRelease;
         public bool isMultiplication = false;
         public float effectValue;
@@ -32,6 +32,14 @@ namespace Actor.Stats
                 return Mathf.FloorToInt(duration);
             }
         }
+
+        public Effect()
+        {
+            this.type = EffectType.None;
+            effectValue = 0;
+            isPermanent = false;
+            isStackable = false;
+        }
         
         public Effect(EffectType type, float effectValue)
         {
@@ -39,7 +47,6 @@ namespace Actor.Stats
             isPermanent = true;
             isStackable = false;
             this.effectValue = effectValue;
-            this.effectTo = new List<AttributeType>();
 
             switch (this.type)
             {
