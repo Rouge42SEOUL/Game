@@ -2339,7 +2339,6 @@ MonoBehaviour:
   passiveSelect: {fileID: 1153814609}
   classSelect: {fileID: 10497744}
   newGamePopUp: {fileID: 1181796066}
-  charSelect: {fileID: 10497744}
   playerStat: {fileID: 11400000, guid: c6d6312bbd5c7884bb273850f3b45774, type: 2}
   passive:
   - {fileID: 11400000, guid: 8df5fd147cb619340a8d079e40acacd9, type: 2}
@@ -3091,8 +3090,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _stat: {fileID: 11400000, guid: c6d6312bbd5c7884bb273850f3b45774, type: 2}
-  firstGold: 0
-  jsonFileName: /Json/GameManager.json
 --- !u!1 &1681708432
 GameObject:
   m_ObjectHideFlags: 0
