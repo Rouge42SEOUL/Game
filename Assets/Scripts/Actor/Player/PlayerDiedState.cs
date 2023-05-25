@@ -26,7 +26,7 @@ namespace Actor.Player
         {
             yield return new WaitForSeconds(3f);
             _context.gameObject.SetActive(false);
-            DataManager.Instance.DeleteData();
+            GameManager.Instance.InitGame();
             SceneManager.LoadScene("MainScene");
         }
     }

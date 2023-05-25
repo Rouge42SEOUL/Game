@@ -9,15 +9,15 @@ namespace Managers.SaveData
         [JsonProperty]
         public int MapIndex;
         [JsonProperty] 
-        public Dictionary<int, EventType> Events;
+        public Dictionary<int, EventType> Events = new();
 
-        public void SaveInfo(Node[] nodes, Node currentNode)
+        public void SaveInfo()
         {
-            Events = new Dictionary<int, EventType>();
-            for (int i = 0; i < nodes.Length; i++)
+            Events.Clear();
+            for (int i = 0; i < StageManager.Instance.Nodes.Length; i++)
             {
-                Events.Add(i, nodes[i].eventType);
-                if (nodes[i] == currentNode)
+                Events.Add(i, StageManager.Instance.Nodes[i].eventType);
+                if (StageManager.Instance.Nodes[i] == MapDataManager.Instance.CurrentNode)
                 {
                     DataManager.DataManager.Instance.CurrentNode = i;
                 }

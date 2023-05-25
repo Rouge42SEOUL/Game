@@ -13,12 +13,13 @@ namespace Managers.DataManager
         private static DataManager _instance;
 
         private MapData _mapData = new ();
-        private PlayData _playData;
+        private PlayData _playData = new ();
         [SerializeField] private PlayerStatObject _stat;
 
         private int _firstGold;
         private readonly string _mapDataPath = "/Json/MapData.json";
         private readonly string _playDataPath = "/Json/PlayData.json";
+        private readonly string _statDataPath = "/Json/StatData.json";
 
         public Action<int> OnGoldUpdate;
 
@@ -63,12 +64,11 @@ namespace Managers.DataManager
 
         public void InitData()
         {
-            _playData = new PlayData
-            {
-                Gold = _firstGold,
-                CurrentNodeIdx = 0,
-                IsEventRunning = false
-            };
+            _playData.Gold = _firstGold;
+            _playData.CurrentNodeIdx = 0;
+            _playData.IsEventRunning = false;
+            
+            _stat.InitStat();
         }
 
         public void InitEventKeys(ref int[] keys)
@@ -81,11 +81,24 @@ namespace Managers.DataManager
             if (StageManager.Instance == null)
                 return false;
             _mapData.MapIndex = StageManager.Instance.MapNum;
-            _mapData.SaveInfo(StageManager.Instance.Nodes, MapDataManager.Instance.CurrentNode);
+            _mapData.SaveInfo();
             JsonConverter.Save(_mapData, Application.dataPath + _mapDataPath);
             JsonConverter.Save(_playData, Application.dataPath + _playDataPath);
+            JsonConverter.Save(_stat, Application.dataPath + _statDataPath);
             Debug.Log("Save Data");
             return true;
+        }
+
+        public void SavePlayData()
+        {
+            for (int i = 0; i < StageManager.Instance.Nodes.Length; i++)
+            {
+                if (StageManager.Instance.Nodes[i] == MapDataManager.Instance.CurrentNode)
+                {
+                    CurrentNode = i;
+                }
+            }
+            JsonConverter.Save(_playData, Application.dataPath + _playDataPath);
         }
 
         public bool GetRunningEvent()
@@ -102,14 +115,17 @@ namespace Managers.DataManager
 
         public bool LoadData()
         {
-            JsonConverter.Load(out _playData, Application.dataPath + _playDataPath);
-            return JsonConverter.Load(out _mapData, Application.dataPath + _mapDataPath);
+            var isLoaded = JsonConverter.Load(out _mapData, Application.dataPath + _mapDataPath);
+            isLoaded = isLoaded && JsonConverter.Load(out _playData, Application.dataPath + _playDataPath);
+            isLoaded = isLoaded && JsonConverter.Load(out _stat, Application.dataPath + _statDataPath);
+            return isLoaded;
         }
 
         public void DeleteData()
         {
             JsonConverter.DeleteJson(Application.dataPath + _mapDataPath);
             JsonConverter.DeleteJson(Application.dataPath + _playDataPath);
+            JsonConverter.DeleteJson(Application.dataPath + _statDataPath);
         }
 
         public bool HasData() => File.Exists(Application.dataPath + _mapDataPath);

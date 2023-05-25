@@ -15,6 +15,10 @@ public class GoldUI : MonoBehaviour
     private void OnEnable()
     {
         DataManager.Instance.OnGoldUpdate += OnGoldUpdated;
+    }
+
+    private void Start()
+    {
         _tMP.text = DataManager.Instance.Gold.ToString();
     }
 

@@ -15,7 +15,7 @@ public partial class MapDataManager // public
 		_uiManager.OptionUIControl();
         _currentNode = node;
         playerPawn.MoveToNode(node);
-        DataManager.Instance.SaveData();
+        DataManager.Instance.SavePlayData();
     }
 }
 
