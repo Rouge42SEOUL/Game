@@ -51,7 +51,7 @@ public partial class MapDataManager : MonoBehaviour // private
         DataManager.Instance.SaveData();
         CheckPrevEventRun(_currentNode);
     }
-    async void CheckPrevEventRun(Node node) // 객체들간의 초기화순서때문에 Null Reference Exception이.. 호출돼서
+    async void CheckPrevEventRun(Node node) // 객체들간의 초기화순서때문에 Null Reference Exception이..호출돼서
     {
         if (DataManager.Instance.GetRunningEvent())
         {

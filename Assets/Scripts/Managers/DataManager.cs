@@ -76,6 +76,7 @@ namespace Managers.DataManager
             _data.Map = StageManager.Instance.MapNum;
             _data.SaveInfo(StageManager.Instance.Nodes, MapDataManager.Instance.CurrentNode);
             JsonConverter.Save(_data, Application.dataPath + jsonFileName);
+            JsonConverter.Save(_runningData, Application.dataPath + _runningEventFile);
             return true;
         }
 
