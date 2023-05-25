@@ -19,7 +19,7 @@ namespace Managers.DataManager
         [SerializeField] private PlayerStatObject _stat;
 
         private bool _isFirstStart = true;
-        private int _firstGold;
+        private int _firstGold = 10000;
         private readonly string _mapDataPath = "/Json/GameManager.json";
         private readonly string _playDataPath = "/Json/runningEvent.json";
 

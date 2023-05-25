@@ -5,6 +5,7 @@ using Actor.Stats;
 using UnityEngine;
 using Items.ScriptableObjectSource;
 using Items.init;
+using Newtonsoft.Json;
 
 namespace Items
 {
@@ -343,42 +344,51 @@ namespace Items
         [System.Serializable]
         public class PlayerData
         {
-            public List<Item> inventoryItems;
-            public Weapon[] slotWeapon = new Weapon[2];
-            public Armor slotArmor;
-            public Necklace slotNecklace;
-            public Ring[] slotRing = new Ring[2];
+            [JsonProperty] public List<int> inventoryId = new List<int>();
+            [JsonProperty] public List<int> slotId = new List<int>();
 
             public PlayerData(Inventory inventory, Slot slot)
             {
                 // Deep copy
-                // Deep copy
-                inventoryItems = new List<Item>(inventory.inventoryItems);
+                // Deep copy 
 
+                foreach (Item item in inventory.inventoryItems)
+                {
+                    if (item != null)
+                    {
+                        inventoryId.Add(item.id);
+                    }
+                }
+                
                 if (slot.slotWeapon[0] != null)
-                    slotWeapon[0] = (Weapon)slot.slotWeapon[0].DeepCopy();
+                    slotId.Add(slot.slotWeapon[0].id);
 
                 if (slot.slotWeapon[1] != null)
-                    slotWeapon[1] = (Weapon)slot.slotWeapon[1].DeepCopy();
+                    slotId.Add(slot.slotWeapon[1].id);
 
                 if (slot.slotArmor != null)
-                    slotArmor = (Armor)slot.slotArmor.DeepCopy();
+                    slotId.Add(slot.slotArmor.id);
 
                 if (slot.slotNecklace != null)
-                    slotNecklace = (Necklace)slot.slotNecklace.DeepCopy();
+                    slotId.Add(slot.slotNecklace.id);
 
                 if (slot.slotRing[0] != null)
-                    slotRing[0] = (Ring)slot.slotRing[0].DeepCopy();
+                    slotId.Add(slot.slotRing[0].id);
 
                 if (slot.slotRing[1] != null)
-                    slotRing[1] = (Ring)slot.slotRing[1].DeepCopy();
+                    slotId.Add(slot.slotRing[1].id);
+            }
+
+            public PlayerData()
+            {
+                
             }
         }
 
         public void Save()
         {
             PlayerData data = new PlayerData(this, slot);
-            JsonConverter.Save(data, Application.dataPath + "/Json/item");
+            JsonConverter.Save(data, Application.dataPath + "/Json/item.json");
             // string json = JsonUtility.ToJson(data);
             // Debug.Log("Save function called");
             //
@@ -388,40 +398,24 @@ namespace Items
 
         public void Load()
         {
-            string filePath = Application.persistentDataPath + "/Items.json";
-            Debug.Log("Load function called");
-            if (!System.IO.File.Exists(filePath))
+            if (!JsonConverter.Load(out PlayerData data, Application.dataPath + "/Json/item.json"))
             {
-                Init();
                 return;
             }
-
-            // Read JSON string from file
-            string json = System.IO.File.ReadAllText(Application.persistentDataPath + "/Items.json");
-            
-            PlayerData data = JsonUtility.FromJson<PlayerData>(json);
+            Debug.Log("Load function called");
 
             // Set variables from loaded data
-            inventoryItems = new List<Item>(data.inventoryItems);
-            if (data.slotWeapon[0] != null)
-                slot.slotWeapon[0] = (Weapon)data.slotWeapon[0].DeepCopy();
+            foreach (int i in data.slotId)
+            {
+                AddItem(i);
+                EquipItemEvent(0);
+            }
 
-            if (data.slotWeapon[1] != null)
-                slot.slotWeapon[1] = (Weapon)data.slotWeapon[1].DeepCopy();
-
-            if (data.slotArmor != null)
-                slot.slotArmor = (Armor)data.slotArmor.DeepCopy();
-
-            if (data.slotNecklace != null)
-                slot.slotNecklace = (Necklace)data.slotNecklace.DeepCopy();
-
-            if (data.slotRing[0] != null)
-                slot.slotRing[0] = (Ring)data.slotRing[0].DeepCopy();
-
-            if (data.slotRing[1] != null)
-                slot.slotRing[1] = (Ring)data.slotRing[1].DeepCopy();
-
-
+            foreach (int i in data.inventoryId)
+            {
+                AddItem(i);
+            }
+            
             UpdateInventory();
             UpdateSlot();
         }
@@ -429,12 +423,6 @@ namespace Items
         public void Init()
         {
             Debug.Log("Init function called");
-            // 아이템 슬롯 초기화
-            inventoryItems = new List<Item>(16);
-            slot.slotWeapon = new Weapon[2];
-            slot.slotArmor = new Armor();
-            slot.slotNecklace = new Necklace();
-            slot.slotRing = new Ring[2];
         }
         
         public void Delete()

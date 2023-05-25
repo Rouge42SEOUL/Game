@@ -16,14 +16,14 @@ namespace Items
         void Start()
         {
             _inventory.Load();
-            _inventory.AddItem(33);
-            for (int i = 0; i < 32; i++)
-            {
-                if (i % 2 == 0)
-                {
-                    _inventory.AddItem(i);
-                }
-            }
+            // _inventory.AddItem(33);
+            // for (int i = 0; i < 6; i++)
+            // {
+            //     if (i % 2 == 0)
+            //     {
+            //         _inventory.AddItem(i);
+            //     }
+            // }
         }
     }
 }
