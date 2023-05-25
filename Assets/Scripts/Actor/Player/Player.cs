@@ -6,7 +6,7 @@ using Core;
 using Elemental;
 using StateMachine;
 using Interface;
-
+using Skill;
 
 
 namespace Actor.Player
@@ -18,16 +18,34 @@ namespace Actor.Player
 
         internal Animator PlayerAnim;
         internal Rigidbody2D PlayerRigid;
+        
+        public Action OnAttributeChanged;
 
         public float PercentHealPoint => stat.PercentHealPoint;
+
+        public override void AddHP(float value)
+        {
+            stat.currentHealthPoint += value;
+            OnHPChanged?.Invoke();
+        }
+        
         public override float GetAttributeValue(AttributeType type) => stat.currentAttributes[type].value;
-        public override void AddAttributeValue(AttributeType type, float value) => stat.AddAttribute(type, value);
+
+        public override void AddAttributeValue(AttributeType type, float value)
+        {
+            stat.AddAttribute(type, value);
+            OnAttributeChanged?.Invoke();
+        }
+
         public override void AddEffect(Effect effect) => stat.AddEffect(effect);
         public override void DeleteEffect(EffectType type) => stat.DeleteEffect(type);
 
-        protected override void Died()
+        protected override void CheckDied()
         {
-            StateMachine.ChangeState<PlayerDiedState>();
+            if (stat.currentHealthPoint <= 0)
+            {
+                StateMachine.ChangeState<PlayerDiedState>();
+            }
         }
     }
 
@@ -65,8 +83,10 @@ namespace Actor.Player
             StateMachine.AddState(new PlayerDiedState());
         }
 
-        protected void OnEnable()
+        protected override void OnEnable()
         {
+            base.OnEnable();
+            OnAttributeChanged += stat.CalculateSideAttributes;
             attackCollider.GetComponent<PlayerAttackCol>().OnAttackTrigger += stat.normalAttack.OnAttackTrigger;
             launcher.OnAttackTrigger += stat.skills[0].OnAttackTrigger;
         }
@@ -78,12 +98,12 @@ namespace Actor.Player
             {
                 slot.SetContext(GetComponent<IActorContext>());
             }
+
+            stat.skills[3].slotType = SkillType.Ultimate;
         }
 
         private void Update()
         {
-            if (stat.currentHealthPoint <= 0)
-                Died();
             StateMachine.Update();
         }
 
@@ -92,9 +112,12 @@ namespace Actor.Player
             StateMachine.FixedUpdate();
         }
 
-        private void OnDisable()
+        protected override void OnDisable()
         {
+            base.OnDisable();
+            OnAttributeChanged -= stat.CalculateSideAttributes;
             attackCollider.GetComponent<PlayerAttackCol>().OnAttackTrigger -= stat.normalAttack.OnAttackTrigger;
+            launcher.OnAttackTrigger += stat.skills[0].OnAttackTrigger;
         }
     }
 
@@ -120,7 +143,6 @@ namespace Actor.Player
 
         public override void Damaged(DamageData data)
         {
-            stat.currentHealthPoint -=
             ElementalBalancer.ApplyBalance(data.ElementalType, stat.elementalType, data.Damage);
             Effect effect = null;
             ElementalBalancer.ApplyElementalEffect(data.ElementalType, ref effect);

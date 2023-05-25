@@ -7661,10 +7661,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5feba3843ae5d53458a0e3eb2d5ceeab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthSlider: {fileID: 1806358609}
-  atkText: {fileID: 1217743078}
-  agiText: {fileID: 1495799357}
-  defText: {fileID: 1421942890}
   timerText: {fileID: 2059587305}
 --- !u!1 &2021893442
 GameObject:
@@ -20862,8 +20858,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 2781783833759806822, guid: f8f27a0c6c890b04eb1e2fae970ff48d, type: 3}
   spawnDuration: 1
-  poolMax: 10
-  maxCount: 10
+  poolMax: 2
+  maxCount: 2
 --- !u!1 &2059587303
 GameObject:
   m_ObjectHideFlags: 0

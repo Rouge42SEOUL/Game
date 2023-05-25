@@ -3,23 +3,23 @@ using UnityEngine;
 public abstract class EventUI : MonoBehaviour
 {
     protected GameObject EventUIButton;
-    private GameSceneManager _gameSceneManager;
+    private MapDataManager _mapDataManager;
 
     protected virtual void Start()
     {
-        _gameSceneManager = GameSceneManager.Instance;
+        _mapDataManager = MapDataManager.Instance;
         EventUIButton = GameObject.Find("EventUIButton");
     }
 
     public void DisplayUI()
     {
-        _gameSceneManager.InfoToJson.IsEventRunning = true;
+        GameManager.Instance.PauseGame();
         gameObject.SetActive(true);
         EventUIButton.gameObject.SetActive(false);
     }
     public void CloseUI()
     {
-        _gameSceneManager.InfoToJson.IsEventRunning = true;
+        GameManager.Instance.ContinueGame();
         EventUIButton.gameObject.SetActive(true);
         gameObject.SetActive(false);
     }
