@@ -54,7 +54,7 @@ namespace Items.Tooltip
         
         private IEnumerator HoverCoroutine()
         {
-            yield return new WaitForSeconds(0.8f);
+            // yield return new WaitForSeconds(0.8f); 상인 이벤트에서 시간 지나도 돌아오지 않음 인벤토리에서는 잘작동함
 
             // Set the position of the tooltip panel to the mouse position
             if (itemIndex is >= 0 and < 4 || slotType == SlotType.Weapon0 || slotType == SlotType.Armor || slotType == SlotType.Weapon1)
@@ -98,7 +98,6 @@ namespace Items.Tooltip
                     item = GetComponent<MerchantOption>().Item;
                     break;
             }
-            Debug.Log(item.itemName);
             if (item != null)
             {
                 if(item is Weapon weapon)
@@ -130,6 +129,7 @@ namespace Items.Tooltip
             {
                 toolTipPanel.SetActive(false);
             }
+            yield return new WaitForSeconds(0.8f);
         }
     }
 }

@@ -394,7 +394,6 @@ namespace Items
 
         public void Save()
         {
-            Debug.Log("Inventory save");
             PlayerData data = new PlayerData(this, slot);
             JsonConverter.Save(data, Application.dataPath + "/Json/item.json");
             // string json = JsonUtility.ToJson(data);
@@ -406,13 +405,10 @@ namespace Items
 
         public void Load()
         {
-            Debug.Log("Inventory load");
             if (!JsonConverter.Load(out PlayerData data, Application.dataPath + "/Json/item.json"))
             {
                 return;
             }
-            Debug.Log("Load function called");
-
             // Set variables from loaded data
             foreach (int i in data.slotId)
             {

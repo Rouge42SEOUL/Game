@@ -85,7 +85,6 @@ namespace Managers.DataManager
             JsonConverter.Save(_mapData, Application.dataPath + _mapDataPath);
             JsonConverter.Save(_playData, Application.dataPath + _playDataPath);
             //JsonConverter.Save(_stat, Application.dataPath + _statDataPath);
-            Debug.Log("Save Data");
             return true;
         }
 

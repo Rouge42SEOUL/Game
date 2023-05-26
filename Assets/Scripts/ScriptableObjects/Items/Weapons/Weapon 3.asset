@@ -18,7 +18,7 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 4ceb0a22206fea046be70ad00381bf62, type: 3}
   gold: 20
   reinforcement: 0
-  type: 1
+  type: 0
   status:
     attackSpeed: 0.2
     damage: 40

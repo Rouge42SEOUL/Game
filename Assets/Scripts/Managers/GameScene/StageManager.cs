@@ -5,7 +5,7 @@ using Random = UnityEngine.Random;
 public enum RoundTable
 {
     Start = 1,
-    Middle = 5,
+    Middle = 7,
     End = 15,
 }
 

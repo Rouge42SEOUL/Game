@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eventStructs:
   - type: 1
-    probability: 0.7
+    probability: 0.5
   - type: 3
-    probability: 0.9
+    probability: 0.75
   - type: 4
     probability: 1

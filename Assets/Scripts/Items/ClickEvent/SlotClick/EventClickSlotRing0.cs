@@ -14,15 +14,21 @@ namespace Items.ClickEvent.SlotClick
         }
         public void OnPointerClick(PointerEventData eventData)
         {
-            _inventory.Save();
             if (eventData.button == PointerEventData.InputButton.Right)
             {
                 if (_inventory.slot.slotRing[0] == null)
+                {
+                    _inventory.Save();
                     return;
+                }
                 _inventory.ReleasingRingItem0();
                 _inventory.UpdateInventory();
                 _inventory.UpdateSlot();
-                if (merchantUI == null) return;
+                if (merchantUI == null)
+                {
+                    _inventory.Save();
+                    return;
+                }
                 merchantUI.UpdateInventory();
                 merchantUI.UpdateSlot();
             }
